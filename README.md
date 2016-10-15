@@ -34,3 +34,26 @@ peer-reviewed paper with minimal effort that allows contributors to get
 academic credit for their work.  See http://joss.theoj.org/about for more
 details on this.
 
+## Authorship policy
+
+We aim to err on the side of being too inclusive rather than exclusive.
+Any concerns regarding the author list for a particular article can be brought
+up on the scipy-dev mailing list or directly with one of the authors or SciPy
+core developers.
+
+We believe it's not productive to define a criterion for inclusion as an author
+on a paper in terms of number of commits or lines of code written.  Instead, we
+will use these guidelines:
+
+- For a full-length article, an author should have contributed at least either
+  one major feature in SciPy or done a significant amount of maintenance work.
+- For an abstract article, an author should have made a nontrivial
+  contribution.  This means: fixing a typo is not enough, but a single bug fix
+  can be.
+
+The author list for an abstract article will be ordered alphabetically or
+reverse-alphabetically (alternating, starting with alphabetically).
+
+The author list for a full article will be ordered by commit count over the
+period the paper covers.
+
