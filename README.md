@@ -34,6 +34,18 @@ peer-reviewed paper with minimal effort that allows contributors to get
 academic credit for their work.  See http://joss.theoj.org/about for more
 details on this.
 
+The purposes of these two types of articles are different.  An abstract article
+is only meant to give credit to contributors to (a) particular release(s).
+The frequency of writing such an article is a balance between providing new
+contributors with credit and diluting citations.  A reasonable frequency is
+probably once every 1.5 or 2 years.
+
+A full-length article contains content that will help readers understand the
+scope of SciPy, the development process, major new features, plans for future
+development, etc.  It also provides a more significant level of credit, hence
+the higher bar for authorship (see below).  We plan only a single such article
+at the moment, with the publication date coinciding with the 1.0 release.
+
 ## Authorship policy
 
 We aim to err on the side of being too inclusive rather than exclusive.
