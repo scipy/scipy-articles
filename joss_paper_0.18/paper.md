@@ -8,6 +8,9 @@ authors:
  - name: Evgeni Burovski
    orcid: 0000-0001-8149-0483
    affiliation: National Research University Higher School of Economics
+ - name: Andrew Nelson
+   orcid: 0000-0002-4548-3558
+   affiliation: Australian Nuclear Science and Technology Organisation
 date: XXX
 bibliography: paper.bib
 ---
