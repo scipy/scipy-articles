@@ -7,13 +7,13 @@ tags:
 authors:
  - name: Evgeni Burovski
    orcid: 0000-0001-8149-0483
-   affiliation: National Research University Higher School of Economics
+   affiliation: National Research University Higher School of Economics, Moscow, Russia
  - name: Ralf Gommers
    orcid: 0000-0002-0300-3333
    affiliation: Scion, Rotorua, New Zealand
  - name: Andrew Nelson
    orcid: 0000-0002-4548-3558
-   affiliation: Australian Nuclear Science and Technology Organisation
+   affiliation: Australian Nuclear Science and Technology Organisation, Sydney, Australia
 date: XXX
 bibliography: paper.bib
 ---
