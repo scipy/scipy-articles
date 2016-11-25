@@ -28,10 +28,10 @@ sparse matrices, hierarchial clustering, signal and N-dimensional image processi
 spatial algorithms and data structures, graph algorithms, and reading and
 writing data files in a variety of common data formats.
 
-The @SciPy library depends on @NumPy, which provides convenient and fast N-dimensional
-array manipulation. The SciPy library is built to work with NumPy arrays, and
-provides many user-friendly and efficient numerical methods such as routines
-for numerical integration and optimization. 
+The @SciPy library depends on NumPy [@NumPy, @WCV2011], which provides convenient
+and fast N-dimensional array manipulation. The SciPy library is built to work with
+NumPy arrays, and provides many user-friendly and efficient numerical methods such
+as routines for numerical integration and optimization. 
 
 The latest stable release of SciPy is [0.18.1](@SciPy0181), which improves on the feature
 release [0.18.0](SciPy0180). Together they contain numerous bug-fixes, improved test coverage,
