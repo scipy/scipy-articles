@@ -14,6 +14,9 @@ authors:
  - name: Andrew Nelson
    orcid: 0000-0002-4548-3558
    affiliation: Australian Nuclear Science and Technology Organisation, Sydney, Australia
+ - name: Josh Wilson
+   orcid: 0000-0003-3169-9136
+   affiliation: University of Minnesota, Minneapolis, Minnesota
 date: XXX
 bibliography: paper.bib
 ---
