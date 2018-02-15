@@ -1,0 +1,15 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: person142/latex:latest
+    steps:
+      - checkout
+      - run: |
+          mkdir /papers/artifacts
+          cd scipy-1.0
+          make
+          cp paper.pdf /papers/artifacts
+      - store_artifacts:
+          path: /papers/artifacts
