@@ -1,7 +1,108 @@
-\documentclass[11pt]{article}
+\documentclass[fleqn,10pt]{wlscirep}
+\title{SciPy - some descriptive title here}
 
+\author[1]{Pauli Virtanen}
+\author[2,*]{Ralf Gommers}
+\author[3]{TODO}
+\affil[1]{Affiliation, department, city, postcode, country}
+\affil[2]{Affiliation, department, city, postcode, country}
+\affil[2]{Affiliation, department, city, postcode, country}
+
+\affil[*]{ralf.gommers@gmail.com}
+
+\keywords{Scientific computing, Python, Mathematics}
+
+\begin{abstract}
+TODO. Abstract must be under 200 words and not include subheadings or citations.
+\end{abstract}
 \begin{document}
 
-One day this will be a wonderful paper.
+\flushbottom
+\maketitle
+\thispagestyle{empty}
+
+\section*{Introduction}
+
+\textit{The Introduction section expands on the background of the work (some overlap with the Abstract is acceptable). The introduction should not include subheadings.}
+
+\textbf{History}
+
+\textbf{Project goals and scope}
+
+\textbf{Current status (maturity, users)}
+
+
+\section*{Architecture and implementation choices}
+
+\subsection*{Submodule organisation}
+
+\subsection*{Common infrastructure}
+
+\subsection*{Language preferences}
+
+\subsection*{API and ABI evolution}
+
+
+\section*{Key technical improvements}
+
+Here we describe key technical improvements made in the last three years.
+
+\subsection*{Data structures}
+\textbf{cKDTree}
+\textbf{Sparse matrices}
+
+\subsection*{Unified bindings to compiled code}
+LowLevelCallable
+
+\subsection*{Cython bindings for BLAS, LAPACK and special}
+
+\subsection*{Numerical optimization}
+
+\subsection*{Statistical distributions}
+
+\subsection*{Polynomial interpolators}
+
+\subsection*{Test and benchmark suite}
+
+
+\section*{Project organisation and community}
+
+\textbf{Governance}
+
+\textbf{Roadmap}
+
+\textbf{Community beyond the SciPy library}
+
+\textbf{Maintainers and contributors}
+
+
+\section*{Discussion}
+
+\textit{The Discussion should be succinct and must not contain subheadings.}
+
+\textbf{Impact now}
+
+\textbf{Future development}.
+\textit{This section should include key issues: sparse arrays, ndimage pixel vs point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained submodules.}
+
+
+\bibliography{references}
+
+\noindent Use the cite command for an inline citation, e.g. \cite{behnel2011cython}.
+
+\section*{Acknowledgements (not compulsory)}
+
+Acknowledgements should be brief, and should not include thanks to anonymous referees and editors, or effusive comments. Grant or contribution numbers may be acknowledged.
+
+\section*{Author contributions statement}
+
+Must include all authors, identified by initials, for example:
+A.A. conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A. and D.A. analysed the results.  All authors reviewed the manuscript.
+
+\section*{Additional information}
+
+To include, in this order: \textbf{Accession codes} (where applicable); \textbf{Competing financial interests} (mandatory statement).
+
+The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
 
 \end{document}
