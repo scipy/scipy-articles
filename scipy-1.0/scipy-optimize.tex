@@ -1,7 +1,7 @@
 \newcommand{\RR}{\ensuremath{\mathbb{R}}}
 The \texttt{scipy.optimize} module provides functions for the numerical solution of several classes of root finding and optimization problems:
 \begin{enumerate}
-\item root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
+\item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
 \item linear sum assignment problems (\texttt{linear\textunderscore sum\textunderscore assignment}),
 \item linear and nonlinear sum-of-squares problems (\texttt{leastsq}, \texttt{least\textunderscore squares}, \texttt{nnls}, \texttt{lsq\textunderscore linear}, and \texttt{curve\textunderscore fit}),
 \item general, linear optimization problems (\texttt{linprog}),
@@ -16,7 +16,7 @@ The general ``root finding'' problem is to find a root $\mathbf{x} \in \RR^m$ of
 \begin{equation}
 \mathbf{f}(\mathbf{x}) = \mathbf{0}
 \end{equation}
-for a solution $\mathbf{x}$.\footnote{Equivalently the problem is to simultaneously find the roots $x_i \in \RR$ of several scalar functions $f_i : \RR \rightarrow \RR$, that is, to solve $f_i(x_0, x_1, \dots, x_{m-1}) = 0$ for $x_i$, $i \in \{0, 1, \dots {m-1}\}$.} The function \texttt{scipy.optimize.root} provides a common interface to several algorithms for solving problems of this type. For the special case\footnote{that is, to solve a single scalar equation $f(x) = 0$ for a single scalar variable $x$} $m = 1$, any one of several specialized functions \texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, or \texttt{newton} may provide improved performance or accuracy. (Have there been any recent improvements? Do we want to summarize the methods as @antonior92 has done for $minimize$? Is this a good template for the beginning of the following subsections?)
+for a solution $\mathbf{x}$.\footnote{Equivalently the problem is to simultaneously find the roots $x_i \in \RR$ of several scalar functions $f_i : \RR \rightarrow \RR$, that is, to solve $f_i(x_0, x_1, \dots, x_{m-1}) = 0$ for $x_i$, $i \in \{0, 1, \dots {m-1}\}$.} The function \texttt{scipy.optimize.root} provides a common interface to several algorithms for solving problems of this type. For the special case\footnote{that is, to solve a single scalar equation $f(x) = 0$ for a single scalar variable $x$} $m = 1$, any one of several specialized functions \texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, or \texttt{newton} may provide improved performance or accuracy. (Have there been any recent improvements? Do we want to summarize the methods as @antonior92 has done for $minimize$? Do we have to explain that these methods only provide \emph{one} solution, and that they are iterative based on a user-provided guess? Do we have to explain the notion of tolerance? Is this a good template for the beginning of the following subsections?)
 
 \subsubsection{Linear Sum Assignment}
 
