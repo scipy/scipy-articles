@@ -1,5 +1,19 @@
 \documentclass[fleqn,10pt]{wlscirep}
-\title{SciPy - some descriptive title here}
+
+% Packages
+\usepackage[super]{nth}
+\usepackage{rotating}
+\usepackage{makecell}
+\usepackage{pifont}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+% New Commands
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+
+\title {SciPy - some descriptive title here}
 
 \author[1]{Pauli Virtanen}
 \author[2,*]{Ralf Gommers}
@@ -59,6 +73,7 @@ LowLevelCallable
 \subsection*{Numerical optimization}
 \input{scipy-optimize}
 
+
 \subsection*{Statistical distributions}
 
 \subsection*{Polynomial interpolators}
@@ -107,3 +122,8 @@ To include, in this order: \textbf{Accession codes} (where applicable); \textbf{
 The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

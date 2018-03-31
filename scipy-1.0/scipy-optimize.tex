@@ -19,7 +19,7 @@ Documentation of SciPy's functionality in each these areas can be found in (cite
 %for a solution $\mathbf{x}$.\footnote{Equivalently the problem is to simultaneously find the roots $x_i \in \RR$ of several scalar functions $f_i : \RR \rightarrow \RR$, that is, to solve $f_i(x_0, x_1, \dots, x_{m-1}) = 0$ for $x_i$, $i \in \{0, 1, \dots {m-1}\}$.} The function \texttt{scipy.optimize.root} provides a common interface to several algorithms for solving problems of this type. For the special case\footnote{that is, to solve a single scalar equation $f(x) = 0$ for a single scalar variable $x$} $m = 1$, any one of several specialized functions \texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, or \texttt{newton} may provide improved performance or accuracy. (Have there been any recent improvements? Do we want to summarize the methods as @antonior92 has done for $minimize$? Do we have to explain that these methods only provide \emph{one} solution, and that they are iterative based on a user-provided guess? Do we have to explain the notion of tolerance? Is this a good template for the beginning of the following subsections?)
 
 
-\subsubsection{Linear Optimization}
+\subsubsection*{Linear Optimization}
 
 A new interior-point optimizer for continuous linear programming problems, \texttt{linprog} with \texttt{method='interior-point'}, was released with SciPy 1.0. Implementing the core algorithm of the commercial solver MOSEK \cite{andersen2000mosek}, it solves all of the 90+ NETLIB LP benchmark problems \cite{netlib} tested. Unlike some interior point methods, this homogenous self-dual formulation provides certificates of infeasibility or unboundedness as appropriate. 
 
@@ -27,20 +27,105 @@ A presolve routine based on \cite{andersen1995presolving} solves trivial problem
 
 Compared to the previously implemented simplex method, the new interior-point method is faster for all but the smallest problems, and is suitable for solving medium- and large-sized problems on which the existing simplex implementation fails. However, the interior point method typically returns a solution near the center of an optimal face, yet basic solutions are often preferred for sensitivity analysis and for use in mixed integer programming algorithms. This motivates the need for a crossover routine or a new implementation of the simplex method for sparse problems in a future release, either of which would require an improved sparse linear system solver with efficient support for rank-one updates
 
-\subsubsection{Multivariable, Nonlinear, Local Optimization}
+\subsubsection*{Nonlinear Optimization}
 
 
-\subsubsection{Other Improvements}
+The \texttt{minimize} function provides methods for solving general nonlinear optimization
+problems. It unifies several methods with a common interface in order to facilitate
+interchanging between solvers with different characteristics.  Table~\ref{tab:minimize} summarizes
+all the methods available for solving minimization problems of the type:
+\begin{equation}
+  \label{eq:minimization-prob}
+  \min_x f(x)
+\end{equation}
+where $f$ is a multivariate function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ and $x \in \mathbb{R}^n$.
+\texttt{COBYLA} and \texttt{SLSQP} methods allow nonlinear constraints to be included in the optimization
+problems, \texttt{L-BFGS-B} and \texttt{TNC} allow box constraints $x^l \le x \le x^u$,
+and the remaining methods are unconstrained optimization methods.
 
-\paragraph{Nonlinear Root Finding}
-Mention df-sane?
+\begin{table}[]
+  \centering
+  \caption{Optimization methods from \texttt{minimize}.  The field \textit{version added} gives when the algorithm
+    was included in SciPy. Algorithm with \textit{version added} equals to 0.6* were added in version 0.6 or before.
+    The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
+    (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
+    indicates whether the first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
+    with $\sim$ the algorithm does not requires the second-order derivatives from
+    the user, it computes an approximation internally and uses it to accelerate the method convergence.
+    \textit{Iterative Hessian factorization} indicates algorithms that factorize the Hessian in an iterative way,
+    which does not require the explicit matrix factorization or storage of the Hessian.
+    \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
+    iterate is sufficiently close to the solution. The convergence rates mentioned at the table
+    are: linear (L), superlinear (S) and quadratic (Q). When the convergence rate is denoted by S$^*$ the algorithm
+    has a superlinear rate for the parameters used in SciPy, but could  achieve a quadratic convergence rate for other parameter choices.
+    The \textit{global convergence} is marked for the algorithms with guarantees of convergence to a stationary
+    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$). The table also indicates which algorithms
+    can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
+    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
+  \begin{tabular}{cccccccccccccc}
+      & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
+    \hline
+    Version added &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.9 &  0.6* &  0.6* & 0.13 & 0.13 & 0.19 & 1.0 \\
+    \hline
+    Wrapper & & & \cmark & & & \cmark & \cmark & \cmark & &  & & & \cmark \\
+    \hline
+    \nth{1} derivatives &  & & & \cmark  & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \nth{2} derivatives &  &  &  &  & $\sim$ & $\sim$ & $\sim$ & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \makecell{Iterative Hessian \\
+    factorization} & & & &  & & & & \cmark & \cmark &  & \cmark &  & \cmark \\
+    \hline
+    Local convergence& & & & L & S &  L & S & S$^*$ & S$^*$ & Q & S$^*$ & Q & S$^*$  \\
+    \hline
+    Global convergence & & &  &   & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark  \\
+    \hline
+    \makecell{Line-search (LS) or\\ trust-region (TR)} & Neither  & LS &  TR & LS & LS & LS & LS & LS & LS & TR & TR & TR & TR \\
+    \hline
+    Bound constraints &&&\cmark&&&&\cmark&\cmark&\cmark&&&& \\
+    \hline
+    Equality constraints &&&&&&&\cmark&&&&& \\
+    \hline
+    Inequality constraint &&&\cmark&&&&\cmark&&&&& \\
+    \hline
+    References & \cite{nelder_simplex_1965, wright_direct_1996} & \cite{powell_efficient_1964} &
+      \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
+      \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
+      \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
+      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
+      \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
+      \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, lenders_trlib:_2016} \\
+    \hline
+  \end{tabular}
+  \label{tab:minimize}
+\end{table}
 
-\paragraph{Linear Sum Assignment}
-(Should this be included?)
 
-\paragraph{Curve Fitting}
-As covariant errors are commonplace in scientific data used to fit parametric models, the \texttt{curve\_fit} routine in SciPy 1.0 now accepts a covariance matrix of errors in the data to be fitted. 
+The available methods implement a variety of strategies for solving optimization problems.
+Derivative-free methods (e.g. \texttt{Nelder-Mead}, \texttt{Powell} and \texttt{COBYLA}) are appropriate for minimizing non-differentiable or
+noisy objective functions. When the derivatives are available, however, other methods offer faster convergence rates
+and have the convergence to a local solution proved.
 
-\paragraph{Global Optimization}
+Available derivative-based methods start with an initial guess and refine it iteratively, seeking
+a local solution to the optimization problem. There are algorithms implementing two competing strategies:
+line-search and trust-region. The so-called line-search (LS) methods at each iteration choose a direction
+and find, approximately, the optimal point in the given direction. Trust-region (TR) methods, on the other
+hand, choose a region for which the local approximation is valid and find, approximately, the  best point
+inside this \textit{trust-region}.
 
+An example of trust-region method introduced in the latest releases is \texttt{trust-exact},
+which a  provides a fast convergence rate by solving  almost exactly the trust-region subproblem.
+Its downside is it requires the Hessian to be stored and factored every iteration, which may preclude
+the solution of very large problems.
 
+Some of the available optimization methods are appropriate for large-scale problems
+(e.g.~problems with more than 1000 variables).
+\texttt{CG} does not use second derivatives and is adequate for large-scale problems due to the low storage requirements.
+\texttt{L-BFGS-B} maintain a simple and compact representation of the Hessian and is also adequate for large-scale problems.
+Finally, \texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use the second order derivatives to achieve faster
+convergence but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way,
+which does not require the Hessian to be stored.
+
+The method \texttt{trust-krylov}, introduced in the latest release, is as a good compromise between
+\texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
+subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
