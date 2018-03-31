@@ -9,26 +9,38 @@ The \texttt{scipy.optimize} module provides functions for the numerical solution
 \item general, nonlinear, local optimization problems of several variables (\texttt{minimize}), and
 \item general, global optimization problems (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
 \end{enumerate}
-The following subsections summarize SciPy's functionality in these areas, highlighting the recent additions in SciPy 1.0.
+Documentation of SciPy's functionality in each these areas can be found in (cite SciPy documentation), but here we highlight recent additions through SciPy 1.0.
 
-\subsubsection{Root Finding}
-The general ``root finding'' problem is to find a root $\mathbf{x} \in \RR^m$ of $\mathbf{f}: \RR^m \rightarrow \RR^m$, that is, to solve
-\begin{equation}
-\mathbf{f}(\mathbf{x}) = \mathbf{0}
-\end{equation}
-for a solution $\mathbf{x}$.\footnote{Equivalently the problem is to simultaneously find the roots $x_i \in \RR$ of several scalar functions $f_i : \RR \rightarrow \RR$, that is, to solve $f_i(x_0, x_1, \dots, x_{m-1}) = 0$ for $x_i$, $i \in \{0, 1, \dots {m-1}\}$.} The function \texttt{scipy.optimize.root} provides a common interface to several algorithms for solving problems of this type. For the special case\footnote{that is, to solve a single scalar equation $f(x) = 0$ for a single scalar variable $x$} $m = 1$, any one of several specialized functions \texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, or \texttt{newton} may provide improved performance or accuracy. (Have there been any recent improvements? Do we want to summarize the methods as @antonior92 has done for $minimize$? Do we have to explain that these methods only provide \emph{one} solution, and that they are iterative based on a user-provided guess? Do we have to explain the notion of tolerance? Is this a good template for the beginning of the following subsections?)
+%\subsubsection{Root Finding}
+%The general ``root finding'' problem is to find a root $\mathbf{x} \in \RR^m$ of $\mathbf{f}: \RR^m \rightarrow \RR^m$, that is, to solve
+%\begin{equation}
+%\mathbf{f}(\mathbf{x}) = \mathbf{0}
+%\end{equation}
+%for a solution $\mathbf{x}$.\footnote{Equivalently the problem is to simultaneously find the roots $x_i \in \RR$ of several scalar functions $f_i : \RR \rightarrow \RR$, that is, to solve $f_i(x_0, x_1, \dots, x_{m-1}) = 0$ for $x_i$, $i \in \{0, 1, \dots {m-1}\}$.} The function \texttt{scipy.optimize.root} provides a common interface to several algorithms for solving problems of this type. For the special case\footnote{that is, to solve a single scalar equation $f(x) = 0$ for a single scalar variable $x$} $m = 1$, any one of several specialized functions \texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, or \texttt{newton} may provide improved performance or accuracy. (Have there been any recent improvements? Do we want to summarize the methods as @antonior92 has done for $minimize$? Do we have to explain that these methods only provide \emph{one} solution, and that they are iterative based on a user-provided guess? Do we have to explain the notion of tolerance? Is this a good template for the beginning of the following subsections?)
 
-\subsubsection{Linear Sum Assignment}
-
-\subsubsection{Least Squares}
 
 \subsubsection{Linear Optimization}
 
-\subsubsection{Scalar, Nonlinear Optimization}
+A new interior-point optimizer for continuous linear programming problems, \texttt{linprog} with \texttt{method='interior-point'}, was released with SciPy 1.0. Implementing the core algorithm of the commercial solver MOSEK \cite{andersen2000mosek}, it solves all of the 90+ NETLIB LP benchmark problems \cite{netlib} tested. Unlike some interior point methods, this homogenous self-dual formulation provides certificates of infeasibility or unboundedness as appropriate. 
+
+A presolve routine based on \cite{andersen1995presolving} solves trivial problems and otherwise performs problem simplifications, such as bound tightening and removal of fixed variables, and one of several routines for eliminating redundant equality constraints is automatically chosen to reduce the chance of numerical difficulties caused by singular matrices. Although the main solver implementation is pure Python, end-to-end sparse matrix support and heavy use of SciPy's compiled linear system solvers --- often for the same system with multiple right hand sides due to the predictor-corrector approach --- provide speed sufficient for problems with tens of thousands of variables and constraints.
+
+Compared to the previously implemented simplex method, the new interior-point method is faster for all but the smallest problems, and is suitable for solving medium- and large-sized problems on which the existing simplex implementation fails. However, the interior point method typically returns a solution near the center of an optimal face, yet basic solutions are often preferred for sensitivity analysis and for use in mixed integer programming algorithms. This motivates the need for a crossover routine or a new implementation of the simplex method for sparse problems in a future release, either of which would require an improved sparse linear system solver with efficient support for rank-one updates
 
 \subsubsection{Multivariable, Nonlinear, Local Optimization}
 
-\subsubsection{Global Optimization}
 
+\subsubsection{Other Improvements}
+
+\paragraph{Nonlinear Root Finding}
+Mention df-sane?
+
+\paragraph{Linear Sum Assignment}
+(Should this be included?)
+
+\paragraph{Curve Fitting}
+As covariant errors are commonplace in scientific data used to fit parametric models, the \texttt{curve\_fit} routine in SciPy 1.0 now accepts a covariance matrix of errors in the data to be fitted. 
+
+\paragraph{Global Optimization}
 
 
