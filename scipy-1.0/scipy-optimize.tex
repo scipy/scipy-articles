@@ -43,7 +43,38 @@ where $f$ is a multivariate function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ an
 problems, \texttt{L-BFGS-B} and \texttt{TNC} allow box constraints $x^l \le x \le x^u$,
 and the remaining methods are unconstrained optimization methods.
 
-\begin{table}[]
+
+
+The available methods implement a variety of strategies for solving optimization problems.
+Derivative-free methods (e.g. \texttt{Nelder-Mead}, \texttt{Powell} and \texttt{COBYLA}) are appropriate for minimizing non-differentiable or
+noisy objective functions. When the derivatives are available, however, other methods offer faster convergence rates
+and have the convergence to a local solution proved.
+
+Available derivative-based methods start with an initial guess and refine it iteratively, seeking
+a local solution to the optimization problem. There are algorithms implementing two competing strategies:
+line-search and trust-region. The so-called line-search (LS) methods at each iteration choose a direction
+and find, approximately, the optimal point in the given direction. Trust-region (TR) methods, on the other
+hand, choose a region for which the local approximation is valid and find, approximately, the  best point
+inside this \textit{trust-region}.
+
+An example of trust-region method introduced in the latest releases is \texttt{trust-exact},
+which a  provides a fast convergence rate by solving  almost exactly the trust-region subproblem.
+Its downside is it requires the Hessian to be stored and factored every iteration, which may preclude
+the solution of very large problems.
+
+Some of the available optimization methods are appropriate for large-scale problems
+(e.g.~problems with more than 1000 variables).
+\texttt{CG} does not use second derivatives and is adequate for large-scale problems due to the low storage requirements.
+\texttt{L-BFGS-B} maintain a simple and compact representation of the Hessian and is also adequate for large-scale problems.
+Finally, \texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use the second order derivatives to achieve faster
+convergence but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way,
+which does not require the Hessian to be stored.
+
+The method \texttt{trust-krylov}, introduced in the latest release, is as a good compromise between
+\texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
+subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
+
+\begin{table}[H]
   \centering
   \caption{Optimization methods from \texttt{minimize}.  The field \textit{version added} gives when the algorithm
     was included in SciPy. Algorithm with \textit{version added} equals to 0.6* were added in version 0.6 or before.
@@ -99,33 +130,3 @@ and the remaining methods are unconstrained optimization methods.
   \end{tabular}
   \label{tab:minimize}
 \end{table}
-
-
-The available methods implement a variety of strategies for solving optimization problems.
-Derivative-free methods (e.g. \texttt{Nelder-Mead}, \texttt{Powell} and \texttt{COBYLA}) are appropriate for minimizing non-differentiable or
-noisy objective functions. When the derivatives are available, however, other methods offer faster convergence rates
-and have the convergence to a local solution proved.
-
-Available derivative-based methods start with an initial guess and refine it iteratively, seeking
-a local solution to the optimization problem. There are algorithms implementing two competing strategies:
-line-search and trust-region. The so-called line-search (LS) methods at each iteration choose a direction
-and find, approximately, the optimal point in the given direction. Trust-region (TR) methods, on the other
-hand, choose a region for which the local approximation is valid and find, approximately, the  best point
-inside this \textit{trust-region}.
-
-An example of trust-region method introduced in the latest releases is \texttt{trust-exact},
-which a  provides a fast convergence rate by solving  almost exactly the trust-region subproblem.
-Its downside is it requires the Hessian to be stored and factored every iteration, which may preclude
-the solution of very large problems.
-
-Some of the available optimization methods are appropriate for large-scale problems
-(e.g.~problems with more than 1000 variables).
-\texttt{CG} does not use second derivatives and is adequate for large-scale problems due to the low storage requirements.
-\texttt{L-BFGS-B} maintain a simple and compact representation of the Hessian and is also adequate for large-scale problems.
-Finally, \texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use the second order derivatives to achieve faster
-convergence but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way,
-which does not require the Hessian to be stored.
-
-The method \texttt{trust-krylov}, introduced in the latest release, is as a good compromise between
-\texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
-subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
