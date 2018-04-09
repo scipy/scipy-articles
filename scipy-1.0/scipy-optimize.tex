@@ -7,7 +7,7 @@ The \texttt{scipy.optimize} module provides functions for the numerical solution
 \item general, linear optimization problems (\texttt{linprog}),
 \item general, nonlinear, local optimization problems of a single variable (\texttt{minimize\textunderscore scalar}),
 \item general, nonlinear, local optimization problems of several variables (\texttt{minimize}), and
-\item general, global optimization problems (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
+\item general, nonlinear, global optimization problems of several variables (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
 \end{enumerate}
 Documentation of SciPy's functionality in each these areas can be found in (cite SciPy documentation), but here we highlight recent additions through SciPy 1.0.
 
@@ -33,7 +33,7 @@ Compared to the previously implemented simplex method, the new interior-point me
 The \texttt{minimize} function provides methods for solving general nonlinear optimization
 problems. It unifies several methods with a common interface in order to facilitate
 interchanging between solvers with different characteristics.  Table~\ref{tab:minimize} summarizes
-all the methods available for solving minimization problems of the type:
+the methods available for solving minimization problems of the type:
 \begin{equation}
   \label{eq:minimization-prob}
   \min_x f(x)
@@ -70,7 +70,7 @@ Finally, \texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use th
 convergence but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way,
 which does not require the Hessian to be stored.
 
-The method \texttt{trust-krylov}, introduced in the latest release, is as a good compromise between
+The method \texttt{trust-krylov}, introduced in the latest release, is a good compromise between
 \texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
 subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
 
@@ -130,3 +130,7 @@ subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored
   \end{tabular}
   \label{tab:minimize}
 \end{table}
+
+% Some problems may require the use of global optimizers to find the minimum of the objective function over the set of all parameter values, especially if the objective function possesses many local minima that other solvers could get stuck in.
+% \texttt{Basinhopping} \cite{Wales1997} uses random perturbation of the parameter vector, with local minimization. The acceptance of the new coordinates is dictated by the Metropolis test typically used in Monte Carlo simulations.
+% \texttt{differential\textunderscore evolution} uses
