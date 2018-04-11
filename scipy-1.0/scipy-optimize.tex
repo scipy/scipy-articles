@@ -23,73 +23,66 @@ Documentation of SciPy's functionality in each these areas can be found in (cite
 
 A new interior-point optimizer for continuous linear programming problems, \texttt{linprog} with \texttt{method='interior-point'}, was released with SciPy 1.0. Implementing the core algorithm of the commercial solver MOSEK \cite{andersen2000mosek}, it solves all of the 90+ NETLIB LP benchmark problems \cite{netlib} tested. Unlike some interior point methods, this homogenous self-dual formulation provides certificates of infeasibility or unboundedness as appropriate. 
 
-A presolve routine based on \cite{andersen1995presolving} solves trivial problems and otherwise performs problem simplifications, such as bound tightening and removal of fixed variables, and one of several routines for eliminating redundant equality constraints is automatically chosen to reduce the chance of numerical difficulties caused by singular matrices. Although the main solver implementation is pure Python, end-to-end sparse matrix support and heavy use of SciPy's compiled linear system solvers --- often for the same system with multiple right hand sides due to the predictor-corrector approach --- provide speed sufficient for problems with tens of thousands of variables and constraints.
+A presolve routine \cite{andersen1995presolving} solves trivial problems and otherwise performs problem simplifications, such as bound tightening and removal of fixed variables, and one of several routines for eliminating redundant equality constraints is automatically chosen to reduce the chance of numerical difficulties caused by singular matrices. Although the main solver implementation is pure Python, end-to-end sparse matrix support and heavy use of SciPy's compiled linear system solvers --- often for the same system with multiple right hand sides due to the predictor-corrector approach --- provide speed sufficient for problems with tens of thousands of variables and constraints.
 
 Compared to the previously implemented simplex method, the new interior-point method is faster for all but the smallest problems, and is suitable for solving medium- and large-sized problems on which the existing simplex implementation fails. However, the interior point method typically returns a solution near the center of an optimal face, yet basic solutions are often preferred for sensitivity analysis and for use in mixed integer programming algorithms. This motivates the need for a crossover routine or a new implementation of the simplex method for sparse problems in a future release, either of which would require an improved sparse linear system solver with efficient support for rank-one updates
 
 \subsubsection*{Nonlinear Optimization}
 
 
-The \texttt{minimize} function provides methods for solving general nonlinear optimization
+The \texttt{minimize} function provides methods for solving nonlinear optimization
 problems. It unifies several methods with a common interface in order to facilitate
-interchanging between solvers with different characteristics.  Table~\ref{tab:minimize} summarizes
-the methods available for solving minimization problems of the type:
-\begin{equation}
-  \label{eq:minimization-prob}
-  \min_x f(x)
-\end{equation}
-where $f$ is a multivariate function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ and $x \in \mathbb{R}^n$.
-\texttt{COBYLA} and \texttt{SLSQP} methods allow nonlinear constraints to be included in the optimization
-problems, \texttt{L-BFGS-B} and \texttt{TNC} allow box constraints $x^l \le x \le x^u$,
-and the remaining methods are unconstrained optimization methods.
+interchanging between solvers with different characteristics, summarized in Table~\ref{tab:minimize}.
+%% Currently, this introduces a ton of whitespace around a very simple expression (min f(x)). The reader can easily find the standard of meaning of `nonlinear programming', so I believe it should be removed. If we decide that it is appropriate to include, then we should add the entire problem statement - including constraints - and we should also include the entire linear programming problem statement in the previous section.
+% summarizes all the methods available for solving minimization problems of the type:
+%\begin{equation}
+%  \label{eq:minimization-prob}
+%  \min_x f(x)
+%\end{equation}
+%where $f$ is a multivariate function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ and $x \in \mathbb{R}^n$.
+%%  Without the problem statement this sentence isn't really appropriate.
+%\texttt{COBYLA} and \texttt{SLSQP} methods support nonlinear constraints, \texttt{L-BFGS-B} and \texttt{TNC} allow box constraints $x^l \le x \le x^u$,
+%and the remaining methods are for unconstrained problems.
 
-
-
-The available methods implement a variety of strategies for solving optimization problems.
+% The available methods implement a variety of solution strategies.
 Derivative-free methods (e.g. \texttt{Nelder-Mead}, \texttt{Powell} and \texttt{COBYLA}) are appropriate for minimizing non-differentiable or
-noisy objective functions. When the derivatives are available, however, other methods offer faster convergence rates
-and have the convergence to a local solution proved.
+noisy objective functions. When derivatives are available, however, other methods offer faster convergence rates
+and have proven convergence properties. 
+The derivative-based methods start with an initial guess and refine it iteratively, seeking
+a local solution to the optimization problem. Each of these algorithms implements one of two complementary strategies:
+line-search or trust-region. At each iteration, the line-search (LS) methods choose a direction
+and approximate the optimal point in the given direction. Trust-region (TR) methods, on the other
+hand, choose a ``trust-region'' region for which a local model is valid and approximate the best point
+inside.
 
-Available derivative-based methods start with an initial guess and refine it iteratively, seeking
-a local solution to the optimization problem. There are algorithms implementing two competing strategies:
-line-search and trust-region. The so-called line-search (LS) methods at each iteration choose a direction
-and find, approximately, the optimal point in the given direction. Trust-region (TR) methods, on the other
-hand, choose a region for which the local approximation is valid and find, approximately, the  best point
-inside this \textit{trust-region}.
-
-An example of trust-region method introduced in the latest releases is \texttt{trust-exact},
-which a  provides a fast convergence rate by solving  almost exactly the trust-region subproblem.
-Its downside is it requires the Hessian to be stored and factored every iteration, which may preclude
-the solution of very large problems.
-
-Some of the available optimization methods are appropriate for large-scale problems
-(e.g.~problems with more than 1000 variables).
-\texttt{CG} does not use second derivatives and is adequate for large-scale problems due to the low storage requirements.
-\texttt{L-BFGS-B} maintain a simple and compact representation of the Hessian and is also adequate for large-scale problems.
-Finally, \texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use the second order derivatives to achieve faster
-convergence but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way,
-which does not require the Hessian to be stored.
-
+One recently-added trust-region method is \texttt{trust-exact},
+which achieves fast convergence by solving the trust-region subproblem almost exactly.
+Unfortunately, it requires the Hessian to be stored and factored every iteration, which may preclude
+the solution of large problems (e.g.~problems with more than 1000 variables).
+Other methods are appropriate for large-scale problems, including
+\texttt{CG}, which does not use second derivatives and thus has low memory requirements, and \texttt{L-BFGS-B}, which maintains a simple and compact representation of the Hessian.
+\texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use second order derivatives to achieve faster
+convergence, but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way that does not require the Hessian to be stored.
 The method \texttt{trust-krylov}, introduced in the latest release, is a good compromise between
 \texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
-subproblem than \texttt{trust-ncg} but does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
+subproblem than \texttt{trust-ncg}, but it does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
+
+While most \texttt{minimize} development prior to SciPy 1.0 has focused on unconstrained minimization, methods \texttt{SLSQP} and \texttt{COBYLA}\footnote{We note that any equality constraint $c_{\text{eq}}(x) = 0$ can be expressed as two inequality constraints $c_{\text{eq}}(x) \leq 0$ and $-c_{\text{eq}}(x) \leq 0$} support fully general nonlinear programming. However, neither provides special treatment for sparsity. Accordingly, ongoing development efforts for \texttt{minimize} are focused on the addition of nonlinear programming algorithms for large, sparse problems. 
 
 \begin{table}[H]
   \centering
-  \caption{Optimization methods from \texttt{minimize}.  The field \textit{version added} gives when the algorithm
-    was included in SciPy. Algorithm with \textit{version added} equals to 0.6* were added in version 0.6 or before.
+  \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
     The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
     (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
-    indicates whether the first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
-    with $\sim$ the algorithm does not requires the second-order derivatives from
-    the user, it computes an approximation internally and uses it to accelerate the method convergence.
-    \textit{Iterative Hessian factorization} indicates algorithms that factorize the Hessian in an iterative way,
-    which does not require the explicit matrix factorization or storage of the Hessian.
+    indicates whether first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
+    with $\sim$ the algorithm does not requires second-order derivatives from
+    the user; it computes an approximation internally and uses it to accelerate method convergence.
+    \textit{Iterative Hessian factorization} denotes algorithms that factorize the Hessian in an iterative way,
+    which does not require explicit matrix factorization or storage of the Hessian.
     \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
-    iterate is sufficiently close to the solution. The convergence rates mentioned at the table
-    are: linear (L), superlinear (S) and quadratic (Q). When the convergence rate is denoted by S$^*$ the algorithm
-    has a superlinear rate for the parameters used in SciPy, but could  achieve a quadratic convergence rate for other parameter choices.
-    The \textit{global convergence} is marked for the algorithms with guarantees of convergence to a stationary
+    iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
+    has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
+    \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
     point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$). The table also indicates which algorithms
     can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
     \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}

@@ -1,0 +1,112 @@
+The SciPy library is organized as a collection of subpackages.  Here we
+summarize the scope and capabilities of each subpackage.
+
+\begin{description}
+
+\item[\texttt{cluster}] ~ \newline
+    The \texttt{cluster} subpackage contains two submodules:
+    \texttt{cluster.vq} provides vector quantization and k-means algorithms,
+    and \texttt{cluster.hierarchy} provides functions for hierarchical and
+    agglomerative clustering.
+\item[\texttt{constants}] ~ \newline
+    Physical and mathematical constants, including the CODATA recommended
+    values of the fundamental physical constants\cite{CODATA2014}.
+\item[\texttt{fftpack}] ~ \newline
+    Fast Fourier Transform routines.  In addition to the FFT, the subpackage
+    includes functions for the discrete sine and cosine transforms and for
+    pseudo-differential operators.
+\item[\texttt{integrate}] ~ \newline
+    The \texttt{integrate} subpackage provides tools for the numerical
+    computation of single and multiple definite integrals, and for the
+    solution of ordinary differential equations, including initial value
+    problems and two-point boundary value problems.
+\item[\texttt{interpolate}] ~ \newline
+    The \texttt{interpolate} subpackage contains spline functions and
+    classes, one-dimensional and multi-dimensional (univariate and
+    multivariate) interpolation classes, Lagrange and Taylor polynomial
+    interpolators, and wrappers for FITPACK and DFITPACK functions.
+\item[\texttt{io}] ~ \newline
+    A collection of functions and classes for reading and writing MATLAB, IDL,
+    Matrix Market, Fortran, NetCDF, Harwell-Boeing, WAV and ARFF data files. 
+\item[\texttt{linalg}] ~ \newline
+    Linear algebra functions, including:
+    elementary functions of a matrix, such as the trace, determinant, norm and
+    condition number;
+    basic solver for $Ax = b$;
+    specialized solvers for Toeplitz matrices, circulant matrices, triangular
+    matrices and other structured matrices; least squares solver and
+    pseudo-inverse calculations; eigenvalue and eigenvector calculations
+    (basic and generalized); matrix decompositions, including Cholesky, Schur,
+    Hessenberg, $LU$, $LDL^{\intercal}$, $QR$, $QZ$, singular value, and polar;
+    and functions to create specialized matrices, such as diagonal, Toeplitz,
+    Hankel, companion, Hilbert, and more.
+\item[\texttt{ndimage}] ~ \newline
+    This package contains various functions for multi-dimensional image
+    processing, including: convolution and assorted linear and nonlinear
+    filters (Gaussian filter, median filter, Sobel filter, etc.);
+    interpolation; region labeling and processing; and mathematical morphology
+    functions.
+\item[\texttt{misc}] ~ \newline
+    A collection of functions that did not fit into the other subpackages.
+    While this subpackage still exists in version 1.0.0, effort is continuing
+    to deprecate the contents of this subpackage and eventually remove it.
+\item[\texttt{odr}] ~ \newline
+    Orthogonal distance regression, including Python wrappers for the Fortran
+    library ODRPACK.
+\item[\texttt{optimize}] ~ \newline
+    The package includes:
+    implementations of many minimization algorithms; a general linear
+    programming solver; a routine for least-squares curve fitting; and a
+    collection of general nonlinear solvers for root-finding.
+\item[\texttt{signal}] ~ \newline
+    The \texttt{signal} subpackage focuses on signal processing (plus some
+    basic linear systems theory).  Functionality includes:
+    convolution and correlation; splines; filtering and filter design;
+    continuous and discrete time linear systems; waveform generation;
+    window functions; wavelet computations; peak finding; and spectral
+    analysis.  
+\item[\texttt{sparse}] ~ \newline
+    This package includes implementations of several representations of
+    sparse matrices.  It contains two subpackages, 
+    \texttt{scipy.sparse.linalg} and \texttt{scipy.sparse.csgraph}.
+
+    \texttt{scipy.sparse.linalg} provides a collection of linear algebra
+    routines that work with sparse matrices, including linear equation
+    solvers, eigenvalue decomposition, singular value decomposition
+    and LU factorization.
+
+    \texttt{scipy.sparse.csgraph} provides a collections of graph algorithms
+    for which the graph is represented using a sparse matrix.  Algorithms
+    include connected components, shortest path, minimum spanning tree
+    and more.
+\item[\texttt{spatial}] ~ \newline
+    This subpackage provides spatial data structures and algorithms,
+    including the k-d tree, Delaunay triangulation, convex hulls and Voronoi
+    diagrams.  The subpackage \texttt{scipy.spatial.distance} provides
+    a large collection of distance functions, along with functions for
+    computing the distance between all pairs of vectors in a given collection
+    of points or between all pairs from two collections of points.
+\item[\texttt{special}] ~ \newline
+    The name comes the class of functions traditionally known as \emph{special
+    functions}, but over time, the module has grown to include functions
+    beyond the classical special functions.  A more appropriate characterization
+    of this subpackage is simply \emph{useful functions}.
+    It includes: a large collection of the classical special functions
+    such as Airy, Bessel, etc.; orthogonal families of polynomials;
+    the Gamma function, and functions related to it;
+    functions for computing the PDF, CDF and quantile function for several
+    probability distributions;
+    information theory functions;
+    combinatorial functions \texttt{comb} and \texttt{factorial};
+    and more.
+\item[\texttt{stats}] ~ \newline
+    The \texttt{stats} subpackage provides: a large collection of continuous
+    and discrete \emph{probability distributions}, each with methods to compute
+    the PDF or PMF, CDF, moments and other statistics, generation of random
+    variates, and more;
+    \emph{statistical tests}, including Pearson's correlation, Spearman's rank-order
+    correlations, Kendal's tau, chi-squared test and its generalization as the
+    Cressie-Read power divergence, contingency table tests including Fisher's
+    exact test and Mood's median test, and many more;
+    and assorted \emph{transformations and statistics} of data.
+\end{description}
