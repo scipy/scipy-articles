@@ -28,9 +28,9 @@ A presolve routine \cite{andersen1995presolving} solves trivial problems and oth
 Compared to the previously implemented simplex method, the new interior-point method is faster for all but the smallest problems, and is suitable for solving medium- and large-sized problems on which the existing simplex implementation fails. However, the interior point method typically returns a solution near the center of an optimal face, yet basic solutions are often preferred for sensitivity analysis and for use in mixed integer programming algorithms. This motivates the need for a crossover routine or a new implementation of the simplex method for sparse problems in a future release, either of which would require an improved sparse linear system solver with efficient support for rank-one updates
 
 \subsubsection*{Nonlinear Optimization}
+\paragraph{Local Minimization}
 
-
-The \texttt{minimize} function provides methods for solving nonlinear optimization
+The \texttt{minimize} function provides methods for finding local minima of nonlinear optimization
 problems. It unifies several methods with a common interface in order to facilitate
 interchanging between solvers with different characteristics, summarized in Table~\ref{tab:minimize}.
 %% Currently, this introduces a ton of whitespace around a very simple expression (min f(x)). The reader can easily find the standard of meaning of `nonlinear programming', so I believe it should be removed. If we decide that it is appropriate to include, then we should add the entire problem statement - including constraints - and we should also include the entire linear programming problem statement in the previous section.
@@ -67,7 +67,9 @@ The method \texttt{trust-krylov}, introduced in the latest release, is a good co
 \texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
 subproblem than \texttt{trust-ncg}, but it does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
 
-While most \texttt{minimize} development prior to SciPy 1.0 has focused on unconstrained minimization, methods \texttt{SLSQP} and \texttt{COBYLA}\footnote{We note that any equality constraint $c_{\text{eq}}(x) = 0$ can be expressed as two inequality constraints $c_{\text{eq}}(x) \leq 0$ and $-c_{\text{eq}}(x) \leq 0$} support fully general nonlinear programming. However, neither provides special treatment for sparsity. Accordingly, ongoing development efforts for \texttt{minimize} are focused on the addition of nonlinear programming algorithms for large, sparse problems. 
+While most \texttt{minimize} development prior to SciPy 1.0 has focused on unconstrained minimization, 
+% methods \texttt{SLSQP} and \texttt{COBYLA}\footnote{We note that any equality constraint $c_{\text{eq}}(x) = 0$ can be expressed as two inequality constraints $c_{\text{eq}}(x) \leq 0$ and $-c_{\text{eq}}(x) \leq 0$} 
+\texttt{SLSQP} supports fully general nonlinear programming. However, it does not provide special treatment for sparsity, limiting its utility to small problems. Accordingly, ongoing development efforts for \texttt{minimize} are focused on the addition of nonlinear programming algorithms for large, sparse problems. 
 
 \begin{table}[H]
   \centering
@@ -83,7 +85,7 @@ While most \texttt{minimize} development prior to SciPy 1.0 has focused on uncon
     iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
     has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
     \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
-    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$). The table also indicates which algorithms
+    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
     can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
     \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
   \begin{tabular}{cccccccccccccc}
@@ -124,9 +126,21 @@ While most \texttt{minimize} development prior to SciPy 1.0 has focused on uncon
   \label{tab:minimize}
 \end{table}
 
-Some problems may require the use of global optimizers to find the minimum of the objective function over the set of all parameter values, especially if the objective function possesses many local minima that other solvers could get stuck in.
-\texttt{Brute} performs a grid search over the entire parameter range, with the best grid point undergoing further polishing by another solver. However, this approach becomes increasingly inefficient as the problem dimensionality increases, or if the objective function has many extrema.
-\texttt{Basinhopping} \cite{Wales1997} uses random perturbation of the parameter vector, with local minimization. The acceptance of the new coordinates is dictated by the Metropolis test typically used in Monte Carlo simulations.
-\texttt{differential\textunderscore evolution} \cite{Wormington1999,Storn1997} is a stochastic solver that improves by gradual evolution of a population of candidate solutions. In each iteration trial candidates are generated by combination of candidates from the existing population; if the trial candidates represent an improvement then the population is updated. \texttt{differential\textunderscore evolution} does not require that the objective function be differentiable.
+\paragraph{Global Minimization}
+As \texttt{minimize} only seeks a local minimum, some problems require the use of a global optimization routine to find the minimum of the objective function over the set of all decision variable values, especially if the objective function possesses many local minima that other solvers could get stuck in. % e.g. if there is concern that `minimize` could get stuck in an unacceptable local minimum?
+The \texttt{brute} function performs a grid search over the entire domain, and the best grid point is ``polished'' by a local minimizer. However, this approach becomes prohibitively expensive as the problem dimensionality increases.
+% As far as I understand how brute works, the run time does not depend on the number of extrema, as it only polishes the best one
+% , or if the objective function has many extrema. 
+To address this, the
+\texttt{basinhopping} \cite{Wales1997} function uses random perturbation of the decision variables in conjunction with local minimization. The acceptance of the perturbed coordinates is dictated by the Metropolis test typically used in Monte Carlo simulations. 
+\texttt{differential\textunderscore evolution} \cite{Wormington1999,Storn1997} is a stochastic solver that improves by gradual evolution of a population of candidate solutions. In each iteration, trial candidates are generated by combination of candidates from the existing population; if the trial candidates represent an improvement then the population is updated. 
+% Is the following a unique feature of differential_evolution? If so, state it (although it seems that neither `brute`or `basinhopping` inherently require the a differentiable problem). If not, why mention it? 
+% \texttt{differential\textunderscore evolution} does not require that the objective function be differentiable.
 %  basinhopping may need differentiable objective for the local minimization.
-The SciPy benchmark suite possesses a comprehensive range of global optimization problems (196), of varying difficulties, that can be used to evaluate the performance of a particular solver. This suite is used to decide whether new solvers have good enough performance to be added to the package.
+Most recently, the SciPy benchmark suite gained a comprehensive set of 196 global optimization problems
+% They're ``comprehensive''
+% of varying difficulties, 
+% that can be used to evaluate the performance of the solvers. 
+%This suite is used to decide
+for tracking the performance of existing solvers over time and for evaluating whether the performance of new solvers merits inclusion in the package. 
+% have good enough performance to be added to the package.
