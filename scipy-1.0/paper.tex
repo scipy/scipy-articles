@@ -104,6 +104,20 @@ LowLevelCallable
 
    Any pull request can be compared against the \texttt{master} branch with the command \texttt{asv continuous master new-feature}. This will provide a benchmark against the master branch and the branch a new feature is implemented in. More features are available in the documentation, including arguments to select which benchmarks to run.
 
+    \subsubsection*{Test suite}
+    The SciPy test suite is orchestrated by a continuous integration matrix
+    that includes posix and Windows (32/64-bit) platforms managed by Travis CI and appveyor,
+    respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and include
+    code linting with pyflakes and pycodestyle. There are more than $13000$ unit
+    tests in the test suite, which is written for usage with the pytest runner, and
+    with a 76.5 \% coverage of approximately $204000$ lines
+    of code. Documentation for the code is automatically built and hosted by the
+    CircleCI service to facilitate evaluation of documentation changes / integrity.
+    Our full test suite also passes with PyPy3, a just-in-time compiled version
+    of the Python language.
+    % NOTE: is there a citation for PyPy?
+
+
 \section*{Project organisation and community}
 
 \textbf{Governance}
