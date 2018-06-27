@@ -1,0 +1,35 @@
+The cKDTree module is rewritten in C++ with templated classes.
+
+The support to a box of periodic boundary condition is added. A periodic
+condition is typically used in computer simulations of physical processes.
+
+\subsubsection{k-NN}
+
+The API for querying neighbours is enhanced, to allow querying a subset of
+k nearest neighbours.
+
+\subsubsection{sparse distance matrix}
+
+generating approximated sparse distance matrix
+
+\subsubsection{Pair-Counting}
+
+The cKDTree module implements the dual tree counting algorithm in (cite).
+
+An improvement to the pair counting algorithm is added to improve the scale
+with the number of bins.
+
+\textbf{Add a Figure to show the scaling, before and after.}
+
+The cKDTree can now be augmented by weights. Weighted paircount is essential
+in many scientific applications, e.g. computing correlation function of galaxies.
+
+\textbf{perhaps give an example or some formula.}
+
+(cite / mention faster implementions of paircounting algorithms / treecorr, corrfunc)
+
+The main purpose of the paircounting algorithm in cKDTree is to provide a readily
+available tool. The KDTree based algorithm is not necessarily the fastest algorithm
+depending on the application. E.g. for low number densities a chaining mesh based algorithm
+can be easily many times faster than a tree based algorithm.
+
