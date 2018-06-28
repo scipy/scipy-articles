@@ -344,6 +344,85 @@ instructions for contacting the three members of our Code of Conduct Committee o
 external representative on the NumFOCUS Board of Directors.
 
 \textbf{Roadmap}
+The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
+maintained by the community that describes some of the major directions
+for improvement for the project, as well as specific limitations and
+matters that require assistance moving forward.
+
+In general, we encourage changes that improvie clarity in the API of the library,
+but strongly discourage breaking backwards compatibility, given our position near
+the base of the scientific Python computing stack.
+
+Unit test coverage for most recent code additions / adjustments is quite
+respectable, but some of the historical components of the code base
+would still benefit from increased test coverage. We are still striving
+to increase the number of high-quality SciPy usage tutorials, but our
+standard documentation for library features is already in excellent shape.
+
+The low-level Cython code in our library (which interacts with C-level
+code and exposes it for Python usage) could use some measure of modernization,
+including migration to typed memoryviews to handle NumPy arrays in place
+of the older syntax.
+
+Some specific submodules of SciPy would benefit from  attention moving forward.
+\texttt{fftpack} has some single-precision floating point errors, a caching bug,
+and would benefit from the addition of the Bluestein algorithm. There's also
+too much community code duplication with \texttt{numpy.fft}, which
+requires clarification of best choices and long-term plans.
+
+\texttt{scipy.integrate} now has a new ODE solver interface, and we should aim
+to gracefully deprecate the older API. Support for integrating complex-valued
+functions and integrating multiple intervals could be beneficial.
+
+\texttt{scipy.interpolate} could benefit from a set of new features including
+spline fitting routines with better user control; integration, differentiation,
+and arithmetic routines for splines; transparent tensor-product splines,
+Non-Uniform Rational B-Splines support; and mesh refinement and coarsening of
+B-splines and corresponding tensor products.
+
+\texttt{scipy.io} would benefit from PCM float support, but we otherwise
+direct users with more sophisticated needs to domain-specific audio
+libraries.
+
+For \texttt{scipy.linalg} we need to remove functions that are duplicate with 
+\texttt{numpy.linalg}, \texttt{get\_lapack\_funcs} should always use flapack, and
+we should continue to wrap more LAPACK functions. Ideally, we'd also
+add type-generic wrappers in the Cython BLAS and LAPACK interfaces, and
+transform many of the linear algebra routines into gufuncs.
+
+We're planning to remove \texttt{scipy.misc} as a public module, and
+rename \texttt{scipy.odr} to \texttt{scipy.regression} or
+\texttt{scipy.fitting}, and include \texttt{optimize.curve\_fit}. This 
+module will then provide a home for other fitting functionality.
+\texttt{scipy.optimize} would benefit from a few more good global optimizers 
+as well as large-scale optimizers.
+
+\texttt{scipy.ndimage} should be completely migrated to a data point
+model (values on a grid), instead of a pixel model (elements with centers),
+both of which have been used in the past, because the former is now
+proving more effective in practice. We also need to standardize the
+\texttt{scipy.ndimage.morphology} API.
+
+\texttt{scipy.signal} needs its overlap with \texttt{scipy.ndimage}
+to be reduced; B-splines functionality should be moved to \texttt{interpolate},
+\texttt{firwin2} can be merged into \texttt{firwin}; Second Order Sections need
+to be updated to match the capabilities in other routines, and wavelet-related
+routines are somewhat out of place.
+
+\texttt{scipy.sparse} is fairly mature now, but there are many data
+formats and the community continues to move forward here so we will aim
+to take advantage of their improvements while preserving backwards
+compatibility to the extent that it is possible. \texttt{sparse.linalg}
+may benefit from wrappers for PROPACK for faster sparse SVD computation.
+
+For \texttt{scipy.spatial}, KDTree will be removed, and cKDTree will be 
+renamed to KDTree in a backwards-compatible way. \texttt{distance\_wrap.c} 
+likely needs a rewrite in Cython. \texttt{scipy.special} needs precision
+improvements for hypergeometric functions, parabolic cylinder functions,
+and spheroidal wave functions.
+
+
+
 
 \textbf{Community beyond the SciPy library}
 
