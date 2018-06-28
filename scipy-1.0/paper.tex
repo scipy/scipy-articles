@@ -11,6 +11,7 @@
 \usepackage{pgfplots}
 
 \pgfplotsset{compat=newest}
+\usepackage{listings}
 
 % New Commands
 \newcommand{\cmark}{\ding{51}}%
@@ -354,17 +355,45 @@ but strongly discourage breaking backwards compatibility, given our position nea
 the base of the scientific Python computing stack.
 
 Unit test coverage for most recent code additions / adjustments is quite
-respectable, but some of the historical components of the code base
+respectable, with overall project test coverage holding steady at
+around 76\% for the last six months (Figure~\ref{fig:coverage}),
+but some of the historical components of the code base
 would still benefit from increased test coverage. We are still striving
-to increase the number of high-quality SciPy usage tutorials, but our
+to increase the number of high-quality SciPy usage tutorials beyond
+our current 15 section offering\cite{SciPy_tutorials}, but our
 standard documentation for library features is already in excellent shape.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/coverage-chart}
+\caption{\% coverage of the SciPy code base by unit tests over the six
+	 months preceding June 28, 2018 as reported by the \texttt{codecov}
+	 service. The analysis of lines of source code covered is performed
+	 automatically in our continuous integation suite using the
+	 \texttt{pytest-cov} and \texttt{gcov} libraries.}
+\label{fig:coverage}
+\end{figure}
 
 The low-level Cython code in our library (which interacts with C-level
 code and exposes it for Python usage) could use some measure of modernization,
-including migration to typed memoryviews to handle NumPy arrays in place
-of the older syntax.
+including migration to typed memoryviews to handle NumPy arrays instead of
+the older syntax:
 
-Some specific submodules of SciPy would benefit from  attention moving forward.
+\begin{lstlisting}[language=Python]
+# example of a function that takes a single
+# 3 dimesional typed memoryview as an argument
+# this allows Cython-level handling of a NumPy
+# array object
+cpdef int func_new(int[:, :, :] arr):
+    pass
+
+# example of the old syntax for handling
+# the same scenario
+cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
+    pass
+
+\end{lstlisting}
+
 \texttt{fftpack} has some single-precision floating point errors, a caching bug,
 and would benefit from the addition of the Bluestein algorithm. There's also
 too much community code duplication with \texttt{numpy.fft}, which
@@ -384,22 +413,23 @@ B-splines and corresponding tensor products.
 direct users with more sophisticated needs to domain-specific audio
 libraries.
 
-For \texttt{scipy.linalg} we need to remove functions that are duplicate with 
-\texttt{numpy.linalg}, \texttt{get\_lapack\_funcs} should always use flapack, and
+For \texttt{scipy.linalg}, we need to remove functions that are duplicate with 
+\texttt{numpy.linalg} unless performance is superior in SciPy,
+\texttt{get\_lapack\_funcs} should always use flapack, and
 we should continue to wrap more LAPACK functions. Ideally, we'd also
 add type-generic wrappers in the Cython BLAS and LAPACK interfaces, and
 transform many of the linear algebra routines into gufuncs.
 
 We're planning to remove \texttt{scipy.misc} as a public module, and
 rename \texttt{scipy.odr} to \texttt{scipy.regression} or
-\texttt{scipy.fitting}, and include \texttt{optimize.curve\_fit}. This 
+\texttt{scipy.fitting}, and relocate \texttt{optimize.curve\_fit}. This 
 module will then provide a home for other fitting functionality.
 \texttt{scipy.optimize} would benefit from a few more good global optimizers 
 as well as large-scale optimizers.
 
 \texttt{scipy.ndimage} should be completely migrated to a data point
 model (values on a grid), instead of a pixel model (elements with centers),
-both of which have been used in the past, because the former is now
+both of which have been used in the past, because the data point model is now
 proving more effective in practice. We also need to standardize the
 \texttt{scipy.ndimage.morphology} API.
 
