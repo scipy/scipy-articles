@@ -349,7 +349,7 @@ maintained by the community that describes some of the major directions
 for improvement for the project, as well as specific limitations and
 matters that require assistance moving forward.
 
-In general, we encourage changes that improvie clarity in the API of the library,
+In general, we encourage changes that improve clarity in the API of the library,
 but strongly discourage breaking backwards compatibility, given our position near
 the base of the scientific Python computing stack.
 
@@ -370,7 +370,7 @@ and would benefit from the addition of the Bluestein algorithm. There's also
 too much community code duplication with \texttt{numpy.fft}, which
 requires clarification of best choices and long-term plans.
 
-\texttt{scipy.integrate} now has a new ODE solver interface, and we should aim
+\texttt{scipy.integrate} has a new ODE solver interface, and we should aim
 to gracefully deprecate the older API. Support for integrating complex-valued
 functions and integrating multiple intervals could be beneficial.
 
@@ -409,7 +409,7 @@ to be reduced; B-splines functionality should be moved to \texttt{interpolate},
 to be updated to match the capabilities in other routines, and wavelet-related
 routines are somewhat out of place.
 
-\texttt{scipy.sparse} is fairly mature now, but there are many data
+While \texttt{scipy.sparse} is mature, there are many data
 formats and the community continues to move forward here so we will aim
 to take advantage of their improvements while preserving backwards
 compatibility to the extent that it is possible. \texttt{sparse.linalg}
