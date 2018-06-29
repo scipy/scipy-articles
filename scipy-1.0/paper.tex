@@ -113,7 +113,24 @@ SciPy library and highlight some recent technical developments.
 
 \subsection*{Common infrastructure}
 
-\subsection*{Language preferences}
+\subsection*{Language choices}
+Python / Cython, Fortran, C and C++ are the programming languages
+used to implement scientific algorithms in the SciPy library. An analysis
+of our code base using the \texttt{linguist} library provides a detailed
+breakdown as \% composition by programming language in SciPy
+(Figure~\ref{fig:linguist}).
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{static/linguist}
+        \caption{The breakdown of programming languages used in the
+	         SciPy library determined using the linguist library.
+		 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
+		 and Makefile are excluded for clarity and mostly
+		 provide supporting roles in tests, building, and
+		 documentation.}
+        \label{fig:linguist}
+    \end{figure}
 
 \subsection*{API and ABI evolution}
 
