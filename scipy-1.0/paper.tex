@@ -190,6 +190,21 @@ large, sparse, nonsymmetric systems of linear equations),
 Qhull\cite{Barber:1996:QAC:235815.235821} (computational
 geometry), and Cephes\cite{cephes_netlib} (mathematics algorithms). 
 
+Therefore, the relative abundance of different programming languages
+in the SciPy library results from a combination of the usage of powerful performance
+enhancing languages that interact well with Python (i.e., Cython), and
+the usage of languages (and their libraries) that have proven reliable
+and performant over many decades. The position that SciPy occupies
+near the foundation of the scientific Python ecosystem is such that
+adoption of new languages or major dependencies is generally unlikely--our
+choices are strongly driven by long-term stability. GPU acceleration,
+new transpiling libraries, and the latest JIT compilation approaches
+(i.e., Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall outside the remit
+of the main SciPy library. That said, we have recently increased our
+efforts to support compatibility with some of these options, and having
+our full test suite pass with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1565827}
+is now a requirement in our development workflow.
+
 \subsection*{API and ABI evolution}
 
 
