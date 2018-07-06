@@ -173,6 +173,22 @@ ARPACK\cite{leh:sor:yan96} (solving large scale eigenvalue problems),
 ALGORITHM 644\cite{Amos:1986:APP:7921.214331} (handling Bessel Functions), and 
 CDFLIB\cite{CDFLIB_site} (evaluation of cumulative density functions).
 
+Rounding out the top three languages in SciPy is C, which is also extremely
+well-established over several decades\cite{Kernighan:1988:CPL:576122} of
+scientific computing. Alongside its objected-oriented relative C++, C
+can be leveraged in Python after being exposed using the Cython
+language. Cython has been described as a creole language that mixes
+the best parts of Python and lower-level C / C++
+paradigms\cite{behnel2011cython}. We thus often use Cython as a glue
+between well-established low-level scientific computing libraries and
+the Python interface offered by SciPy. We also use Cython to enable
+performance enhancements in Python code, especially for cases where heavily
+used inner loops benefit from a compiled code with static typing. Some of the C
+libraries that we wrap in SciPy include trlib\cite{doi:10.1080/10556788.2018.1449842} 
+(iterative solving of the trust region problem), SuperLU\cite{li05,superlu_ug99} (solution of
+large, sparse, nonsymmetric systems of linear equations),
+Qhull\cite{Barber:1996:QAC:235815.235821} (computational
+geometry), and Cephes\cite{cephes_netlib} (mathematics algorithms). 
 
 \subsection*{API and ABI evolution}
 
