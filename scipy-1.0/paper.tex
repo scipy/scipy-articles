@@ -154,6 +154,26 @@ breakdown as \% composition by programming language in SciPy
         \label{fig:linguist}
     \end{figure}
 
+While it is not surprising that Python is heavily used in SciPy, the
+usage distribution of the other languages warrants some discussion. Fortran
+is an extremely well-established scientific programming language, both
+for historical reasons and because of its continued excellent
+performance\cite{Koelbel:1993:HPF:562354}. We
+wrap the FFTPACK Fortran library for performing Fourier
+transforms\cite{SWARZTRAUBER198445, SWARZTRAUBER198251} since
+this library has been a standard in the field for 33 years and has a license
+that is compatible with our own. Likewise, we wrap the Fortran source
+for ODEPACK\cite{citeulike:2644528} as it has been  trusted for the initial 
+value problem for ordinary differential equation systems for 30 years. For
+similar reasons we also warp the Fortran libraries QUADPACK\cite{1983qspa.book.....P} (for numerical
+integration of one-dimensional functions), FITPACK\cite{Dierckx:1993:CSF:151103} (curve-fitting /
+interpolation), ODRPACK\cite{ODRPACK_Boggs} (orthogonal distance regression),
+MINPACK\cite{osti_6997568} (minimization of linear and nonlinear equations),
+ARPACK\cite{leh:sor:yan96} (solving large scale eigenvalue problems), 
+ALGORITHM 644\cite{Amos:1986:APP:7921.214331} (handling Bessel Functions), and 
+CDFLIB\cite{CDFLIB_site} (evaluation of cumulative density functions).
+
+
 \subsection*{API and ABI evolution}
 
 
