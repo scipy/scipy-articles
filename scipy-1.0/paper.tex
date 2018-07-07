@@ -263,6 +263,34 @@ from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 
 
 \subsection*{Statistical distributions}
+Version 1.0 of SciPy saw the addition of the energy distance algorithm in
+\texttt{scipy.stats.energy\_distance}. Energy distance is used in a varity of applications ranging
+from genetic analysis to multivariate independence. We also added the
+first Wasserstein distance algorithm to the library in
+\texttt{scipy.stats.wasserstein\_distance}. The Wasserstein distance is often
+used in color digital image analysis.
+
+We now also provide the cumulative distribution function of the multivariate
+normal distribution, \\\texttt{scipy.stats.multivariate\_normal}, via the newly
+associated \texttt{logcdf} and \texttt{cdf} methods.
+
+Other recent additions to \texttt{scipy.stats} include the Argus distribution
+in \texttt{scipy.stats.argus} (used in particle physics), a class for
+generating a distribution from a histogram in
+\texttt{scipy.stats.rv\_histogram}, an implementation of the multinomial
+distribution in \texttt{scipy.stats.multinomial} (used for example in natural
+language processing), a weighted Kendall's tau statistic algorithm in
+\texttt{scipy.stats.weightedtau}, interquantile range handling in
+\texttt{scipy.stats.iqr}, the Burr type XII distribution is available in
+\texttt{scipy.stats.burr12}, the skew normal distribution has been implemented 
+as \texttt{scipy.stats.skewnorm}, a trepzoidal continuous random variable
+has been added in \texttt{scipy.stats.trapz}, and the matrix normal distribution
+is now available in \texttt{scipy.stats.matrix\_normal}. 
+
+From a design standpoint, many functions in \texttt{scipy.stats} now support
+a \texttt{nan\_policy} keyword to allow user-level control over the algorithmic
+decision to propagate, omit, or raise an error in the case that \texttt{NaN}
+values are encountered.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Polynomial interpolators}
