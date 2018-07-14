@@ -8,7 +8,7 @@ condition is typically used in computer simulations of physical processes.
 % TODO: please check / improve literature citations used here
 % what about the time complexity of the kNN implementation?
 In 2015, we enhanced \texttt{cKDTree.query} with a $k$ nearest neighbors search
-parameter. This may be an efficient operation\cite{Sproull:1991:RNS:3118219.3118331} 
+parameter. This is an efficient operation\cite{Sproull:1991:RNS:3118219.3118331} 
 because it generates and returns a data structure that may be only a fraction 
 of the size of the full neighbor list. A C++ implementation is provided that releases
 the Python global interpreter lock for the neighbor search process, uses
@@ -18,7 +18,7 @@ of periodic boundary conditions. When $k$ is a non-contiguous list of nearest
 neighbors to account for (i.e., \texttt{[1, 3, 4]}), the intervening distances
 between the nearest neighbor ($k = 1$) and the farthest neighbor requested
 are all interrogated, but only those neighbors that are requested are retained
-in memory. Thus, the max heap size for this algorithm is conceptually determined
+in memory. Thus, the maximum heap size for this algorithm is conceptually determined
 as \texttt{np.arange(max(k))}.
 
 \subsubsection{sparse distance matrix}
