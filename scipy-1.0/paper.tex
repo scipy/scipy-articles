@@ -215,6 +215,9 @@ our full test suite pass with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1
 is now a requirement in our development workflow.
 
 \subsection*{API and ABI evolution}
+In general, we encourage changes that improve clarity in the API of the library,
+but strongly discourage breaking backwards compatibility, given our position near
+the base of the scientific Python computing stack.
 
 
 \section*{Key technical improvements}
@@ -286,10 +289,26 @@ from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
     code linting with pyflakes and pycodestyle. There are more than $13000$ unit
     tests in the test suite, which is written for usage with the pytest runner, and
     with a 76.5 \% coverage of approximately $204000$ lines
-    of code. Documentation for the code is automatically built and hosted by the
-    CircleCI service to facilitate evaluation of documentation changes / integrity.
+    of code holding steady for the last six months (Figure~\ref{fig:coverage}).
+    Some of the historical components of the code base would still benefit from
+    increased test coverage. Documentation for the code is automatically built and hosted 
+    by the CircleCI service to facilitate evaluation of documentation changes / integrity.
     Our full test suite also passes with PyPy3, a just-in-time compiled version
     of the Python language.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/coverage-chart}
+\caption{\% coverage of the SciPy code base by unit tests over the six
+	 months preceding June 28, 2018 as reported by the \texttt{codecov}
+	 service. The analysis of lines of source code covered is performed
+	 automatically in our continuous integation suite using the
+	 \texttt{pytest-cov} and \texttt{gcov} libraries.}
+\label{fig:coverage}
+\end{figure}
+    
+
+
     % NOTE: is there a citation for PyPy?
 
 
@@ -345,34 +364,16 @@ instructions for contacting the three members of our Code of Conduct Committee o
 external representative on the NumFOCUS Board of Directors.
 
 \textbf{Roadmap}
+
 The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
 maintained by the community that describes some of the major directions
 for improvement for the project, as well as specific limitations and
 matters that require assistance moving forward.
 
-In general, we encourage changes that improve clarity in the API of the library,
-but strongly discourage breaking backwards compatibility, given our position near
-the base of the scientific Python computing stack.
-
-Unit test coverage for most recent code additions / adjustments is quite
-respectable, with overall project test coverage holding steady at
-around 76\% for the last six months (Figure~\ref{fig:coverage}),
-but some of the historical components of the code base
-would still benefit from increased test coverage. We are still striving
-to increase the number of high-quality SciPy usage tutorials beyond
+We are still striving to increase the number of SciPy usage tutorials beyond
 our current 15 section offering\cite{SciPy_tutorials}, but our
 standard documentation for library features is already in excellent shape.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{static/coverage-chart}
-\caption{\% coverage of the SciPy code base by unit tests over the six
-	 months preceding June 28, 2018 as reported by the \texttt{codecov}
-	 service. The analysis of lines of source code covered is performed
-	 automatically in our continuous integation suite using the
-	 \texttt{pytest-cov} and \texttt{gcov} libraries.}
-\label{fig:coverage}
-\end{figure}
 
 The low-level Cython code in our library (which interacts with C-level
 code and exposes it for Python usage) could use some measure of modernization,
@@ -394,62 +395,41 @@ cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
 
 \end{lstlisting}
 
-\texttt{fftpack} has some single-precision floating point errors, a caching bug,
-and would benefit from the addition of the Bluestein algorithm. There's also
-too much community code duplication with \texttt{numpy.fft}, which
-requires clarification of best choices and long-term plans.
-
-\texttt{scipy.integrate} has a new ODE solver interface, and we should aim
-to gracefully deprecate the older API. Support for integrating complex-valued
-functions and integrating multiple intervals could be beneficial.
+\texttt{fftpack} and {linalg} have too much functionality overlap with
+\texttt{numpy} equivalents.
 
 \texttt{scipy.interpolate} could benefit from a set of new features including
-spline fitting routines with better user control; integration, differentiation,
-and arithmetic routines for splines; transparent tensor-product splines,
-Non-Uniform Rational B-Splines support; and mesh refinement and coarsening of
-B-splines and corresponding tensor products.
+spline fitting routines with better user control; arithmetic routines for splines;
+transparent tensor-product splines, Non-Uniform Rational B-Splines support;
+and mesh refinement and coarsening of B-splines and corresponding tensor products.
+Some spline functionality in \texttt{scipy.signal} should be migrated to \texttt{interpolate} 
+and Second Order Sections need to be updated to match the capabilities in other routines.
 
-\texttt{scipy.io} would benefit from PCM float support, but we otherwise
-direct users with more sophisticated needs to domain-specific audio
-libraries.
+For \texttt{scipy.linalg}, the major change needed is to support a more recent
+version of LAPACK. Users should be able access an increasing repertoire of
+LAPACK functions using either \texttt{get\_lapack\_funcs} or
+\texttt{sp.linalg.lapack.name\_of\_function}.
 
-For \texttt{scipy.linalg}, we need to remove functions that are duplicate with 
-\texttt{numpy.linalg} unless performance is superior in SciPy,
-\texttt{get\_lapack\_funcs} should always use flapack, and
-we should continue to wrap more LAPACK functions. Ideally, we'd also
-add type-generic wrappers in the Cython BLAS and LAPACK interfaces, and
-transform many of the linear algebra routines into gufuncs.
-
-We're planning to remove \texttt{scipy.misc} as a public module, and
-rename \texttt{scipy.odr} to \texttt{scipy.regression} or
-\texttt{scipy.fitting}, and relocate \texttt{optimize.curve\_fit}. This 
-module will then provide a home for other fitting functionality.
 \texttt{scipy.optimize} would benefit from a few more good global optimizers 
 as well as large-scale optimizers.
 
 \texttt{scipy.ndimage} should be completely migrated to a data point
 model (values on a grid), instead of a pixel model (elements with centers),
 both of which have been used in the past, because the data point model is now
-proving more effective in practice. We also need to standardize the
-\texttt{scipy.ndimage.morphology} API.
-
-\texttt{scipy.signal} needs its overlap with \texttt{scipy.ndimage}
-to be reduced; B-splines functionality should be moved to \texttt{interpolate},
-\texttt{firwin2} can be merged into \texttt{firwin}; Second Order Sections need
-to be updated to match the capabilities in other routines, and wavelet-related
-routines are somewhat out of place.
+proving more effective in practice.
 
 While \texttt{scipy.sparse} is mature, there are many data
 formats and the community continues to move forward here so we will aim
-to take advantage of their improvements while preserving backwards
-compatibility to the extent that it is possible. \texttt{sparse.linalg}
-may benefit from wrappers for PROPACK for faster sparse SVD computation.
+to take advantage of their improvements\cite{Sparse_Arrays} 
+while preserving backwards compatibility to the extent that it is possible.
+\texttt{sparse.linalg} may benefit from wrappers for PROPACK 
+for faster sparse SVD computation.
 
-For \texttt{scipy.spatial}, KDTree will be removed, and cKDTree will be 
-renamed to KDTree in a backwards-compatible way. \texttt{distance\_wrap.c} 
-likely needs a rewrite in Cython. \texttt{scipy.special} needs precision
-improvements for hypergeometric functions, parabolic cylinder functions,
-and spheroidal wave functions.
+\texttt{scipy.spatial} will benefit from \texttt{spatial.transforms} with
+support for rotation matrices.
+
+\texttt{scipy.special} needs precision improvements for hypergeometric 
+functions, parabolic cylinder functions, and spheroidal wave functions.
 
 
 
