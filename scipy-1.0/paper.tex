@@ -1,3 +1,4 @@
+\PassOptionsToPackage{dvipsnames}{xcolor}
 \documentclass[fleqn,10pt]{wlscirep}
 
 % Packages
@@ -22,6 +23,12 @@
   stringstyle=\color{red},  % string literal style
   upquote=true  %straight single quotes (requires textcomp)
 }
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{todonotes}
+\presetkeys%
+    {todonotes}%
+    {inline,linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum}{}
 
 % New Commands
 \newcommand{\cmark}{\ding{51}}%
@@ -462,6 +469,10 @@ consists of 610 unique contributors of source code, with $>19,000$ commits
 accepted into the code base (GitHub page data).
 
 % need some better usage stats sources?
+%
+% note: @stefanv has pypinfo set up, so can grab all the info shown at
+% https://github.com/ofek/pypinfo
+%
 % SciPy stuff from njs blog: https://docs.google.com/spreadsheets/d/1lOLvSF0up4eZyv2ugZi-TM_GIs3gPCkGNIDKXS1Y3w4/edit#gid=406031940
 From the user side, there have been at least 15 million downloads
 of the SciPy manylinux wheels between the start of 2016 and May of 2018
@@ -480,6 +491,62 @@ Future development plans include a major rewrite of the \texttt{scipy.sparse} mo
 
 \textit{This section should include key issues: sparse arrays, ndimage pixel vs point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained submodules.}
 
+\subsection*{ndimage pixel vs point}
+
+\begin{itemize}
+  \item A pixel is not a little square
+    (http://alvyray.com/Memos/CG/Microsoft/6\_pixel.pdf)
+  \item Match edges vs match centers
+    (http://entropymine.com/imageworsener/matching/)
+\end{itemize}
+
+There are two competing models for representing image measurements:
+the first considers an image as a collection of pixels, square blocks
+of size 1x1 with centers offset by (0.5, 0.5).  This model corresponds
+closely with a camera sensor, that integrates light as it falls on
+(more-or-less) square elements, producing a digital readout for each.
+
+Another view is that of an image as a grid of point measurements.
+This model explicitly rejects two notions encouraged by the pixel
+model: that our signal is best represented as a step-wise function, and
+that a single measurement represents knowledge of the surrounding
+square area element.  Instead, we think of the image as a smoothly
+varying function, of which we have measurements at grid positions.
+
+While the representations may not seem very different, they have
+significant implications for image processing algorithms such as
+rescaling.
+
+{\tt ndimage} currently follows the pixel model for operations like
+{\tt zoom} but the data point model for general geometric
+transformations and interpolation.  We think that consistently using
+the data point model will serve us better in the long run:
+
+\begin{enumerate}
+  \item It makes no assumption about the sampling mechanism used
+    (camera, scanner, laser, etc.).
+  \item NumPy coordinates map directly to measurement coordinates,
+    without a 0.5 offset. \todo{Will have to rethink this statement,
+      since this {\bf is} the current underlying model for interpolation}
+  \item It makes it easier to reason about extrapolation.  E.g., the current
+    dubious notion of ``reflection'', in which the image is padded
+    {\tt d c b a | a b c d | d c b a} becomes nonsensical, and leaves
+    only the reliable notion of mirroring, {\tt d c b | a b c d | c b a}.
+\end{enumerate}
+
+The second model, while consistent, does introduce some challenges
+w.r.t. traditional image manipulation (see attached figure).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{static/image_pixel_model}
+    \caption{Upscaling an image 2x.  In the data point model, the
+      original data points remain in the image corners, which means it
+      contributes less to the center of the resulting image than to
+      the corners.  In the pixel model, the original pixels contribute
+      more evenly to both of these.}
+    \label{fig:image-pixel-model}
+\end{figure}
 
 \bibliography{references}
 
