@@ -11,7 +11,17 @@
 \usepackage{pgfplots}
 
 \pgfplotsset{compat=newest}
-\usepackage{listings}
+\usepackage{listings, textcomp}
+
+\lstset{ %
+  basicstyle=\ttfamily\footnotesize,  % size of fonts used for the code
+  breaklines=true,   % automatic line breaking only at whitespace
+  captionpos=b,   % sets the caption-position to bottom
+  commentstyle=\color{gray},  % comment style
+  keywordstyle=\color{blue},  % keyword style
+  stringstyle=\color{red},  % string literal style
+  upquote=true  %straight single quotes (requires textcomp)
+}
 
 % New Commands
 \newcommand{\cmark}{\ding{51}}%
@@ -382,7 +392,7 @@ the older syntax:
 
 \begin{lstlisting}[language=Python]
 # example of a function that takes a single
-# 3 dimesional typed memoryview as an argument
+# 3 dimensional typed memoryview as an argument
 # this allows Cython-level handling of a NumPy
 # array object
 cpdef int func_new(int[:, :, :] arr):
