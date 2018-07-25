@@ -476,6 +476,8 @@ other major downstream software libraries in the Python scientific
 computing stack.
 
 \textbf{Future development}.
+Future development plans include a major rewrite of the \texttt{scipy.sparse} module, which is already underway\cite{abbasi2018sparse}. This is due to the current interface only supporting two-dimensional objects. Even sub-arrays are two-dimensional, and dimensions greater than two aren't supported. The new package supports dimensions greater than two, and it bases itself around arrays rather than matrices (which is strictly more powerful). It also features improved inter-operability with NumPy and other community packages.
+
 \textit{This section should include key issues: sparse arrays, ndimage pixel vs point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained submodules.}
 
 
