@@ -280,8 +280,24 @@ Here we describe key technical improvements made in the last three years.
 \textbf{cKDTree}
 \input{ckdtree}
 \textbf{Sparse matrices}
+
 Over the last three years our sparse matrix handling internals have
-been rewritten and performance has been improved.
+been rewritten and performance has been improved. Iterating over 
+and slicing of CSC and CSR matrices is now faster by up to 35\%,
+and the CSR to COO matrix format conversion is now several times faster.
+COO matrices are now generally more memory efficient. Importantly,
+SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing
+the low-level implementations leveraged by a subset of our \texttt{sparse}
+offerings.
+
+From a new features standpoint, \texttt{scipy.sparse} matrices and linear
+operators now support the Python matrix multiplication (@) operator when
+available. We've added \texttt{scipy.sparse.norm} and \texttt{scipy.sparse.random} 
+for computing sparse matrix norms and drawing random variates from arbitrary 
+distributions, respectively. Users can now easily serialize a number of our
+sprase matrix formats with the newly associated \texttt{save\_npz} function.
+We've enhanced the diagonal selection API for sparse matrices to allow
+for more user control.
 
 \subsection*{Unified bindings to compiled code}
 \subsubsection*{LowLevelCallable}
