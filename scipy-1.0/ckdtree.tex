@@ -3,7 +3,7 @@ The cKDTree module is rewritten in C++ with templated classes.
 The support to a box of periodic boundary condition is added. A periodic
 condition is typically used in computer simulations of physical processes.
 
-\subsubsection{k-NN}
+\subsubsection*{k-NN}
 
 % TODO: please check / improve literature citations used here
 % what about the time complexity of the kNN implementation?
@@ -21,7 +21,7 @@ are all interrogated, but only those neighbors that are requested are retained
 in memory. Thus, the maximum heap size for this algorithm is conceptually determined
 as \texttt{np.arange(max(k))}.
 
-\subsubsection{sparse distance matrix}
+\subsubsection*{sparse distance matrix}
 
 In 2015 SciPy added support for generating approximated sparse distance matrices 
 between \texttt{KDTree} objects (sets of points organized into a binary space 
@@ -46,7 +46,7 @@ sparse matrix to be directly converted to the common CSR, CSC, and COO
 data structures.
 
 
-\subsubsection{Pair-Counting}
+\subsubsection*{Pair-Counting}
 
 The cKDTree module implements the dual tree counting algorithm in (cite).
 
