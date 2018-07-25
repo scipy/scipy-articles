@@ -263,24 +263,26 @@ from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 
 
 \subsection*{Statistical distributions}
-
-We now provide the cumulative distribution function (using the Fortran code by
-Alan Genz) of the multivariate normal distribution, \\\texttt{scipy.stats.multivariate\_normal},
-via the newly associated \texttt{logcdf} and \texttt{cdf} methods. Other key recent distributions 
-added to \texttt{scipy.stats} include the histogram-based
+The \texttt{scipy.stats} module provides a framework to implement probability
+distributions.  Given an expression for a probability distribution function (pdf),
+the framework will calculate moments, cumulative distribution function (cdf),
+differential entropy, and more. Those properties are calculated based on
+generic code, e.g., numerical integration of the pdf to obtain the cdf. In cases
+where that generic code does not provide sufficient accuracy, it is replaced
+by an implemented specific to the distribution.
+The distributions framework also allows the user to draw random
+variates from the distribution. Drawing random variates now accepts a \texttt{random\_state}
+parameter, which is either a \texttt{numpy.random.RandomState} object or an
+integer used to generate such an object, to provide fine-grained user-level
+control over the random state of a workflow.
+Currently about 80 continuous univariate distributions, 12 discrete univariate
+distributions and 10 multivariate distributions are implemented.
+Key recent distributions added to \texttt{scipy.stats} include the histogram-based
 distribution in \texttt{scipy.stats.rv\_histogram} and the multinomial
 distribution in \texttt{scipy.stats.multinomial} (used, for example, in natural
 language processing\cite{Griffiths5228}). \texttt{multinomial} is the first and so 
 far the only multivariate discrete distribution available in SciPy.
 
-From a design standpoint, many functions in \texttt{scipy.stats} now support
-a \texttt{nan\_policy} keyword to allow user-level control over the algorithmic
-decision to propagate, omit, or raise an error in the case that \texttt{NaN}
-values are encountered. Much of the functionality offered by
-\texttt{scipy.stats} for drawing random variates now accepts a
-\texttt{random\_state} parameter, which is either a \texttt{numpy.random.RandomState}
-object or an integer used to generate such an object, to provide fine-grained
-user-level control over the random state of a workflow.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Polynomial interpolators}
