@@ -1,9 +1,7 @@
-The cKDTree module is rewritten in C++ with templated classes.
 
-The support to a box of periodic boundary condition is added. A periodic
-condition is typically used in computer simulations of physical processes.
-
-\subsubsection{k-NN}
+The cKDTree module was rewritten in C++ with templated classes, and support for
+periodic boundary conditions was added. A periodic boundary condition is typically 
+used in computer simulations of physical processes.
 
 % TODO: please check / improve literature citations used here
 % what about the time complexity of the kNN implementation?
@@ -21,9 +19,7 @@ are all interrogated, but only those neighbors that are requested are retained
 in memory. Thus, the maximum heap size for this algorithm is conceptually determined
 as \texttt{np.arange(max(k))}.
 
-\subsubsection{sparse distance matrix}
-
-In 2015 SciPy added support for generating approximated sparse distance matrices 
+Also in 2015, SciPy added support for generating approximated sparse distance matrices 
 between \texttt{KDTree} objects (sets of points organized into a binary space 
 partitioning data structure\cite{Bentley:1975:MBS:361002.361007}). 
 The user provides a maximum distance value
@@ -45,21 +41,14 @@ operations on the sparse matrix, SciPy allows the dictionary of keys
 sparse matrix to be directly converted to the common CSR, CSC, and COO
 data structures.
 
-
-\subsubsection{Pair-Counting}
-
-The cKDTree module implements the dual tree counting algorithm in (cite).
-
-An improvement to the pair counting algorithm is added to improve the scale
-with the number of bins.
+The cKDTree module implements a dual tree counting algorithm\cite{Moore2000ar},
+with an improvement to the pair counting algorithm to improve the scaling
+with the number of bins. The cKDTree can now be augmented by weights, with 
+weighted paircount essential in many scientific applications, e.g. computing 
+correlation functions of galaxies\cite{0004-637X-750-1-38}.
 
 \textbf{Add a Figure to show the scaling, before and after.}
-
-The cKDTree can now be augmented by weights. Weighted paircount is essential
-in many scientific applications, e.g. computing correlation function of galaxies.
-
 \textbf{perhaps give an example or some formula.}
-
 (cite / mention faster implementions of paircounting algorithms / treecorr, corrfunc)
 
 The main purpose of the paircounting algorithm in cKDTree is to provide a readily
