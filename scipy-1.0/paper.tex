@@ -11,6 +11,17 @@
 \usepackage{pgfplots}
 
 \pgfplotsset{compat=newest}
+\usepackage{listings, textcomp}
+
+\lstset{ %
+  basicstyle=\ttfamily\footnotesize,  % size of fonts used for the code
+  breaklines=true,   % automatic line breaking only at whitespace
+  captionpos=b,   % sets the caption-position to bottom
+  commentstyle=\color{gray},  % comment style
+  keywordstyle=\color{blue},  % keyword style
+  stringstyle=\color{red},  % string literal style
+  upquote=true  %straight single quotes (requires textcomp)
+}
 
 % New Commands
 \newcommand{\cmark}{\ding{51}}%
@@ -214,6 +225,9 @@ our full test suite pass with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1
 is now a requirement in our development workflow.
 
 \subsection*{API and ABI evolution}
+In general, we encourage changes that improve clarity in the API of the library,
+but strongly discourage breaking backwards compatibility, given our position near
+the base of the scientific Python computing stack.
 
 
 \section*{Key technical improvements}
@@ -285,10 +299,26 @@ from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
     code linting with pyflakes and pycodestyle. There are more than $13000$ unit
     tests in the test suite, which is written for usage with the pytest runner, and
     with a 76.5 \% coverage of approximately $204000$ lines
-    of code. Documentation for the code is automatically built and hosted by the
-    CircleCI service to facilitate evaluation of documentation changes / integrity.
+    of code holding steady for the last six months (Figure~\ref{fig:coverage}).
+    Some of the historical components of the code base would still benefit from
+    increased test coverage. Documentation for the code is automatically built and hosted 
+    by the CircleCI service to facilitate evaluation of documentation changes / integrity.
     Our full test suite also passes with PyPy3, a just-in-time compiled version
     of the Python language.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/coverage-chart}
+\caption{\% coverage of the SciPy code base by unit tests over the six
+	 months preceding June 28, 2018 as reported by the \texttt{codecov}
+	 service. The analysis of lines of source code covered is performed
+	 automatically in our continuous integation suite using the
+	 \texttt{pytest-cov} and \texttt{gcov} libraries.}
+\label{fig:coverage}
+\end{figure}
+    
+
+
     % NOTE: is there a citation for PyPy?
 
 
@@ -344,6 +374,75 @@ instructions for contacting the three members of our Code of Conduct Committee o
 external representative on the NumFOCUS Board of Directors.
 
 \textbf{Roadmap}
+
+The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
+maintained by the community that describes some of the major directions
+for improvement for the project, as well as specific limitations and
+matters that require assistance moving forward.
+
+We are still striving to increase the number of SciPy usage tutorials beyond
+our current 15 section offering\cite{SciPy_tutorials}, but our
+standard documentation for library features is already in excellent shape.
+
+
+The low-level Cython code in our library (which interacts with C-level
+code and exposes it for Python usage) could use some measure of modernization,
+including migration to typed memoryviews to handle NumPy arrays instead of
+the older syntax:
+
+\begin{lstlisting}[language=Python]
+# example of a function that takes a single
+# 3 dimensional typed memoryview as an argument
+# this allows Cython-level handling of a NumPy
+# array object
+cpdef int func_new(int[:, :, :] arr):
+    pass
+
+# example of the old syntax for handling
+# the same scenario
+cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
+    pass
+
+\end{lstlisting}
+
+\texttt{fftpack} and {linalg} have too much functionality overlap with
+\texttt{numpy} equivalents.
+
+\texttt{scipy.interpolate} could benefit from a set of new features including
+spline fitting routines with better user control; arithmetic routines for splines;
+transparent tensor-product splines, Non-Uniform Rational B-Splines support;
+and mesh refinement and coarsening of B-splines and corresponding tensor products.
+Some spline functionality in \texttt{scipy.signal} should be migrated to \texttt{interpolate} 
+and Second Order Sections need to be updated to match the capabilities in other routines.
+
+For \texttt{scipy.linalg}, the major change needed is to support a more recent
+version of LAPACK. Users should be able access an increasing repertoire of
+LAPACK functions using either \texttt{get\_lapack\_funcs} or
+\texttt{sp.linalg.lapack.name\_of\_function}.
+
+\texttt{scipy.optimize} would benefit from a few more good global optimizers 
+as well as large-scale optimizers.
+
+\texttt{scipy.ndimage} should be completely migrated to a data point
+model (values on a grid), instead of a pixel model (elements with centers),
+both of which have been used in the past, because the data point model is now
+proving more effective in practice.
+
+While \texttt{scipy.sparse} is mature, there are many data
+formats and the community continues to move forward here so we will aim
+to take advantage of their improvements\cite{Sparse_Arrays} 
+while preserving backwards compatibility to the extent that it is possible.
+\texttt{sparse.linalg} may benefit from wrappers for PROPACK 
+for faster sparse SVD computation.
+
+\texttt{scipy.spatial} will benefit from \texttt{spatial.transforms} with
+support for rotation matrices.
+
+\texttt{scipy.special} needs precision improvements for hypergeometric 
+functions, parabolic cylinder functions, and spheroidal wave functions.
+
+
+
 
 \textbf{Community beyond the SciPy library}
 
