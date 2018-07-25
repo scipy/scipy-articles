@@ -461,19 +461,16 @@ of the code base over that roughly two-week period. The developer community
 consists of 610 unique contributors of source code, with $>19,000$ commits
 accepted into the code base (GitHub page data).
 
-% need some better usage stats sources?
-% SciPy stuff from njs blog: https://docs.google.com/spreadsheets/d/1lOLvSF0up4eZyv2ugZi-TM_GIs3gPCkGNIDKXS1Y3w4/edit#gid=406031940
-From the user side, there have been at least 15 million downloads
-of the SciPy manylinux wheels between the start of 2016 and May of 2018
-(njs blog). The recommended source for citing SciPy is simply a reference
-to the website / library itself\cite{SciPylib}, and has been cited $>3000$
-times. Some of the most prominent citing articles include the IPython
-publication\cite{PER-GRA:2007}, a heavily-cited Nature Biotechnology
-article\cite{pmid17287757}, a dark
-matter annihilitation study in the field of
-cosmology\cite{1475-7516-2012-08-007}, and many of the
-other major downstream software libraries in the Python scientific
-computing stack.
+From the user side, there were 13,096,468 PyPI downloads
+of SciPy during the year 2017\cite{pypinfo}, which is likely a vast
+underestimate of total downloads given that we don't have access to the
+popular Anaconda package manager download statistics. The recommended 
+source for citing SciPy is simply a reference to the website / library
+itself\cite{SciPylib}, and has been cited $>3000$ times. Some of the most
+prominent usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
+scientific collaboration that lead to the observation of gravitational
+waves \cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly
+with MacOS and in the Intel Distribution for Python\cite{intel-python}. 
 
 \textbf{Future development}.
 Future development plans include a major rewrite of the \texttt{scipy.sparse} module, which is already underway\cite{abbasi2018sparse}. This is due to the current interface only supporting two-dimensional objects. Even sub-arrays are two-dimensional, and dimensions greater than two aren't supported. The new package supports dimensions greater than two, and it bases itself around arrays rather than matrices (which is strictly more powerful). It also features improved inter-operability with NumPy and other community packages.
