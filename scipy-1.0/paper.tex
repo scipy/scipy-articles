@@ -314,6 +314,11 @@ The wrappers for BLAS and LAPACK are primarily generated using type information 
 The input and output types of each routine are saved in a data file that is read at build time and used to generate the corresponding Cython wrapper files.
 The wrappers in \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} are also generated from a data file containing type information for the wrapped routines.
 
+Since SciPy can be built with LAPACK 3.4.0 or later, Cython wrappers are only provided for the routines that maintain a consistent interface across all supported LAPACK versions.
+In other words, wrappers are provided for routines that are included in the earliest supported LAPACK version and are not removed or changed in some incompatible way in some subsequent LAPACK release.
+The standard BLAS interface provided by the various existing BLAS libraries is not currently changing, so changes are not generally needed in the wrappers we provide.
+Changes to the Cython wrappers for the functions in \texttt{scipy.{\allowbreak}special} follow corresponding changes to the interface of that submodule.
+
 \subsection*{Numerical optimization}
 \input{scipy-optimize}
 
