@@ -115,7 +115,33 @@ SciPy library and highlight some recent technical developments.
 
 \textbf{History}
 
-\textbf{Project goals and scope}
+\textbf{Project scope}
+SciPy aims to provide fundamental algorithms for scientific computing. The
+breadth of its scope was derived from the Guide to Available Mathematical
+Software classification system (GAMS\cite{boisvert1991guide}). In areas
+that move relatively slowly, e.g. linear algebra, SciPy aims to provide
+complete coverage. In other areas it aims to provide fundamental building
+blocks, while interacting well with other packages specialized in that area.
+For example for statistics, SciPy provides what one expect to find in a
+statistics textbook (probability distributions, hypothesis tests, frequency
+statistics, correlation functions, and more), while Statsmodels provides
+more advanced statistical estimators and inference methods, scikit-learn
+covers machine learning, PyMC3, emcee and PyStan cover Bayesian statistics
+and probabilistic modelling.
+
+We use the following criteria to determine whether or not to include new
+functionality in SciPy:
+\begin{itemize}
+    \item The algorithm is of relevance to multiple fields of science.
+    \item The implementation is demonstrably important.  E.g., it is classic
+    enough to be included in textbooks, or it is based on a peer-reviewed article
+    which has a significant number of citations.
+\end{itemize}
+
+In terms of software systems and architecture, SciPy's scope matches NumPy's:
+algorithms for in-memory computing on single machines, with support for a wide
+range of data types and process architectures. Distributed computing and support
+for graphics processing units (GPUs) is explicitly out of scope.
 
 \textbf{Current status (maturity, users)}
 
@@ -226,15 +252,7 @@ is now a requirement in our development workflow.
 
 \subsection*{API and ABI evolution}
 The application programming interface (API) for SciPy consists of
-approximately 1500 functions and classes. Adding new functionality has to
-meet the following criteria:
-\begin{itemize}
-    \item The algorithm is of relevance to multiple fields of science.
-    \item The implementation is demonstrably important.  E.g., it is classic
-    enough to be included in textbooks, or it is based on a peer-reviewed article
-    which has a significant number of citations.
-\end{itemize}
-
+approximately 1500 functions and classes.
 Our policy for evolving the API over time is that new functionality can be added,
 while removing or changing existing functionality can only be done if the benefits
 of that exceeds the (often significant) costs to users, \textit{and} only
