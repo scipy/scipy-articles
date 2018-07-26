@@ -281,6 +281,11 @@ Here we describe key technical improvements made in the last three years.
 \input{ckdtree}
 \textbf{Sparse matrices}
 
+\texttt{scipy.sparse} offers seven sparse matrix data structures. 
+The most important ones are CSR and CSC; these offer fast row or column 
+access and fast matrix-vector multiplication, and are used heavily in 
+scikit-learn.
+
 Over the last three years our sparse matrix handling internals have
 been rewritten and performance has been improved. Iterating over 
 and slicing of CSC and CSR matrices is now faster by up to 35\%,
@@ -294,10 +299,7 @@ From a new features standpoint, \texttt{scipy.sparse} matrices and linear
 operators now support the Python matrix multiplication (@) operator when
 available. We've added \texttt{scipy.sparse.norm} and \texttt{scipy.sparse.random} 
 for computing sparse matrix norms and drawing random variates from arbitrary 
-distributions, respectively. Users can now easily serialize a number of our
-sprase matrix formats with the newly associated \texttt{save\_npz} function.
-We've enhanced the diagonal selection API for sparse matrices to allow
-for more user control.
+distributions, respectively.
 
 \subsection*{Unified bindings to compiled code}
 \subsubsection*{LowLevelCallable}
