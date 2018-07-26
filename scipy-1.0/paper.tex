@@ -225,10 +225,30 @@ our full test suite pass with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1
 is now a requirement in our development workflow.
 
 \subsection*{API and ABI evolution}
-In general, we encourage changes that improve clarity in the API of the library,
-but strongly discourage breaking backwards compatibility, given our position near
-the base of the scientific Python computing stack.
+The application programming interface (API) for SciPy consists of
+approximately 2600 functions and classes. Adding new functionality has to
+meet the following criteria:
+\begin{itemize}
+    \item The algorithm is of relevance to multiple fields of science.
+    \item The implementation is demonstrably important.  E.g., it is classic
+    enough to be included in textbooks, or it is based on a peer-reviewed article
+    which has a significant number of citations.
+\end{itemize}
 
+Our policy for evolving the API over time is that new functionality can be added,
+while removing or changing existing functionality can only be done if the benefits
+of that exceeds the (often significant) costs to users, \textit{and} only
+after giving clear deprecation warnings to those users for at least one year.
+In general, we encourage changes that improve clarity in the API of the
+library but strongly discourage breaking backwards compatibility\footnote{
+    Backwards compatibility means that new versions of SciPy will keep user
+    code written for an older version working.}
+given our position near the base of the scientific Python computing stack.
+
+In addition to the Python API, SciPy has C and Cython interfaces in a number
+of submodules. Therefore, we have to also consider the application binary
+interface (ABI). This ABI has been stable for a long time, and we aim to
+evolve it only in a backwards compatible way.
 
 \section*{Key technical improvements}
 
