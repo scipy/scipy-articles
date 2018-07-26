@@ -303,7 +303,7 @@ from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 When writing algorithms or wrappers in Cython, it is often convenient to call directly into the libraries that SciPy wraps rather than routing the call back through the Python interpreter.
 SciPy currently includes Cython wrappers for many BLAS and LAPACK routines and for many of the special functions provided in the \texttt{scipy.{\allowbreak}special} submodule.
 These wrappers are available in the modules \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas}, \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
-The low-level interfaces for Cython can also be used by third party libraries to get direct access to the functions in these libraries while avoiding the overhead of Python function calls.
+The low-level interfaces for Cython can also be used by third party libraries to get direct access to the functions in these libraries while avoiding the overhead of Python function calls{\textemdash}this can give performance gains of one or two orders of magnitude for many use cases.
 Cython's cimport machinery allows Cython based modules to share C-level objects with other Cython modules without requiring that the third-party extensions link against any additional libraries.
 Function pointers to wrappers for library routines can also be shared in this way, so that Cython modules using the interface provided by SciPy no longer have to worry about finding and linking against the original library.
 This lets other extensions avoid the complexity of finding and using the correct libraries on the various possible Fortran compiler ABI and OS combinations.
