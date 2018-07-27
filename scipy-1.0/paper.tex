@@ -291,8 +291,7 @@ Over the last three years our sparse matrix handling internals have
 been rewritten and performance has been improved. Iterating over 
 and slicing of CSC and CSR matrices is now faster by up to 35\%,
 and the CSR to COO matrix format conversion is now several times faster.
-COO matrices are now generally more memory efficient. Importantly,
-SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing
+Importantly, SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing
 the low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
 
@@ -302,7 +301,8 @@ available. We've added \texttt{scipy.sparse.norm} and \texttt{scipy.sparse.rando
 for computing sparse matrix norms and drawing random variates from arbitrary 
 distributions, respectively. Also, we've made a concerted effort to bring the
 \texttt{scipy.sparse} API into line with the equivalent NumPy API where possible,
-typically by adding support for kwargs like axis=None or copy=False to many methods.
+typically by adding support for kwargs like \texttt{axis=None} or
+\texttt{copy=False} to many methods.
 
 \subsection*{Unified bindings to compiled code}
 \subsubsection*{LowLevelCallable}
