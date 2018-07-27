@@ -298,19 +298,20 @@ call signature matches the specifications. Furthermore, it is even
 possible to generate a low-level callback function automatically
 from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 
-\subsection*{Cython bindings for BLAS, LAPACK and special}
+\subsection*{Cython bindings for BLAS, LAPACK, and special}
 
-When writing algorithms in Cython\cite{behnel2011cython}, it is typically more efficient to call directly into the libraries SciPy wraps rather than indirectly, using SciPy's Python APIs.
-SciPy includes Cython wrappers for many BLAS and LAPACK\cite{LAPACK} routines and for many of the special functions provided in the \texttt{scipy.{\allowbreak}special} submodule.
+SciPy includes Cython\cite{behnel2011cython} wrappers for many BLAS and LAPACK\cite{LAPACK} routines and for the special functions provided in the \texttt{scipy.{\allowbreak}special} submodule.
 These Cython wrappers are available in the modules \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas}, \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
-These low-level interfaces for Cython can also be used outside of the SciPy codebase to gain direct access to the functions in the wrapped libraries while avoiding the overhead of Python function calls.
+When writing algorithms in Cython, it is typically more efficient to call directly into the libraries SciPy wraps rather than indirectly, using SciPy's Python APIs.
+These low-level interfaces for Cython can also be used outside of the SciPy codebase to gain access to the functions in the wrapped libraries while avoiding the overhead of Python function calls.
 This can give performance gains of one or two orders of magnitude for many use cases.
 
-The low-level Cython interfaces can also be used without linking against the wrapped libraries\cite{blas-lapack-wrappers-scipy-2015}.
+Developers can also use the low-level Cython interfaces without linking against the wrapped libraries\cite{blas-lapack-wrappers-scipy-2015}.
 This lets other extensions avoid the complexity of finding and using the correct libraries.
-This is especially important when wrapping libraries written in Fortran since these low-level wrappers can be used without a Fortran compiler and without having to handle all the different Fortran compiler ABI's and name mangling schemes.
+Avoiding this complexity is especially important when wrapping libraries written in Fortran.
+Not only can these low-level wrappers be used without a Fortran compiler, they can also be used without having to handle all the different Fortran compiler ABI's and name mangling schemes.
 
-To help with both correctness and ease of maintenance, most of these low-level Cython wrappers are generated automatically.
+Most of these low-level Cython wrappers are generated automatically to help with both correctness and ease of maintenance. 
 The wrappers for BLAS and LAPACK are primarily generated using type information that is parsed from the BLAS and LAPACK source files using F2PY\cite{peterson2009f2py}, though a small number of routines use hand-written type signatures instead.
 The input and output types of each routine are saved in a data file that is read at build time and used to generate the corresponding Cython wrapper files.
 The wrappers in \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} are also generated from a data file containing type information for the wrapped routines.
