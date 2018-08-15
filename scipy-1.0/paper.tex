@@ -117,9 +117,10 @@ SciPy library and highlight some recent technical developments.
 
 \textit{The Introduction section expands on the background of the work (some overlap with the Abstract is acceptable). The introduction should not include subheadings.}
 
-\textbf{History}
+\subsection*{History}
 
-\textbf{Project scope}
+\subsection*{Project scope}
+
 SciPy aims to provide fundamental algorithms for scientific computing. The
 breadth of its scope was derived from the Guide to Available Mathematical
 Software classification system (GAMS\cite{boisvert1991guide}). In areas
@@ -147,122 +148,125 @@ algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
 
-\textbf{Current status (maturity, users)}
+\subsection*{Current status (maturity, users)}
 
 
 \section*{Architecture and implementation choices}
 
 \subsection*{Submodule organisation}
+
 \input{subpackages}
 
 \subsection*{Common infrastructure}
 
 \subsection*{Language choices}
-Python, Cython, Fortran, C and C++ are the programming languages
-used to implement scientific algorithms in the SciPy library. An analysis
-of our code base using the \texttt{linguist} library provides a detailed
-breakdown as \% composition by programming language in SciPy
-(Figure~\ref{fig:linguist}).
 
-    \begin{figure}[H]
-        \centering
+Python, Cython, Fortran, C and C++ are the programming languages used to
+implement scientific algorithms in the SciPy library. An analysis of our code
+base using the \texttt{linguist} library provides a detailed breakdown as \%
+composition by programming language in SciPy (Figure~\ref{fig:linguist}).
 
-        \begin{tikzpicture}[font=\sffamily]
-        \begin{axis}[height=6cm, width=10cm,
-        ybar, ymax=60, ymin=0,bar width=1cm,
-        ylabel={\% of Scipy code base},
-        ytick={0,20,...,60},
-        axis lines*=left,
-        axis y line shift=0pt,
-        enlarge x limits=0.15,
-        symbolic x coords={py,f,c,cy,cpp},
-        xticklabels={Python,FORTRAN,C,Cython,C++},
-        ticklabel style={align=center,font=\sffamily\small,
-        /pgf/number format/assume math mode=true},
-        xtick=data,
-        nodes near coords,
-        nodes near coords style={/pgf/number format/assume math mode=true}
-        ]
-        \addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
-        \end{axis}
-        \end{tikzpicture}
-        \caption{The breakdown of programming languages used in the
-	         SciPy library determined using the linguist library.
-		 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
-		 and Makefile are excluded for clarity and mostly
-		 provide supporting roles in tests, building, and
-		 documentation.}
-        \label{fig:linguist}
-    \end{figure}
+\begin{figure}[H]
+    \centering
 
-For implementing new functionality, we have a clear order of language preference.
-First Python, if performance is not an issue. If it is, then in order of
-preference: Cython, C, C++, Fortran. The main motivation for this is 
-maintainability: Cython has the highest abstraction level and most 
-Python developers will understand it. C is also widely known,
-and easier to deal with for the core development team
-than C++ and especially Fortran.
+    \begin{tikzpicture}[font=\sffamily]
+    \begin{axis}[height=6cm, width=10cm,
+    ybar, ymax=60, ymin=0,bar width=1cm,
+    ylabel={\% of Scipy code base},
+    ytick={0,20,...,60},
+    axis lines*=left,
+    axis y line shift=0pt,
+    enlarge x limits=0.15,
+    symbolic x coords={py,f,c,cy,cpp},
+    xticklabels={Python,FORTRAN,C,Cython,C++},
+    ticklabel style={align=center,font=\sffamily\small,
+    /pgf/number format/assume math mode=true},
+    xtick=data,
+    nodes near coords,
+    nodes near coords style={/pgf/number format/assume math mode=true}
+    ]
+    \addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{The breakdown of programming languages used in the
+             SciPy library determined using the linguist library.
+    	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
+    	 and Makefile are excluded for clarity and mostly
+    	 provide supporting roles in tests, building, and
+    	 documentation.}
+    \label{fig:linguist}
+\end{figure}
 
-While it is not surprising that Python is heavily used in SciPy, the
-usage distribution of the other languages warrants some discussion. Fortran
-is an extremely well-established scientific programming language, both
-for historical reasons and because of its continued excellent
-performance\cite{Koelbel:1993:HPF:562354}. We
-wrap the FFTPACK Fortran library for performing Fourier
-transforms\cite{SWARZTRAUBER198445, SWARZTRAUBER198251} since
-this library has been a standard in the field for 33 years and has a license
-that is compatible with our own. Likewise, we wrap the Fortran source
-for ODEPACK\cite{citeulike:2644528} as it has been  trusted for the initial 
+For implementing new functionality, we have a clear order of language
+preference.  First Python, if performance is not an issue. If it is, then in
+order of preference: Cython, C, C++, Fortran. The main motivation for this is
+maintainability: Cython has the highest abstraction level and most Python
+developers will understand it. C is also widely known, and easier to deal with
+for the core development team than C++ and especially Fortran.
+
+While it is not surprising that Python is heavily used in SciPy, the usage
+distribution of the other languages warrants some discussion. Fortran is an
+extremely well-established scientific programming language, both for historical
+reasons and because of its continued excellent
+performance\cite{Koelbel:1993:HPF:562354}. We wrap the FFTPACK Fortran library
+for performing Fourier transforms\cite{SWARZTRAUBER198445, SWARZTRAUBER198251}
+since this library has been a standard in the field for 33 years and has a
+license that is compatible with our own. Likewise, we wrap the Fortran source
+for ODEPACK\cite{citeulike:2644528} as it has been  trusted for the initial
 value problem for ordinary differential equation systems for 30 years. For
-similar reasons we also wrap the Fortran libraries QUADPACK\cite{1983qspa.book.....P} (for numerical
-integration of one-dimensional functions), FITPACK\cite{Dierckx:1993:CSF:151103} (curve-fitting /
-interpolation), ODRPACK\cite{ODRPACK_Boggs} (orthogonal distance regression),
-MINPACK\cite{osti_6997568} (minimization of linear and nonlinear equations),
-ARPACK\cite{leh:sor:yan96} (solving large scale eigenvalue problems), 
-ALGORITHM 644\cite{Amos:1986:APP:7921.214331} (handling Bessel Functions), and 
-CDFLIB\cite{CDFLIB_site} (evaluation of cumulative density functions).
+similar reasons we also wrap the Fortran libraries
+QUADPACK\cite{1983qspa.book.....P} (for numerical integration of
+one-dimensional functions), FITPACK\cite{Dierckx:1993:CSF:151103}
+(curve-fitting / interpolation), ODRPACK\cite{ODRPACK_Boggs} (orthogonal
+distance regression), MINPACK\cite{osti_6997568} (minimization of linear and
+nonlinear equations), ARPACK\cite{leh:sor:yan96} (solving large scale
+eigenvalue problems), ALGORITHM 644\cite{Amos:1986:APP:7921.214331} (handling
+Bessel Functions), and CDFLIB\cite{CDFLIB_site} (evaluation of cumulative
+density functions).
 
 Rounding out the top three languages in SciPy is C, which is also extremely
 well-established over several decades\cite{Kernighan:1988:CPL:576122} of
-scientific computing. Alongside its objected-oriented relative C++, C
-can be leveraged in Python after being exposed using the Cython
-language. Cython has been described as a creole language that mixes
-the best parts of Python and lower-level C / C++
-paradigms\cite{behnel2011cython}. We thus often use Cython as a glue
-between well-established low-level scientific computing libraries and
-the Python interface offered by SciPy. We also use Cython to enable
-performance enhancements in Python code, especially for cases where heavily
-used inner loops benefit from a compiled code with static typing. Some of the C
-libraries that we wrap in SciPy include trlib\cite{doi:10.1080/10556788.2018.1449842} 
-(iterative solving of the trust region problem), SuperLU\cite{li05,superlu_ug99} (solution of
-large, sparse, nonsymmetric systems of linear equations),
-Qhull\cite{Barber:1996:QAC:235815.235821} (computational
-geometry), and Cephes\cite{cephes_netlib} (mathematics algorithms). 
+scientific computing. Alongside its objected-oriented relative C++, C can be
+leveraged in Python after being exposed using the Cython language. Cython has
+been described as a creole language that mixes the best parts of Python and
+lower-level C / C++ paradigms\cite{behnel2011cython}. We thus often use Cython
+as a glue between well-established low-level scientific computing libraries and
+the Python interface offered by SciPy. We also use Cython to enable performance
+enhancements in Python code, especially for cases where heavily used inner
+loops benefit from a compiled code with static typing. Some of the C libraries
+that we wrap in SciPy include trlib\cite{doi:10.1080/10556788.2018.1449842}
+(iterative solving of the trust region problem),
+SuperLU\cite{li05,superlu_ug99} (solution of large, sparse, nonsymmetric
+systems of linear equations), Qhull\cite{Barber:1996:QAC:235815.235821}
+(computational geometry), and Cephes\cite{cephes_netlib} (mathematics
+algorithms). 
 
-Therefore, the relative abundance of different programming languages
-in the SciPy library results from a combination of the usage of powerful performance
-enhancing languages that interact well with Python (i.e., Cython), and
-the usage of languages (and their libraries) that have proven reliable
-and performant over many decades. The position that SciPy occupies
-near the foundation of the scientific Python ecosystem is such that
-adoption of new languages or major dependencies is generally unlikely--our
-choices are strongly driven by long-term stability. GPU acceleration,
-new transpiling libraries, and the latest JIT compilation approaches
-(i.e., Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall outside the remit
-of the main SciPy library. That said, we have recently increased our
-efforts to support compatibility with some of these options, and having
-our full test suite pass with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1565827}
-is now a requirement in our development workflow.
+Therefore, the relative abundance of different programming languages in the
+SciPy library results from a combination of the usage of powerful performance
+enhancing languages that interact well with Python (i.e., Cython), and the
+usage of languages (and their libraries) that have proven reliable and
+performant over many decades. The position that SciPy occupies near the
+foundation of the scientific Python ecosystem is such that adoption of new
+languages or major dependencies is generally unlikely--our choices are strongly
+driven by long-term stability. GPU acceleration, new transpiling libraries, and
+the latest JIT compilation approaches (i.e.,
+Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall
+outside the remit of the main SciPy library. That said, we have recently
+increased our efforts to support compatibility with some of these options, and
+having our full test suite pass with the PyPy JIT
+compiler\cite{Bolz:2009:TMP:1565824.1565827} is now a requirement in our
+development workflow.
 
 \subsection*{API and ABI evolution}
-The application programming interface (API) for SciPy consists of
-approximately 1500 functions and classes.
-Our policy for evolving the API over time is that new functionality can be added,
-while removing or changing existing functionality can only be done if the benefits
-of that exceeds the (often significant) costs to users, \textit{and} only
-after giving clear deprecation warnings to those users for at least one year.
-In general, we encourage changes that improve clarity in the API of the
-library but strongly discourage breaking backwards compatibility\footnote{
+
+The application programming interface (API) for SciPy consists of approximately
+1500 functions and classes.  Our policy for evolving the API over time is that
+new functionality can be added, while removing or changing existing
+functionality can only be done if the benefits of that exceeds the (often
+significant) costs to users, \textit{and} only after giving clear deprecation
+warnings to those users for at least one year.  In general, we encourage
+changes that improve clarity in the API of the library but strongly discourage
+breaking backwards compatibility\footnote{
     Backwards compatibility means that new versions of SciPy will keep user
     code written for an older version working.}
 given our position near the base of the scientific Python computing stack.
@@ -277,9 +281,12 @@ evolve it only in a backwards compatible way.
 Here we describe key technical improvements made in the last three years.
 
 \subsection*{Data structures}
-\textbf{cKDTree}
+
+\subsubsection*{cKDTree}
+
 \input{ckdtree}
-\textbf{Sparse matrices}
+
+\subsubsection*{Sparse matrices}
 
 \texttt{scipy.sparse} offers seven sparse matrix data structures,
 also known as sparse formats. The most important ones are the row- 
@@ -287,213 +294,249 @@ and column-compressed formats (CSR and CSC, respectively).
 These offer fast major-axis indexing and fast matrix-vector multiplication,
 and are used heavily in scikit-learn.
 
-Over the last three years our sparse matrix handling internals have
-been rewritten and performance has been improved. Iterating over 
-and slicing of CSC and CSR matrices is now faster by up to 35\%,
-and the CSR to COO matrix format conversion is now several times faster.
-Importantly, SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing
-the low-level implementations leveraged by a subset of our \texttt{sparse}
+Over the last three years our sparse matrix handling internals have been
+rewritten and performance has been improved. Iterating over and slicing of CSC
+and CSR matrices is now faster by up to 35\%, and the CSR to COO matrix format
+conversion is now several times faster.  Importantly,
+SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
+low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
 
 From a new features standpoint, \texttt{scipy.sparse} matrices and linear
 operators now support the Python matrix multiplication (@) operator when
-available. We've added \texttt{scipy.sparse.norm} and \texttt{scipy.sparse.random} 
-for computing sparse matrix norms and drawing random variates from arbitrary 
-distributions, respectively. Also, we've made a concerted effort to bring the
-\texttt{scipy.sparse} API into line with the equivalent NumPy API where possible.
+available. We've added \texttt{scipy.sparse.norm} and
+\texttt{scipy.sparse.random} for computing sparse matrix norms and drawing
+random variates from arbitrary distributions, respectively. Also, we've made a
+concerted effort to bring the \texttt{scipy.sparse} API into line with the
+equivalent NumPy API where possible.
 
 \subsection*{Unified bindings to compiled code}
+
 \subsubsection*{LowLevelCallable}
-As of SciPy version 0.19, it is possible for users to wrap low-level
-functions in a \texttt{scipy.LowLevelCallable()} object that reduces
-the overhead for calling compiled C functions directly from Python.
-Supported low-level functions include \texttt{PyCapsule} objects,
-ctypes function pointers, and cffi function pointers. The low level
-function signature must be consistent with the expectations of the
-routine it is passed to. For example, the documentation for
-\texttt{scipy.ndimage.generic\_filter} defines two acceptable C callback
-function signatures that may be used to produce functions that operate
-on each element of image data with low overhead. The C code may be
-generated using numba or Cython, for example, as long as the function
-call signature matches the specifications. Furthermore, it is even
-possible to generate a low-level callback function automatically
-from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
+
+As of SciPy version 0.19, it is possible for users to wrap low-level functions
+in a \texttt{scipy.LowLevelCallable()} object that reduces the overhead for
+calling compiled C functions directly from Python.  Supported low-level
+functions include \texttt{PyCapsule} objects, ctypes function pointers, and
+cffi function pointers. The low level function signature must be consistent
+with the expectations of the routine it is passed to. For example, the
+documentation for \texttt{scipy.ndimage.generic\_filter} defines two acceptable
+C callback function signatures that may be used to produce functions that
+operate on each element of image data with low overhead. The C code may be
+generated using numba or Cython, for example, as long as the function call
+signature matches the specifications. Furthermore, it is even possible to
+generate a low-level callback function automatically from a Cython module using
+\texttt{scipy.LowLevelCallable.from\_cython}.
 
 \subsection*{Cython bindings for BLAS, LAPACK, and special}
 
-SciPy includes Cython\cite{behnel2011cython} wrappers for many BLAS and LAPACK\cite{LAPACK} routines and for the special functions provided in the \texttt{scipy.{\allowbreak}special} submodule.
-These Cython wrappers are available in the modules \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas}, \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
-When writing algorithms in Cython, it is typically more efficient to call directly into the libraries SciPy wraps rather than indirectly, using SciPy's Python APIs.
-These low-level interfaces for Cython can also be used outside of the SciPy codebase to gain access to the functions in the wrapped libraries while avoiding the overhead of Python function calls.
-This can give performance gains of one or two orders of magnitude for many use cases.
+SciPy includes Cython\cite{behnel2011cython} wrappers for many BLAS and
+LAPACK\cite{LAPACK} routines and for the special functions provided in the
+\texttt{scipy.{\allowbreak}special} submodule.  These Cython wrappers are
+available in the modules
+\texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas},
+\texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and
+\texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
+When writing algorithms in Cython, it is typically more efficient to call
+directly into the libraries SciPy wraps rather than indirectly, using SciPy's
+Python APIs.  These low-level interfaces for Cython can also be used outside of
+the SciPy codebase to gain access to the functions in the wrapped libraries
+while avoiding the overhead of Python function calls.  This can give
+performance gains of one or two orders of magnitude for many use cases.
 
-Developers can also use the low-level Cython interfaces without linking against the wrapped libraries\cite{blas-lapack-wrappers-scipy-2015}.
-This lets other extensions avoid the complexity of finding and using the correct libraries.
-Avoiding this complexity is especially important when wrapping libraries written in Fortran.
-Not only can these low-level wrappers be used without a Fortran compiler, they can also be used without having to handle all the different Fortran compiler ABI's and name mangling schemes.
+Developers can also use the low-level Cython interfaces without linking against
+the wrapped libraries\cite{blas-lapack-wrappers-scipy-2015}.  This lets other
+extensions avoid the complexity of finding and using the correct libraries.
+Avoiding this complexity is especially important when wrapping libraries
+written in Fortran.  Not only can these low-level wrappers be used without a
+Fortran compiler, they can also be used without having to handle all the
+different Fortran compiler ABI's and name mangling schemes.
 
-Most of these low-level Cython wrappers are generated automatically to help with both correctness and ease of maintenance. 
-The wrappers for BLAS and LAPACK are primarily generated using type information that is parsed from the BLAS and LAPACK source files using F2PY\cite{peterson2009f2py}, though a small number of routines use hand-written type signatures instead.
-The input and output types of each routine are saved in a data file that is read at build time and used to generate the corresponding Cython wrapper files.
-The wrappers in \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} are also generated from a data file containing type information for the wrapped routines.
+Most of these low-level Cython wrappers are generated automatically to help
+with both correctness and ease of maintenance.  The wrappers for BLAS and
+LAPACK are primarily generated using type information that is parsed from the
+BLAS and LAPACK source files using F2PY\cite{peterson2009f2py}, though a small
+number of routines use hand-written type signatures instead.  The input and
+output types of each routine are saved in a data file that is read at build
+time and used to generate the corresponding Cython wrapper files.  The wrappers
+in \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} are also
+generated from a data file containing type information for the wrapped
+routines.
 
-Since SciPy can be built with LAPACK 3.4.0 or later, Cython wrappers are only provided for the routines that maintain a consistent interface across all supported LAPACK versions.
-The standard BLAS interface provided by the various existing BLAS libraries is not currently changing, so changes are not generally needed in the wrappers provided by SciPy.
-Changes to the Cython wrappers for the functions in \texttt{scipy.{\allowbreak}special} follow corresponding changes to the interface of that submodule.
+Since SciPy can be built with LAPACK 3.4.0 or later, Cython wrappers are only
+provided for the routines that maintain a consistent interface across all
+supported LAPACK versions.  The standard BLAS interface provided by the various
+existing BLAS libraries is not currently changing, so changes are not generally
+needed in the wrappers provided by SciPy.  Changes to the Cython wrappers for
+the functions in \texttt{scipy.{\allowbreak}special} follow corresponding
+changes to the interface of that submodule.
 
 \subsection*{Numerical optimization}
+
 \input{scipy-optimize}
 
-
 \subsection*{Statistical distributions}
+
 The \texttt{scipy.stats} module provides provides more than 100 probability
-distributions and a framework to implement additional distributions. Given
-an expression for a probability distribution function (pdf),
-the framework will calculate moments, cumulative distribution function (cdf),
-differential entropy, and more. Those properties are calculated based on
-generic code, e.g., numerical integration of the pdf to obtain the cdf.
-Where possible, the generic code is replaced by explicit formulas or more
-accurate or efficient implementations. For example, most distributions have
-an explicit formula for the cdf, so it is used instead of integrating the
-pdf. The distributions framework also allows the user to draw random
-variates from the distribution. Drawing random variates now accepts a \texttt{random\_state}
-parameter, which is either a \texttt{numpy.random.RandomState} object or an
-integer used to generate such an object, to provide fine-grained user-level
-control over the random state of a workflow.
-Currently about 80 continuous univariate distributions, 12 discrete univariate
-distributions and 10 multivariate distributions are implemented.
-Key recent distributions added to \texttt{scipy.stats} include the histogram-based
-distribution in \texttt{scipy.stats.rv\_histogram} and the multinomial
-distribution in \texttt{scipy.stats.multinomial} (used, for example, in natural
-language processing\cite{Griffiths5228}). \texttt{multinomial} is the first and so 
-far the only multivariate discrete distribution available in SciPy.
+distributions and a framework to implement additional distributions. Given an
+expression for a probability distribution function (pdf), the framework will
+calculate moments, cumulative distribution function (cdf), differential
+entropy, and more. Those properties are calculated based on generic code, e.g.,
+numerical integration of the pdf to obtain the cdf.  Where possible, the
+generic code is replaced by explicit formulas or more accurate or efficient
+implementations. For example, most distributions have an explicit formula for
+the cdf, so it is used instead of integrating the pdf. The distributions
+framework also allows the user to draw random variates from the distribution.
+Drawing random variates now accepts a \texttt{random\_state} parameter, which
+is either a \texttt{numpy.random.RandomState} object or an integer used to
+generate such an object, to provide fine-grained user-level control over the
+random state of a workflow.  Currently about 80 continuous univariate
+distributions, 12 discrete univariate distributions and 10 multivariate
+distributions are implemented.  Key recent distributions added to
+\texttt{scipy.stats} include the histogram-based distribution in
+\texttt{scipy.stats.rv\_histogram} and the multinomial distribution in
+\texttt{scipy.stats.multinomial} (used, for example, in natural language
+processing\cite{Griffiths5228}). \texttt{multinomial} is the first and so far
+the only multivariate discrete distribution available in SciPy.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Polynomial interpolators}
+
 \input{poly}
 
 \subsection*{Test and benchmark suite}
 
-    \subsubsection*{Benchmark suite}
+\subsubsection*{Benchmark suite}
 
-    The airspeed velocity (asv) library enables benchmarking Python packages over their lifetimes, and the performance of the SciPy
-    code base was monitored with asv starting in February of 2015 (PR \#4501). In addition to ensuring that unit tests are passing (see above),
-    confirming that performance generally remains constant or improves over the commit hash history of the project allows us to objectively
-    measure that our code base is improving, to empower scientific applications.
+The airspeed velocity (asv) library enables benchmarking Python packages
+over their lifetimes, and the performance of the SciPy code base was monitored
+with asv starting in February of 2015 (PR \#4501). In addition to ensuring that
+unit tests are passing (see above), confirming that performance generally
+remains constant or improves over the commit hash history of the project allows
+us to objectively measure that our code base is improving, to empower
+scientific applications.
 
-    Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning roughly nine years of project history. These demonstrate the gradual performance
-    improvements in a nearest-neighbor search through \texttt{scipy.spatial.cKDTree.query()}, and can be run using the command:
+Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
+roughly nine years of project history. These demonstrate the gradual
+performance improvements in a nearest-neighbor search through
+\texttt{scipy.spatial.cKDTree.query()}, and can be run using the command:
 
 
-    \texttt{python run.py run -e -s 800 --bench "\textbackslash btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
+\texttt{python run.py run -e -s 800 --bench "\textbackslash
+btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-        \caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query() over a roughly nine year commit history time frame. The results are based on Python 2.7 performance on the master branch of the project using numpy 1.8.2 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward compatibility). Only the L2 (Euclidean) norm is shown here, and to improve backward compatibility and sampling of the benchmarks there was no application of toroidal topology to the KDTree (boxsize argument was ignored).}
-        \label{fig:asvbench}
-    \end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
+\caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query()
+over a roughly nine year commit history time frame. The results are based on
+Python 2.7 performance on the master branch of the project using numpy 1.8.2
+and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
+compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
+backward compatibility and sampling of the benchmarks there was no application
+of toroidal topology to the KDTree (boxsize argument was ignored).}
+\label{fig:asvbench}
+\end{figure}
 
-   Any pull request can be compared against the \texttt{master} branch with the command \texttt{asv continuous master new-feature}. This will provide a benchmark against the master branch and the branch a new feature is implemented in. More features are available in the documentation, including arguments to select which benchmarks to run.
+Any pull request can be compared against the \texttt{master} branch with the
+command \texttt{asv continuous master new-feature}. This will provide a
+benchmark against the master branch and the branch a new feature is implemented
+in. More features are available in the documentation, including arguments to
+select which benchmarks to run.
 
-    \subsubsection*{Test suite}
-    The SciPy test suite is orchestrated by a continuous integration matrix
-    that includes posix and Windows (32/64-bit) platforms managed by Travis CI and appveyor,
-    respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and include
-    code linting with pyflakes and pycodestyle. There are more than $13000$ unit
-    tests in the test suite, which is written for usage with the pytest runner, and
-    with a 76.5 \% coverage of approximately $204000$ lines
-    of code holding steady for the last six months (Figure~\ref{fig:coverage}).
-    Some of the historical components of the code base would still benefit from
-    increased test coverage. Documentation for the code is automatically built and hosted 
-    by the CircleCI service to facilitate evaluation of documentation changes / integrity.
-    Our full test suite also passes with PyPy3, a just-in-time compiled version
-    of the Python language.
+\subsubsection*{Test suite}
+
+The SciPy test suite is orchestrated by a continuous integration matrix that
+includes posix and Windows (32/64-bit) platforms managed by Travis CI and
+appveyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
+include code linting with pyflakes and pycodestyle. There are more than $13000$
+unit tests in the test suite, which is written for usage with the pytest
+runner, and with a 76.5 \% coverage of approximately $204000$ lines of code
+holding steady for the last six months (Figure~\ref{fig:coverage}).  Some of
+the historical components of the code base would still benefit from increased
+test coverage. Documentation for the code is automatically built and hosted by
+the CircleCI service to facilitate evaluation of documentation changes /
+integrity.  Our full test suite also passes with PyPy3, a just-in-time compiled
+version of the Python language.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{static/coverage-chart}
-\caption{\% coverage of the SciPy code base by unit tests over the six
-	 months preceding June 28, 2018 as reported by the \texttt{codecov}
-	 service. The analysis of lines of source code covered is performed
-	 automatically in our continuous integation suite using the
-	 \texttt{pytest-cov} and \texttt{gcov} libraries.}
+\caption{\% coverage of the SciPy code base by unit tests over the six months
+preceding June 28, 2018 as reported by the \texttt{codecov} service. The
+analysis of lines of source code covered is performed automatically in our
+continuous integation suite using the \texttt{pytest-cov} and \texttt{gcov}
+libraries.}
 \label{fig:coverage}
 \end{figure}
-    
 
-
-    % NOTE: is there a citation for PyPy?
-
+% NOTE: is there a citation for PyPy?
 
 \section*{Project organisation and community}
 
-\textbf{Governance}
+\subsection*{Governance}
 
 SciPy adopted an official Governance Document on August 3,
-2017\cite{SciPyProjectGovernance}.
-We have a Benevolant Dictator for Life (BDFL), Pauli Virtanen, leading the
-project, following a detailed discussion of the governance model with the
-community on the mailing list.  In practice, the overruling authority of the BDFL
-is anticipated to be used only when the Steering Council cannot agree on a matter.
-The BDFL is expected to consider any strong indications that they should step down;
-although the BDFL may appoint a successor it is generally expected that the Steering
-Council will be consulted on the matter.
+2017\cite{SciPyProjectGovernance}.  We have a Benevolant Dictator for Life
+(BDFL), Pauli Virtanen, leading the project, following a detailed discussion of
+the governance model with the community on the mailing list.  In practice, the
+overruling authority of the BDFL is anticipated to be used only when the
+Steering Council cannot agree on a matter.  The BDFL is expected to consider
+any strong indications that they should step down; although the BDFL may
+appoint a successor it is generally expected that the Steering Council will be
+consulted on the matter.
 
-The (currently) 18 member Steering Council is chaired by Ralf Gommers and performs a number of
-tasks including nominating and voting on new Council Members, and actively
-contributing to the progress of the project (could be code review but also
-outreach activities, etc.). Generally, 1 year of sustained and substantial
-contributions (not restricted to source code contributions) that improve
-the project are the prerequiste for nomination of new Council Members. Council
-Members do not get special treatment for the vast majority of the day to day
-project activities (code submission / review), though it is anticipated that their
-experience with the project will serve as helpful guidance in many matters.
-Council Members have commit rights to the project, but will typically only
-incorporate changes when there are no substantive community objections. The
-Chair of the Steering Council is responsible for starting more formal
-technical reviews of the direction of the project, ensuring that the
-composition of the Council remains current, and communicating / summarizing
-any Council activities performed privately to the broader community. We also
-describe in some detail how institutional partners may contribute to the
-project, but no financial weight from grants or other sources
+The (currently) 18 member Steering Council is chaired by Ralf Gommers and
+performs a number of tasks including nominating and voting on new Council
+Members, and actively contributing to the progress of the project (could be
+code review but also outreach activities, etc.). Generally, 1 year of sustained
+and substantial contributions (not restricted to source code contributions)
+that improve the project are the prerequiste for nomination of new Council
+Members. Council Members do not get special treatment for the vast majority of
+the day to day project activities (code submission / review), though it is
+anticipated that their experience with the project will serve as helpful
+guidance in many matters.  Council Members have commit rights to the project,
+but will typically only incorporate changes when there are no substantive
+community objections. The Chair of the Steering Council is responsible for
+starting more formal technical reviews of the direction of the project,
+ensuring that the composition of the Council remains current, and communicating
+/ summarizing any Council activities performed privately to the broader
+community. We also describe in some detail how institutional partners may
+contribute to the project, but no financial weight from grants or other sources
 may be leveraged to circumvent or overrule the technical direction of the
-project decided upon by the Steering Committee. The Chair does not have
-a fixed term, but is nominated by the Steering Committee and is expected
-to yield to substantive claims that stepping down is the appropriate action.
+project decided upon by the Steering Committee. The Chair does not have a fixed
+term, but is nominated by the Steering Committee and is expected to yield to
+substantive claims that stepping down is the appropriate action.
 
 SciPy adopted an official Code of Conduct on October 24, 2017
-\cite{SciPyCodeOfConduct}, drawing
-inspiration from the Apache Foundation Code of
-Conduct\cite{ApacheCodeOfConduct}, the Contributor Covenant
-\cite{ContributorConvenant},
-the Jupyter Code of Conduct \cite{Jupyter_COC}, and the Open Source Guides -
-Code of Conduct\cite{OSG_COC}. In short,
-we stated five specific guidelines: \emph{be open} (to anyone participating in our community),
-\emph{be empathetic and patient} (in resolving conflicts), \emph{be collaborative} (we depend
-on each other to build up the tools in the library), \emph{be inquisitive} (identifying issues
-early on can be helpful to everyone), and \emph{be careful with wording} (do not harass or exclude).
-We outlined a broad diversity inclusion statement, and provide
-instructions for contacting the three members of our Code of Conduct Committee or an
-external representative on the NumFOCUS Board of Directors.
+\cite{SciPyCodeOfConduct}, drawing inspiration from the Apache Foundation Code
+of Conduct\cite{ApacheCodeOfConduct}, the Contributor Covenant
+\cite{ContributorConvenant}, the Jupyter Code of Conduct \cite{Jupyter_COC},
+and the Open Source Guides - Code of Conduct\cite{OSG_COC}. In short, we stated
+five specific guidelines: \emph{be open} (to anyone participating in our
+community), \emph{be empathetic and patient} (in resolving conflicts), \emph{be
+collaborative} (we depend on each other to build up the tools in the library),
+\emph{be inquisitive} (identifying issues early on can be helpful to everyone),
+and \emph{be careful with wording} (do not harass or exclude).  We outlined a
+broad diversity inclusion statement, and provide instructions for contacting
+the three members of our Code of Conduct Committee or an external
+representative on the NumFOCUS Board of Directors.
 
-\textbf{Roadmap}
+\subsection*{Roadmap}
 
 The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
-maintained by the community that describes some of the major directions
-for improvement for the project, as well as specific limitations and
-matters that require assistance moving forward.
+maintained by the community that describes some of the major directions for
+improvement for the project, as well as specific limitations and matters that
+require assistance moving forward.
 
 We are still striving to increase the number of SciPy usage tutorials beyond
-our current 15 section offering\cite{SciPy_tutorials}, but our
-standard documentation for library features is already in excellent shape.
+our current 15 section offering\cite{SciPy_tutorials}, but our standard
+documentation for library features is already in excellent shape.
 
-
-The low-level Cython code in our library (which interacts with C-level
-code and exposes it for Python usage) could use some measure of modernization,
-including migration to typed memoryviews to handle NumPy arrays instead of
-the older syntax:
+The low-level Cython code in our library (which interacts with C-level code and
+exposes it for Python usage) could use some measure of modernization, including
+migration to typed memoryviews to handle NumPy arrays instead of the older
+syntax:
 
 \begin{lstlisting}[language=Python]
 # example of a function that takes a single
@@ -507,18 +550,18 @@ cpdef int func_new(int[:, :, :] arr):
 # the same scenario
 cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
     pass
-
 \end{lstlisting}
 
 \texttt{fftpack} and {linalg} have too much functionality overlap with
 \texttt{numpy} equivalents.
 
 \texttt{scipy.interpolate} could benefit from a set of new features including
-spline fitting routines with better user control; arithmetic routines for splines;
-transparent tensor-product splines, Non-Uniform Rational B-Splines support;
-and mesh refinement and coarsening of B-splines and corresponding tensor products.
-Some spline functionality in \texttt{scipy.signal} should be migrated to \texttt{interpolate} 
-and Second Order Sections need to be updated to match the capabilities in other routines.
+spline fitting routines with better user control; arithmetic routines for
+splines; transparent tensor-product splines, Non-Uniform Rational B-Splines
+support; and mesh refinement and coarsening of B-splines and corresponding
+tensor products.  Some spline functionality in \texttt{scipy.signal} should be
+migrated to \texttt{interpolate} and Second Order Sections need to be updated
+to match the capabilities in other routines.
 
 For \texttt{scipy.linalg}, the major change needed is to support a more recent
 version of LAPACK. Users should be able access an increasing repertoire of
@@ -546,49 +589,59 @@ support for rotation matrices.
 \texttt{scipy.special} needs precision improvements for hypergeometric 
 functions, parabolic cylinder functions, and spheroidal wave functions.
 
+\subsection*{Community beyond the SciPy library}
 
+TODO
 
+\subsection*{Maintainers and contributors}
 
-\textbf{Community beyond the SciPy library}
-
-\textbf{Maintainers and contributors}
 The SciPy project has approximately 15 active maintainers - people who review
-others' contributions, and in general do everything needed to ensure that
-the software and the project move forward. Maintainers are critical to the
-health of the project\cite{eghbal2016}; their skills and efforts largely
-determine how fast the project moves forward, and they enable contributions
-from a much larger group. Accordingly, the project also has an additional
-~100 unique contributors for every 6-monthly release cycle. Anyone with the
-interest and skills can become a contributor or maintainer; the SciPy
-Developer Guide provides guidance on how to do that.
+others' contributions, and in general do everything needed to ensure that the
+software and the project move forward. Maintainers are critical to the health
+of the project\cite{eghbal2016}; their skills and efforts largely determine how
+fast the project moves forward, and they enable contributions from a much
+larger group. Accordingly, the project also has an additional ~100 unique
+contributors for every 6-monthly release cycle. Anyone with the interest and
+skills can become a contributor or maintainer; the SciPy Developer Guide
+provides guidance on how to do that.
 
 \section*{Discussion}
 
 \textit{The Discussion should be succinct and must not contain subheadings.}
 
-\textbf{Impact now}
-SciPy has a strong developer community and a massive user base. GitHub
-traffic metrics report roughly 20,000 unique visitors to the source
-website between May 14 and May 27, 2018, with 721 unique copies (``clones")
-of the code base over that roughly two-week period. The developer community
-consists of 610 unique contributors of source code, with $>19,000$ commits
-accepted into the code base (GitHub page data).
+\subsection*{Impact now}
 
-From the user side, there were 13,096,468 downloads of SciPy from the
-Python Packaging Index (PyPI) during the year 2017\cite{pypinfo}, which is
-a lower bound on the number of total downloads by users given that downloading
-from PyPI is only one of several popular methods to install SciPy.
-The SciPy website\cite{SciPylib}, which has been the default citation in the
-absence of a peer-reviewed paper, has been cited $>3000$ times. Some of the most
-prominent usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
-scientific collaboration that lead to the observation of gravitational
-waves \cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly
-with MacOS and in the Intel Distribution for Python\cite{intel-python}. 
+SciPy has a strong developer community and a massive user base. GitHub traffic
+metrics report roughly 20,000 unique visitors to the source website between May
+14 and May 27, 2018, with 721 unique copies (``clones") of the code base over
+that roughly two-week period. The developer community consists of 610 unique
+contributors of source code, with $>19,000$ commits accepted into the code base
+(GitHub page data).
 
-\textbf{Future development}.
-Future development plans include a major rewrite of the \texttt{scipy.sparse} module, which is already underway\cite{abbasi2018sparse}. This is due to the current interface only supporting two-dimensional objects. Even sub-arrays are two-dimensional, and dimensions greater than two aren't supported. The new package supports dimensions greater than two, and it bases itself around arrays rather than matrices (which is strictly more powerful). It also features improved inter-operability with NumPy and other community packages.
+From the user side, there were 13,096,468 downloads of SciPy from the Python
+Packaging Index (PyPI) during the year 2017\cite{pypinfo}, which is a lower
+bound on the number of total downloads by users given that downloading from
+PyPI is only one of several popular methods to install SciPy.  The SciPy
+website\cite{SciPylib}, which has been the default citation in the absence of a
+peer-reviewed paper, has been cited $>3000$ times. Some of the most prominent
+usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
+scientific collaboration that lead to the observation of gravitational waves
+\cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly with
+MacOS and in the Intel Distribution for Python\cite{intel-python}. 
 
-\textit{This section should include key issues: sparse arrays, ndimage pixel vs point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained submodules.}
+\subsection*{Future development}
+
+Future development plans include a major rewrite of the \texttt{scipy.sparse}
+module, which is already underway\cite{abbasi2018sparse}. This is due to the
+current interface only supporting two-dimensional objects. Even sub-arrays are
+two-dimensional, and dimensions greater than two aren't supported. The new
+package supports dimensions greater than two, and it bases itself around arrays
+rather than matrices (which is strictly more powerful). It also features
+improved inter-operability with NumPy and other community packages.
+
+\textit{This section should include key issues: sparse arrays, ndimage pixel vs
+point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained
+submodules.}
 
 
 \bibliography{references}
