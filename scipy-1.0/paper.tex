@@ -183,27 +183,69 @@ in a general purpose programming language.  And given Python's innate
 ability to function as a systems language, controlling specialized or
 custom-built hardware was feasible.
 
+% Paul Dubois, CDAT
+% https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
+
+% Perry Greenfield, Hubble
+% https://conference.scipy.org/scipy2011/slides/greenfield_keynote_astronomy.pdf
+%
+% Note: plotting was important for them, so they eventually
+% funded development on Matplotlib.
+
+% Numeric, even though written by grad students, became critical for
+% large scale endeavors
+
 \subsection*{SciPy Begins}
 
-Travis O
-Pearu
--
-Gary Strangman
+%With a rich programming environment and a numerical array object in
+%place, the time was ripe for the development of a full scientific
+%software stack.
+
+% PhD Mayo Clinic, started faculty position at BYU in 2001
+By the late 90s, Travis Oliphant, a PhD student at the Mayo Clinic,
+released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
+package, and provided algorithms for signal processing, special
+functions, sparse matrices, quadrature, optimization, and Fast Fourier
+Transforms, and more.  One of these packages, Multipack, was a set of
+extension modules that wrapped Fortran and C libraries such as
+ODEPACK, QUADPACK, and MINPACK, to solve and minimize nonlinear
+equations, integrate differential equations, and fit splines (the
+latter implemented by Pearu Peterson).  Robert Kern, then an
+undergraduate student (and currently a SciPy core developer), provided
+compilation instructions under Windows.
+% 2001 PhD Tallinn Technical University
+Around the same time, Pearu Peterson, a PhD student from Estonia,
+released f2py\footnote{https://mail.python.org/pipermail/numpy-discussion/2000-September/000243.html}, a command line tool for binding Python and Fortran
+codes.
+% Graduated 1999, Duke
+Eric Jones, while a graduate student at Duke, wrote a number of
+packages to support his dissertation, including a parallel job
+scheduler and genetic optimizer.
+% Graduated 1998, PhD from Brown, 97–99 postdoc at Harvard Medical
+% School; at Harvard ever since
 %
-%https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
+% https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
 %
-%
-Eric and Travis V
+Gary Strangman, a postdoctoral fellow at Harvard Medical School,
+published several descriptive and inferential statistical routines\footnote{https://web.archive.org/web/20001022231108/http://www.nmr.mgh.harvard.edu/Neural\_Systems\_Group/gary/python.html}.
+
+In 2001, Eric Jones and Travis Vaught founded Enthought Scientific
+Computing Solutions (now Enthought, Inc.) in Austin, Texas.  In an
+effort to simplify the tool stack, they created the SciPy project,
+centered around the SciPy library which would subsume all the
+above-mentioned packages.
 
 -  Jun 10, 2001
 Travis N. Vaught announced scipy-dev mailing list
 
 - Aug 20, 2001
-Eric Jones announced
+Eric Jones announced \ref{fig:announce-0.1}
 
 IPython 2001 first release
 
 Matplotlib 2003 first release
+
+NumPy 2005
 
 \begin{figure}
 \begin{verbatim}
@@ -223,7 +265,7 @@ SciPy's current module set includes the following:
     Splines and Interpolation
     And other stuff.
 \end{verbatim}
-\caption{Excerpt from first release announcement.}
+\caption{Excerpt from first release announcement.}\label{fig:announce-0.1}
 \end{figure}
 
 
