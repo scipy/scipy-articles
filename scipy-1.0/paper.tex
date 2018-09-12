@@ -54,12 +54,13 @@
 \author[22]{Yu Feng}
 \author[23]{Antonio Horta Ribeiro}
 \author[24]{Ian Henriksen}
+\author[3,25]{K. Jarrod Millman}
+\author[3]{St\'efan J. van der Walt}
 
 \affil[1]{Affiliation, department, city, postcode, country}
 \affil[2]{Affiliation, department, city, postcode, country}
 \affil[2]{Affiliation, department, city, postcode, country}
-\affil[3]{UC Berkeley Institute for Data Science,
-          Berkeley, CA, 94720, USA}
+\affil[3]{Berkeley Institute for Data Science, University of California, Berkeley, CA, 94720, USA}
 \affil[4]{Los Alamos National Laboratory,
 	  Theoretical Division 6,
           Los Alamos, NM, 87545, USA}
@@ -85,6 +86,8 @@
 \affil[24]{University of Texas at Austin,
            Institute for Computational Engineering and Sciences,
 	   Austin, TX, 78712, USA}
+\affil[25]{Division of Biostatistics, University of California,
+  Berkeley, CA, 94720, USA}
 
 \affil[*]{ralf.gommers@gmail.com}
 
@@ -120,36 +123,85 @@ SciPy library and highlight some recent technical developments.
 
 \section*{Background}
 
-Python ... late 1980s
-
-
-
-An matrix / n-dimensional array object ...
-matrix.py, numeric, numarray, numpy
-
-Paul Dubois
-
-Travis O
-
-Pearu
-
--
-Gary Strangman
-
-%https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
+Python is an interactive computer programming language, designed by
+Guido van Rossum in the late 80s, with a heavy emphasis on readability
+and rapid prototyping.
+% https://legacy.python.org/search/hypermail/python-1992/0000.html
 %
+While it was a general purpose programming language with a ``batteries
+included'' standard library, it had no special support for scientific
+data structures or algorithms, unlike many of the other established computation
+platforms of the time. Yet, scientists soon discovered the language's
+virtues, such as its ability to wrap C and Fortran libraries and to
+then drive those libraries interactively.
+Scientists could thereby gain access to a wide variety of existing
+computational libraries, without concerning themselves with low-level
+programming concepts as as memory management.
 
-Eric and Travis V
+In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
+message on the Python Matrix Special Interest Group
+mailing list\footnote{https://mail.python.org/pipermail/matrix-sig/1995-August/000002.html}:
+\begin{quote}
+There seems to be a fair amount of interest in the Python community
+concerning the addition of numeric operations to Python.  My own desire is
+to have as large a library of matrix based functions available as possible
+(linear algebra, eigenfunctions, signal processing, statistics, etc.).  In
+order to ensure that all of these libraries interoperate, there needs to
+be agreement on a basic matrix object that can be used to represent arrays
+of numbers.
+\end{quote}
+Over the next several months, conversations on that mailing
+list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
+Hinsen, and Guido van Rossum, led to the creation of an array object
+with arbitrarily high dimensions.  Jim Hugunin explained the utility
+of Python for numerical computation\footnote{http://hugunin.net/papers/hugunin95numpy.html}:
+\begin{quote}
+I've used almost all of the available numerical languages at one time
+or another over the past 8 years. One thing I've noticed is that over
+time, the designers of these languages are steadily adding more of the
+features that one would expect to find in a general-purpose
+programming language.
+\end{quote}
+This is still one of the distinguishing features of Python for
+science, and why it has been so successful in the realm of data
+science: instead of adding general features to a language designed for
+numerical and scientific computing, here scientific features are added
+to a general purpose language instead.  This broadens the scope of
+problems that can be addressed easily, the sources of data that are
+readily accessible, and increases the size of the community that
+develops general purpose tooling.
+
+The availability of a standard numerical array data structure in
+Python led to a sudden and rapidly growing number of scientific
+packages becoming available for solving various common numeric
+problems.
+
+A number of these packages were written by graduate students and
+postdoctoral researchers to solve the very practical research problems
+that they faced on a daily basis.  While they had access to and were
+familiar with specialized (and often commercial) systems, many found
+it easier to implement the domain-specific functionality they needed
+in a general purpose programming language.  And given Python's innate
+ability to function as a systems language, controlling specialized or
+custom-built hardware was feasible.
 
 \subsection*{SciPy Begins}
+
+Travis O
+Pearu
+-
+Gary Strangman
+%
+%https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
+%
+%
+Eric and Travis V
 
 -  Jun 10, 2001
 Travis N. Vaught announced scipy-dev mailing list
 
 - Aug 20, 2001
 Eric Jones announced
-
-
 
 IPython 2001 first release
 
