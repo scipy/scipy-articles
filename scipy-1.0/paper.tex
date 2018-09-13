@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{pgfplots}
+\usepackage[multiple]{footmisc}
 
 \pgfplotsset{compat=newest}
 \usepackage{listings, textcomp}
@@ -139,7 +140,7 @@ computational libraries, without concerning themselves with low-level
 programming concepts such as memory management.
 
 In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
-message on the Python Matrix Special Interest Group
+message on the Python Matrix Special Interest Group (Matrix-SIG)
 mailing list\footnote{https://mail.python.org/pipermail/matrix-sig/1995-August/000002.html}:
 \begin{quote}
 There seems to be a fair amount of interest in the Python community
@@ -188,18 +189,24 @@ place, the time was ripe for the development of a full scientific
 software stack.  Many of the first efforts were driven by graduate
 students and post-doctoral researchers, but soon attracted the
 attention of senior researchers.
-
 % Paul Dubois, CDAT
 % https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
-Paul Dubois in the Program for Climate Model Diagnosis and
-Intercomparison at Lawrence Livermore National Laboratory built their
-Climate Data Analysis Tools (``an open-source set of Python modules
-and tools for accessing, manipulating, and plotting scientific data in
-general and climate data sets in
-particular''\footnote{https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html})
-on Numeric, the newly established Python array object.  Paul later
-became the maintainer for Numeric, and helped fund the writing of the
-first manual [citation needed].
+Paul Dubois at Lawrence Livermore National Laboratories took over the
+maintenance of Numeric and funded the writing of its
+manual\footnote{http://people.csail.mit.edu/jrennie/python/numeric/numeric-manual.pdf}.
+\fixme{replace this URL with numpy.org hosted version }% Make sure we host this PDF somewhere in the numpy GitHub org
+%in the Program for Climate Model Diagnosis and Intercomparison at
+%Lawrence Livermore National Laboratory built their Climate Data
+%Analysis Tools (``an open-source set of Python modules and tools for
+%accessing, manipulating, and plotting scientific data in general and
+%climate data sets in
+%particular''\footnote{https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html})
+%on Numeric, the newly established Python array object.  Paul later
+%became the maintainer for Numeric, and helped fund the writing of the
+%first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
+In 1998, the Space Telescope Science Institute, in charge of science
+operations of the Hubble Space Telescope, decided to replace their
+custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
 
 % Perry Greenfield, Hubble
 % https://conference.scipy.org/scipy2011/slides/greenfield_keynote_astronomy.pdf
@@ -213,7 +220,9 @@ first manual [citation needed].
 \subsection*{SciPy Begins}
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
-By the late 90s, Travis Oliphant, a PhD student at the Mayo Clinic,
+By the late 90s, discussions started to appear on Matrix-SIG,
+expressing a desire for a complete scientific data analysis environment\footnote{https://conference.scipy.org/scipy2010/slides/travis\_oliphant\_keynote.pdf}.
+Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
 package, and provided algorithms for signal processing, special
 functions, sparse matrices, quadrature, optimization, and Fast Fourier
@@ -227,11 +236,11 @@ compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
 Around the same time, Pearu Peterson, a PhD student from Estonia,
 released f2py\footnote{https://mail.python.org/pipermail/numpy-discussion/2000-September/000243.html}, a command line tool for binding Python and Fortran
-codes.
+codes, and wrote modules for linear algebra and interpolation.
 % Graduated 1999, Duke
 Eric Jones, while a graduate student at Duke, wrote a number of
 packages to support his dissertation, including a parallel job
-scheduler and genetic optimizer.
+scheduler, genetic optimizer, and inline C++ compiler.
 % Graduated 1998, PhD from Brown, 97–99 postdoc at Harvard Medical
 % School; at Harvard ever since
 %
@@ -245,18 +254,70 @@ Computing Solutions (now Enthought, Inc.) in Austin, Texas.  In an
 effort to simplify the tool stack, they created the SciPy project,
 centered around the SciPy library which would subsume all the
 above-mentioned packages.
+The new project quickly gained momentum, with a website and code
+repository appearing in
+February\footnote{https://web.archive.org/web/20010309040805/http://scipy.org:80/}, and
+a mailing list announced in
+June \footnote{https://mail.python.org/pipermail/scipy-dev/2001-June/000000.html}. By
+August, a first release was announced\footnote{https://mail.python.org/pipermail/python-list/2001-August/106419.html}, an excerpt of which is shown in
+Fig.~\ref{fig:announce-0.1}.
+In September, the first documentation was
+published\footnote{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1},
+and by the following September the inaugural SciPy workshop was held
+at Caltech\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}.
 
--  Jun 10, 2001
-Travis N. Vaught announced scipy-dev mailing list
+% Janko Hauser on toolboxes
+% https://mail.python.org/pipermail/scipy-dev/2001-September/000032.html
 
-- Aug 20, 2001
-Eric Jones announced \ref{fig:announce-0.1}
+At this point, scientific Python is starting to attract more serious
+attention; code that started out as side projects by graduate students
+has grown into essential infrastructure at national laboratories and
+research institutes.  But even as SciPy, the algorithms library of the
+ecosystem, started to mature, the next generation of graduate students
+and postdocs were already exploring other aspects of the computational
+environment.
 
-IPython 2001 first release
+In 2000, Prabhu Ramachandran\fixme{also note that he, and the others
+  mentioned below, are also SciPy contributors}, a PhD student at the Indian Institute of
+Technology, started work on a 3D visualization application, based on
+Wingware's C++ Visualization Toolkit, called
+Mayavi\footnote{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
 
-Matplotlib 2003 first release
+SciPy initially contained a plotting module, but it did not have an
+easy and familiar interface. \fixme{There were multiple plotting
+  packages in SciPy, and Chaco, and wxPyPlot(s), IPython + GNUPlot,
+  and ....?}
+John Hunter, a gradute student
+\fixme{check, since John around that time became postdoc, can check
+  with John Milton?} at the University
+of Chicago Medical School, liked the plotting functionality
+available in MATLAB, but had problems accessing their laboratory's
+license, which was governed by a hardware dongle.  In response, he
+wrote a plotting library from scratch, and Matplotlib 0.1 was released
+April 2003\footnote{https://mail.python.org/pipermail/python-list/2003-April/193167.html}.
 
-NumPy 2005
+In 2001, Fernando Pérez, a graduate student at the University of
+Colorado, Boulder, created the IPython interactive shell, built into
+IPP, an earlier attempt by Janko Hauser, and including code from
+Nathan Gray's LazyPython.
+% IPython hosted on SciPy:
+% https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
+
+In 2000, STScI ported their entire IDL-based analysis pipeline, IRAF,
+to Python.  And it was here that a small crisis developed around the
+Python numerical array container.  Numeric, the original array package, was
+suitable for small arrays, but not for the large images processed by
+STScI.  With the Numeric maintainer's blessing, the decision was made
+to write NumArray, a library that could handle data on a different
+scale.  Unfortunately, NumArray proved inefficient for small arrays,
+facing the community with a rather unfortunate choice.  In 2005,
+Travis Oliphant combined the best elements of Numeric and NumArray,
+thereby solving the dilemma and paving the way for Python to become
+a very significant player in the Data Science movement. \fixme{mention
+  first NumPy meeting at Berkeley}
+
+% Future directions for SciPy after meeting at Berkeley
+% https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
 
 \begin{figure}
 \begin{verbatim}
@@ -862,6 +923,9 @@ provides guidance on how to do that.
 \fixme{The Discussion should be succinct and must not contain subheadings.}
 
 \subsection*{Impact now}
+
+% While Paul was one of the early adopters at the national laboratories,
+% Python's presence is now ubiquitous.
 
 SciPy has a strong developer community and a massive user base. GitHub traffic
 metrics report roughly 20,000 unique visitors to the source website between May
