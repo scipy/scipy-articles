@@ -120,7 +120,38 @@ SciPy library and highlight some recent technical developments.
 
 \section*{Introduction}
 
-\fixme{The Introduction section expands on the background of the work (some overlap with the Abstract is acceptable). The introduction should not include subheadings.}
+\begin{verbatim}
+SciPy is not what you think it is
+
+- At risk of failure many times
+- Funding was *hard* to come by; funding agencies didn't easily give
+  money.  Some labs, Enthough committed a bit of money.
+- Java and other enterprize packages were getting support; MATLAB
+  was huge.  Not many wanted to encourage this ``amateur'' effort.
+- Graduate students & post-docs doing the heavy lifting; they found
+  a system they enjoyed using, saw its potential, put energy into it.
+- Driven by eclectic group of people being passionate about it, not
+  because they were paid or told to work on it.
+- And not by EECS people, but by scientists.  Some with fairly little
+  programming background (David), others in varying stages of academic/research careers.
+- Over time, the project became more more professional:
+  - Standardized release formats
+  - Docstrings
+  - Testing & CI infrastructure
+  - APIs
+  - Issue tracking
+  - Revision control (CVS -> SVN -> Git)
+  - Conference
+- Python wasn't perfectly suited in all ways; packaging, compiling,
+  indexing (indexing/array protocols and complex numbers added)
+- Initially, this high quality, stable, widely used project, hinged on
+  three people doing the ``right'' thing to get it established.
+- Bus factor for maintenance still very low.
+
+The background section captures a selective history where we're trying
+to identify some of the more important events.  But really, it relies
+on the collective work of numerous individuals, too many to mention.
+\end{verbatim}
 
 \section*{Background}
 
@@ -312,11 +343,21 @@ scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
 thereby solving the dilemma and paving the way for Python to become
-a very significant player in the Data Science movement. \fixme{mention
-  first NumPy meeting at Berkeley}
+a very significant player in the Data Science movement.
 
 % Future directions for SciPy after meeting at Berkeley
 % https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
+
+SciPy now begins a phase of significant growth and adoption.  The
+informal workshops are grown into international conferences with many
+hundreds of attendees, special issues are organized and published in a
+leading scientific magazine, and the scope of the SciPy library
+narrows, while the breadth of the ecosystem is grown and encouraged
+through a new type of auxhilary package, the scikit.  The tooling,
+development and release processes become more professional, grown with
+a patience only affordable in open source development, leading with
+best practices nowadays increasingly common in both industry and other
+open source projects \cite{millman2014developing}.
 
 \begin{figure}
 \begin{verbatim}
@@ -345,9 +386,12 @@ SciPy's current module set includes the following:
 % https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
 % https://str.llnl.gov/str/News896.html
 
-SciPy
-
-US, India, Europe
+In 2008, the SciPy conference went from being a small gathering of
+core developers, to a multi-location event, with increased funding, a
+published proceedings, and scholarships for attending students (some
+of whom are authors on this paper).  In 2010, the conference grew even
+further, with an additional event added in India, and the US
+conference—now with parallel tracks—moving to Austin, Texas.
 
 SIAM CSE
 
@@ -379,7 +423,6 @@ CiSE 2011 special issue
 \cite{behnel2011cython}
 \cite{pedregosa2011scikit}
 \cite{vanderwalt2014scikit}
-\cite{millman2014developing}
 \cite{meurer2017sympy}
 
 \subsection*{SciKits}
