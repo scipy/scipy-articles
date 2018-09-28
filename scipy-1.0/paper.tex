@@ -249,13 +249,8 @@ in a general purpose programming language.  And given Python's innate
 ability to function as a systems language, controlling specialized or
 custom-built hardware was feasible.
 
-With a rich programming environment and a numerical array object in
-place, the time was ripe for the development of a full scientific
-software stack. Many of the first efforts were driven by graduate
-students and post-doctoral researchers, but soon attracted the
-attention of more senior researchers.
-% Paul Dubois, CDAT
-% https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
+Initial work on numerical computing in Python was driven by graduate
+students, but soon larger research labs became increasingly engaged.
 For example, Paul Dubois at Lawrence Livermore National Laboratory took over the
 maintenance of Numeric and funded the writing of its
 manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
@@ -272,6 +267,13 @@ in 1998 the Space Telescope Science Institute, in charge of science
 operations of the Hubble Space Telescope, decided to replace their
 custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
 
+
+Many of the first efforts were driven by graduate
+students and post-doctoral researchers, but soon attracted the
+attention of more senior researchers.
+% Paul Dubois, CDAT
+% https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
+For example,
 % Perry Greenfield, Hubble
 % https://conference.scipy.org/scipy2011/slides/greenfield_keynote_astronomy.pdf
 %
@@ -336,6 +338,9 @@ SciPy's current module set includes the following:
 \caption{Excerpt from first release announcement.}\label{fig:announce-0.1}
 \end{figure}
 
+With a rich programming environment and a numerical array object in
+place, the time was ripe for the development of a full scientific
+software stack.
 In 2001, Eric Jones and Travis Vaught founded Enthought Scientific
 Computing Solutions (now Enthought, Inc.) in Austin, Texas.  In an
 effort to simplify the tool stack, they created the SciPy project,
@@ -349,31 +354,42 @@ June \footnote{https://mail.python.org/pipermail/scipy-dev/2001-June/000000.html
 August, a first release was announced\footnote{https://mail.python.org/pipermail/python-list/2001-August/106419.html}, an excerpt of which is shown in
 Fig.~\ref{fig:announce-0.1}.
 In September, the first documentation was
-published\footnote{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1},
-and by the following September the inaugural SciPy workshop was held
-at Caltech\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}.
+published\footnote{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1}.
+The first SciPy
+workshop\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}
+was held in September 2002 at CalTech---a single track, two day event with 50
+participants, many of them developers of SciPy and surrounding libraries.
+
+%and by the following September the inaugural SciPy workshop was held
+%at Caltech\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}.
 
 % Janko Hauser on toolboxes
 % https://mail.python.org/pipermail/scipy-dev/2001-September/000032.html
 
-At this point, scientific Python is starting to attract more serious
-attention; code that started out as side projects by graduate students
-has grown into essential infrastructure at national laboratories and
-research institutes.  But even as SciPy, the algorithms library of the
-ecosystem, started to mature, the next generation of graduate students
-and postdocs were already exploring other aspects of the computational
-environment.
-
+At this point, scientific Python started attracting more serious attention;
+code that started out as side projects by graduate students has grown into
+essential infrastructure at national laboratories and research institutes.
+For example, starting in 2000, the Space Telescope Science Institute (STScI)
+ported their entire IDL-based analysis pipeline, IRAF, to Python.
+STScI was founded to guide the Hubble Space Telescope including developing
+advanced data, archives, and analysis tools for the most famous observatory
+in history.
+ 
+As SciPy, the algorithms library of the ecosystem, began attracting the attention
+of large research organizations,
+the next generation of graduate students and postdocs were already exploring
+other aspects of the computational environment.
 In 2000, Prabhu Ramachandran\fixme{also note that he, and the others
   mentioned below, are also SciPy contributors}, a PhD student at the Indian Institute of
 Technology, started work on a 3D visualization application, based on
 Wingware's C++ Visualization Toolkit, called
 Mayavi\footnote{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
-
-SciPy initially contained a plotting module, but it did not have an
-easy and familiar interface. \fixme{There were multiple plotting
-  packages in SciPy, and Chaco, and wxPyPlot(s), IPython + GNUPlot,
-  and ....?}
+In 2001, Fernando Pérez, a graduate student at the University of
+Colorado, Boulder, created the IPython interactive shell, built into
+IPP, an earlier attempt by Janko Hauser, and including code from
+Nathan Gray's LazyPython.
+% IPython hosted on SciPy:
+% https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
 John Hunter, a gradute student
 \fixme{check, since John around that time became postdoc, can check
   with John Milton?} at the University
@@ -383,16 +399,33 @@ license, which was governed by a hardware dongle.  In response, he
 wrote a plotting library from scratch, and Matplotlib 0.1 was released
 April 2003\footnote{https://mail.python.org/pipermail/python-list/2003-April/193167.html}.
 
-In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell, built into
-IPP, an earlier attempt by Janko Hauser, and including code from
-Nathan Gray's LazyPython.
-% IPython hosted on SciPy:
-% https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
+% https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
+% https://str.llnl.gov/str/News896.html
 
-In 2000, STScI ported their entire IDL-based analysis pipeline, IRAF,
-to Python.  And it was here that a small crisis developed around the
-Python numerical array container.  Numeric, the original array package, was
+In the early
+workshops, recurrent topics indicate the state of development, with
+emphasis being placed on the underlying array package, plotting,
+parallel processing, acceleration / wrapping, and user interfaces.  By
+2004, a significant shift occurred towards application of SciPy on
+scientific problems.  The event also started to draw in more keynote
+speakers from outside the community, such as Guido van Rossum (creator
+of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
+Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
+
+%2002—https://web.archive.org/web/20021020215937/http://www.scipy.org:80/site_content/scipy02/scipy02_agenda.htm
+%2003—https://web.archive.org/web/20031207151811/http://www.scipy.org:80/site_content/scipy03/
+%2004—Jim Hugunin
+%https://web.archive.org/web/20040920080225/http://www.scipy.org:80/wikis/scipy04
+%Travis Oliphant 2005—https://web.archive.org/web/20051103155042/http://www.scipy.org:80/wikis/scipy05/FrontPage
+%Guido—2006 https://scipy.github.io/old-wiki/pages/SciPy2006.html
+%Martelli—2008 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2004.html
+%Norvig—2009 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2005.html
+
+
+As STScI continued to use Python for an increasingly large portion
+of the Hubble Space Telescope data analysis pipeline, they encountered
+problems with the Python numerical array container.
+Numeric, the original array package, was
 suitable for small arrays, but not for the large images processed by
 STScI.  With the Numeric maintainer's blessing, the decision was made
 to write NumArray, a library that could handle data on a different
@@ -406,16 +439,12 @@ a very significant player in the Data Science movement.\fixme{NumPy
 % Future directions for SciPy after meeting at Berkeley
 % https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
 
-SciPy now begins a phase of significant growth and adoption.  The
-informal workshops are grown into international conferences with many
-hundreds of attendees, special issues are organized and published in a
-leading scientific magazine, and the scope of the SciPy library
-narrows, while the breadth of the ecosystem is grown and encouraged
-through a new type of auxhilary package, the scikit.  The tooling,
-development and release processes become more professional, grown with
-a patience only affordable in open source development, leading with
-best practices nowadays increasingly common in both industry and other
-open source projects \cite{millman2014developing}.
+CiSE 2007 special issue (steering code)
+\cite{dubois2007guest}
+\cite{oliphant2007python}
+\cite{perez2007ipython}
+\cite{hunter2007matplotlib}
+research applications ...
 
 
 
@@ -501,15 +530,37 @@ open source projects \cite{millman2014developing}.
 %https://www.researchgate.net/publication/260585856_From_Equations_to_Code_Automated_Scientific_Computing
 
 
-CiSE 2007 special issue
+SciPy now begins a phase of significant growth and adoption.  The
+informal workshops are grown into international conferences with many
+hundreds of attendees, special issues are organized and published in a
+leading scientific magazine, and the scope of the SciPy library
+narrows, while the breadth of the ecosystem is grown and encouraged
+through a new type of auxhilary package, the scikit.  The tooling,
+development and release processes become more professional, grown with
+a patience only affordable in open source development, leading with
+best practices nowadays increasingly common in both industry and other
+open source projects \cite{millman2014developing}.
+
+
+
+
+%http://conference.scipy.org/proceedings/scipy2008/paper\_0/full\_text.pdf
+%http://conference.scipy.org/proceedings/scipy2008/paper\_1/full\_text.pdf
+
+In 2008, the SciPy conference went from being a small gathering of
+core developers, to a multi-location event, with increased funding, a
+published proceedings, and scholarships for attending students (some
+of whom are authors on this paper).  In 2010, the conference grew even
+further, with an additional event added in India, and the US
+conference—now with parallel tracks—moving to Austin, Texas.
+While the US SciPy conference kept growing (by ... it had multiple
+tracks, student sponsorship, proceedings, and funding), satellite
+events were being organized by volunteers elsewhere, such as EuroSciPy
+(2008–) and SciPy India (2009–).
 
 CiSE 2011 special issue
 
 
-\cite{dubois2007guest}
-\cite{oliphant2007python}
-\cite{perez2007ipython}
-\cite{hunter2007matplotlib}
 \cite{vanderwalt2008scipy}
 \cite{peterson2009f2py}
 \cite{millman2011python}
@@ -520,47 +571,6 @@ CiSE 2011 special issue
 \cite{vanderwalt2014scikit}
 \cite{meurer2017sympy}
 
-
-
-
-% https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
-% https://str.llnl.gov/str/News896.html
-
-http://conference.scipy.org/proceedings/scipy2008/paper\_0/full\_text.pdf
-http://conference.scipy.org/proceedings/scipy2008/paper\_1/full\_text.pdf
-
-The first SciPy workshop was held in September 2002 at CalTech—a
-single track, two day event with 50 participants, many of them
-developers of SciPy and surrounding libraries.  In the early
-workshops, recurrent topics indicate the state of development, with
-emphasis being placed on the underlying array package, plotting,
-parallel processing, acceleration / wrapping, and user interfaces.  By
-2004, a significant shift occurred towards application of SciPy on
-scientific problems.  The event also started to draw in more keynote
-speakers from outside the community, such as Guido van Rossum (creator
-of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
-Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
-
-%2002—https://web.archive.org/web/20021020215937/http://www.scipy.org:80/site_content/scipy02/scipy02_agenda.htm
-%2003—https://web.archive.org/web/20031207151811/http://www.scipy.org:80/site_content/scipy03/
-%2004—Jim Hugunin
-https://web.archive.org/web/20040920080225/http://www.scipy.org:80/wikis/scipy04
-%Travis Oliphant 2005—https://web.archive.org/web/20051103155042/http://www.scipy.org:80/wikis/scipy05/FrontPage
-%Guido—2006 https://scipy.github.io/old-wiki/pages/SciPy2006.html
-%Martelli—2008 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2004.html
-%Norvig—2009 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2005.html
-
-While the US SciPy conference kept growing (by ... it had multiple
-tracks, student sponsorship, proceedings, and funding), satellite
-events were being organized by volunteers elsewhere, such as EuroSciPy
-(2008–) and SciPy India (2009–).
-
-In 2008, the SciPy conference went from being a small gathering of
-core developers, to a multi-location event, with increased funding, a
-published proceedings, and scholarships for attending students (some
-of whom are authors on this paper).  In 2010, the conference grew even
-further, with an additional event added in India, and the US
-conference—now with parallel tracks—moving to Austin, Texas.
 
 FOSSEE
 
@@ -573,6 +583,34 @@ everywhere...
 \cite{siamcse09}
 
 %https://archive.siam.org/news/news.php?id=1595
+
+
+%\subsection*{SciKits}
+
+% stefan, gael, david, jarrod, robert
+
+
+website http://scikits.appspot.com/
+
+statsmodels
+
+scikit-image
+
+scikit-learn
+
+
+% scikits
+%https://mail.python.org/pipermail/scipy-dev/2006-November/006315.html
+%https://mail.python.org/pipermail/scipy-dev/2006-November/006316.html
+%https://mail.python.org/pipermail/scipy-dev/2007-April/006972.html
+%https://mail.python.org/pipermail/scipy-dev/2007-April/006835.html
+
+% roadmap
+%https://mail.python.org/pipermail/scipy-dev/2007-March/006808.html
+
+% scikit learn
+%https://mail.python.org/pipermail/scipy-dev/2007-July/007451.html
+
 
 
 
@@ -643,34 +681,6 @@ Python 2 / 3?
 %https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
 %https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
 %https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
-
-%\subsection*{SciKits}
-
-% stefan, gael, david, jarrod, robert
-
-
-website http://scikits.appspot.com/
-
-statsmodels
-
-scikit-image
-
-scikit-learn
-
-
-% scikits
-%https://mail.python.org/pipermail/scipy-dev/2006-November/006315.html
-%https://mail.python.org/pipermail/scipy-dev/2006-November/006316.html
-%https://mail.python.org/pipermail/scipy-dev/2007-April/006972.html
-%https://mail.python.org/pipermail/scipy-dev/2007-April/006835.html
-
-% roadmap
-%https://mail.python.org/pipermail/scipy-dev/2007-March/006808.html
-
-% scikit learn
-%https://mail.python.org/pipermail/scipy-dev/2007-July/007451.html
-
-
 
 
 
