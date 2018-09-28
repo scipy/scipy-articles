@@ -152,7 +152,7 @@ SciPy library and highlight some recent technical developments.
 %% on the collective work of numerous individuals, too many to mention.
 
 SciPy recently released its first stable version: 1.0.  It signals to
-the user community that the package's API has now reached a level of
+the user community that the library's API has now reached a level of
 maturity and stability that warrants trusting it inside research
 pipelines.  But the version numbering belies the history of a package
 that has already seen extensive adoption in research and industry.
@@ -160,25 +160,25 @@ that has already seen extensive adoption in research and industry.
 Upon historic introspection, its arrival at this point is surprising,
 and somewhat anomalous.  When first started, the library had very
 little funding, and was written mainly by graduate students---many of
-them without an official computer science education, or even the
-blessing of their advisor.  To even imagine that a small group of
+them without a computer science education, and often without the
+blessing of their advisors.  To even imagine that a small group of
 ``rogue'' student programmers could upend the already well-established
-research software ecosystem---backed by millions in funding, and
+ecosystem of research software---backed by millions in funding, and
 thousands of highly qualified engineers---was preposterous.
 
 Yet, the philosophical motivations behind a fully open toolstack, and
 an excited, friendly community with a singular focus, seemed to have
 proven decisive in the long run.  It led not only to the library
 described in this paper, but also to an entire ecosystem of related
-packages, and a variety of social activities around them.  The
-packages in the ecosystem share high standards of implementation,
+packages, and a variety of social activities centered around them.  The
+packages in the SciPy ecosystem share high standards of implementation,
 documentation, and testing, and a culture eager to learn and adopt
 better practices---both for community management and software
 development.
 
 Despite its success, SciPy still faces challenges: a low ``bus
-factor'' (the minimum number of contributors that needs to leave to
-cause serious difficult) being perhaps the most serious.
+factor''---the minimum number of contributors that needs to leave to
+cause serious difficulty---being perhaps the most serious.
 
 In the background section that follows, we capture a selective history
 of some milestones and important events in the growth of SciPy.
@@ -194,15 +194,15 @@ Guido van Rossum in the late 80s, with a heavy emphasis on readability
 and rapid prototyping.
 % https://legacy.python.org/search/hypermail/python-1992/0000.html
 %
-While it was a general purpose programming language with a ``batteries
-included'' standard library, it had no special support for scientific
-data structures or algorithms, unlike many of the other established computation
-platforms of the time. Yet, scientists soon discovered the language's
-virtues, such as its ability to wrap C and Fortran libraries and to
-then drive those libraries interactively.
-Scientists could thereby gain access to a wide variety of existing
-computational libraries, without concerning themselves with low-level
-programming concepts such as memory management.
+A general purpose programming language with a ``batteries included''
+standard library, it had no special support for scientific data
+structures or algorithms, unlike many of the other established
+computation platforms of the time. Yet, scientists soon discovered the
+language's virtues, such as its ability to wrap C and Fortran
+libraries and to then drive those libraries interactively.  Scientists
+could thereby gain access to a wide variety of existing computational
+libraries, without concerning themselves with low-level programming
+concepts such as memory management.
 
 In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
 message on the Python Matrix Special Interest Group (Matrix-SIG)
@@ -219,7 +219,7 @@ of numbers.
 Over the next several months, conversations on that mailing
 list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
 Hinsen, and Guido van Rossum, led to the creation of an array object
-with arbitrarily high dimensions.  Jim Hugunin explained the utility
+that supported a high number of dimensions.  Jim Hugunin explained the utility
 of Python for numerical computation\footnote{http://hugunin.net/papers/hugunin95numpy.html}:
 \begin{quote}
 I've used almost all of the available numerical languages at one time
@@ -243,7 +243,7 @@ problems.
 A number of these packages were written by graduate students and
 postdoctoral researchers to solve the very practical research problems
 that they faced on a daily basis.  While they had access to and were
-familiar with specialized (and often commercial) systems, many found
+familiar with specialized (often commercial) systems, many found
 it easier to implement the domain-specific functionality they needed
 in a general purpose programming language.  And given Python's innate
 ability to function as a systems language, controlling specialized or
@@ -251,14 +251,14 @@ custom-built hardware was feasible.
 
 With a rich programming environment and a numerical array object in
 place, the time was ripe for the development of a full scientific
-software stack.  Many of the first efforts were driven by graduate
+software stack. Many of the first efforts were driven by graduate
 students and post-doctoral researchers, but soon attracted the
-attention of senior researchers.
+attention of more senior researchers.
 % Paul Dubois, CDAT
 % https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
-Paul Dubois at Lawrence Livermore National Laboratory took over the
+For example, Paul Dubois at Lawrence Livermore National Laboratory took over the
 maintenance of Numeric and funded the writing of its
-manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}.
+manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
 %in the Program for Climate Model Diagnosis and Intercomparison at
 %Lawrence Livermore National Laboratory built their Climate Data
 %Analysis Tools (``an open-source set of Python modules and tools for
@@ -268,7 +268,7 @@ manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}.
 %on Numeric, the newly established Python array object.  Paul later
 %became the maintainer for Numeric, and helped fund the writing of the
 %first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
-In 1998, the Space Telescope Science Institute, in charge of science
+in 1998 the Space Telescope Science Institute, in charge of science
 operations of the Hubble Space Telescope, decided to replace their
 custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
 
@@ -280,6 +280,8 @@ custom scripting language with Python\footnote{https://conference.scipy.org/scip
 
 % Numeric, even though written by grad students, became critical for
 % large scale endeavors
+
+
 
 \subsection*{SciPy Begins}
 
