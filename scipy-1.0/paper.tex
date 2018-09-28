@@ -120,38 +120,72 @@ SciPy library and highlight some recent technical developments.
 
 \section*{Introduction}
 
-\begin{verbatim}
-SciPy is not what you think it is
+%% SciPy is not what you think it is
 
-- At risk of failure many times
-- Funding was *hard* to come by; funding agencies didn't easily give
-  money.  Some labs, Enthough committed a bit of money.
-- Java and other enterprize packages were getting support; MATLAB
-  was huge.  Not many wanted to encourage this ``amateur'' effort.
-- Graduate students & post-docs doing the heavy lifting; they found
-  a system they enjoyed using, saw its potential, put energy into it.
-- Driven by eclectic group of people being passionate about it, not
-  because they were paid or told to work on it.
-- And not by EECS people, but by scientists.  Some with fairly little
-  programming background (David), others in varying stages of academic/research careers.
-- Over time, the project became more more professional:
-  - Standardized release formats
-  - Docstrings
-  - Testing & CI infrastructure
-  - APIs
-  - Issue tracking
-  - Revision control (CVS -> SVN -> Git)
-  - Conference
-- Python wasn't perfectly suited in all ways; packaging, compiling,
-  indexing (indexing/array protocols and complex numbers added)
-- Initially, this high quality, stable, widely used project, hinged on
-  three people doing the ``right'' thing to get it established.
-- Bus factor for maintenance still very low.
+%% - At risk of failure many times
+%% - Funding was *hard* to come by; funding agencies didn't easily give
+%%   money.  Some labs, Enthough committed a bit of money.
+%% - Java and other enterprize packages were getting support; MATLAB
+%%   was huge.  Not many wanted to encourage this ``amateur'' effort.
+%% - Graduate students & post-docs doing the heavy lifting; they found
+%%   a system they enjoyed using, saw its potential, put energy into it.
+%% - Driven by eclectic group of people being passionate about it, not
+%%   because they were paid or told to work on it.
+%% - And not by EECS people, but by scientists.  Some with fairly little
+%%   programming background (David), others in varying stages of academic/research careers.
+%% - Over time, the project became more more professional:
+%%   - Standardized release formats
+%%   - Docstrings
+%%   - Testing & CI infrastructure
+%%   - APIs
+%%   - Issue tracking
+%%   - Revision control (CVS -> SVN -> Git)
+%%   - Conference
+%% - Python wasn't perfectly suited in all ways; packaging, compiling,
+%%   indexing (indexing/array protocols and complex numbers added)
+%% - Initially, this high quality, stable, widely used project, hinged on
+%%   three people doing the ``right'' thing to get it established.
+%% - Bus factor for maintenance still very low.
 
-The background section captures a selective history where we're trying
-to identify some of the more important events.  But really, it relies
-on the collective work of numerous individuals, too many to mention.
-\end{verbatim}
+%% The background section captures a selective history where we're trying
+%% to identify some of the more important events.  But really, it relies
+%% on the collective work of numerous individuals, too many to mention.
+
+SciPy recently released its first stable version: 1.0.  It signals to
+the user community that the package's API has now reached a level of
+maturity and stability that warrants trusting it inside research
+pipelines.  But the version numbering belies the history of a package
+that has already seen extensive adoption in research and industry.
+
+Upon historic introspection, its arrival at this point is surprising,
+and somewhat anomalous.  When first started, the library had very
+little funding, and was written mainly by graduate students---many of
+them without an official computer science education, or even the
+blessing of their advisor.  To even imagine that a small group of
+``rogue'' student programmers could upend the already well-established
+research software ecosystem---backed by millions in funding, and
+thousands of highly qualified engineers---was preposterous.
+
+Yet, the philosophical motivations behind a fully open toolstack, and
+an excited, friendly community with a singular focus, seemed to have
+proven decisive in the long run.  It led not only to the library
+described in this paper, but also to an entire ecosystem of related
+packages, and a variety of social activities around them.  The
+packages in the ecosystem share high standards of implementation,
+documentation, and testing, and a culture eager to learn and adopt
+better practices---both for community management and software
+development.
+
+Despite its success, SciPy still faces challenges: a low ``bus
+factor'' (the minimum number of contributors that needs to leave to
+cause serious difficult) being perhaps the most serious.
+
+In the background section that follows, we capture a selective history
+of some milestones and important events in the growth of SciPy.
+Despite what we might highlight here, it is important to understand
+that a project like SciPy is only possible because of the
+contributions of very many contributors---too many to mention
+individually, but each bringing an important part to the puzzle.
 
 \section*{Background}
 
