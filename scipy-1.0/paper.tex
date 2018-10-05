@@ -151,16 +151,16 @@ SciPy library and highlight some recent technical developments.
 %% to identify some of the more important events.  But really, it relies
 %% on the collective work of numerous individuals, too many to mention.
 
-SciPy recently released its first stable version: 1.0.  It signals to
-the user community that the library's API has now reached a level of
-maturity and stability that warrants trusting it inside research
-pipelines.  But the version numbering belies the history of a package
-that has already seen extensive adoption in research and industry.
+Traditionally, a 1.0 release signals that a
+library's API has reached a level of maturity and stability
+that warrants trusting it inside research pipelines.
+The SciPy 1.0 version numbering belies the history of a project
+that has become the standard which others follow
+and has seen extensive adoption in research and industry.
 
-Upon historic introspection, its arrival at this point is surprising,
-and somewhat anomalous.  When first started, the library had very
-little funding, and was written mainly by graduate students---many of
-them without a computer science education, and often without the
+SciPy's arrival at this point is surprising, and somewhat anomalous.
+When started, the library had little funding, and was written mainly
+by graduate students---many of them without a computer science education, and often without the
 blessing of their advisors.  To even imagine that a small group of
 ``rogue'' student programmers could upend the already well-established
 ecosystem of research software---backed by millions in funding, and
@@ -176,9 +176,10 @@ documentation, and testing, and a culture eager to learn and adopt
 better practices---both for community management and software
 development.
 
-Despite its success, SciPy still faces challenges: a low ``bus
-factor''---the minimum number of contributors that needs to leave to
-cause serious difficulty---being perhaps the most serious.
+Despite its success, SciPy still faces challenges:
+a low ``bus factor''---from the phrase ``hit by a bus'' and
+meaning that the project depends on a small number of
+specific contributors---being perhaps the most serious.
 
 In the background section that follows, we capture a selective history
 of some milestones and important events in the growth of SciPy.
@@ -190,7 +191,7 @@ individually, but each bringing an important part to the puzzle.
 \section*{Background}
 
 Python is an interactive computer programming language, designed by
-Guido van Rossum in the late 80s, with a heavy emphasis on readability
+Guido van Rossum in the late 1980s, with an emphasis on readability
 and rapid prototyping.
 % https://legacy.python.org/search/hypermail/python-1992/0000.html
 %
@@ -251,7 +252,7 @@ custom-built hardware was feasible.
 
 Initial work on numerical computing in Python was driven by graduate
 students, but soon larger research labs became increasingly engaged.
-For example, Paul Dubois at Lawrence Livermore National Laboratory took over the
+For example, Paul Dubois at Lawrence Livermore National Laboratory (LLNL) took over the
 maintenance of Numeric and funded the writing of its
 manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
 %in the Program for Climate Model Diagnosis and Intercomparison at
@@ -263,7 +264,7 @@ manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
 %on Numeric, the newly established Python array object.  Paul later
 %became the maintainer for Numeric, and helped fund the writing of the
 %first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
-in 1998 the Space Telescope Science Institute, in charge of science
+in 1998 the Space Telescope Science Institute (STScI), in charge of science
 operations of the Hubble Space Telescope, decided to replace their
 custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
 
@@ -287,7 +288,7 @@ custom scripting language with Python\footnote{https://conference.scipy.org/scip
 \subsection*{SciPy Begins}
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
-By the late 90s, discussions started to appear on Matrix-SIG,
+By the late 1990s, discussions appeared on Matrix-SIG,
 expressing a desire for a complete scientific data analysis environment\footnote{https://conference.scipy.org/scipy2010/slides/travis\_oliphant\_keynote.pdf}.
 Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
@@ -334,7 +335,7 @@ SciPy's current module set includes the following:
     Splines and Interpolation
     And other stuff.
 \end{verbatim}
-\caption{Excerpt from first release announcement.}\label{fig:announce-0.1}
+\caption{Excerpt from SciPy 0.1 release announcement.}\label{fig:announce-0.1}
 \end{figure}
 
 With a rich programming environment and a numerical array object in
@@ -368,11 +369,8 @@ participants, many of them developers of SciPy and surrounding libraries.
 At this point, scientific Python started attracting more serious attention;
 code that started out as side projects by graduate students has grown into
 essential infrastructure at national laboratories and research institutes.
-For example, starting in 2000, the Space Telescope Science Institute (STScI)
-ported their entire IDL-based analysis pipeline, IRAF, to Python.
-STScI was founded to guide the Hubble Space Telescope including developing
-advanced data, archives, and analysis tools for the most famous observatory
-in history.
+For example, starting in 2000, STScI ported their IDL-based analysis pipeline,
+IRAF, to Python.
  
 As SciPy, the algorithms library of the ecosystem, began attracting the attention
 of large research organizations,
@@ -389,7 +387,7 @@ IPP, an earlier attempt by Janko Hauser, and including code from
 Nathan Gray's LazyPython.
 % IPython hosted on SciPy:
 % https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
-John Hunter, a gradute student
+John Hunter, a graduate student
 \fixme{check, since John around that time became postdoc, can check
   with John Milton?} at the University
 of Chicago Medical School, liked the plotting functionality
@@ -401,15 +399,6 @@ April 2003\footnote{https://mail.python.org/pipermail/python-list/2003-April/193
 % https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
 % https://str.llnl.gov/str/News896.html
 
-In the early
-workshops, recurrent topics indicate the state of development, with
-emphasis being placed on the underlying array package, plotting,
-parallel processing, acceleration / wrapping, and user interfaces.  By
-2004, a significant shift occurred towards application of SciPy on
-scientific problems.  The event also started to draw in more keynote
-speakers from outside the community, such as Guido van Rossum (creator
-of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
-Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
 
 %2002—https://web.archive.org/web/20021020215937/http://www.scipy.org:80/site_content/scipy02/scipy02_agenda.htm
 %2003—https://web.archive.org/web/20031207151811/http://www.scipy.org:80/site_content/scipy03/
@@ -438,8 +427,31 @@ a very significant player in the Data Science movement.\fixme{NumPy
 % Future directions for SciPy after meeting at Berkeley
 % https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
 
-CiSE 2007 special issue (steering code)
-\cite{dubois2007guest}
+In April 2006, Paul
+Dubois\footnote{https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html} wrote
+to the NumPy mailing list:
+\begin{quote}
+IEEE's magazine, Computing in Science and Engineering (CiSE), has asked me
+to put together a theme issue on the use of Python in Science and
+Engineering. I will write an overview to be accompanied by 3-5 articles [. . .]
+that show a diverse set of applications or
+tools, to give our readers a sense of whether or not Python might be useful
+in their own work.
+\end{quote}
+Python had a strong enough presence in science and engineering so that
+editors were soliciting a special issue, but it was still niche enough
+that the average reader would need additional information in order
+to decide whether it would ``be useful in their own work.''
+In the resulting CiSE May/June 2007 special issue, Paul's overview\cite{dubois2007guest}
+stated:
+\begin{quote}
+LLNL now has many Python-based efforts built from scratch or wrapped around
+legacy codes [. . .] hundreds of thousands
+of lines of C++, Python, and Fortran 95, all working together just as we hoped,
+doing compute-intensive calculations on massively parallel computers.
+\end{quote}
+%https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
+(steering code)
 \cite{oliphant2007python}
 \cite{perez2007ipython}
 \cite{hunter2007matplotlib}
@@ -529,12 +541,13 @@ research applications ...
 %https://www.researchgate.net/publication/260585856_From_Equations_to_Code_Automated_Scientific_Computing
 
 
-SciPy now begins a phase of significant growth and adoption.  The
-informal workshops are grown into international conferences with many
+By the middle to late 2000s, SciPy matured after a long phase of significant
+growth and adoption.
+The informal workshops are grown into international conferences with many
 hundreds of attendees, special issues are organized and published in a
 leading scientific magazine, and the scope of the SciPy library
 narrows, while the breadth of the ecosystem is grown and encouraged
-through a new type of auxhilary package, the scikit.  The tooling,
+through a new type of auxiliary package, the scikit.  The tooling,
 development and release processes become more professional, grown with
 a patience only affordable in open source development, leading with
 best practices nowadays increasingly common in both industry and other
@@ -546,7 +559,15 @@ open source projects \cite{millman2014developing}.
 %http://conference.scipy.org/proceedings/scipy2008/paper\_0/full\_text.pdf
 %http://conference.scipy.org/proceedings/scipy2008/paper\_1/full\_text.pdf
 
-In 2008, the SciPy conference went from being a small gathering of
+In the early workshops, recurrent topics indicate the state of development, with
+emphasis being placed on the underlying array package, plotting,
+parallel processing, acceleration / wrapping, and user interfaces.  By
+2004, a significant shift occurred towards application of SciPy on
+scientific problems.  The event also started to draw in more keynote
+speakers from outside the community, such as Guido van Rossum (creator
+of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
+Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
+The SciPy conference went from being a small gathering of
 core developers, to a multi-location event, with increased funding, a
 published proceedings, and scholarships for attending students (some
 of whom are authors on this paper).  In 2010, the conference grew even
@@ -615,7 +636,7 @@ scikit-learn
 
 \subsection*{Project scope}
 
-SciPy aims to provide fundamental algorithms for scientific computing. The
+SciPy provides fundamental algorithms for scientific computing. The
 breadth of its scope was derived from the Guide to Available Mathematical
 Software classification system (GAMS\cite{boisvert1991guide}). In areas
 that move relatively slowly, e.g. linear algebra, SciPy aims to provide
@@ -963,7 +984,7 @@ btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
 \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
 \caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query()
 over a roughly nine year commit history time frame. The results are based on
-Python 2.7 performance on the master branch of the project using numpy 1.8.2
+Python 2.7 performance on the master branch of the project using NumPy 1.8.2
 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
 compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
 backward compatibility and sampling of the benchmarks there was no application
