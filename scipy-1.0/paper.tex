@@ -446,13 +446,19 @@ legacy codes [. . .] hundreds of thousands
 of lines of C++, Python, and Fortran 95, all working together just as we hoped,
 doing compute-intensive calculations on massively parallel computers.
 \end{quote}
+While it is now more commonly accepted, Paul took the time to explain to
+the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
+He also shares his own interest in Python for ``computational steering''
+where ``Python serves as the input language to a scientific application, and the actual
+computations are performed both in Python itself and in compiled extensions.''
 %https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
-(steering code)
-SciPy \cite{oliphant2007python}
-IPython \cite{perez2007ipython}
-Matplotlib \cite{hunter2007matplotlib}
-research applications ...
-
+Using Python for computational steering was one of the earliest uses of Python
+in large scientific processing pipelines.
+In addition to Paul's overview there were also articles introducing
+Python and SciPy \cite{oliphant2007python}, IPython \cite{perez2007ipython},
+and  Matplotlib \cite{hunter2007matplotlib}.
+In addition to these longer introductory articles, there was a diverse set of
+research applications including
 systems biology\cite{myers2007python},
 astronomy\cite{greenfield2007reaching},
 robotics\cite{krauss2007python},
@@ -460,8 +466,7 @@ nanophotonics\cite{bienstman2007python},
 partial differential equations\cite{mardal2007using},
 neuroimaging\cite{millman2007analysis},
 geographic information systems\cite{shi2007python}, and
-education\cite{backer2007computational, myers2007pythona},
-
+education\cite{backer2007computational, myers2007pythona}.
 
 
 \subsection*{SciPy Matures}
@@ -586,17 +591,6 @@ appearing at many events.
 For example, a three-part minisymposium organized for CSE 2009 was
 featured in SIAM News\cite{siamcse09}.
 
-
-In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
-and Fernando Perez founded NumFOCUS\footnote{https://numfocus.org}.
-
-over 25 sponsored projects
-
-PyData
-
-everywhere...
-
-
 When Paul edited the CiSE May/June 2007 special issue, Python already had a
 strong enough presence in science and engineering so that editors solicited
 the special issue, but it was still niche enough that the average reader
@@ -613,6 +607,18 @@ For example, Frontiers in Neuroinformatics has a collection of 25 articles---cov
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
 neuroscience\footnote{\url{https://www.frontiersin.org/research-topics/8/python-in-neuroscience}}
+
+In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
+and Fernando Pérez founded NumFOCUS\footnote{https://numfocus.org}.
+NumFOCUS is a 501(c)3 public charity whose mission is to
+``promote sustainable high-level programming languages, open code development,
+and reproducible scientific research.''
+While NumFOCUS is language agnostic, many of the early sponsored projects
+came from the scientific Python stack.
+Today it has over 25 sponsored projects including NumPy, SciPy, IPython, and
+Matplotlib.
+Among its other projects, NumFOCUS organizes a global network of 
+community driven educational program called PyData.
 
 
 \cite{vanderwalt2008scipy}
@@ -676,7 +682,7 @@ We use the following criteria to determine whether or not to include new
 functionality in SciPy:
 \begin{itemize}
     \item The algorithm is of relevance to multiple fields of science.
-    \item The algorithm is demonstrably important.  E.g., it is classic
+    \item The algorithm is demonstrably important.  For example, it is classic
     enough to be included in textbooks, or it is based on a peer-reviewed article
     which has a significant number of citations.
 \end{itemize}
