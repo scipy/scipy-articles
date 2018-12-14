@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{pgfplots}
+\usepackage[multiple]{footmisc}
 
 \pgfplotsset{compat=newest}
 \usepackage{listings, textcomp}
@@ -54,12 +55,13 @@
 \author[22]{Yu Feng}
 \author[23]{Antonio Horta Ribeiro}
 \author[24]{Ian Henriksen}
+\author[3,25]{K. Jarrod Millman}
+\author[3]{St\'efan J. van der Walt}
 
 \affil[1]{Affiliation, department, city, postcode, country}
 \affil[2]{Affiliation, department, city, postcode, country}
 \affil[2]{Affiliation, department, city, postcode, country}
-\affil[3]{UC Berkeley Institute for Data Science,
-          Berkeley, CA, 94720, USA}
+\affil[3]{Berkeley Institute for Data Science, University of California, Berkeley, CA, 94720, USA}
 \affil[4]{Los Alamos National Laboratory,
 	  Theoretical Division 6,
           Los Alamos, NM, 87545, USA}
@@ -85,6 +87,8 @@
 \affil[24]{University of Texas at Austin,
            Institute for Computational Engineering and Sciences,
 	   Austin, TX, 78712, USA}
+\affil[25]{Division of Biostatistics, University of California,
+  Berkeley, CA, 94720, USA}
 
 \affil[*]{ralf.gommers@gmail.com}
 
@@ -116,13 +120,524 @@ SciPy library and highlight some recent technical developments.
 
 \section*{Introduction}
 
-\fixme{The Introduction section expands on the background of the work (some overlap with the Abstract is acceptable). The introduction should not include subheadings.}
+%% SciPy is not what you think it is
 
-\subsection*{History}
+%% - At risk of failure many times
+%% - Funding was *hard* to come by; funding agencies didn't easily give
+%%   money.  Some labs, Enthough committed a bit of money.
+%% - Java and other enterprize packages were getting support; MATLAB
+%%   was huge.  Not many wanted to encourage this ``amateur'' effort.
+%% - Graduate students & post-docs doing the heavy lifting; they found
+%%   a system they enjoyed using, saw its potential, put energy into it.
+%% - Driven by eclectic group of people being passionate about it, not
+%%   because they were paid or told to work on it.
+%% - And not by EECS people, but by scientists.  Some with fairly little
+%%   programming background (David), others in varying stages of academic/research careers.
+%% - Over time, the project became more more professional:
+%%   - Standardized release formats
+%%   - Docstrings
+%%   - Testing & CI infrastructure
+%%   - APIs
+%%   - Issue tracking
+%%   - Revision control (CVS -> SVN -> Git)
+%%   - Conference
+%% - Python wasn't perfectly suited in all ways; packaging, compiling,
+%%   indexing (indexing/array protocols and complex numbers added)
+%% - Initially, this high quality, stable, widely used project, hinged on
+%%   three people doing the ``right'' thing to get it established.
+%% - Bus factor for maintenance still very low.
+
+%% The background section captures a selective history where we're trying
+%% to identify some of the more important events.  But really, it relies
+%% on the collective work of numerous individuals, too many to mention.
+
+SciPy is a library of numerical routines for the Python programming
+language, providing the fundamental building blocks for modeling and
+solving scientific problems.  For example, when LIGO, the Laser
+Interferometer Gravitational-Wave Observatory, recently announced the
+discovery of gravitational waves, their published Python analysis
+scripts imported three different SciPy submodules: signal processing,
+interpolation, and input/output.  SciPy has routines for solving
+classes of generic problems such as optimization, integration,
+interpolation, eigenvalues, and linear systems.  It also provides
+specialized data structures, such as sparse arrays and k-dimensional
+trees.  SciPy is built on top of NumPy, and is itself the foundation
+upon which higher level scientific libraries, including scikit-learn\cite{pedregosa2011scikit}
+and scikit-image\cite{vanderwalt2014scikit}, are built.
+
+Recently, SciPy released version 1.0, a milestone that traditionally
+signals a library's API (Applications Programming Interface) being
+mature enough to be be trusted in production pipelines.  The SciPy 1.0
+version numbering, however, belies the history of a project that has
+become the standard which others follow and has seen extensive
+adoption in research and industry.
+
+SciPy's arrival at this point is surprising, and somewhat anomalous.
+When started, the library had little funding, and was written mainly
+by graduate students---many of them without a computer science education, and often without the
+blessing of their advisors.  To even imagine that a small group of
+``rogue'' student programmers could upend the already well-established
+ecosystem of research software---backed by millions in funding, and
+thousands of highly qualified engineers---was preposterous.
+
+Yet, the philosophical motivations behind a fully open toolstack, and
+an excited, friendly community with a singular focus, seemed to have
+proven decisive in the long run.  It led not only to the library
+described in this paper, but also to an entire ecosystem of related
+packages, and a variety of social activities centered around them.  The
+packages in the SciPy ecosystem share high standards of implementation,
+documentation, and testing, and a culture eager to learn and adopt
+better practices---both for community management and software
+development.
+
+Despite its success, SciPy still faces challenges:
+a low ``bus factor''---meaning that the entire project depends on a small number of
+active contributors---being perhaps the most serious.
+
+In the background section that follows, we capture a selective history
+of some milestones and important events in the growth of SciPy.
+Despite what we might highlight here, it is important to understand
+that a project like SciPy is only possible because of the
+contributions of very many contributors---too many to mention
+individually, but each bringing an important part to the puzzle.
+
+\section*{Background}
+
+Python is an interactive computer programming language, designed by
+Guido van Rossum in the late 1980s, with an emphasis on readability
+and rapid prototyping.
+% https://legacy.python.org/search/hypermail/python-1992/0000.html
+%
+A general purpose programming language with a ``batteries included''
+standard library, it had no special support for scientific data
+structures or algorithms, unlike many of the other established
+computation platforms of the time. Yet, scientists soon discovered the
+language's virtues, such as its ability to wrap C and Fortran
+libraries and to then drive those libraries interactively.  Scientists
+could thereby gain access to a wide variety of existing computational
+libraries, without concerning themselves with low-level programming
+concepts such as memory management.
+
+In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
+message on the Python Matrix Special Interest Group (Matrix-SIG)
+mailing list\footnote{https://mail.python.org/pipermail/matrix-sig/1995-August/000002.html}:
+\begin{quote}
+There seems to be a fair amount of interest in the Python community
+concerning the addition of numeric operations to Python.  My own desire is
+to have as large a library of matrix based functions available as possible
+(linear algebra, eigenfunctions, signal processing, statistics, etc.).  In
+order to ensure that all of these libraries interoperate, there needs to
+be agreement on a basic matrix object that can be used to represent arrays
+of numbers.
+\end{quote}
+Over the next several months, conversations on that mailing
+list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
+Hinsen, and Guido van Rossum, led to the creation of an array object
+that supported a high number of dimensions.  Jim Hugunin explained the utility
+of Python for numerical computation\footnote{http://hugunin.net/papers/hugunin95numpy.html}:
+\begin{quote}
+I've used almost all of the available numerical languages at one time
+or another over the past 8 years. One thing I've noticed is that over
+time, the designers of these languages are steadily adding more of the
+features that one would expect to find in a general-purpose
+programming language.
+\end{quote}
+This is still a distinguishing feature of Python for science, and one of the
+reasons why it has been so successful in the realm of data science: instead of
+adding general features to a language designed for numerical and scientific
+computing, here scientific features are added to a general purpose language
+instead.  This broadens the scope of problems that can be addressed easily, the
+sources of data that are readily accessible, and increases the size of the
+community that develops general purpose tooling.
+
+The availability of a standard numerical array data structure in
+Python led to a sudden and rapidly growing number of scientific
+packages becoming available for solving various common numeric
+problems.
+A number of these packages were written by graduate students and
+postdoctoral researchers to solve the very practical research problems
+that they faced on a daily basis.  While they had access to and were
+familiar with specialized (often commercial) systems, many found
+it easier to implement the domain-specific functionality they needed
+in a general purpose programming language.  And given Python's innate
+ability to function as a systems language, controlling specialized or
+custom-built hardware was also possible.
+
+Initial work on numerical computing in Python was driven by graduate
+students, but soon larger research labs became increasingly engaged.
+For example, Paul Dubois at Lawrence Livermore National Laboratory (LLNL) took over the
+maintenance of Numeric and funded the writing of its
+manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
+%in the Program for Climate Model Diagnosis and Intercomparison at
+%Lawrence Livermore National Laboratory built their Climate Data
+%Analysis Tools (``an open-source set of Python modules and tools for
+%accessing, manipulating, and plotting scientific data in general and
+%climate data sets in
+%particular''\footnote{https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html})
+%on Numeric, the newly established Python array object.  Paul later
+%became the maintainer for Numeric, and helped fund the writing of the
+%first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
+in 1998 the Space Telescope Science Institute (STScI), in charge of science
+operations of the Hubble Space Telescope, decided to replace their
+custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
+
+
+%Many of the first efforts were driven by graduate
+%students and post-doctoral researchers, but soon attracted the
+%attention of more senior researchers.
+% Paul Dubois, CDAT
+% https://mail.python.org/pipermail/numpy-discussion/2001-May/000645.html
+% Perry Greenfield, Hubble
+% https://conference.scipy.org/scipy2011/slides/greenfield_keynote_astronomy.pdf
+%
+% Note: plotting was important for them, so they eventually
+% funded development on Matplotlib.
+
+% Numeric, even though written by grad students, became critical for
+% large scale endeavors
+
+
+
+\subsection*{SciPy Begins}
+
+% PhD Mayo Clinic, started faculty position at BYU in 2001
+By the late 1990s, discussions appeared on Matrix-SIG,
+expressing a desire for a complete scientific data analysis environment\footnote{https://conference.scipy.org/scipy2010/slides/travis\_oliphant\_keynote.pdf}.
+Travis Oliphant, a PhD student at the Mayo Clinic,
+released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
+package, and provided algorithms for signal processing, special
+functions, sparse matrices, quadrature, optimization, Fast Fourier
+Transforms, and more.  One of these packages, Multipack, was a set of
+extension modules that wrapped Fortran and C libraries such as
+ODEPACK, QUADPACK, and MINPACK, to solve and minimize nonlinear
+equations, integrate differential equations, and fit splines (the
+latter implemented by Pearu Peterson).  Robert Kern, then an
+undergraduate student (and currently a SciPy core developer), provided
+compilation instructions under Windows.
+% 2001 PhD Tallinn Technical University
+Around the same time, Pearu Peterson, a PhD student from Estonia,
+released f2py\footnote{https://mail.python.org/pipermail/numpy-discussion/2000-September/000243.html}, a command line tool for binding Python and Fortran
+codes, and wrote modules for linear algebra and interpolation.
+% Graduated 1999, Duke
+Eric Jones, while a graduate student at Duke, wrote a number of
+packages to support his dissertation, including a parallel job
+scheduler and genetic optimizer.
+% Graduated 1998, PhD from Brown, 97–99 postdoc at Harvard Medical
+% School; at Harvard ever since
+%
+% https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
+%
+Gary Strangman, a postdoctoral fellow at Harvard Medical School,
+published several descriptive and inferential statistical routines\footnote{https://web.archive.org/web/20001022231108/http://www.nmr.mgh.harvard.edu/Neural\_Systems\_Group/gary/python.html}.
+
+\begin{figure}
+\begin{verbatim}
+SciPy is an open source package that builds on the strengths of Python and
+Numeric providing a wide range of fast scientific and numeric functionality.
+SciPy's current module set includes the following:
+
+    Special Functions (Bessel, hanker, Airy, etc.)
+    Signal/Image Processing
+    2D Plotting capabilities
+    Integration
+    ODE solvers
+    Optimization (simplex, BFGS, Netwon-CG, etc.)
+    Genetic Algorithms
+    Numeric -> C++ expression compiler
+    Parallel programming tools
+    Splines and Interpolation
+    And other stuff.
+\end{verbatim}
+\caption{Excerpt from SciPy 0.1 release announcement.}\label{fig:announce-0.1}
+\end{figure}
+
+With a rich programming environment and a numerical array object in
+place, the time was ripe for the development of a full scientific
+software stack.
+In 2001, Eric Jones and Travis Vaught founded Enthought Scientific
+Computing Solutions (now Enthought, Inc.) in Austin, Texas.  In an
+effort to simplify the tool stack, they created the SciPy project,
+centered around the SciPy library which would subsume all the
+above-mentioned packages.
+The new project quickly gained momentum, with a website and code
+repository appearing in
+February\footnote{https://web.archive.org/web/20010309040805/http://scipy.org:80/}, and
+a mailing list announced in
+June \footnote{https://mail.python.org/pipermail/scipy-dev/2001-June/000000.html}. By
+August, a first release was announced\footnote{https://mail.python.org/pipermail/python-list/2001-August/106419.html}, an excerpt of which is shown in
+Fig.~\ref{fig:announce-0.1}.
+In September, the first documentation was
+published\footnote{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1}.
+The first SciPy
+workshop\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}
+was held in September 2002 at CalTech---a single track, two day event with 50
+participants, many of them developers of SciPy and surrounding libraries.
+
+%and by the following September the inaugural SciPy workshop was held
+%at Caltech\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}.
+
+% Janko Hauser on toolboxes
+% https://mail.python.org/pipermail/scipy-dev/2001-September/000032.html
+
+At this point, scientific Python started attracting more serious attention;
+code that started out as side projects by graduate students has grown into
+essential infrastructure at national laboratories and research institutes.
+For example, starting in 2000, STScI ported their IDL-based analysis pipeline,
+IRAF, to Python.
+ 
+As SciPy, the algorithms library of the ecosystem, began attracting the attention
+of large research organizations,
+the next generation of graduate students and postdocs were already exploring
+other aspects of the computational environment.
+In 2000, Prabhu Ramachandran, a PhD student at the Indian Institute of
+Technology, started work on a 3D visualization application, based on
+Wingware's C++ Visualization Toolkit, called
+Mayavi\footnote{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
+In 2001, Fernando Pérez, a graduate student at the University of
+Colorado, Boulder, created the IPython interactive shell (that would
+eventually blossom into Project Jupyter), built into
+IPP, an earlier attempt by Janko Hauser, and including code from
+Nathan Gray's LazyPython.
+% IPython hosted on SciPy:
+% https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
+John Hunter, a postdoc
+%John got his PhD in 2001, then a post-doc with John Milton (dept of
+%Neurology, UChicago?) a couple of years; then research professor
+%under Kurt Hecox, whereafter at Tradelink from 2006
+at the University
+of Chicago, liked the plotting functionality
+available in MATLAB, but had problems accessing their laboratory's
+license, which was governed by a hardware dongle.  In response, he
+wrote a plotting library from scratch, and Matplotlib 0.1 was released
+April 2003\footnote{https://mail.python.org/pipermail/python-list/2003-April/193167.html}.
+
+% https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
+% https://str.llnl.gov/str/News896.html
+
+
+%2002—https://web.archive.org/web/20021020215937/http://www.scipy.org:80/site_content/scipy02/scipy02_agenda.htm
+%2003—https://web.archive.org/web/20031207151811/http://www.scipy.org:80/site_content/scipy03/
+%2004—Jim Hugunin
+%https://web.archive.org/web/20040920080225/http://www.scipy.org:80/wikis/scipy04
+%Travis Oliphant 2005—https://web.archive.org/web/20051103155042/http://www.scipy.org:80/wikis/scipy05/FrontPage
+%Guido—2006 https://scipy.github.io/old-wiki/pages/SciPy2006.html
+%Martelli—2008 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2004.html
+%Norvig—2009 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2005.html
+
+
+As STScI continued to use Python for an increasingly large portion
+of the Hubble Space Telescope data analysis pipeline, they encountered
+problems with the Python numerical array container.
+Numeric, the original array package, was
+suitable for small arrays, but not for the large images processed by
+STScI.  With the Numeric maintainer's blessing, the decision was made
+to write NumArray, a library that could handle data on a different
+scale.  Unfortunately, NumArray proved inefficient for small arrays,
+presenting the community with a rather unfortunate choice.  In 2005,
+Travis Oliphant combined the best elements of Numeric and NumArray,
+thereby solving the dilemma and paving the way for Python to become
+a very significant player in the Data Science movement.\fixme{NumPy
+  1.0 was released in October 2006}
+
+% Future directions for SciPy after meeting at Berkeley
+% https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
+
+%In April 2006, Paul
+%Dubois\footnote{https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html} wrote
+%to the NumPy mailing list:
+%\begin{quote}
+%IEEE's magazine, Computing in Science and Engineering (CiSE), has asked me
+%to put together a theme issue on the use of Python in Science and
+%Engineering. I will write an overview to be accompanied by 3-5 articles [. . .]
+%that show a diverse set of applications or
+%tools, to give our readers a sense of whether or not Pyth%on might be useful
+%in their own work.
+%\end{quote}
+In a May/June 2007 special issue of IEEE Computing in Science and
+Engineering, Paul Dubois wrote\cite{dubois2007guest}:
+\begin{quote}
+LLNL now has many Python-based efforts built from scratch or wrapped around
+legacy codes [. . .] hundreds of thousands
+of lines of C++, Python, and Fortran 95, all working together just as we hoped,
+doing compute-intensive calculations on massively parallel computers.
+\end{quote}
+While it is now more commonly accepted, Paul took the time to explain to
+the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
+He also shares his own interest in Python for ``computational steering''
+where ``Python serves as the input language to a scientific application, and the actual
+computations are performed both in Python itself and in compiled extensions.''
+%https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
+Using Python for computational steering was one of the earliest uses of Python
+in large scientific processing pipelines.
+In addition to Paul's overview there were also articles introducing
+Python and SciPy \cite{oliphant2007python}, IPython \cite{perez2007ipython},
+and  Matplotlib \cite{hunter2007matplotlib}.
+In addition to these longer introductory articles, there was a diverse set of
+research applications including
+systems biology\cite{myers2007python},
+astronomy\cite{greenfield2007reaching},
+robotics\cite{krauss2007python},
+nanophotonics\cite{bienstman2007python},
+partial differential equations\cite{mardal2007using},
+neuroimaging\cite{millman2007analysis},
+geographic information systems\cite{shi2007python}, and
+education\cite{backer2007computational, myers2007pythona}.
+
+
+\subsection*{SciPy Matures}
+
+%Seeking articles for special issue on Python and Science and Engineering
+%Paul Dubois
+%Wed Apr 12 13:00:04 EDT 2006
+%https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html
+%
+%Python--Batteries Included
+%https://www.computer.org/csdl/mags/cs/2007/03/c3007.pdf
+%
+%https://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=4160244
+%
+%Python: Batteries Included
+%Paul F. Dubois
+%
+%Python for Scientific Computing
+%Travis E. Oliphant
+%
+%IPython: A System for Interactive Scientific Computing
+%Fernando Perez ; Brian E. Granger
+%
+%Computational Physics Education with Python
+%Arnd Backer
+%
+%Python Unleashed on Systems Biology
+%Christopher R. Myers ; Ryan N. Gutenkunst ; James P. Sethna
+%
+%Reaching for the Stars with Python
+%Perry Greenfield
+%
+%A Python Module for Modeling and Control Design of Flexible Robots
+%Ryan W. Krauss ; Wayne J. Book
+%
+%Python in Nanophotonics Research
+%Peter Bienstman ; Lieven Vanholme ; Wim Bogaerts ; Pieter Dumon ; Peter Vandersteegen
+%
+%Using Python to Solve Partial Differential Equations
+%Kent-Andre Mardal ; Ola Skavhaug ; Glenn T. Lines ; Gunnar A. Staff ; Asmund Odegard
+%
+%Analysis of Functional Magnetic Resonance Imaging in Python
+%K. Jarrod Millman ; Matthew Brett
+%
+%Python for Internet GIS Applications
+%Xuan Shi
+%
+%Python for Education: Computational Methods for Nonlinear Systems
+%Christopher R. Myers ; James P. Sethna
+%
+%Matplotlib: A 2D Graphics Environment
+%John D. Hunter
+%
+%-----
+%
+%https://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=5725228&punumber=5992
+%
+%Python for Scientists and Engineers
+%K. Jarrod Millman ; Michael Aivazis
+%
+%
+%Python: An Ecosystem for Scientific Computing
+%Fernando Perez ; Brian E. Granger ; John D. Hunter
+%
+%The NumPy Array: A Structure for Efficient Numerical Computation
+%Stefan van der Walt ; S. Chris Colbert ; Gael Varoquaux
+%
+%Cython: The Best of Both Worlds
+%Stefan Behnel ; Robert Bradshaw ; Craig Citro ; Lisandro Dalcin ; Dag Sverre Seljebotn ; Kurt Smith
+%
+%Mayavi: 3D Visualization of Scientific Data
+%Prabhu Ramachandran ; Gael Varoquaux
+%
+%??? these were in the same issue
+%
+%web2py for Scientific Applications
+%Massimo Di Pierro
+%
+%From Equations to Code: Automated Scientific Computing
+%Andy R. Terrel
+%https://www.researchgate.net/publication/260585856_From_Equations_to_Code_Automated_Scientific_Computing
+
+
+By the middle to late 2000s, SciPy was starting to mature after a long phase of significant
+growth and adoption.
+The informal workshops are grown into international conferences with many
+hundreds of attendees, special issues are organized and published in a
+leading scientific magazine, and the scope of the SciPy library
+narrows, while the breadth of the ecosystem is grown and encouraged
+through a new type of auxiliary package, the scikit.  The tooling,
+development, and release processes become more professional, grown with
+the patience affordable in open source development, leading with
+best practices nowadays increasingly common in both industry and other
+open source projects \cite{millman2014developing}.
+
+
+
+
+%http://conference.scipy.org/proceedings/scipy2008/paper\_0/full\_text.pdf
+%http://conference.scipy.org/proceedings/scipy2008/paper\_1/full\_text.pdf
+
+In the early workshops, recurrent topics indicate the state of development, with
+emphasis being placed on the underlying array package, plotting,
+parallel processing, acceleration / wrapping, and user interfaces.  By
+2004, a significant shift occurred towards application of SciPy to
+scientific problems.  The event also started to draw in more keynote
+speakers from outside the community, such as Guido van Rossum (creator
+of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
+Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
+The SciPy conference went from being a small gathering of
+core developers, to a multi-location event, with increased funding, a
+published proceedings, and scholarships for attending students (some
+of whom are authors on this paper).  In 2010, the conference grew even
+further, with an additional event added in India, and the US
+conference—now with parallel tracks—moving to Austin, Texas.
+While the US SciPy conference kept growing (by ... it had multiple
+tracks, student sponsorship, proceedings, and funding), satellite
+events were being organized by volunteers elsewhere, such as EuroSciPy
+(2008–) and SciPy India (2009–).
+Special sessions and minisymposia dedicated to scientific Python began
+appearing at many events.
+For example, a three-part minisymposium organized for CSE 2009 was
+featured in SIAM News\cite{siamcse09}.
+
+When Paul edited the CiSE May/June 2007 special issue, Python already had a
+strong enough presence in science and engineering so that editors solicited
+the special issue, but it was still niche enough that the average reader
+would need additional information in order to decide whether it would
+``be useful in their own work.''
+The follow-up CiSE March/April 2011 Python for Scientists and Engineers
+special issue\cite{millman2011python}, focused more on the core parts
+of the scientific Python ecosystem\cite{perez2011python} including
+NumPy\cite{vanderwalt2011numpy}, Cython\cite{behnel2011cython},
+and Mayavi\cite{ramachandran2011mayavi}.
+
+Python has become so pervasive, there are now domain-specific special issues.
+For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
+topics including modeling and simulation, data collection, electrophysiology, visualization,
+as well as stimulus generation and presentation---called Python in
+neuroscience\footnote{\url{https://www.frontiersin.org/research-topics/8/python-in-neuroscience}}.
+
+In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
+and Fernando Pérez founded NumFOCUS\footnote{https://numfocus.org},
+ a 501(c)3 public charity whose mission is to
+``promote sustainable high-level programming languages, open code development,
+and reproducible scientific research.''
+While NumFOCUS is language agnostic, many of the early sponsored projects
+came from the scientific Python stack.
+Today it has over 25 sponsored projects including NumPy, SciPy, IPython, and
+Matplotlib.
+Among its other projects, NumFOCUS organizes a global network of 
+community driven educational program called PyData.
 
 \subsection*{Project scope}
 
-SciPy aims to provide fundamental algorithms for scientific computing. The
+SciPy provides fundamental algorithms for scientific computing. The
 breadth of its scope was derived from the Guide to Available Mathematical
 Software classification system (GAMS\cite{boisvert1991guide}). In areas
 that move relatively slowly, e.g. linear algebra, SciPy aims to provide
@@ -135,11 +650,17 @@ more advanced statistical estimators and inference methods, scikit-learn
 covers machine learning, PyMC3, emcee and PyStan cover Bayesian statistics
 and probabilistic modeling.
 
+scikit-image
+
+sympy\cite{meurer2017sympy}
+
+NetworkX\cite{hagberg2008networkx}
+
 We use the following criteria to determine whether or not to include new
 functionality in SciPy:
 \begin{itemize}
     \item The algorithm is of relevance to multiple fields of science.
-    \item The algorithm is demonstrably important.  E.g., it is classic
+    \item The algorithm is demonstrably important.  For example, it is classic
     enough to be included in textbooks, or it is based on a peer-reviewed article
     which has a significant number of citations.
 \end{itemize}
@@ -150,6 +671,45 @@ range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
 
 \subsection*{Current status (maturity, users)}
+
+SciPy 1.0 was released ... see timeline ...
+
+1.1 ...
+
+1.2
+
+Python 2 / 3?
+
+
+\begin{figure}
+\begin{verbatim}
+    2001: first SciPy release
+    2005: transition to NumPy
+    2007: creation of scikits
+    2008: spatial module and first Cython code added
+    2010: move to a 6-monthly release cycle
+    2011: development moves to GitHub
+    2011: Python 3 support
+    2012: add a sparse graph module and unified optimization interface
+    2012: removal of maxentropy
+    2013: continuous integration with TravisCI
+    2015: adding Cython interface for BLAS/LAPACK and a benchmark suite
+    2017: add a unified C API with LowLevelCallable; remove weave
+    2017: SciPy 1.0 release
+\end{verbatim}
+\caption{Timeline}
+\end{figure}
+
+% Release management
+
+% Jarrod
+%https://mail.python.org/pipermail/scipy-dev/2007-August/007613.html
+%Ralf
+%https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
+%https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
+%https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
+
+
 
 
 \section*{Architecture and implementation choices}
@@ -248,7 +808,7 @@ enhancing languages that interact well with Python (i.e., Cython), and the
 usage of languages (and their libraries) that have proven reliable and
 performant over many decades. The position that SciPy occupies near the
 foundation of the scientific Python ecosystem is such that adoption of new
-languages or major dependencies is generally unlikely--our choices are strongly
+languages or major dependencies is generally unlikely---our choices are strongly
 driven by long-term stability. GPU acceleration, new transpiling libraries, and
 the latest JIT compilation approaches (i.e.,
 Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall
@@ -431,7 +991,7 @@ btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
 \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
 \caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query()
 over a roughly nine year commit history time frame. The results are based on
-Python 2.7 performance on the master branch of the project using numpy 1.8.2
+Python 2.7 performance on the master branch of the project using NumPy 1.8.2
 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
 compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
 backward compatibility and sampling of the benchmarks there was no application
@@ -490,7 +1050,7 @@ consulted on the matter.
 The (currently) 18 member Steering Council is chaired by Ralf Gommers and
 performs a number of tasks including nominating and voting on new Council
 Members, and actively contributing to the progress of the project (could be
-code review but also outreach activities, etc.). Generally, 1 year of sustained
+code review but also outreach activities, etc.). Generally, one year of sustained
 and substantial contributions (not restricted to source code contributions)
 that improve the project are the prerequisites for nomination of new Council
 Members. Council Members do not get special treatment for the vast majority of
@@ -608,7 +1168,7 @@ and then placed in SciPy after the fact.
 
 \subsection*{Maintainers and contributors}
 
-The SciPy project has approximately 15 active maintainers - people who review
+The SciPy project has approximately 15 active maintainers---people who review
 others' contributions, and in general do everything needed to ensure that the
 software and the project move forward. Maintainers are critical to the health
 of the project\cite{eghbal2016}; their skills and efforts largely determine how
@@ -623,6 +1183,9 @@ provides guidance on how to do that.
 \fixme{The Discussion should be succinct and must not contain subheadings.}
 
 \subsection*{Impact now}
+
+% While Paul was one of the early adopters at the national laboratories,
+% Python's presence is now ubiquitous.
 
 SciPy has a strong developer community and a massive user base. GitHub traffic
 metrics report roughly 20,000 unique visitors to the source website between May

@@ -1,7 +1,10 @@
-**/*~
+*~
 
-**/*.aux
-**/*.fdb_latexmk
-**/*.fls
-**/*.log
-**/*.pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.bbl
+*.out
+*.blg
