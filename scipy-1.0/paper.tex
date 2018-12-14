@@ -191,9 +191,8 @@ better practices---both for community management and software
 development.
 
 Despite its success, SciPy still faces challenges:
-a low ``bus factor''---from the phrase ``hit by a bus'' and
-meaning that the project depends on a small number of
-specific contributors---being perhaps the most serious.
+a low ``bus factor''---meaning that the entire project depends on a small number of
+active contributors---being perhaps the most serious.
 
 In the background section that follows, we capture a selective history
 of some milestones and important events in the growth of SciPy.
@@ -262,7 +261,7 @@ familiar with specialized (often commercial) systems, many found
 it easier to implement the domain-specific functionality they needed
 in a general purpose programming language.  And given Python's innate
 ability to function as a systems language, controlling specialized or
-custom-built hardware was feasible.
+custom-built hardware was also possible.
 
 Initial work on numerical computing in Python was driven by graduate
 students, but soon larger research labs became increasingly engaged.
@@ -307,7 +306,7 @@ expressing a desire for a complete scientific data analysis environment\footnote
 Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
 package, and provided algorithms for signal processing, special
-functions, sparse matrices, quadrature, optimization, and Fast Fourier
+functions, sparse matrices, quadrature, optimization, Fast Fourier
 Transforms, and more.  One of these packages, Multipack, was a set of
 extension modules that wrapped Fortran and C libraries such as
 ODEPACK, QUADPACK, and MINPACK, to solve and minimize nonlinear
@@ -390,21 +389,23 @@ As SciPy, the algorithms library of the ecosystem, began attracting the attentio
 of large research organizations,
 the next generation of graduate students and postdocs were already exploring
 other aspects of the computational environment.
-In 2000, Prabhu Ramachandran\fixme{also note that he, and the others
-  mentioned below, are also SciPy contributors}, a PhD student at the Indian Institute of
+In 2000, Prabhu Ramachandran, a PhD student at the Indian Institute of
 Technology, started work on a 3D visualization application, based on
 Wingware's C++ Visualization Toolkit, called
 Mayavi\footnote{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
 In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell, built into
+Colorado, Boulder, created the IPython interactive shell (that would
+eventually blossom into Project Jupyter), built into
 IPP, an earlier attempt by Janko Hauser, and including code from
 Nathan Gray's LazyPython.
 % IPython hosted on SciPy:
 % https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
-John Hunter, a graduate student
-\fixme{check, since John around that time became postdoc, can check
-  with John Milton?} at the University
-of Chicago Medical School, liked the plotting functionality
+John Hunter, a postdoc
+%John got his PhD in 2001, then a post-doc with John Milton (dept of
+%Neurology, UChicago?) a couple of years; then research professor
+%under Kurt Hecox, whereafter at Tradelink from 2006
+at the University
+of Chicago, liked the plotting functionality
 available in MATLAB, but had problems accessing their laboratory's
 license, which was governed by a hardware dongle.  In response, he
 wrote a plotting library from scratch, and Matplotlib 0.1 was released
@@ -441,19 +442,19 @@ a very significant player in the Data Science movement.\fixme{NumPy
 % Future directions for SciPy after meeting at Berkeley
 % https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
 
-In April 2006, Paul
-Dubois\footnote{https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html} wrote
-to the NumPy mailing list:
-\begin{quote}
-IEEE's magazine, Computing in Science and Engineering (CiSE), has asked me
-to put together a theme issue on the use of Python in Science and
-Engineering. I will write an overview to be accompanied by 3-5 articles [. . .]
-that show a diverse set of applications or
-tools, to give our readers a sense of whether or not Python might be useful
-in their own work.
-\end{quote}
-In the resulting CiSE May/June 2007 special issue, Paul's overview\cite{dubois2007guest}
-stated:
+%In April 2006, Paul
+%Dubois\footnote{https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html} wrote
+%to the NumPy mailing list:
+%\begin{quote}
+%IEEE's magazine, Computing in Science and Engineering (CiSE), has asked me
+%to put together a theme issue on the use of Python in Science and
+%Engineering. I will write an overview to be accompanied by 3-5 articles [. . .]
+%that show a diverse set of applications or
+%tools, to give our readers a sense of whether or not Pyth%on might be useful
+%in their own work.
+%\end{quote}
+In a May/June 2007 special issue of IEEE Computing in Science and
+Engineering, Paul Dubois wrote\cite{dubois2007guest}:
 \begin{quote}
 LLNL now has many Python-based efforts built from scratch or wrapped around
 legacy codes [. . .] hundreds of thousands
@@ -564,15 +565,15 @@ education\cite{backer2007computational, myers2007pythona}.
 %https://www.researchgate.net/publication/260585856_From_Equations_to_Code_Automated_Scientific_Computing
 
 
-By the middle to late 2000s, SciPy matured after a long phase of significant
+By the middle to late 2000s, SciPy was starting to mature after a long phase of significant
 growth and adoption.
 The informal workshops are grown into international conferences with many
 hundreds of attendees, special issues are organized and published in a
 leading scientific magazine, and the scope of the SciPy library
 narrows, while the breadth of the ecosystem is grown and encouraged
 through a new type of auxiliary package, the scikit.  The tooling,
-development and release processes become more professional, grown with
-a patience only affordable in open source development, leading with
+development, and release processes become more professional, grown with
+the patience affordable in open source development, leading with
 best practices nowadays increasingly common in both industry and other
 open source projects \cite{millman2014developing}.
 
@@ -585,7 +586,7 @@ open source projects \cite{millman2014developing}.
 In the early workshops, recurrent topics indicate the state of development, with
 emphasis being placed on the underlying array package, plotting,
 parallel processing, acceleration / wrapping, and user interfaces.  By
-2004, a significant shift occurred towards application of SciPy on
+2004, a significant shift occurred towards application of SciPy to
 scientific problems.  The event also started to draw in more keynote
 speakers from outside the community, such as Guido van Rossum (creator
 of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
@@ -620,11 +621,11 @@ Python has become so pervasive, there are now domain-specific special issues.
 For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
-neuroscience\footnote{\url{https://www.frontiersin.org/research-topics/8/python-in-neuroscience}}
+neuroscience\footnote{\url{https://www.frontiersin.org/research-topics/8/python-in-neuroscience}}.
 
 In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
-and Fernando Pérez founded NumFOCUS\footnote{https://numfocus.org}.
-NumFOCUS is a 501(c)3 public charity whose mission is to
+and Fernando Pérez founded NumFOCUS\footnote{https://numfocus.org},
+ a 501(c)3 public charity whose mission is to
 ``promote sustainable high-level programming languages, open code development,
 and reproducible scientific research.''
 While NumFOCUS is language agnostic, many of the early sponsored projects
