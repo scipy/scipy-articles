@@ -643,18 +643,20 @@ Software classification system (GAMS\cite{boisvert1991guide}). In areas
 that move relatively slowly, e.g. linear algebra, SciPy aims to provide
 complete coverage. In other areas it aims to provide fundamental building
 blocks while interacting well with other packages specialized in that area.
-For example, SciPy provides what one expect to find in a
+For example, SciPy provides what one expects to find in a
 statistics textbook (probability distributions, hypothesis tests, frequency
-statistics, correlation functions, and more), while Statsmodels provides
-more advanced statistical estimators and inference methods, scikit-learn
-covers machine learning, PyMC3, emcee and PyStan cover Bayesian statistics
-and probabilistic modeling.
-
-scikit-image
-
-sympy\cite{meurer2017sympy}
-
-NetworkX\cite{hagberg2008networkx}
+statistics, correlation functions, and more), while 
+Statsmodels\cite{statsmodels2010} provides
+more advanced statistical estimators and inference methods;
+scikit-learn\cite{pedregosa2011scikit} covers machine learning; and
+PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and 
+PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
+scikit-image\cite{vanderwalt2014scikit} provides image processing
+capabilities beyond \texttt{scipy.ndimage}, sympy\cite{meurer2017sympy}
+provides a Python interface for symbolic computation, and
+NetworkX\cite{hagberg2008networkx} is a Python library for probing
+graphs and networks in a more specialized way than SciPy components
+like \texttt{sparse.csgraph} or \texttt{spatial}.
 
 We use the following criteria to determine whether or not to include new
 functionality in SciPy:
