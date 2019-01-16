@@ -220,7 +220,7 @@ concepts such as memory management.
 
 In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
 message on the Python Matrix Special Interest Group (Matrix-SIG)
-mailing list\footnote{https://mail.python.org/pipermail/matrix-sig/1995-August/000002.html}:
+mailing list\cite{Hugunin-first}:
 \begin{quote}
 There seems to be a fair amount of interest in the Python community
 concerning the addition of numeric operations to Python.  My own desire is
@@ -234,7 +234,7 @@ Over the next several months, conversations on that mailing
 list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
 Hinsen, and Guido van Rossum, led to the creation of an array object
 that supported a high number of dimensions.  Jim Hugunin explained the utility
-of Python for numerical computation\footnote{http://hugunin.net/papers/hugunin95numpy.html}:
+of Python for numerical computation\cite{Hugunin-whitepaper}:
 \begin{quote}
 I've used almost all of the available numerical languages at one time
 or another over the past 8 years. One thing I've noticed is that over
@@ -267,7 +267,7 @@ Initial work on numerical computing in Python was driven by graduate
 students, but soon larger research labs became increasingly engaged.
 For example, Paul Dubois at Lawrence Livermore National Laboratory (LLNL) took over the
 maintenance of Numeric and funded the writing of its
-manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
+manual\cite{Numeric-manual}, and
 %in the Program for Climate Model Diagnosis and Intercomparison at
 %Lawrence Livermore National Laboratory built their Climate Data
 %Analysis Tools (``an open-source set of Python modules and tools for
@@ -279,7 +279,7 @@ manual\footnote{http://www.numpy.org/\_downloads/numeric-manual.pdf}, and
 %first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
 in 1998 the Space Telescope Science Institute (STScI), in charge of science
 operations of the Hubble Space Telescope, decided to replace their
-custom scripting language with Python\footnote{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
+custom scripting language with Python\cite{STScI-slither}.
 
 
 %Many of the first efforts were driven by graduate
@@ -302,9 +302,10 @@ custom scripting language with Python\footnote{https://conference.scipy.org/scip
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
 By the late 1990s, discussions appeared on Matrix-SIG,
-expressing a desire for a complete scientific data analysis environment\footnote{https://conference.scipy.org/scipy2010/slides/travis\_oliphant\_keynote.pdf}.
+expressing a desire for a complete scientific data analysis environment\cite{Travis-Keynote-2010}.
 Travis Oliphant, a PhD student at the Mayo Clinic,
-released a number of packages\footnote{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}\footnote{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/} that built on top of the Numeric array
+released a number of packages\cite{Travis-some-modules,Travis-enhance} 
+that built on top of the Numeric array
 package, and provided algorithms for signal processing, special
 functions, sparse matrices, quadrature, optimization, Fast Fourier
 Transforms, and more.  One of these packages, Multipack, was a set of
@@ -316,7 +317,7 @@ undergraduate student (and currently a SciPy core developer), provided
 compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
 Around the same time, Pearu Peterson, a PhD student from Estonia,
-released f2py\footnote{https://mail.python.org/pipermail/numpy-discussion/2000-September/000243.html}, a command line tool for binding Python and Fortran
+released f2py\cite{Pearu-f2py-mail}, a command line tool for binding Python and Fortran
 codes, and wrote modules for linear algebra and interpolation.
 % Graduated 1999, Duke
 Eric Jones, while a graduate student at Duke, wrote a number of
@@ -328,7 +329,8 @@ scheduler and genetic optimizer.
 % https://mail.python.org/pipermail/scipy-dev/2001-November/000088.html
 %
 Gary Strangman, a postdoctoral fellow at Harvard Medical School,
-published several descriptive and inferential statistical routines\footnote{https://web.archive.org/web/20001022231108/http://www.nmr.mgh.harvard.edu/Neural\_Systems\_Group/gary/python.html}.
+published several descriptive and inferential statistical 
+routines\cite{Strangman-modules}.
 
 \begin{figure}
 \begin{verbatim}
@@ -361,15 +363,15 @@ centered around the SciPy library which would subsume all the
 above-mentioned packages.
 The new project quickly gained momentum, with a website and code
 repository appearing in
-February\footnote{https://web.archive.org/web/20010309040805/http://scipy.org:80/}, and
+February\cite{archived-scipyorg}, and
 a mailing list announced in
-June \footnote{https://mail.python.org/pipermail/scipy-dev/2001-June/000000.html}. By
-August, a first release was announced\footnote{https://mail.python.org/pipermail/python-list/2001-August/106419.html}, an excerpt of which is shown in
+June \cite{new-scipy-list}. By
+August, a first release was announced\cite{first-scipy-rel}, an excerpt of which is shown in
 Fig.~\ref{fig:announce-0.1}.
 In September, the first documentation was
-published\footnote{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1}.
+published\cite{first-scipy-docs}.
 The first SciPy
-workshop\footnote{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}
+workshop\cite{first-scipy-workshop}
 was held in September 2002 at CalTech---a single track, two day event with 50
 participants, many of them developers of SciPy and surrounding libraries.
 
@@ -392,7 +394,7 @@ other aspects of the computational environment.
 In 2000, Prabhu Ramachandran, a PhD student at the Indian Institute of
 Technology, started work on a 3D visualization application, based on
 Kitware's C++ Visualization Toolkit\cite{schroeder:2006:VTK}, called
-Mayavi\footnote{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
+Mayavi\cite{mayavi-intro}.
 In 2001, Fernando Pérez, a graduate student at the University of
 Colorado, Boulder, created the IPython interactive shell (that would
 eventually blossom into Project Jupyter\cite{Kluyver:2016aa}), built into
@@ -409,7 +411,7 @@ of Chicago, liked the plotting functionality
 available in MATLAB, but had problems accessing their laboratory's
 license, which was governed by a hardware dongle.  In response, he
 wrote a plotting library from scratch, and Matplotlib 0.1 was released
-April 2003\footnote{https://mail.python.org/pipermail/python-list/2003-April/193167.html}.
+April 2003\cite{matplotlib-rel}.
 
 % https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
 % https://str.llnl.gov/str/News896.html
@@ -620,10 +622,10 @@ Python has become so pervasive, there are now domain-specific special issues.
 For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
-neuroscience\footnote{\url{https://www.frontiersin.org/research-topics/8/python-in-neuroscience}}.
+neuroscience\cite{python-FIN}.
 
 In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
-and Fernando Pérez founded NumFOCUS\footnote{https://numfocus.org},
+and Fernando Pérez founded NumFOCUS\cite{numfocus},
  a 501(c)3 public charity whose mission is to
 ``promote sustainable high-level programming languages, open code development,
 and reproducible scientific research.''
@@ -827,9 +829,8 @@ functionality can only be done if the benefits of that exceeds the (often
 significant) costs to users, \textit{and} only after giving clear deprecation
 warnings to those users for at least one year.  In general, we encourage
 changes that improve clarity in the API of the library but strongly discourage
-breaking backwards compatibility\footnote{
-    Backwards compatibility means that new versions of SciPy will keep user
-    code written for an older version working.}
+breaking backwards compatibility (Backwards compatibility means that new 
+versions of SciPy will keep user code written for an older version working.)
 given our position near the base of the scientific Python computing stack.
 
 In addition to the Python API, SciPy has C and Cython interfaces in a number
