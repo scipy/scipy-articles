@@ -973,7 +973,7 @@ the only multivariate discrete distribution available in SciPy.
 The airspeed velocity (asv\cite{asvref}) library enables benchmarking Python packages
 over their lifetimes, and the performance of the SciPy code base was monitored
 with asv starting in February of 2015 (PR \#4501). In addition to ensuring that
-unit tests are passing (see above), confirming that performance generally
+unit tests are passing (see below), confirming that performance generally
 remains constant or improves over the commit hash history of the project allows
 us to objectively measure that our code base is improving, to empower
 scientific applications.
@@ -981,8 +981,9 @@ scientific applications.
 Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
 roughly nine years of project history. These demonstrate the gradual
 performance improvements in a nearest-neighbor search through
-\texttt{scipy.spatial.cKDTree.query()}, and can be run using the command:
-
+\texttt{scipy.spatial.cKDTree.query()}, and can be run using the
+following command, where \texttt{run.py} is a light wrapper
+script around \texttt{asv}, packaged with SciPy:
 
 \texttt{python run.py run -e -s 800 --bench "\textbackslash
 btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
@@ -1003,8 +1004,8 @@ of toroidal topology to the KDTree (boxsize argument was ignored).}
 Any pull request can be compared against the \texttt{master} branch with the
 command \texttt{asv continuous master new-feature}. This will provide a
 benchmark against the master branch and the branch a new feature is implemented
-in. More features are available in the documentation, including arguments to
-select which benchmarks to run.
+in. More features are available in the \texttt{asv} documentation, including 
+arguments to select which benchmarks to run.
 
 \subsubsection*{Test suite}
 
