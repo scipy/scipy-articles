@@ -981,12 +981,13 @@ scientific applications.
 Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
 roughly nine years of project history. These demonstrate the gradual
 performance improvements in a nearest-neighbor search through
-\texttt{scipy.spatial.cKDTree.query()}, and can be run using the
-following command, where \texttt{run.py} is a light wrapper
-script around \texttt{asv}, packaged with SciPy:
+\texttt{scipy.spatial.cKDTree.query()}, and can be run using:
 
 \texttt{python run.py run -e -s 800 --bench "\textbackslash
-btime\_query\textbackslash b" "02de46a546..b3ddb2c"}
+btime\_query\textbackslash b" "02de46a546..b3ddb2c"},
+
+where \texttt{run.py} is a light wrapper script around \texttt{asv}
+that is packaged with SciPy.
 
 \begin{figure}[H]
 \centering
@@ -1004,7 +1005,7 @@ of toroidal topology to the KDTree (boxsize argument was ignored).}
 Any pull request can be compared against the \texttt{master} branch with the
 command \texttt{asv continuous master new-feature}. This will provide a
 benchmark against the master branch and the branch a new feature is implemented
-in. More features are available in the \texttt{asv} documentation, including 
+in. More features are available in the \texttt{asv} documentation\cite{asvdocs}, including 
 arguments to select which benchmarks to run.
 
 \subsubsection*{Test suite}
