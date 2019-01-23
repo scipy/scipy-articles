@@ -862,8 +862,8 @@ and are used heavily in scikit-learn.
 Over the last three years our sparse matrix handling internals have been
 rewritten and performance has been improved. Iterating over and slicing of CSC
 and CSR matrices is now faster by up to 35\% (Figure~\ref{fig:sparse-iter}),
- and the CSR to COO matrix format
-conversion is now several times faster (Figure~\ref{fig:sparse-conv}).  Importantly,
+ and the COO / DIA to CSR / CSC matrix format
+conversions are now faster (Figure~\ref{fig:sparse-conv}). Importantly,
 SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
 low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
@@ -1265,8 +1265,8 @@ submodules.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_csr_to_coo_bench}
-\caption{Airspeed velocity benchmarks for SciPy CSR to COO matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_coo_dia_to_csr_csc}
+\caption{Airspeed velocity benchmarks for SciPy COO / DIA to CSR / CSC matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
 \label{fig:sparse-conv}
 \end{figure}
 
