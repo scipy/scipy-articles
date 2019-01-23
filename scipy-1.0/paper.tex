@@ -1259,7 +1259,7 @@ submodules.}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_iteration_bench}
-\caption{Airspeed velocity benchmarks for SciPy CSC and CSR matrix row iteration over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, NumPy 1.8.2, and the indicated non-zero element density fractions were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+\caption{Airspeed velocity benchmarks for SciPy CSC and CSR matrix row iteration over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, NumPy 1.8.2, and the indicated non-zero element density fractions were used. The partial performance regression observed shortly after the 1.0 release is likely related to a correctness fix\cite{sparse-regress}. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
 \label{fig:sparse-iter}
 \end{figure}
 
