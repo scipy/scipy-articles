@@ -1188,42 +1188,30 @@ cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
     pass
 \end{lstlisting}
 
-\texttt{fftpack} and {linalg} have too much functionality overlap with
-\texttt{numpy} equivalents.
+Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 
-\texttt{scipy.interpolate} could benefit from a set of new features including
-spline fitting routines with better user control; arithmetic routines for
-splines; transparent tensor-product splines, Non-Uniform Rational B-Splines
-support; and mesh refinement and coarsening of B-splines and corresponding
-tensor products.  Some spline functionality in \texttt{scipy.signal} should be
-migrated to \texttt{interpolate} and Second Order Sections need to be updated
-to match the capabilities in other routines.
-
-For \texttt{scipy.linalg}, the major change needed is to support a more recent
-version of LAPACK. Users should be able access an increasing repertoire of
-LAPACK functions using either \texttt{get\_lapack\_funcs} or
-\texttt{sp.linalg.lapack.name\_of\_function}.
-
-\texttt{scipy.optimize} would benefit from a few more good global optimizers 
-as well as large-scale optimizers.
-
-\texttt{scipy.ndimage} should be completely migrated to a data point
-model (values on a grid), instead of a pixel model (elements with centers),
-both of which have been used in the past, because the data point model is now
-proving more effective in practice.
-
-While \texttt{scipy.sparse} is mature, there are many data
-formats and the community continues to move forward here so we will aim
-to take advantage of their improvements\cite{abbasi2018sparse} 
-while preserving backwards compatibility to the extent that it is possible.
-\texttt{sparse.linalg} may benefit from wrappers for PROPACK 
-for faster sparse SVD computation.
-
-\texttt{scipy.spatial} will benefit from \texttt{spatial.transforms} with
-support for rotation matrices.
-
-\texttt{scipy.special} needs precision improvements for hypergeometric 
-functions, parabolic cylinder functions, and spheroidal wave functions.
+\begin{table}[H]
+\caption{Summary of SciPy Roadmap items following 1.0 release}
+\begin{tabular}{ c|c }
+    SciPy submodule & Summary of Change \\
+    \hline
+    \texttt{optimize} & a few more high quality global optimizers\\
+    \texttt{fftpack} & reduce overlap with NumPy equivalent \\
+    \texttt{linalg} & reduce overlap with NumPy equivalent \\
+    \texttt{interpolate} & new spline fitting and arithmetic routines \\
+    \texttt{interpolate} & new transparent tensor-product splines\\
+    \texttt{interpolate} & new Non-Uniform Rational B-Splines\\
+    \texttt{interpolate} & mesh refinement \& coarsening of B-splines and tensor products\\
+    \texttt{signal} & migrate spline functionality to \texttt{interpolate}\\
+    \texttt{signal} & Second Order Sections update to match capabilities in other routines\\
+    \texttt{linalg} & support a more recent version of LAPACK\\
+    \texttt{ndimage} & migrate to data point model from pixel model\\
+    \texttt{sparse} & incorporate sparse arrays from Sparse package\cite{abbasi2018sparse} \\
+    \texttt{sparse.linalg} & add PROPACK wrappers for faster SVD\\
+    \texttt{spatial} & add support for (quaternion) rotation matrices\\
+    \texttt{special} & precision improvements for hypergeometric, parabolic cylinder, and spheroidal wave functions\\
+\end{tabular}\label{table:roadmap}
+\end{table}
 
 \bibliography{references}
 
