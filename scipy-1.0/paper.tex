@@ -1096,7 +1096,63 @@ broad diversity inclusion statement, and provide instructions for contacting
 the three members of our Code of Conduct Committee or an external
 representative on the NumFOCUS Board of Directors.
 
-\subsection*{Roadmap}
+
+\subsection*{Community beyond the SciPy library}
+
+The scientific Python ecosystem includes many examples
+of domain-specific software libraries building on top
+of SciPy features, and then returning to the base SciPy library
+to suggest and even implement improvements to enable
+more effective science applications. For example, there
+are common contributors to the SciPy and astropy core
+libraries\cite{astropy-2018}, and what works well for 
+one of the code bases, infrastructures, or communities 
+is often transferred in some form to the other. At the code
+base level, the \texttt{binned\_statistic} functionality
+is one such cross-project contribution---it was initially
+developed in an Astropy-affiliated package
+and then placed in SciPy after the fact.
+
+\subsection*{Maintainers and contributors}
+
+The SciPy project has approximately 15 active maintainers---people who review
+others' contributions, and in general do everything needed to ensure that the
+software and the project move forward. Maintainers are critical to the health
+of the project\cite{eghbal2016}; their skills and efforts largely determine how
+fast the project moves forward, and they enable contributions from a much
+larger group. Accordingly, the project also has an additional ~100 unique
+contributors for every 6-monthly release cycle. Anyone with the interest and
+skills can become a contributor or maintainer; the SciPy Developer Guide
+provides guidance on how to do that.
+
+\section*{Discussion}
+
+\fixme{The Discussion should be succinct and must not contain subheadings.}
+
+\subsection*{Impact now}
+
+% While Paul was one of the early adopters at the national laboratories,
+% Python's presence is now ubiquitous.
+
+SciPy has a strong developer community and a massive user base. GitHub traffic
+metrics report roughly 20,000 unique visitors to the source website between May
+14 and May 27, 2018, with 721 unique copies (``clones") of the code base over
+that roughly two-week period. The developer community consists of 610 unique
+contributors of source code, with $>19,000$ commits accepted into the code base
+(GitHub page data).
+
+From the user side, there were 13,096,468 downloads of SciPy from the Python
+Packaging Index (PyPI) during the year 2017\cite{pypinfo}, which is a lower
+bound on the number of total downloads by users given that downloading from
+PyPI is only one of several popular methods to install SciPy.  The SciPy
+website\cite{SciPylib}, which has been the default citation in the absence of a
+peer-reviewed paper, has been cited $>3000$ times. Some of the most prominent
+usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
+scientific collaboration that lead to the observation of gravitational waves
+\cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly with
+MacOS and in the Intel Distribution for Python\cite{intel-python}. 
+
+\subsection*{Future Work}
 
 The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
 maintained by the community that describes some of the major directions for
@@ -1162,76 +1218,6 @@ support for rotation matrices.
 
 \texttt{scipy.special} needs precision improvements for hypergeometric 
 functions, parabolic cylinder functions, and spheroidal wave functions.
-
-\subsection*{Community beyond the SciPy library}
-
-The scientific Python ecosystem includes many examples
-of domain-specific software libraries building on top
-of SciPy features, and then returning to the base SciPy library
-to suggest and even implement improvements to enable
-more effective science applications. For example, there
-are common contributors to the SciPy and astropy core
-libraries\cite{astropy-2018}, and what works well for 
-one of the code bases, infrastructures, or communities 
-is often transferred in some form to the other. At the code
-base level, the \texttt{binned\_statistic} functionality
-is one such cross-project contribution---it was initially
-developed in an Astropy-affiliated package
-and then placed in SciPy after the fact.
-
-\subsection*{Maintainers and contributors}
-
-The SciPy project has approximately 15 active maintainers---people who review
-others' contributions, and in general do everything needed to ensure that the
-software and the project move forward. Maintainers are critical to the health
-of the project\cite{eghbal2016}; their skills and efforts largely determine how
-fast the project moves forward, and they enable contributions from a much
-larger group. Accordingly, the project also has an additional ~100 unique
-contributors for every 6-monthly release cycle. Anyone with the interest and
-skills can become a contributor or maintainer; the SciPy Developer Guide
-provides guidance on how to do that.
-
-\section*{Discussion}
-
-\fixme{The Discussion should be succinct and must not contain subheadings.}
-
-\subsection*{Impact now}
-
-% While Paul was one of the early adopters at the national laboratories,
-% Python's presence is now ubiquitous.
-
-SciPy has a strong developer community and a massive user base. GitHub traffic
-metrics report roughly 20,000 unique visitors to the source website between May
-14 and May 27, 2018, with 721 unique copies (``clones") of the code base over
-that roughly two-week period. The developer community consists of 610 unique
-contributors of source code, with $>19,000$ commits accepted into the code base
-(GitHub page data).
-
-From the user side, there were 13,096,468 downloads of SciPy from the Python
-Packaging Index (PyPI) during the year 2017\cite{pypinfo}, which is a lower
-bound on the number of total downloads by users given that downloading from
-PyPI is only one of several popular methods to install SciPy.  The SciPy
-website\cite{SciPylib}, which has been the default citation in the absence of a
-peer-reviewed paper, has been cited $>3000$ times. Some of the most prominent
-usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
-scientific collaboration that lead to the observation of gravitational waves
-\cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly with
-MacOS and in the Intel Distribution for Python\cite{intel-python}. 
-
-\subsection*{Future development}
-
-Future development plans include a major rewrite of the \texttt{scipy.sparse}
-module, which is already underway\cite{abbasi2018sparse}. This is due to the
-current interface only supporting two-dimensional objects. Even sub-arrays are
-two-dimensional, and dimensions greater than two aren't supported. The new
-package supports dimensions greater than two, and it bases itself around arrays
-rather than matrices (which is strictly more powerful). It also features
-improved inter-operability with NumPy and other community packages.
-
-\fixme{This section should include key issues: sparse arrays, ndimage pixel vs
-point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained
-submodules.}
-
 
 \bibliography{references}
 
