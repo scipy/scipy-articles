@@ -1228,6 +1228,18 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 
 \fixme{TODO}
 
+\section*{Supporting Information}
+% separate Figure numbering for SI
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{0}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{supporting_info/knn_complexity_confirm}
+\caption{Assessment of cKDTree nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
+\label{fig:knn-complexity}
+\end{figure}
+
 %Must include all authors, identified by initials, for example: A.A.
 %conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A.
 %and D.A. analysed the results.  All authors reviewed the manuscript.
