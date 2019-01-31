@@ -161,8 +161,10 @@ interpolation, and input/output.  SciPy has routines for solving
 classes of generic problems such as optimization, integration,
 interpolation, eigenvalues, and linear systems.  It also provides
 specialized data structures, such as sparse arrays and k-dimensional
-trees.  SciPy is built on top of NumPy, and is itself the foundation
-upon which higher level scientific libraries, including scikit-learn\cite{pedregosa2011scikit}
+trees. SciPy is built on top of NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
+which provides array data structures and related fast numerical routines.
+SciPy is itself the foundation upon which higher level scientific libraries,
+including scikit-learn\cite{pedregosa2011scikit}
 and scikit-image\cite{vanderwalt2014scikit}, are built.
 
 Recently, SciPy released version 1.0, a milestone that traditionally
@@ -185,8 +187,9 @@ Yet, the philosophical motivations behind a fully open toolstack, and
 an excited, friendly community with a singular focus, seemed to have
 proven decisive in the long run.  It led not only to the library
 described in this paper, but also to an entire ecosystem of related
-packages, and a variety of social activities centered around them.  The
-packages in the SciPy ecosystem share high standards of implementation,
+packages \cite{scipy-ecosystem}, and a variety of social activities centered around
+them\cite{social-python}. The packages in the SciPy ecosystem 
+share high standards of implementation,
 documentation, and testing, and a culture eager to learn and adopt
 better practices---both for community management and software
 development.
@@ -204,12 +207,15 @@ individually, but each bringing an important part to the puzzle.
 
 \section*{Background}
 
-Python is an interactive computer programming language, designed by
-Guido van Rossum in the late 1980s, with an emphasis on readability
-and rapid prototyping.
+Python is an interpreted, high-level, general-purpose computer programming
+language, designed by Guido van Rossum in the late 1980s,
+with a dynamic type system and an emphasis on readability and rapid prototyping.
+The reference and most popular implementation of Python is 
+CPython\cite{cpython-refman,cpython-source}, which is written
+in the C and Python languages and assumed throughout this paper.
 % https://legacy.python.org/search/hypermail/python-1992/0000.html
 %
-A general purpose programming language with a ``batteries included''
+As a general purpose programming language with a ``batteries included''
 standard library, it had no special support for scientific data
 structures or algorithms, unlike many of the other established
 computation platforms of the time. Yet, scientists soon discovered the
@@ -896,10 +902,12 @@ generate a low-level callback function automatically from a Cython module using
 
 \subsection*{Cython bindings for BLAS, LAPACK, and special}
 
-SciPy includes Cython\cite{behnel2011cython} wrappers for many BLAS and
-LAPACK\cite{LAPACK} routines and for the special functions provided in the
-\texttt{scipy.{\allowbreak}special} submodule.  These Cython wrappers are
-available in the modules
+SciPy has provided special functions and leveraged BLAS and
+LAPACK\cite{LAPACK} routines for many years. SciPy now additionally
+includes Cython\cite{behnel2011cython} wrappers for:
+many BLAS and LAPACK routines (added in 2015), and the special functions 
+provided in the \texttt{scipy.{\allowbreak}special} submodule (added in 2016).  
+These Cython wrappers are available in the modules
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas},
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and
 \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
