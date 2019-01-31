@@ -104,7 +104,8 @@ version 0.1 release. SciPy
 has become a \emph{de facto} standard for leveraging scientific algorithms
 in the Python programming language, with more than 600
 unique code contributors, millions of downloads per year, 161 dependent
-packages, and 28700 dependent repositories.
+packages, and 28700 dependent repositories. This includes usage of SciPy
+in almost half of all machine learning projects on GitHub.
 The library includes functionality spanning clustering, Fourier transforms,
 integration, interpolation, file I/O, linear algebra, image processing,
 orthogonal distance regression, minimization algorithms, signal processing,
@@ -163,8 +164,10 @@ integration, and more. SciPy has routines for solving
 classes of generic problems such as optimization, integration,
 interpolation, eigenvalues, and linear systems.  It also provides
 specialized data structures, such as sparse arrays and k-dimensional
-trees.  SciPy is built on top of NumPy, and is itself the foundation
-upon which higher level scientific libraries, including scikit-learn\cite{pedregosa2011scikit}
+trees. SciPy is built on top of NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
+which provides array data structures and related fast numerical routines.
+SciPy is itself the foundation upon which higher level scientific libraries,
+including scikit-learn\cite{pedregosa2011scikit}
 and scikit-image\cite{vanderwalt2014scikit}, are built.
 
 Recently, SciPy released version 1.0, a milestone that traditionally
@@ -187,8 +190,9 @@ Yet, the philosophical motivations behind a fully open toolstack, and
 an excited, friendly community with a singular focus, seemed to have
 proven decisive in the long run.  It led not only to the library
 described in this paper, but also to an entire ecosystem of related
-packages, and a variety of social activities centered around them.  The
-packages in the SciPy ecosystem share high standards of implementation,
+packages \cite{scipy-ecosystem}, and a variety of social activities centered around
+them\cite{social-python}. The packages in the SciPy ecosystem 
+share high standards of implementation,
 documentation, and testing, and a culture eager to learn and adopt
 better practices---both for community management and software
 development.
@@ -444,8 +448,9 @@ scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
 thereby solving the dilemma and paving the way for Python to become
-a very significant player in the Data Science movement.\fixme{NumPy
-  1.0 was released in October 2006}
+a very significant player in the Data Science movement. NumPy
+1.0 was released in October 2006\cite{numpy-1.0-tag}, with about 30
+authors recognized for major contributions in its release notes.
 
 % Future directions for SciPy after meeting at Berkeley
 % https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
@@ -866,8 +871,9 @@ and are used heavily in scikit-learn.
 
 Over the last three years our sparse matrix handling internals have been
 rewritten and performance has been improved. Iterating over and slicing of CSC
-and CSR matrices is now faster by up to 35\%, and the CSR to COO matrix format
-conversion is now several times faster.  Importantly,
+and CSR matrices is now faster by up to 35\% (Figure~\ref{fig:sparse-iter}),
+ and the COO / DIA to CSR / CSC matrix format
+conversions are now faster (Figure~\ref{fig:sparse-conv}). Importantly,
 SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
 low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
@@ -900,10 +906,12 @@ generate a low-level callback function automatically from a Cython module using
 
 \subsection*{Cython bindings for BLAS, LAPACK, and special}
 
-SciPy includes Cython\cite{behnel2011cython} wrappers for many BLAS and
-LAPACK\cite{LAPACK} routines and for the special functions provided in the
-\texttt{scipy.{\allowbreak}special} submodule.  These Cython wrappers are
-available in the modules
+SciPy has provided special functions and leveraged BLAS and
+LAPACK\cite{LAPACK} routines for many years. SciPy now additionally
+includes Cython\cite{behnel2011cython} wrappers for:
+many BLAS and LAPACK routines (added in 2015), and the special functions 
+provided in the \texttt{scipy.{\allowbreak}special} submodule (added in 2016).  
+These Cython wrappers are available in the modules
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas},
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and
 \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
@@ -1095,72 +1103,6 @@ broad diversity inclusion statement, and provide instructions for contacting
 the three members of our Code of Conduct Committee or an external
 representative on the NumFOCUS Board of Directors.
 
-\subsection*{Roadmap}
-
-The SciPy Roadmap\cite{SciPy_roadmap} is a continuously-updated document
-maintained by the community that describes some of the major directions for
-improvement for the project, as well as specific limitations and matters that
-require assistance moving forward.
-
-We are still striving to increase the number of SciPy usage tutorials beyond
-our current 15 section offering\cite{SciPy_tutorials}, but our standard
-documentation for library features is already in excellent shape.
-
-The low-level Cython code in our library (which interacts with C-level code and
-exposes it for Python usage) could use some measure of modernization, including
-migration to typed memoryviews to handle NumPy arrays instead of the older
-syntax:
-
-\begin{lstlisting}[language=Python]
-# example of a function that takes a single
-# 3 dimensional typed memoryview as an argument
-# this allows Cython-level handling of a NumPy
-# array object
-cpdef int func_new(int[:, :, :] arr):
-    pass
-
-# example of the old syntax for handling
-# the same scenario
-cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
-    pass
-\end{lstlisting}
-
-\texttt{fftpack} and {linalg} have too much functionality overlap with
-\texttt{numpy} equivalents.
-
-\texttt{scipy.interpolate} could benefit from a set of new features including
-spline fitting routines with better user control; arithmetic routines for
-splines; transparent tensor-product splines, Non-Uniform Rational B-Splines
-support; and mesh refinement and coarsening of B-splines and corresponding
-tensor products.  Some spline functionality in \texttt{scipy.signal} should be
-migrated to \texttt{interpolate} and Second Order Sections need to be updated
-to match the capabilities in other routines.
-
-For \texttt{scipy.linalg}, the major change needed is to support a more recent
-version of LAPACK. Users should be able access an increasing repertoire of
-LAPACK functions using either \texttt{get\_lapack\_funcs} or
-\texttt{sp.linalg.lapack.name\_of\_function}.
-
-\texttt{scipy.optimize} would benefit from a few more good global optimizers 
-as well as large-scale optimizers.
-
-\texttt{scipy.ndimage} should be completely migrated to a data point
-model (values on a grid), instead of a pixel model (elements with centers),
-both of which have been used in the past, because the data point model is now
-proving more effective in practice.
-
-While \texttt{scipy.sparse} is mature, there are many data
-formats and the community continues to move forward here so we will aim
-to take advantage of their improvements\cite{abbasi2018sparse} 
-while preserving backwards compatibility to the extent that it is possible.
-\texttt{sparse.linalg} may benefit from wrappers for PROPACK 
-for faster sparse SVD computation.
-
-\texttt{scipy.spatial} will benefit from \texttt{spatial.transforms} with
-support for rotation matrices.
-
-\texttt{scipy.special} needs precision improvements for hypergeometric 
-functions, parabolic cylinder functions, and spheroidal wave functions.
 
 \subsection*{Community beyond the SciPy library}
 
@@ -1215,22 +1157,64 @@ peer-reviewed paper, has been cited $>3000$ times. Some of the most prominent
 usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
 scientific collaboration that lead to the observation of gravitational waves
 \cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly with
-MacOS and in the Intel Distribution for Python\cite{intel-python}. 
+MacOS and in the Intel Distribution for Python\cite{intel-python}. SciPy is used
+by 47 \% of all machine learning projects on GitHub\cite{octoverse-scipy}.
 
-\subsection*{Future development}
+\subsection*{Future Work}
 
-Future development plans include a major rewrite of the \texttt{scipy.sparse}
-module, which is already underway\cite{abbasi2018sparse}. This is due to the
-current interface only supporting two-dimensional objects. Even sub-arrays are
-two-dimensional, and dimensions greater than two aren't supported. The new
-package supports dimensions greater than two, and it bases itself around arrays
-rather than matrices (which is strictly more powerful). It also features
-improved inter-operability with NumPy and other community packages.
+The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev} is a
+continuously-updated document
+maintained by the community that describes some of the major directions for
+improvement for the project, as well as specific limitations and matters that
+require assistance moving forward.
 
-\fixme{This section should include key issues: sparse arrays, ndimage pixel vs
-point, splines, fftpack vs. np.fft and linalg vs. np.linalg, under-maintained
-submodules.}
+We are still striving to increase the number of SciPy usage tutorials beyond
+our current 15 section offering\cite{SciPy_tutorials}, but our standard
+documentation for library features is already in excellent shape.
 
+The low-level Cython code in our library (which interacts with C-level code and
+exposes it for Python usage) could use some measure of modernization, including
+migration to typed memoryviews to handle NumPy arrays instead of the older
+syntax:
+
+\begin{lstlisting}[language=Python]
+# example of a function that takes a single
+# 3 dimensional typed memoryview as an argument
+# this allows Cython-level handling of a NumPy
+# array object
+cpdef int func_new(int[:, :, :] arr):
+    pass
+
+# example of the old syntax for handling
+# the same scenario
+cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
+    pass
+\end{lstlisting}
+
+Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
+
+\begin{table}[H]
+\caption{Summary of SciPy Roadmap items following 1.0 release}
+\begin{tabular}{ c|c }
+    SciPy submodule & Summary of Change \\
+    \hline
+    \texttt{optimize} & a few more high quality global optimizers\\
+    \texttt{fftpack} & reduce overlap with NumPy equivalent \\
+    \texttt{linalg} & reduce overlap with NumPy equivalent \\
+    \texttt{interpolate} & new spline fitting and arithmetic routines \\
+    \texttt{interpolate} & new transparent tensor-product splines\\
+    \texttt{interpolate} & new Non-Uniform Rational B-Splines\\
+    \texttt{interpolate} & mesh refinement \& coarsening of B-splines and tensor products\\
+    \texttt{signal} & migrate spline functionality to \texttt{interpolate}\\
+    \texttt{signal} & Second Order Sections update to match capabilities in other routines\\
+    \texttt{linalg} & support a more recent version of LAPACK\\
+    \texttt{ndimage} & migrate to data point model from pixel model\\
+    \texttt{sparse} & incorporate sparse arrays from Sparse package\cite{abbasi2018sparse} \\
+    \texttt{sparse.linalg} & add PROPACK wrappers for faster SVD\\
+    \texttt{spatial} & add support for (quaternion) rotation matrices\\
+    \texttt{special} & precision improvements for hypergeometric, parabolic cylinder, and spheroidal wave functions\\
+\end{tabular}\label{table:roadmap}
+\end{table}
 
 \bibliography{references}
 
@@ -1253,6 +1237,26 @@ submodules.}
 \section*{Additional information}
 
 \fixme{TODO}
+
+\section*{Supporting Information}
+
+% separate Figure numbering for SI
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{0}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_iteration_bench}
+\caption{Airspeed velocity benchmarks for SciPy CSC and CSR matrix row iteration over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, NumPy 1.8.2, and the indicated non-zero element density fractions were used. The partial performance regression observed shortly after the 1.0 release is likely related to a correctness fix\cite{sparse-regress}. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+\label{fig:sparse-iter}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_coo_dia_to_csr_csc}
+\caption{Airspeed velocity benchmarks for SciPy COO / DIA to CSR / CSC matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+\label{fig:sparse-conv}
+\end{figure}
 
 %To include, in this order: \textbf{Accession codes} (where applicable);
 %\textbf{Competing financial interests} (mandatory statement).
