@@ -45,13 +45,3 @@ with an improvement to the pair counting algorithm to improve the scaling
 with the number of bins. The cKDTree can now be augmented by weights, with 
 weighted paircount essential in many scientific applications, e.g. computing 
 correlation functions of galaxies\cite{0004-637X-750-1-38}.
-
-\fixme{Add a Figure to show the scaling, before and after.}
-\fixme{perhaps give an example or some formula.}
-(cite / mention faster implementions of paircounting algorithms / treecorr, corrfunc)
-
-The main purpose of the paircounting algorithm in cKDTree is to provide a readily
-available tool. The KDTree based algorithm is not necessarily the fastest algorithm
-depending on the application. E.g. for low number densities a chaining mesh based algorithm
-can be easily many times faster than a tree based algorithm.
-
