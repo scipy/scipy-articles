@@ -18,27 +18,20 @@ are all interrogated, but only those neighbors that are requested are retained
 in memory. Thus, the maximum heap size for this algorithm is conceptually determined
 as \texttt{np.arange(max(k))}.
 
-Also in 2015, SciPy added support for generating approximated sparse distance matrices 
-between \texttt{KDTree} objects (sets of points organized into a binary space 
-partitioning data structure\cite{Bentley:1975:MBS:361002.361007}). 
-The user provides a maximum distance value
-above which all distances between points in two provided \texttt{KDTree} objects
-are set to 0. The distance metric used between k-d trees is not constrained
-to the conventional L2 (Euclidean) norm---any Minkowski p-norm value
-bounded by 1 and infinity is valid. By default, a dictionary of keys
-based sparse matrix is the returned data structure. Previously-published
-results had suggested that a hashing approach to sparse matrix assembly
-is 7 times faster than constructing with compressed row format (CSR)\cite{10.1007/978-3-540-75755-9_107}.
-The dictionary object maps row and column indices to elements of the sparse matrix, which is
-efficient for matrix construction because all zero values are skipped in
-the dictionary mapping. The C++ level sparse matrix construction releases the Python
-global interpreter lock for increased performance. Once constructed, the
-dictionary of keys sparse matrix has the amortized constant time complexity 
-($O(1)$) for distance value retrieval that one would expect from a 
-dictionary\cite{Cormen:2001:IA:580470}. For efficiently performing arithmetic
-operations on the sparse matrix, SciPy allows the dictionary of keys
-sparse matrix to be directly converted to the common CSR, CSC, and COO
-data structures.
+In 2015, SciPy added support for generating approximated sparse distance matrices 
+between \texttt{KDTree} objects by zeroing all distances that exceed a user-provided value. 
+The distance metric used between k-d trees is not constrained to the 
+conventional L2 (Euclidean) norm---any Minkowski p-norm value bounded by 1 and 
+infinity is valid. By default, the returned data structure is a dictionary of 
+keys based sparse matrix, which is very efficient for matrix construction. 
+Previously-published results had suggested that this hashing approach to sparse 
+matrix assembly is 7 times faster than constructing with compressed row format (CSR)
+\cite{10.1007/978-3-540-75755-9_107} and the C++ level sparse matrix construction 
+releases the Python GIL for increased performance. Also, once the matrix is 
+contructed, distance value retrieval has an amortized constant time complexity 
+\cite{Cormen:2001:IA:580470}. For efficiently performing arithmetic operations 
+on it, SciPy allows the sparse matrix to be directly converted to the common 
+CSR, CSC and COO data structures.
 
 The cKDTree module implements a dual tree counting algorithm\cite{Moore2000ar},
 with an improvement to the pair counting algorithm to improve the scaling
