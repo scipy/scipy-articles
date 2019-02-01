@@ -2,18 +2,14 @@ The cKDTree module was rewritten in C++ with templated classes, and support for
 periodic boundary conditions was added. A periodic boundary condition is typically 
 used in computer simulations of physical processes.
 
-Specifically, in 2015, we enhanced \texttt{cKDTree.query} by reimplementing in C++,
-removing some of the algorithm memory leaks, and allowing 
-release of the GIL so that multiple threads may be used\cite{gh-4374}. In 2013,
-the time complexity of the k nearest neighbor search from \texttt{cKDTree.query}
-was approximately loglinear \cite{knn-jake}, and we've confirmed that this time
-complexity has been preserved in SciPy \texttt{1.0.0} (Figure~\ref{fig:knn-complexity}),
-but with generally improved efficiency (Figure~\ref{fig:asvbench}). The
-discussion in the originally-cited nearest neighbor search
-algorithm publication\cite{kdtree-search-algo}, suggests that there are
-at least some scenarios where $\mathcal{O}(\log{n})$ search time complexity may
-be achieved, but the influence of dimensionality appears to be consistent
-with our empirical observations of approximately $0(n log n)$ performance.
+In 2013, the time complexity of the k nearest neighbor search from
+\texttt{cKDTree.query} was approximately loglinear \cite{knn-jake},
+consistent with its formal description \cite{kdtree-search-algo}.
+Since then, we've enhanced \texttt{cKDTree.query} by reimplementing in
+C++, removing memory leaks, and allowing release of the GIL so that
+multiple threads may be used\cite{gh-4374}. This generally improved
+performance on any given problem (Figure~\ref{fig:asvbench}) while
+preserving the asymptotic complexity (Figure~\ref{fig:knn-complexity}).
 
 % TODO: please check / improve literature citations used here
 Also in 2015, SciPy added support for generating approximated sparse distance matrices 
