@@ -5,7 +5,7 @@ used in computer simulations of physical processes.
 In 2013, the time complexity of the k nearest neighbor search from
 \texttt{cKDTree.query} was approximately loglinear \cite{knn-jake},
 consistent with its formal description \cite{kdtree-search-algo}.
-Since then, we've enhanced \texttt{cKDTree.query} by reimplementing in
+Since then, we've enhanced \texttt{cKDTree.query} by reimplementing it in
 C++, removing memory leaks, and allowing release of the GIL so that
 multiple threads may be used\cite{gh-4374}. This generally improved
 performance on any given problem (Figure~\ref{fig:asvbench}) while
