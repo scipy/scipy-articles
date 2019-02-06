@@ -2,21 +2,14 @@ The cKDTree module was rewritten in C++ with templated classes, and support for
 periodic boundary conditions was added. A periodic boundary condition is typically 
 used in computer simulations of physical processes.
 
-% TODO: please check / improve literature citations used here
-% what about the time complexity of the kNN implementation?
-In 2015, we enhanced \texttt{cKDTree.query} with a $k$ nearest neighbors search
-parameter. This is an efficient operation\cite{Sproull:1991:RNS:3118219.3118331} 
-because it generates and returns a data structure that may be only a fraction 
-of the size of the full neighbor list. A C++ implementation is provided that releases
-the Python global interpreter lock for the neighbor search process, uses
-a memory pool to allocate and automatically reclaim \texttt{structs}, and
-heapsort to sort the $k$ nearest neighbors distances, even in the case
-of periodic boundary conditions. When $k$ is a non-contiguous list of nearest
-neighbors to account for (i.e., \texttt{[1, 3, 4]}), the intervening distances
-between the nearest neighbor ($k = 1$) and the farthest neighbor requested
-are all interrogated, but only those neighbors that are requested are retained
-in memory. Thus, the maximum heap size for this algorithm is conceptually determined
-as \texttt{np.arange(max(k))}.
+In 2013, the time complexity of the k nearest neighbor search from
+\texttt{cKDTree.query} was approximately loglinear \cite{knn-jake},
+consistent with its formal description \cite{kdtree-search-algo}.
+Since then, we've enhanced \texttt{cKDTree.query} by reimplementing it in
+C++, removing memory leaks, and allowing release of the global interpreter lock (GIL) so that
+multiple threads may be used\cite{gh-4374}. This generally improved
+performance on any given problem (Figure~\ref{fig:asvbench}) while
+preserving the asymptotic complexity (Figure~\ref{fig:knn-complexity}).
 
 In 2015, SciPy added the \texttt{sparse\_distance\_matrix} routine for generating approximate 
 sparse distance matrices between \texttt{KDTree} objects by ignoring all distances that 
@@ -36,13 +29,3 @@ with an improvement to the pair counting algorithm to improve the scaling
 with the number of bins. The cKDTree can now be augmented by weights, with 
 weighted paircount essential in many scientific applications, e.g. computing 
 correlation functions of galaxies\cite{0004-637X-750-1-38}.
-
-\fixme{Add a Figure to show the scaling, before and after.}
-\fixme{perhaps give an example or some formula.}
-(cite / mention faster implementions of paircounting algorithms / treecorr, corrfunc)
-
-The main purpose of the paircounting algorithm in cKDTree is to provide a readily
-available tool. The KDTree based algorithm is not necessarily the fastest algorithm
-depending on the application. E.g. for low number densities a chaining mesh based algorithm
-can be easily many times faster than a tree based algorithm.
-
