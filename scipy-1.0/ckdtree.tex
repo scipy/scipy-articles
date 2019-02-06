@@ -34,8 +34,7 @@ operations on the sparse matrix, SciPy allows the dictionary of keys
 sparse matrix to be directly converted to the common CSR, CSC, and COO
 data structures.
 
-The cKDTree module implements a dual tree counting algorithm\cite{Moore2000ar},
-with an improvement to the pair counting algorithm to improve the scaling
-with the number of bins. The cKDTree can now be augmented by weights, with 
-weighted paircount essential in many scientific applications, e.g. computing 
-correlation functions of galaxies\cite{0004-637X-750-1-38}.
+In 2015 the cKDTree dual tree counting algorithm\cite{Moore2000ar}
+was enhanced to support weights\cite{ckdtree-weights}, which are
+essential in many scientific applications, e.g. computing correlation
+functions of galaxies\cite{0004-637X-750-1-38}.
