@@ -11,18 +11,20 @@ multiple threads may be used\cite{gh-4374}. This generally improved
 performance on any given problem (Figure~\ref{fig:asvbench}) while
 preserving the asymptotic complexity (Figure~\ref{fig:knn-complexity}).
 
-In 2015, SciPy added the \texttt{sparse\_distance\_matrix} routine for generating approximate 
-sparse distance matrices between \texttt{KDTree} objects by ignoring all distances that 
-exceed a user-provided value. Also, this routine allows any Minkowski p-norm between 1 and 
-infinity and it is not limited to the conventional L2 (Euclidean) norm. 
-By default, the returned data structure is a dictionary of keys (DOK) based sparse matrix, 
-which is very efficient for matrix construction. 
-This hashing approach to sparse matrix assembly can be 7 times faster than constructing 
-with compressed row format (CSR) \cite{10.1007/978-3-540-75755-9_107} and the C++ level 
-sparse matrix construction releases the Python GIL for increased performance. 
-Once the matrix is constructed, distance value retrieval has an amortized constant time 
-complexity \cite{Cormen:2001:IA:580470}, and the DOK structure can be efficiently converted 
-to a CSR, CSC or COO matrix to allow for speedy arithmetic operations.
+In 2015, SciPy added the \texttt{sparse\_distance\_matrix} routine for generating 
+approximate sparse distance matrices between \texttt{KDTree} objects by ignoring 
+all distances that exceed a user-provided value. Also, this routine it is not 
+limited to the conventional L2 (Euclidean) norm but supports any Minkowski 
+p-norm between 1 and infinity. By default, the returned data structure is a 
+Dictionary Of Keys based sparse matrix (DOK), which is very efficient for matrix 
+construction. This hashing approach to sparse matrix assembly can be 7 times 
+faster than constructing with Compressed Sparse Row format (CSR) 
+\cite{10.1007/978-3-540-75755-9_107} and the C++ level sparse matrix construction 
+releases the Python GIL for increased performance. Once the matrix is constructed, 
+distance value retrieval has an amortized constant time complexity 
+\cite{Cormen:2001:IA:580470}, and the DOK structure can be efficiently converted 
+to a CSR, Compressed Sparse Column (CSC) or COOrdinate (COO) matrix to allow for 
+speedy arithmetic operations.
 
 The cKDTree module implements a dual tree counting algorithm\cite{Moore2000ar},
 with an improvement to the pair counting algorithm to improve the scaling
