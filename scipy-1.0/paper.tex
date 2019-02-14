@@ -1030,9 +1030,9 @@ includes posix and Windows (32/64-bit) platforms managed by Travis CI and
 appveyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
 include code linting with pyflakes and pycodestyle. There are more than $13000$
 unit tests in the test suite, which is written for usage with the pytest
-runner, and with a 76.5 \% coverage of approximately $204000$ lines of code
-holding steady for the last six months (Figure~\ref{fig:coverage}).  Some of
-the historical components of the code base would still benefit from increased
+runner, and with 87 \% and 45 \% line coverages for Python and compiled
+code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}).
+Some of the historical components of the code base would still benefit from increased
 test coverage. Documentation for the code is automatically built and hosted by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3, a just-in-time compiled
@@ -1040,12 +1040,14 @@ version of the Python language.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{static/coverage-chart}
-\caption{\% coverage of the SciPy code base by unit tests over the six months
-preceding June 28, 2018 as reported by the \texttt{codecov} service. The
-analysis of lines of source code covered is performed automatically in our
-continuous integration suite using the \texttt{pytest-cov} and \texttt{gcov}
-libraries.}
+\includegraphics[width=\textwidth]{static/cov}
+\caption{\% coverage of the SciPy code base by unit tests over a five year
+time span predeceding the 1.0 release point. The reconstitution of historical
+build and test environments was performed using a docker-based approach
+\cite{scipy-cov}. Analysis of lines of source code covered is performed 
+automatically in our continuous integration suite using the \texttt{pytest-cov}
+and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
+inclusion of additional vendored code.}
 \label{fig:coverage}
 \end{figure}
 
