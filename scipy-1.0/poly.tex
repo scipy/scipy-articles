@@ -11,16 +11,19 @@ for constructing various interpolators, and to provide users with building
 blocks for constructing additional interpolators.
 
 At the lowest level of the new design are classes which represent univariate
-piecewise polynomials: \code{PPoly}, \code{BPoly} and \code{BSpline}, which allow
+piecewise polynomials: \code{PPoly} (SciPy 0.13)\cite{scipy-gh5827},
+\code{BPoly} (SciPy 0.13) and \code{BSpline} (SciPy 0.19)\cite{scipy-gh3174},
+which allow
 efficient vectorized evaluations, differentiation, integration and root-finding.
 \code{PPoly} represents piecewise polynomials in the power basis in terms of
 breakpoints and coefficients at each interval. \code{BPoly} is similar, and
 represents piecewise polynomials in the Bernstein basis (which is suitable
 for e.g., constructing Bezier curves). \code{BSpline} represents spline
-curves, i.e., linear combinations of b-spline basis elements.\cite{deBoor1978}. 
+curves, i.e., linear combinations of b-spline basis elements.\cite{deBoor1978} 
 
 In the next layer, these polynomial classes are used for constructing several
-common ways of interpolating data: \code{CubicSpline} constructs a twice 
+common ways of interpolating data: \code{CubicSpline} (SciPy 0.18)
+\cite{scipy-gh5653} constructs a twice 
 differentiable piecewise cubic function, \code{Akima1DInterpolator} 
 and \code{PCHIPInterpolator} implement two classic prescriptions for
 constructing a $C^1$ continuous monotone shape-preserving interpolator.
