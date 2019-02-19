@@ -22,9 +22,11 @@ Compared to the previously implemented simplex method, the new interior-point me
 \subsubsection*{Nonlinear Optimization}
 \paragraph{Local Minimization}
 
-The \texttt{minimize} function provides methods for finding local minima of nonlinear optimization
-problems. It unifies several methods with a common interface in order to facilitate
-interchanging between solvers with different characteristics, summarized in Table~\ref{tab:minimize}.
+The \texttt{minimize} function provides methods for finding local minima of
+nonlinear optimization problems. It unifies several methods with a common 
+interface in order to facilitate interchanging between solvers with different
+characteristics. Characteristics of the different methods are summarized in 
+Table~\ref{tab:minimize-si}.
 %% Currently, this introduces a ton of whitespace around a very simple expression (min f(x)). The reader can easily find the standard of meaning of `nonlinear programming', so I believe it should be removed. If we decide that it is appropriate to include, then we should add the entire problem statement - including constraints - and we should also include the entire linear programming problem statement in the previous section.
 % summarizes all the methods available for solving minimization problems of the type:
 %\begin{equation}
@@ -63,60 +65,6 @@ While most \texttt{minimize} development prior to SciPy 1.0 has focused on uncon
 % methods \texttt{SLSQP} and \texttt{COBYLA}\footnote{We note that any equality constraint $c_{\text{eq}}(x) = 0$ can be expressed as two inequality constraints $c_{\text{eq}}(x) \leq 0$ and $-c_{\text{eq}}(x) \leq 0$} 
 \texttt{SLSQP} supports fully general nonlinear programming. However, it does not provide special treatment for sparsity, limiting its utility to small problems. Accordingly, ongoing development efforts for \texttt{minimize} are focused on the addition of nonlinear programming algorithms for large, sparse problems. 
 
-\begin{table}[H]
-  \centering
-  \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
-    The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
-    (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
-    indicates whether first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
-    with $\sim$ the algorithm does not requires second-order derivatives from
-    the user; it computes an approximation internally and uses it to accelerate method convergence.
-    \textit{Iterative Hessian factorization} denotes algorithms that factorize the Hessian in an iterative way,
-    which does not require explicit matrix factorization or storage of the Hessian.
-    \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
-    iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
-    has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
-    \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
-    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
-    can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
-    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
-  \begin{tabular}{cccccccccccccc}
-      & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
-    \hline
-    Version added &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.9 &  0.6* &  0.6* & 0.13 & 0.13 & 0.19 & 1.0 \\
-    \hline
-    Wrapper & & & \cmark & & & \cmark & \cmark & \cmark & &  & & & \cmark \\
-    \hline
-    \nth{1} derivatives &  & & & \cmark  & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
-    \hline
-    \nth{2} derivatives &  &  &  &  & $\sim$ & $\sim$ & $\sim$ & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
-    \hline
-    \makecell{Iterative Hessian \\
-    factorization} & & & &  & & & & \cmark & \cmark &  & \cmark &  & \cmark \\
-    \hline
-    Local convergence& & & & L & S &  L & S & S$^*$ & S$^*$ & Q & S$^*$ & Q & S$^*$  \\
-    \hline
-    Global convergence & & &  &   & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark  \\
-    \hline
-    \makecell{Line-search (LS) or\\ trust-region (TR)} & Neither  & LS &  TR & LS & LS & LS & LS & LS & LS & TR & TR & TR & TR \\
-    \hline
-    Bound constraints &&&\cmark&&&&\cmark&\cmark&\cmark&&&& \\
-    \hline
-    Equality constraints &&&&&&&\cmark&&&&& \\
-    \hline
-    Inequality constraint &&&\cmark&&&&\cmark&&&&& \\
-    \hline
-    References & \cite{nelder_simplex_1965, wright_direct_1996} & \cite{powell_efficient_1964} &
-      \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
-      \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
-      \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
-      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
-      \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
-      \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, lenders_trlib:_2016} \\
-    \hline
-  \end{tabular}
-  \label{tab:minimize}
-\end{table}
 
 \paragraph{Global Minimization}
 As \texttt{minimize} only seeks a local minimum, some problems require the use of a global optimization routine to find the minimum of the objective function over the set of all decision variable values, especially if the objective function possesses many local minima that other solvers could get stuck in. % e.g. if there is concern that `minimize` could get stuck in an unacceptable local minimum?
