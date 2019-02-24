@@ -772,9 +772,8 @@ SciPy (Figure~\ref{fig:linguist}).
     \label{fig:linguist}
 \end{figure}
 
-For implementing new functionality, we have a clear order of language
-preference.  First Python, if performance is not an issue. If it is, then in
-order of preference: Cython, C, C++, Fortran. The main motivation for this is
+For implementing new functionality, Python is the first choice. If Python performance is an issue, then 
+we use Cython, C, C++, or Fortran (listed in order of preference). The main motivation for this is
 maintainability: Cython has the highest abstraction level and most Python
 developers will understand it. C is also widely known, and easier to deal with
 for the core development team than C++ and especially Fortran.
