@@ -311,7 +311,7 @@ custom scripting language with Python\cite{STScI-slither}.
 \subsection*{SciPy Begins}
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
-By the late 1990s, discussions appeared on Matrix-SIG,
+By the late 1990s, discussions appeared on Matrix-SIG
 expressing a desire for a complete scientific data analysis environment\cite{Travis-Keynote-2010}.
 Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\cite{Travis-some-modules,Travis-enhance} 
@@ -327,7 +327,7 @@ undergraduate student (and currently a SciPy core developer), provided
 compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
 Around the same time, Pearu Peterson, a PhD student from Estonia,
-released f2py\cite{Pearu-f2py-mail}, a command line tool for binding Python and Fortran
+released F2PY\cite{peterson2009f2py}, a command line tool for binding Python and Fortran
 codes, and wrote modules for linear algebra and interpolation.
 % Graduated 1999, Duke
 Eric Jones, while a graduate student at Duke, wrote a number of
@@ -382,7 +382,7 @@ In September, the first documentation was
 published\cite{first-scipy-docs}.
 The first SciPy
 workshop\cite{first-scipy-workshop}
-was held in September 2002 at CalTech---a single track, two day event with 50
+was held in September 2002 at Caltech---a single track, two day event with 50
 participants, many of them developers of SciPy and surrounding libraries.
 
 %and by the following September the inaugural SciPy workshop was held
@@ -406,10 +406,8 @@ Technology, started work on a 3D visualization application, based on
 Kitware's C++ Visualization Toolkit\cite{schroeder:2006:VTK}, called
 Mayavi\cite{mayavi-intro}.
 In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell (that would
-eventually blossom into Project Jupyter\cite{Kluyver:2016aa}), built into
-IPP, an earlier attempt by Janko Hauser, and including code from
-Nathan Gray's LazyPython.
+Colorado, Boulder, created the IPython interactive shell, which 
+eventually blossomed into Project Jupyter\cite{Kluyver:2016aa}.
 % IPython hosted on SciPy:
 % https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
 John Hunter, a postdoc
@@ -443,7 +441,7 @@ problems with the Python numerical array container.
 Numeric, the original array package, was
 suitable for small arrays, but not for the large images processed by
 STScI.  With the Numeric maintainer's blessing, the decision was made
-to write NumArray, a library that could handle data on a different
+to write NumArray, a library that could handle data on a larger
 scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
@@ -476,7 +474,7 @@ doing compute-intensive calculations on massively parallel computers.
 \end{quote}
 While it is now more commonly accepted, Dubois took the time to explain to
 the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
-He also shares his own interest in Python for ``computational steering''
+He also shared his own interest in Python for ``computational steering''
 where ``Python serves as the input language to a scientific application, and the actual
 computations are performed both in Python itself and in compiled extensions.''
 %https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
@@ -604,17 +602,13 @@ speakers from outside the community, such as Guido van Rossum (creator
 of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
 Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
 The SciPy conference went from being a small gathering of
-core developers, to a multi-location event, with increased funding, a
-published proceedings, and scholarships for attending students (some
-of whom are authors on this paper).  In 2010, the conference grew even
-further, with an additional event added in India, and the US
-conference—now with parallel tracks—moving to Austin, Texas.
-While the US SciPy conference kept growing (by 2010 it had multiple
-tracks, student sponsorship, proceedings, and funding), satellite
-events were being organized by volunteers elsewhere, such as EuroSciPy
+core developers to a multi-location event with increased funding, a
+published proceedings, and scholarships for attending students.
+By 2010, the US SciPy conference had multiple tracks, and satellite
+conferences were being organized by volunteers elsewhere, such as EuroSciPy
 (2008–) and SciPy India (2009–).
 Special sessions and minisymposia dedicated to scientific Python began
-appearing at many events.
+appearing at many other events.
 For example, a three-part minisymposium organized for CSE 2009 was
 featured in SIAM News\cite{siamcse09}.
 
@@ -628,63 +622,25 @@ The follow-up CiSE March/April 2011 Python for Scientists and Engineers
 special issue\cite{millman2011python}, focused more on the core parts
 of the scientific Python ecosystem\cite{perez2011python} including
 NumPy\cite{vanderwalt2011numpy}, Cython\cite{behnel2011cython},
-and Mayavi\cite{ramachandran2011mayavi}.
-
-Python has become so pervasive, there are now domain-specific special issues.
-For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
+and Mayavi\cite{ramachandran2011mayavi}. Python became so pervasive that 
+journals began publishing domain-specific special issues.
+For example, in 2015 Frontiers in Neuroinformatics published a collection of 25 articles---covering
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
-neuroscience\cite{python-FIN}.
+Neuroscience\cite{python-FIN}.
 
 In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
 and Fernando Pérez founded NumFOCUS\cite{numfocus},
- a 501(c)3 public charity whose mission is to
-``promote sustainable high-level programming languages, open code development,
+ a 501(c)3 public charity with a mission
+``to promote sustainable high-level programming languages, open code development,
 and reproducible scientific research.''
 While NumFOCUS is language agnostic, many of the early sponsored projects
 came from the scientific Python stack.
-Today it has over 25 sponsored projects including NumPy, SciPy, IPython, and
+Today it has 50 affiliated and sponsored projects including NumPy, SciPy, IPython, and
 Matplotlib.
 Among its other projects, NumFOCUS organizes a global network of 
 community driven educational programs, meetups, and conferences
 called PyData.
-
-\subsection*{Project scope}
-
-SciPy provides fundamental algorithms for scientific computing. The
-breadth of its scope was derived from the Guide to Available Mathematical
-Software classification system (GAMS\cite{boisvert1991guide}). In areas
-that move relatively slowly, e.g. linear algebra, SciPy aims to provide
-complete coverage. In other areas it aims to provide fundamental building
-blocks while interacting well with other packages specialized in that area.
-For example, SciPy provides what one expects to find in a
-statistics textbook (probability distributions, hypothesis tests, frequency
-statistics, correlation functions, and more), while 
-Statsmodels\cite{statsmodels2010} provides
-more advanced statistical estimators and inference methods;
-scikit-learn\cite{pedregosa2011scikit} covers machine learning; and
-PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and 
-PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
-scikit-image\cite{vanderwalt2014scikit} provides image processing
-capabilities beyond \texttt{scipy.ndimage}, sympy\cite{meurer2017sympy}
-provides a Python interface for symbolic computation, and
-NetworkX\cite{hagberg2008networkx} is a Python library for probing
-graphs and networks in a more specialized way than SciPy components
-like \texttt{sparse.csgraph} or \texttt{spatial}.
-
-We use the following criteria to determine whether or not to include new
-functionality in SciPy:
-\begin{itemize}
-    \item The algorithm is of relevance to multiple fields of science.
-    \item The algorithm is demonstrably important.  For example, it is classic
-    enough to be included in textbooks, or it is based on a peer-reviewed article
-    which has a significant number of citations.
-\end{itemize}
-
-In terms of software systems and architecture, SciPy's scope matches NumPy's:
-algorithms for in-memory computing on single machines, with support for a wide
-range of data types and process architectures. Distributed computing and support
-for graphics processing units (GPUs) is explicitly out of scope.
 
 \subsection*{Current status}
 
@@ -728,9 +684,44 @@ highlighted in Figure~\ref{fig:timeline}.
 
 
 \section*{Architecture and implementation choices}
+\subsection*{Project scope}
+
+SciPy provides fundamental algorithms for scientific computing. The
+breadth of its scope was derived from the Guide to Available Mathematical
+Software classification system (GAMS\cite{boisvert1991guide}). In areas
+that move relatively slowly, e.g. linear algebra, SciPy aims to provide
+complete coverage. In other areas it aims to provide fundamental building
+blocks while interacting well with other packages specialized in that area.
+For example, SciPy provides what one expects to find in a
+statistics textbook (probability distributions, hypothesis tests, frequency
+statistics, correlation functions, and more), while 
+Statsmodels\cite{statsmodels2010} provides
+more advanced statistical estimators and inference methods;
+scikit-learn\cite{pedregosa2011scikit} covers machine learning; and
+PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and 
+PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
+scikit-image\cite{vanderwalt2014scikit} provides image processing
+capabilities beyond \texttt{scipy.ndimage}, sympy\cite{meurer2017sympy}
+provides a Python interface for symbolic computation, and
+NetworkX\cite{hagberg2008networkx} is a Python library for probing
+graphs and networks in a more specialized way than SciPy components
+like \texttt{sparse.csgraph} or \texttt{spatial}.
+
+We use the following criteria to determine whether or not to include new
+functionality in SciPy:
+\begin{itemize}
+    \item The algorithm is of relevance to multiple fields of science.
+    \item The algorithm is demonstrably important.  For example, it is classic
+    enough to be included in textbooks, or it is based on a peer-reviewed article
+    which has a significant number of citations.
+\end{itemize}
+
+In terms of software systems and architecture, SciPy's scope matches NumPy's:
+algorithms for in-memory computing on single machines, with support for a wide
+range of data types and process architectures. Distributed computing and support
+for graphics processing units (GPUs) is explicitly out of scope.
 
 \subsection*{Package organization}
-
 \input{subpackages}
 
 \subsection*{Language choices}
