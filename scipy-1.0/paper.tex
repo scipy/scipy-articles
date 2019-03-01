@@ -311,7 +311,7 @@ custom scripting language with Python\cite{STScI-slither}.
 \subsection*{SciPy Begins}
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
-By the late 1990s, discussions appeared on Matrix-SIG,
+By the late 1990s, discussions appeared on Matrix-SIG
 expressing a desire for a complete scientific data analysis environment\cite{Travis-Keynote-2010}.
 Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\cite{Travis-some-modules,Travis-enhance} 
@@ -327,7 +327,7 @@ undergraduate student (and currently a SciPy core developer), provided
 compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
 Around the same time, Pearu Peterson, a PhD student from Estonia,
-released f2py\cite{Pearu-f2py-mail}, a command line tool for binding Python and Fortran
+released F2PY\cite{peterson2009f2py}, a command line tool for binding Python and Fortran
 codes, and wrote modules for linear algebra and interpolation.
 % Graduated 1999, Duke
 Eric Jones, while a graduate student at Duke, wrote a number of
@@ -382,7 +382,7 @@ In September, the first documentation was
 published\cite{first-scipy-docs}.
 The first SciPy
 workshop\cite{first-scipy-workshop}
-was held in September 2002 at CalTech---a single track, two day event with 50
+was held in September 2002 at Caltech---a single track, two day event with 50
 participants, many of them developers of SciPy and surrounding libraries.
 
 %and by the following September the inaugural SciPy workshop was held
@@ -406,10 +406,8 @@ Technology, started work on a 3D visualization application, based on
 Kitware's C++ Visualization Toolkit\cite{schroeder:2006:VTK}, called
 Mayavi\cite{mayavi-intro}.
 In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell (that would
-eventually blossom into Project Jupyter\cite{Kluyver:2016aa}), built into
-IPP, an earlier attempt by Janko Hauser, and including code from
-Nathan Gray's LazyPython.
+Colorado, Boulder, created the IPython interactive shell, which 
+eventually blossomed into Project Jupyter\cite{Kluyver:2016aa}.
 % IPython hosted on SciPy:
 % https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
 John Hunter, a postdoc
@@ -443,7 +441,7 @@ problems with the Python numerical array container.
 Numeric, the original array package, was
 suitable for small arrays, but not for the large images processed by
 STScI.  With the Numeric maintainer's blessing, the decision was made
-to write NumArray, a library that could handle data on a different
+to write NumArray, a library that could handle data on a larger
 scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
@@ -476,7 +474,7 @@ doing compute-intensive calculations on massively parallel computers.
 \end{quote}
 While it is now more commonly accepted, Dubois took the time to explain to
 the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
-He also shares his own interest in Python for ``computational steering''
+He also shared his own interest in Python for ``computational steering''
 where ``Python serves as the input language to a scientific application, and the actual
 computations are performed both in Python itself and in compiled extensions.''
 %https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
@@ -604,17 +602,13 @@ speakers from outside the community, such as Guido van Rossum (creator
 of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
 Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
 The SciPy conference went from being a small gathering of
-core developers, to a multi-location event, with increased funding, a
-published proceedings, and scholarships for attending students (some
-of whom are authors on this paper).  In 2010, the conference grew even
-further, with an additional event added in India, and the US
-conference—now with parallel tracks—moving to Austin, Texas.
-While the US SciPy conference kept growing (by 2010 it had multiple
-tracks, student sponsorship, proceedings, and funding), satellite
-events were being organized by volunteers elsewhere, such as EuroSciPy
+core developers to a multi-location event with increased funding, a
+published proceedings, and scholarships for attending students.
+By 2010, the US SciPy conference had multiple tracks, and satellite
+conferences were being organized by volunteers elsewhere, such as EuroSciPy
 (2008–) and SciPy India (2009–).
 Special sessions and minisymposia dedicated to scientific Python began
-appearing at many events.
+appearing at many other events.
 For example, a three-part minisymposium organized for CSE 2009 was
 featured in SIAM News\cite{siamcse09}.
 
@@ -628,26 +622,26 @@ The follow-up CiSE March/April 2011 Python for Scientists and Engineers
 special issue\cite{millman2011python}, focused more on the core parts
 of the scientific Python ecosystem\cite{perez2011python} including
 NumPy\cite{vanderwalt2011numpy}, Cython\cite{behnel2011cython},
-and Mayavi\cite{ramachandran2011mayavi}.
-
-Python has become so pervasive, there are now domain-specific special issues.
-For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
+and Mayavi\cite{ramachandran2011mayavi}. Python became so pervasive that 
+journals began publishing domain-specific special issues.
+For example, in 2015 Frontiers in Neuroinformatics published a collection of 25 articles---covering
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
-neuroscience\cite{python-FIN}.
+Neuroscience\cite{python-FIN}.
 
 In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
 and Fernando Pérez founded NumFOCUS\cite{numfocus},
- a 501(c)3 public charity whose mission is to
-``promote sustainable high-level programming languages, open code development,
+ a 501(c)3 public charity with a mission
+``to promote sustainable high-level programming languages, open code development,
 and reproducible scientific research.''
 While NumFOCUS is language agnostic, many of the early sponsored projects
 came from the scientific Python stack.
-Today it has over 25 sponsored projects including NumPy, SciPy, IPython, and
+Today it has 50 affiliated and sponsored projects including NumPy, SciPy, IPython, and
 Matplotlib.
 Among its other projects, NumFOCUS organizes a global network of 
 community driven educational programs, meetups, and conferences
 called PyData.
+
 
 \subsection*{SciPy Today}
 At the time of writing, the SciPy library consists of nearly 
@@ -659,6 +653,12 @@ new release every six months. Some of the major
 feature highlights from the three years preceding
 SciPy 1.0 are discussed in Section \ref{sec:technical_improvements}, 
 and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
+% At the time of writing, SciPy produces a new release
+% approximately every six months, and some of the major
+% feature highlights from the three years preceding
+% SciPy 1.0 are discussed in a technical improvements
+% section below. Some longer-term milestone events are
+% highlighted in Figure~\ref{fig:timeline}.
 
 \begin{figure}[H]
 \centering
@@ -667,6 +667,18 @@ and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
 the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
 \label{fig:timeline}
 \end{figure}
+
+% Release management
+
+% Jarrod
+%https://mail.python.org/pipermail/scipy-dev/2007-August/007613.html
+%Ralf
+%https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
+%https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
+%https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
+
+
+\section*{Architecture and implementation choices}
 
 \subsection*{Project scope}
 
@@ -704,21 +716,6 @@ In terms of software systems and architecture, SciPy's scope matches NumPy's:
 algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
-
-
-% Release management
-
-% Jarrod
-%https://mail.python.org/pipermail/scipy-dev/2007-August/007613.html
-%Ralf
-%https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
-%https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
-%https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
-
-
-
-
-\section*{Architecture and implementation choices}
 
 \subsection*{Submodule organization}
 
