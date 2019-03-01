@@ -729,8 +729,8 @@ for graphics processing units (GPUs) is explicitly out of scope.
 \subsection*{Language choices}
 
 Python, Cython, Fortran, C and C++ are the programming languages used to
-implement scientific algorithms in the SciPy library. An analysis of our code
-base using the \texttt{linguist} library\cite{linguistref} provides a 
+implement scientific algorithms in the SciPy library. An analysis of our 
+codebase using the \texttt{linguist} library\cite{linguistref} provides a 
 detailed breakdown as \% composition by programming language in 
 SciPy (Figure~\ref{fig:linguist}).
 
@@ -740,7 +740,7 @@ SciPy (Figure~\ref{fig:linguist}).
     \begin{tikzpicture}[font=\sffamily]
     \begin{axis}[height=6cm, width=10cm,
     ybar, ymax=60, ymin=0,bar width=1cm,
-    ylabel={\% of Scipy code base},
+    ylabel={\% of Scipy codebase},
     ytick={0,20,...,60},
     axis lines*=left,
     axis y line shift=0pt,
@@ -971,12 +971,12 @@ available in SciPy.
 \subsubsection*{Benchmark suite}
 
 The airspeed velocity (\texttt{asv}\cite{asvref}) library enables benchmarking Python packages
-over their lifetimes, and the performance of the SciPy code base was monitored
+over their lifetimes, and the performance of the SciPy codebase was monitored
 with \texttt{asv} starting in February of 2015 (PR \#4501). In addition to ensuring that
 unit tests are passing (see Test suite section below), confirming 
 that performance generally
 remains constant or improves over the commit hash history of the project allows
-us to objectively measure that our code base is improving.
+us to objectively measure that our codebase is improving.
 
 Consider the \texttt{asv} benchmark results shown in Figure~\ref{fig:asvbench}, spanning
 roughly nine years of project history. These demonstrate the gradual
@@ -1017,7 +1017,7 @@ include code linting with pyflakes and pycodestyle. There are more than $13000$
 unit tests in the test suite, which is written for usage with the pytest
 runner, and with a 76.5 \% coverage of approximately $204000$ lines of code
 holding steady for the last six months (Figure~\ref{fig:coverage}).  Some of
-the historical components of the code base would still benefit from increased
+the historical components of the codebase would still benefit from increased
 test coverage. Documentation for the code is automatically built and hosted by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3, a just-in-time compiled
@@ -1026,7 +1026,7 @@ version of the Python language.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{static/coverage-chart}
-\caption{\% coverage of the SciPy code base by unit tests over the six months
+\caption{\% coverage of the SciPy codebase by unit tests over the six months
 preceding June 28, 2018 as reported by the \texttt{codecov} service. The
 analysis of lines of source code covered is performed automatically in our
 continuous integration suite using the \texttt{pytest-cov} and \texttt{gcov}
@@ -1096,9 +1096,9 @@ to suggest and even implement improvements to enable
 more effective science applications. For example, there
 are common contributors to the SciPy and astropy core
 libraries\cite{astropy-2018}, and what works well for 
-one of the code bases, infrastructures, or communities 
-is often transferred in some form to the other. At the code
-base level, the \texttt{binned\_statistic} functionality
+one of the codebases, infrastructures, or communities 
+is often transferred in some form to the other. At the
+codebase level, the \texttt{binned\_statistic} functionality
 is one such cross-project contribution---it was initially
 developed in an Astropy-affiliated package
 and then placed in SciPy after the fact.
@@ -1126,9 +1126,9 @@ Guide\cite{scipy-dev-guide} provides guidance on how to do that.
 
 SciPy has a strong developer community and a massive user base. GitHub traffic
 metrics report roughly 20,000 unique visitors to the source website between May
-14 and May 27, 2018, with 721 unique copies (``clones") of the code base over
+14 and May 27, 2018, with 721 unique copies (``clones") of the codebase over
 that roughly two-week period. The developer community consists of 610 unique
-contributors of source code, with $>19,000$ commits accepted into the code base
+contributors of source code, with $>19,000$ commits accepted into the codebase
 (GitHub page data).
 
 From the user side, there were 13,096,468 downloads of SciPy from the Python
