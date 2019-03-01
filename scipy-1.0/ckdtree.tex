@@ -1,8 +1,8 @@
-The cKDTree module was rewritten in C++ with templated classes, and support for
+The \texttt{cKDTree} module was rewritten in C++ with templated classes, and support for
 periodic boundary conditions was added. A periodic boundary condition is typically 
 used in computer simulations of physical processes.
 
-In 2013, the time complexity of the k nearest neighbor search from
+In 2013, the time complexity of the $k$-nearest neighbor search from
 \texttt{cKDTree.query} was approximately loglinear \cite{knn-jake},
 consistent with its formal description \cite{kdtree-search-algo}.
 Since then, we've enhanced \texttt{cKDTree.query} by reimplementing it in
@@ -26,7 +26,7 @@ distance value retrieval has an amortized constant time complexity
 to a CSR, Compressed Sparse Column (CSC) or COOrdinate (COO) matrix to allow for 
 speedy arithmetic operations.
 
-In 2015 the cKDTree dual tree counting algorithm\cite{Moore2000ar}
+In 2015 the \texttt{cKDTree} dual tree counting algorithm\cite{Moore2000ar}
 was enhanced to support weights\cite{ckdtree-weights}, which are
 essential in many scientific applications, e.g. computing correlation
 functions of galaxies\cite{0004-637X-750-1-38}.
