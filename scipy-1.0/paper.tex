@@ -1064,8 +1064,18 @@ v1.0.0 106878 92984 13894 462574 208158 254416
   \addplot+[fill=red!30] table[x expr=\coordindex, y=uncovpyline] {\covtable} \closedcycle;
 \end{axis}
 \end{tikzpicture}
-\caption{\% coverage of the SciPy code base by unit tests over a five year
-time span predeceding the 1.0 release point. The reconstitution of historical
+\caption{
+Python (red) and compiled (blue) code volume in SciPy over time. 
+Deep-shaded area represents lines of code covered by units tests; 
+light-shaded area represents lines not covered. With the exception
+of the removal of $\approx$ 61,000 lines of compiled code for SciPy 
+v0.14 due to (insert reason), the volume of both compiled and Python
+code has increased between releases, as has the number of lines
+covered by unit tests. SciPy v1.0.0 was composed of 462,574 lines of
+compiled code with test coverage near 45\% and 106,878 lines of Python 
+code with test coverage near 87\%.
+
+The reconstitution of historical
 build and test environments was performed using a docker-based approach
 \cite{scipy-cov}. Analysis of lines of source code covered is performed 
 automatically in our continuous integration suite using the \texttt{pytest-cov}
