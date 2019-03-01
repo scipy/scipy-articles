@@ -970,16 +970,16 @@ available in SciPy.
 
 \subsubsection*{Benchmark suite}
 
-The airspeed velocity (asv\cite{asvref}) library enables benchmarking Python packages
+The airspeed velocity (\texttt{asv}\cite{asvref}) library enables benchmarking Python packages
 over their lifetimes, and the performance of the SciPy code base was monitored
-with asv starting in February of 2015 (PR \#4501). In addition to ensuring that
+with \texttt{asv} starting in February of 2015 (PR \#4501). In addition to ensuring that
 unit tests are passing (see Test suite section below), confirming 
 that performance generally
 remains constant or improves over the commit hash history of the project allows
 us to objectively measure that our code base is improving, to empower
 scientific applications.
 
-Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
+Consider the \texttt{asv} benchmark results shown in Figure~\ref{fig:asvbench}, spanning
 roughly nine years of project history. These demonstrate the gradual
 performance improvements in a nearest-neighbor search through
 \texttt{scipy.spatial.cKDTree.query()}, and can be run using:
