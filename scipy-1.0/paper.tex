@@ -311,7 +311,7 @@ custom scripting language with Python\cite{STScI-slither}.
 \subsection*{SciPy Begins}
 
 % PhD Mayo Clinic, started faculty position at BYU in 2001
-By the late 1990s, discussions appeared on Matrix-SIG,
+By the late 1990s, discussions appeared on Matrix-SIG
 expressing a desire for a complete scientific data analysis environment\cite{Travis-Keynote-2010}.
 Travis Oliphant, a PhD student at the Mayo Clinic,
 released a number of packages\cite{Travis-some-modules,Travis-enhance} 
@@ -327,7 +327,7 @@ undergraduate student (and currently a SciPy core developer), provided
 compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
 Around the same time, Pearu Peterson, a PhD student from Estonia,
-released f2py\cite{Pearu-f2py-mail}, a command line tool for binding Python and Fortran
+released F2PY\cite{peterson2009f2py}, a command line tool for binding Python and Fortran
 codes, and wrote modules for linear algebra and interpolation.
 % Graduated 1999, Duke
 Eric Jones, while a graduate student at Duke, wrote a number of
@@ -382,7 +382,7 @@ In September, the first documentation was
 published\cite{first-scipy-docs}.
 The first SciPy
 workshop\cite{first-scipy-workshop}
-was held in September 2002 at CalTech---a single track, two day event with 50
+was held in September 2002 at Caltech---a single track, two day event with 50
 participants, many of them developers of SciPy and surrounding libraries.
 
 %and by the following September the inaugural SciPy workshop was held
@@ -406,10 +406,8 @@ Technology, started work on a 3D visualization application, based on
 Kitware's C++ Visualization Toolkit\cite{schroeder:2006:VTK}, called
 Mayavi\cite{mayavi-intro}.
 In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell (that would
-eventually blossom into Project Jupyter\cite{Kluyver:2016aa}), built into
-IPP, an earlier attempt by Janko Hauser, and including code from
-Nathan Gray's LazyPython.
+Colorado, Boulder, created the IPython interactive shell, which 
+eventually blossomed into Project Jupyter\cite{Kluyver:2016aa}.
 % IPython hosted on SciPy:
 % https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
 John Hunter, a postdoc
@@ -443,7 +441,7 @@ problems with the Python numerical array container.
 Numeric, the original array package, was
 suitable for small arrays, but not for the large images processed by
 STScI.  With the Numeric maintainer's blessing, the decision was made
-to write NumArray, a library that could handle data on a different
+to write NumArray, a library that could handle data on a larger
 scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
@@ -476,7 +474,7 @@ doing compute-intensive calculations on massively parallel computers.
 \end{quote}
 While it is now more commonly accepted, Dubois took the time to explain to
 the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
-He also shares his own interest in Python for ``computational steering''
+He also shared his own interest in Python for ``computational steering''
 where ``Python serves as the input language to a scientific application, and the actual
 computations are performed both in Python itself and in compiled extensions.''
 %https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
@@ -604,17 +602,13 @@ speakers from outside the community, such as Guido van Rossum (creator
 of Python, 2006), Ivan Krstić (One Laptop per Child, 2007), Alex
 Martelli (Google, 2008), and Peter Norvig (Google Research, 2009).
 The SciPy conference went from being a small gathering of
-core developers, to a multi-location event, with increased funding, a
-published proceedings, and scholarships for attending students (some
-of whom are authors on this paper).  In 2010, the conference grew even
-further, with an additional event added in India, and the US
-conference—now with parallel tracks—moving to Austin, Texas.
-While the US SciPy conference kept growing (by 2010 it had multiple
-tracks, student sponsorship, proceedings, and funding), satellite
-events were being organized by volunteers elsewhere, such as EuroSciPy
+core developers to a multi-location event with increased funding, a
+published proceedings, and scholarships for attending students.
+By 2010, the US SciPy conference had multiple tracks, and satellite
+conferences were being organized by volunteers elsewhere, such as EuroSciPy
 (2008–) and SciPy India (2009–).
 Special sessions and minisymposia dedicated to scientific Python began
-appearing at many events.
+appearing at many other events.
 For example, a three-part minisymposium organized for CSE 2009 was
 featured in SIAM News\cite{siamcse09}.
 
@@ -628,26 +622,63 @@ The follow-up CiSE March/April 2011 Python for Scientists and Engineers
 special issue\cite{millman2011python}, focused more on the core parts
 of the scientific Python ecosystem\cite{perez2011python} including
 NumPy\cite{vanderwalt2011numpy}, Cython\cite{behnel2011cython},
-and Mayavi\cite{ramachandran2011mayavi}.
-
-Python has become so pervasive, there are now domain-specific special issues.
-For example, Frontiers in Neuroinformatics has a collection of 25 articles---covering
+and Mayavi\cite{ramachandran2011mayavi}. Python became so pervasive that 
+journals began publishing domain-specific special issues.
+For example, in 2015 Frontiers in Neuroinformatics published a collection of 25 articles---covering
 topics including modeling and simulation, data collection, electrophysiology, visualization,
 as well as stimulus generation and presentation---called Python in
-neuroscience\cite{python-FIN}.
+Neuroscience\cite{python-FIN}.
 
 In 2012, Perry Greenfield, John Hunter, Jarrod Millman, Travis Oliphant,
 and Fernando Pérez founded NumFOCUS\cite{numfocus},
- a 501(c)3 public charity whose mission is to
-``promote sustainable high-level programming languages, open code development,
+ a 501(c)3 public charity with a mission
+``to promote sustainable high-level programming languages, open code development,
 and reproducible scientific research.''
 While NumFOCUS is language agnostic, many of the early sponsored projects
 came from the scientific Python stack.
-Today it has over 25 sponsored projects including NumPy, SciPy, IPython, and
+Today it has 50 affiliated and sponsored projects including NumPy, SciPy, IPython, and
 Matplotlib.
 Among its other projects, NumFOCUS organizes a global network of 
 community driven educational programs, meetups, and conferences
 called PyData.
+
+
+\subsection*{SciPy Today}
+At the time of writing, the SciPy library consists of nearly 
+600,000 lines of code organized in 16 subpackages. 
+Over 85,000 GitHub repositories and almost 5000 packages depend
+on SciPy. SciPy's GitHub repository attracts approximately 20,000 unique 
+visitors every two weeks, and more than 100 people contribute to a 
+new release every six months. Some of the major
+feature highlights from the three years preceding
+SciPy 1.0 are discussed in Section \ref{sec:technical_improvements}, 
+and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
+% At the time of writing, SciPy produces a new release
+% approximately every six months, and some of the major
+% feature highlights from the three years preceding
+% SciPy 1.0 are discussed in a technical improvements
+% section below. Some longer-term milestone events are
+% highlighted in Figure~\ref{fig:timeline}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{static/scipy_timeline}
+\caption{Major milestones from SciPy's initial release in 2001 to
+the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
+\label{fig:timeline}
+\end{figure}
+
+% Release management
+
+% Jarrod
+%https://mail.python.org/pipermail/scipy-dev/2007-August/007613.html
+%Ralf
+%https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
+%https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
+%https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
+
+
+\section*{Architecture and implementation choices}
 
 \subsection*{Project scope}
 
@@ -685,49 +716,6 @@ In terms of software systems and architecture, SciPy's scope matches NumPy's:
 algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
-
-\subsection*{Current status}
-
-At the time of writing, SciPy produces a new release
-approximately every six months, and some of the major
-feature highlights from the three years preceding
-SciPy 1.0 are discussed in a technical improvements
-section below. Some longer-term milestone events are
-highlighted in Figure~\ref{fig:timeline}.
-
-\begin{figure}[H]
-\begin{verbatim}
-    2001: first SciPy release
-    2005: transition to NumPy
-    2007: creation of scikits
-    2008: spatial module and first Cython code added
-    2010: move to a 6-monthly release cycle
-    2011: development moves to GitHub
-    2011: Python 3 support
-    2012: add a sparse graph module and unified optimization interface
-    2012: removal of maxentropy
-    2013: continuous integration with TravisCI
-    2015: adding Cython interface for BLAS/LAPACK and a benchmark suite
-    2017: add a unified C API with LowLevelCallable; remove weave
-    2017: SciPy 1.0 release
-\end{verbatim}
-\caption{Timeline}
-\label{fig:timeline}
-\end{figure}
-
-% Release management
-
-% Jarrod
-%https://mail.python.org/pipermail/scipy-dev/2007-August/007613.html
-%Ralf
-%https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
-%https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
-%https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
-
-
-
-
-\section*{Architecture and implementation choices}
 
 \subsection*{Submodule organization}
 
@@ -850,7 +838,7 @@ interface (ABI). This ABI has been stable for a long time, and we aim to
 evolve it only in a backwards compatible way.
 
 \section*{Key technical improvements}
-
+\label{sec:technical_improvements}
 Here we describe key technical improvements made in the last three years.
 
 \subsection*{Data structures}
@@ -1237,9 +1225,11 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 
 \section*{Supporting Information}
 
-% separate Figure numbering for SI
+% separate Figure / Table numbering for SI
 \renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
 \setcounter{figure}{0}
+\setcounter{table}{0}
 
 \begin{figure}[H]
 \centering
@@ -1302,7 +1292,73 @@ The spline representation used by \code{BSpline} is directly
 compatible with FITPACK. We recommend that users work with
 \code{BSpline} objects instead of directly manipulating \code{tck}
 tuples of knots, coefficients and the spline degree.
-%
+
+\section*{Numerical Optimization: Additional Details}
+The \texttt{scipy.optimize} module provides functions for the numerical solution of several classes of root finding and optimization problems:
+\begin{enumerate}
+\item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
+\item linear sum assignment problems (\texttt{linear\textunderscore sum\textunderscore assignment}),
+\item linear and nonlinear sum-of-squares problems (\texttt{leastsq}, \texttt{least\textunderscore squares}, \texttt{nnls}, \texttt{lsq\textunderscore linear}, and \texttt{curve\textunderscore fit}),
+\item general, linear optimization problems (\texttt{linprog}),
+\item general, nonlinear, local optimization problems of a single variable (\texttt{minimize\textunderscore scalar}),
+\item general, nonlinear, local optimization problems of several variables (\texttt{minimize}), and
+\item general, nonlinear, global optimization problems of several variables (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
+\end{enumerate}
+
+\begin{table}[H]
+  \centering
+  \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
+    The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
+    (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
+    indicates whether first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
+    with $\sim$ the algorithm does not requires second-order derivatives from
+    the user; it computes an approximation internally and uses it to accelerate method convergence.
+    \textit{Iterative Hessian factorization} denotes algorithms that factorize the Hessian in an iterative way,
+    which does not require explicit matrix factorization or storage of the Hessian.
+    \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
+    iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
+    has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
+    \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
+    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
+    can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
+    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
+  \begin{tabular}{cccccccccccccc}
+      & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
+    \hline
+    Version added &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.9 &  0.6* &  0.6* & 0.13 & 0.13 & 0.19 & 1.0 \\
+    \hline
+    Wrapper & & & \cmark & & & \cmark & \cmark & \cmark & &  & & & \cmark \\
+    \hline
+    \nth{1} derivatives &  & & & \cmark  & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \nth{2} derivatives &  &  &  &  & $\sim$ & $\sim$ & $\sim$ & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \makecell{Iterative Hessian \\
+    factorization} & & & &  & & & & \cmark & \cmark &  & \cmark &  & \cmark \\
+    \hline
+    Local convergence& & & & L & S &  L & S & S$^*$ & S$^*$ & Q & S$^*$ & Q & S$^*$  \\
+    \hline
+    Global convergence & & &  &   & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark  \\
+    \hline
+    \makecell{Line-search (LS) or\\ trust-region (TR)} & Neither  & LS &  TR & LS & LS & LS & LS & LS & LS & TR & TR & TR & TR \\
+    \hline
+    Bound constraints &&&\cmark&&&&\cmark&\cmark&\cmark&&&& \\
+    \hline
+    Equality constraints &&&&&&&\cmark&&&&& \\
+    \hline
+    Inequality constraint &&&\cmark&&&&\cmark&&&&& \\
+    \hline
+    References & \cite{nelder_simplex_1965, wright_direct_1996} & \cite{powell_efficient_1964} &
+      \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
+      \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
+      \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
+      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
+      \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
+      \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, lenders_trlib:_2016} \\
+    \hline
+  \end{tabular}
+  \label{tab:minimize-si}
+\end{table}
 
 %To include, in this order: \textbf{Accession codes} (where applicable);
 %\textbf{Competing financial interests} (mandatory statement).
