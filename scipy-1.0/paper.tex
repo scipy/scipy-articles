@@ -8,7 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{float}
-\usepackage{pgfplots}
+\usepackage{pgfplotstable}
 \usepackage[multiple]{footmisc}
 
 \pgfplotsset{compat=newest}
@@ -978,12 +978,60 @@ version of the Python language.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{static/coverage-chart}
-\caption{\% coverage of the SciPy codebase by unit tests over the six months
-preceding June 28, 2018 as reported by the \texttt{codecov} service. The
-analysis of lines of source code covered is performed automatically in our
-continuous integration suite using the \texttt{pytest-cov} and \texttt{gcov}
-libraries.}
+\begin{tikzpicture}[]
+\pgfplotstableread[column/ver/.style=string type]{
+ver totpyline covpyline uncovpyline totcompline covcompline uncovcompline
+v0.12.1 33844 25721 8123 273634  142290 131344
+v0.13.3 36638 28944 7694 338926  172852 166074
+v0.14.1 37301 30587 6714 277643  147151 130492
+v0.15.1 38339 30288 8051 304898  158547 146351
+v0.16.1 40094 32075 8019 322398  167647 154751
+v0.17.1 42566 34478 8088 340903  170452 170451
+v0.18.1 44711 36216 8495 353417  173174 180243
+v0.19.1 43823 36373 7450 436900  200974 235926
+v1.0.0 106878 92984 13894 462574 208158 254416
+}\covtable
+    \begin{axis}[
+    width=\textwidth,
+    height=7cm,
+    enlargelimits=false,
+    ymin=0,
+    ymax=6e5,
+    stack plots=y,%   
+    area style,
+    xtick=data,
+    ytick={2e5,4e5,6e5},
+    xticklabels from table={\covtable}{ver},
+    scaled y ticks=false,
+    y tick label style={/pgf/number format/.cd, fixed, 1000 sep={}},
+    legend entries={Compiled (covered),Compiled (uncovered),Python (covered),Python (uncovered)},
+    legend style={draw=none,fill=none, cells={align=left},/tikz/every even column/.append style={column sep=3mm}},
+    legend columns=-1,
+    legend image code/.code={\fill[#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm);},
+    ]
+  \addplot+[fill=blue!50] table[x expr=\coordindex, y=covcompline] {\covtable} \closedcycle;
+  \addplot+[fill=blue!10] table[x expr=\coordindex, y=uncovcompline] {\covtable} \closedcycle;
+  \addplot+[fill=red!70] table[x expr=\coordindex, y=covpyline] {\covtable} \closedcycle;
+  \addplot+[fill=red!30] table[x expr=\coordindex, y=uncovpyline] {\covtable} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+\caption{
+% This paragraph of caption won't compile
+%Python (red) and compiled (blue) code volume in SciPy over time. 
+%Deep-shaded area represents lines of code covered by units tests; 
+%light-shaded area represents lines not covered. With the exception
+%of the removal of $\approx$ 61,000 lines of compiled code for SciPy 
+%v0.14 due to (insert reason), the volume of both compiled and Python
+%code has increased between releases, as has the number of lines
+%covered by unit tests. SciPy v1.0.0 was composed of 462,574 lines of
+%compiled code with test coverage near 45\% and 106,878 lines of Python 
+%code with test coverage near 87\%.
+The reconstitution of historical
+build and test environments was performed using a docker-based approach
+\cite{scipy-cov}. Analysis of lines of source code covered is performed 
+automatically in our continuous integration suite using the \texttt{pytest-cov}
+and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
+inclusion of additional vendored code.}
 \label{fig:coverage}
 \end{figure}
 
