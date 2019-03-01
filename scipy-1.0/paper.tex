@@ -1000,32 +1000,27 @@ libraries.}
 The airspeed velocity (\texttt{asv}\cite{asvref}) library enables benchmarking Python packages
 over their lifetimes, and the performance of the SciPy codebase was monitored
 with \texttt{asv} starting in February of 2015 (PR \#4501). In addition to ensuring that
-unit tests are passing (see section \ref{sec:testsuite}), confirming 
-that performance generally
+unit tests are passing, confirming that performance generally
 remains constant or improves over the commit hash history of the project allows
-us to objectively measure that our codebase is improving.
-
-Consider the \texttt{asv} benchmark results shown in Figure~\ref{fig:asvbench}, spanning
-roughly nine years of project history. These demonstrate the gradual
-performance improvements in a nearest-neighbor search through
-\texttt{scipy.spatial.cKDTree.query()}, and can be run using:
-
-\texttt{python run.py run -e -s 800 --bench "\textbackslash
-btime\_query\textbackslash b" "02de46a546..b3ddb2c"},
-
-where \texttt{run.py} is a light wrapper script around \texttt{asv}
-that is packaged with SciPy.
+us to objectively measure that our codebase is improving. Figure~\ref{fig:asvbench}
+shows an example benchmark results for \texttt{scipy.spatial.cKDTree.query} over 
+roughly nine years of project history.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-\caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query()
-over a roughly nine year commit history time frame. The results are based on
+\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query}. 
+The results are based on
 Python 2.7 performance on the master branch of the project using NumPy 1.8.2
 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
 compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
 backward compatibility and sampling of the benchmarks there was no application
-of toroidal topology to the KDTree (boxsize argument was ignored).}
+of toroidal topology to the \texttt{KDTree} (\texttt{boxsize} argument was ignored). Such results
+can be generated using can be run using the command:
+\texttt{python run.py run -e -s 800 --bench "\textbackslash
+btime\_query\textbackslash b" "02de46a546..b3ddb2c"},
+where \texttt{run.py} is a light wrapper script around \texttt{asv}
+that is packaged with SciPy.}
 \label{fig:asvbench}
 \end{figure}
 
