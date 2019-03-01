@@ -642,32 +642,29 @@ Among its other projects, NumFOCUS organizes a global network of
 community driven educational programs, meetups, and conferences
 called PyData.
 
-\subsection*{Current status}
 
-At the time of writing, SciPy produces a new release
-approximately every six months, and some of the major
+\subsection*{SciPy Today}
+At the time of writing, the SciPy library consists of nearly 
+600,000 lines of code organized in 16 subpackages. 
+Over 85,000 GitHub repositories and almost 5000 packages depend
+on SciPy. SciPy's GitHub repository attracts approximately 20,000 unique 
+visitors every two weeks, and more than 100 people contribute to a 
+new release every six months. Some of the major
 feature highlights from the three years preceding
-SciPy 1.0 are discussed in a technical improvements
-section below. Some longer-term milestone events are
-highlighted in Figure~\ref{fig:timeline}.
+SciPy 1.0 are discussed in Section \ref{sec:technical_improvements}, 
+and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
+% At the time of writing, SciPy produces a new release
+% approximately every six months, and some of the major
+% feature highlights from the three years preceding
+% SciPy 1.0 are discussed in a technical improvements
+% section below. Some longer-term milestone events are
+% highlighted in Figure~\ref{fig:timeline}.
 
 \begin{figure}[H]
-\begin{verbatim}
-    2001: first SciPy release
-    2005: transition to NumPy
-    2007: creation of scikits
-    2008: spatial module and first Cython code added
-    2010: move to a 6-monthly release cycle
-    2011: development moves to GitHub
-    2011: Python 3 support
-    2012: add a sparse graph module and unified optimization interface
-    2012: removal of maxentropy
-    2013: continuous integration with TravisCI
-    2015: adding Cython interface for BLAS/LAPACK and a benchmark suite
-    2017: add a unified C API with LowLevelCallable; remove weave
-    2017: SciPy 1.0 release
-\end{verbatim}
-\caption{Timeline}
+\centering
+\includegraphics[width=0.95\textwidth]{static/scipy_timeline}
+\caption{Major milestones from SciPy's initial release in 2001 to
+the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
 \label{fig:timeline}
 \end{figure}
 
@@ -679,8 +676,6 @@ highlighted in Figure~\ref{fig:timeline}.
 %https://mail.python.org/pipermail/numpy-discussion/2010-March/049057.html
 %https://mail.python.org/pipermail/scipy-dev/2010-March/014034.html
 %https://mail.python.org/pipermail/scipy-dev/2010-April/014091.html
-
-
 
 
 \section*{Architecture and implementation choices}
@@ -843,7 +838,7 @@ interface (ABI). This ABI has been stable for a long time, and we aim to
 evolve it only in a backwards compatible way.
 
 \section*{Key technical improvements}
-
+\label{sec:technical_improvements}
 Here we describe key technical improvements made in the last three years.
 
 \subsection*{Data structures}
