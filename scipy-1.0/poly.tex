@@ -14,7 +14,7 @@ the \code{interp1d} routine. To further complicate matters, the spline format
 used by \code{splmake}/\code{spleval} was incompatible with
 \code{splrep}/\code{splev}.
 %
-Routines for manipulating piecewise polynomials and b-splines were either not available or lacking in ease of use and/or performance characteristics.
+Routines for manipulating piecewise polynomials and B-splines were either not available or lacking in ease of use and/or performance characteristics.
 
 Implementing a new, modular design of polynomial interpolators was spread over
 several releases. The goals of this effort were to have a set of basic objects
@@ -34,7 +34,7 @@ In the next layer, these polynomial classes are used for constructing several co
 %
 Interpolation with known or estimated derivatives, i.e., cubic or higher-order Hermite splines, can be constructed by either subclassing \code{PPoly} or \code{BPoly}, or using the factory method \code{BPoly.from\_derivatives}.
 
-For working with b-splines, there are several options. The basic object is \code{BSpline}, which represents spline curves, i.e., linear combinations of b-spline basis elements.\cite{deBoor1978}. The spline
+For working with B-splines, there are several options. The basic object is \code{BSpline}, which represents spline curves, i.e., linear combinations of B-spline basis elements.\cite{deBoor1978}. The spline
 representation used by \code{BSpline} is directly compatible with FITPACK. We
 recommend that users work with \code{BSpline} objects instead of directly
 manipulating \code{tck} tuples of knots, coefficients and the spline degree.
