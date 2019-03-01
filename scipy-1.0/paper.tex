@@ -944,10 +944,10 @@ The \texttt{scipy.stats} module provides more than 100 probability
 distributions and a framework to implement additional distributions. Given an
 expression for a probability distribution function (pdf), the framework will
 calculate moments, cumulative distribution function (cdf), differential
-entropy, and more. Those properties are calculated based on generic code, e.g.,
-numerical integration of the pdf to obtain the cdf.  Where possible, the
-generic code is replaced by explicit formulas or more accurate or efficient
-implementations. For example, most distributions have an explicit formula for
+entropy, and more. By default, these properties are calculated by generic code, e.g.
+numerical integration of the pdf to obtain the cdf, but the
+generic code can be replaced by explicit formulas or more accurate/efficient
+implementations when available. For example, most distributions have an explicit formula for
 the cdf, so it is used instead of integrating the pdf. The distributions
 framework also allows the user to draw random variates from the distribution.
 Drawing random variates now accepts a \texttt{random\_state} parameter, which
