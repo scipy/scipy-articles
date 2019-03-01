@@ -1,0 +1,12 @@
+# values extracted from Python coverage packages &
+# gcov via gcovr
+# SciPy commit hash | Python total lines | Compiled total lines
+v1.0.0 106878 462574
+v0.19.1 43823 436900
+v0.18.1 44711 353417
+v0.17.1 42566 340903
+v0.16.1 40094 322398
+v0.15.1 38339 304898
+v0.14.1 37301 277643
+v0.13.3 36638 338926
+v0.12.1 33844 273634
