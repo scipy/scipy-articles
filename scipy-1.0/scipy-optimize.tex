@@ -22,48 +22,7 @@ Compared to the previously implemented simplex method, the new interior-point me
 \subsubsection*{Nonlinear Optimization}
 \paragraph{Local Minimization}
 
-The \texttt{minimize} function provides methods for finding local minima of
-nonlinear optimization problems. It unifies several methods with a common 
-interface in order to facilitate interchanging between solvers with different
-characteristics. Characteristics of the different methods are summarized in 
-Table~\ref{tab:minimize-si}.
-%% Currently, this introduces a ton of whitespace around a very simple expression (min f(x)). The reader can easily find the standard of meaning of `nonlinear programming', so I believe it should be removed. If we decide that it is appropriate to include, then we should add the entire problem statement - including constraints - and we should also include the entire linear programming problem statement in the previous section.
-% summarizes all the methods available for solving minimization problems of the type:
-%\begin{equation}
-%  \label{eq:minimization-prob}
-%  \min_x f(x)
-%\end{equation}
-%where $f$ is a multivariate function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ and $x \in \mathbb{R}^n$.
-%%  Without the problem statement this sentence isn't really appropriate.
-%\texttt{COBYLA} and \texttt{SLSQP} methods support nonlinear constraints, \texttt{L-BFGS-B} and \texttt{TNC} allow box constraints $x^l \le x \le x^u$,
-%and the remaining methods are for unconstrained problems.
-
-% The available methods implement a variety of solution strategies.
-Derivative-free methods (e.g. \texttt{Nelder-Mead}, \texttt{Powell} and \texttt{COBYLA}) are appropriate for minimizing non-differentiable or
-noisy objective functions. When derivatives are available, however, other methods offer faster convergence rates
-and have proven convergence properties. 
-The derivative-based methods start with an initial guess and refine it iteratively, seeking
-a local solution to the optimization problem. Each of these algorithms implements one of two complementary strategies:
-line-search or trust-region. At each iteration, the line-search (LS) methods choose a direction
-and approximate the optimal point in the given direction. Trust-region (TR) methods, on the other
-hand, choose a ``trust-region'' region for which a local model is valid and approximate the best point
-inside.
-
-One recently-added trust-region method is \texttt{trust-exact},
-which achieves fast convergence by solving the trust-region subproblem almost exactly.
-Unfortunately, it requires the Hessian to be stored and factored every iteration, which may preclude
-the solution of large problems (e.g.~problems with more than 1000 variables).
-Other methods are appropriate for large-scale problems, including
-\texttt{CG}, which does not use second derivatives and thus has low memory requirements, and \texttt{L-BFGS-B}, which maintains a simple and compact representation of the Hessian.
-\texttt{Newton-CG}, \texttt{trust-ncg} and \texttt{trust-krylov} use second order derivatives to achieve faster
-convergence, but are still appropriate for large problems because they factorize the Hessian in an inexact and iterative way that does not require the Hessian to be stored.
-The method \texttt{trust-krylov}, introduced in the latest release, is a good compromise between
-\texttt{trust-ncg} and \texttt{trust-exact}: it provides a more accurate solution to the trust-region
-subproblem than \texttt{trust-ncg}, but it does not require the Hessian to be stored and factored as in \texttt{trust-exact}.
-
-While most \texttt{minimize} development prior to SciPy 1.0 has focused on unconstrained minimization, 
-% methods \texttt{SLSQP} and \texttt{COBYLA}\footnote{We note that any equality constraint $c_{\text{eq}}(x) = 0$ can be expressed as two inequality constraints $c_{\text{eq}}(x) \leq 0$ and $-c_{\text{eq}}(x) \leq 0$} 
-\texttt{SLSQP} supports fully general nonlinear programming. However, it does not provide special treatment for sparsity, limiting its utility to small problems. Accordingly, ongoing development efforts for \texttt{minimize} are focused on the addition of nonlinear programming algorithms for large, sparse problems. 
+The \texttt{minimize} function unifies several methods of finding local minima of nonlinear optimization problems in a common interface. Four new methods for unconstrained optimization were added to \texttt{minimize} in recent versions of SciPy: \texttt{dogleg}, \texttt{trust-ncg}, \texttt{trust-exact}, and \texttt{trust-krylov}. All are trust-region methods that build a local model of the objective function based on first- and second-derivative information, approximate the best point within a local ``trust region'', and iterate until a local minimum of the original objective function is reached, but each has unique characteristics that make it appropriate for certain types of problems. For instance, \texttt{trust-exact} achieves fast convergence by solving the trust-region subproblem almost exactly, but it requires the second-derivative Hessian matrix to be stored and factored every iteration, which may preclude the solution of large problems ($\geq 1000$ variables). On the other hand, \texttt{trust-ncg} and \texttt{trust-krylov} are well-suited to large-scale optimization problems because they do not need to store and factor the Hessian explicitly, instead using second-derivative information in a faster, approximate way. A detailed comparison of the characteristics of all \texttt{minimize} methods is presented in Table~\ref{tab:minimize-si}.
 
 
 \paragraph{Global Minimization}
