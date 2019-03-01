@@ -163,7 +163,7 @@ signal processing, interpolation, input / output, optimization, statistics,
 integration, and more. SciPy has routines for solving
 classes of generic problems such as optimization, integration,
 interpolation, eigenvalues, and linear systems.  It also provides
-specialized data structures, such as sparse arrays and k-dimensional
+specialized data structures, such as sparse arrays and $k$-dimensional
 trees. SciPy is built on top of NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
 which provides array data structures and related fast numerical routines.
 SciPy is itself the foundation upon which higher level scientific libraries,
@@ -679,7 +679,6 @@ the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
 
 
 \section*{Architecture and implementation choices}
-
 \subsection*{Project scope}
 
 SciPy provides fundamental algorithms for scientific computing. The
@@ -717,8 +716,7 @@ algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
 
-\subsection*{Submodule organization}
-
+\subsection*{Package organization}
 \input{subpackages}
 
 \subsection*{Language choices}
@@ -843,7 +841,7 @@ Here we describe key technical improvements made in the last three years.
 
 \subsection*{Data structures}
 
-\subsubsection*{cKDTree}
+\subsubsection*{\texttt{cKDTree}}
 
 \input{ckdtree}
 
@@ -994,13 +992,13 @@ that is packaged with SciPy.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-\caption{Airspeed velocity benchmarks for scipy.spatial.cKDTree.query()
+\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query()}
 over a roughly nine year commit history time frame. The results are based on
 Python 2.7 performance on the master branch of the project using NumPy 1.8.2
 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
 compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
 backward compatibility and sampling of the benchmarks there was no application
-of toroidal topology to the KDTree (boxsize argument was ignored).}
+of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
 \label{fig:asvbench}
 \end{figure}
 
@@ -1282,7 +1280,7 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{supporting_info/knn_complexity_confirm}
-\caption{Assessment of cKDTree nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
+\caption{Assessment of \texttt{cKDTree} nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
 \label{fig:knn-complexity}
 \end{figure}
 
@@ -1368,7 +1366,7 @@ The \texttt{scipy.optimize} module provides functions for the numerical solution
     has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
     \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
     point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
-    can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
+    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
     \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
   \begin{tabular}{cccccccccccccc}
       & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
