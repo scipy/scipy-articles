@@ -963,7 +963,6 @@ distributions are implemented.  Key recent distributions added to
 processing\cite{Griffiths5228}). \texttt{multinomial} is the first and so far
 the only multivariate discrete distribution available in SciPy.
 
-
 \subsection*{Polynomial interpolators}
 
 \input{poly}
@@ -1252,6 +1251,47 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 \caption{Airspeed velocity benchmarks for SciPy COO / DIA to CSR / CSC matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
 \label{fig:sparse-conv}
 \end{figure}
+
+\section{Polynomial Interpolators: Additional Details}
+FITPACK provides a collection of routines for calculating
+smoothing splines and automatic knot selection. One issue 
+with FITPACK and its Python wrappers in SciPy, \code{UnivariateSpline}
+and the \code{splrep}/\code{splev} combination, is the monolithic design:
+specific algorithms for construction of interpolating and 
+smoothing splines and knot selection are tightly coupled 
+at the Fortran level. The library offers a very
+limited degree of user control over the details 
+of the spline fitting it performs. 
+%
+Routines for manipulating piecewise polynomials and b-splines were either
+not available or lacking in ease of use and/or performance characteristics.
+
+An alternative set of spline interpolation routines was implemented in the
+(now deprecated) \code{splmake}/\code{spleval} combination, and used as a
+backend of the \code{interp1d} routine. To further complicate matters,
+the spline format used by \code{splmake}/\code{spleval} was incompatible 
+with \code{splrep}/\code{splev}.
+
+Using \code{UnivariateSpline} in new code is not recommended. Given data points,
+the helper function \code{make\_interp\_spline} constructs a \code{BSpline}
+instance, representing a spline which interpolates the data. Interpolated values
+at intermediate points can be computed either via its \code{\_\_call\_\_} method,
+or by calling \code{splev(xnew, BSpline\_object)} --- the \code{splev} routine
+accepts both \code{tck} tuples and \code{Bspline} instances.
+
+Fitting \emph{smoothing} splines to data can currently only be done with 
+FITPACK. Building alternative algorithms is certainly possible,
+but is still to be implemented.
+
+Interpolation with known or estimated derivatives, i.e., cubic or
+higher-order Hermite splines, can be constructed by either
+subclassing \code{PPoly} or \code{BPoly}, or using the factory
+method \code{BPoly.from\_derivatives}.
+
+The spline representation used by \code{BSpline} is directly
+compatible with FITPACK. We recommend that users work with
+\code{BSpline} objects instead of directly manipulating \code{tck}
+tuples of knots, coefficients and the spline degree.
 
 \section*{Numerical Optimization: Additional Details}
 The \texttt{scipy.optimize} module provides functions for the numerical solution of several classes of root finding and optimization problems:
