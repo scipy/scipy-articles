@@ -729,26 +729,7 @@ SciPy (Figure~\ref{fig:linguist}).
 
 \begin{figure}[H]
     \centering
-
-    \begin{tikzpicture}[font=\sffamily]
-    \begin{axis}[height=6cm, width=10cm,
-    ybar, ymax=60, ymin=0,bar width=1cm,
-    ylabel={\% of Scipy code base},
-    ytick={0,20,...,60},
-    axis lines*=left,
-    axis y line shift=0pt,
-    enlarge x limits=0.15,
-    symbolic x coords={py,f,c,cy,cpp},
-    xticklabels={Python,FORTRAN,C,Cython,C++},
-    ticklabel style={align=center,font=\sffamily\small,
-    /pgf/number format/assume math mode=true},
-    xtick=data,
-    nodes near coords,
-    nodes near coords style={/pgf/number format/assume math mode=true}
-    ]
-    \addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
-    \end{axis}
-    \end{tikzpicture}
+		\includegraphics[width=\textwidth]{static/composition}
     \caption{The breakdown of programming languages used in the
              SciPy library determined using the linguist library.
     	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
