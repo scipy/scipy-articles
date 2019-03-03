@@ -80,7 +80,7 @@
 \affil[17]{Affiliation, department, city, postcode, country}
 \affil[18]{Affiliation, department, city, postcode, country}
 \affil[19]{Affiliation, department, city, postcode, country}
-\affil[20]{Affiliation, department, city, postcode, country}
+\affil[20]{BioResource and Agricultural Engineering, California Polytechnic State University, San Luis Obispo, CA, 93407, USA}
 \affil[21]{Affiliation, department, city, postcode, country}
 \affil[22]{Affiliation, department, city, postcode, country}
 \affil[23]{Affiliation, department, city, postcode, country}
@@ -153,27 +153,29 @@ SciPy library and highlight some recent technical developments.
 %% on the collective work of numerous individuals, too many to mention.
 
 SciPy is a library of numerical routines for the Python programming
-language, providing the fundamental building blocks for modeling and
-solving scientific problems.  For example, when LIGO, the Laser
-Interferometer Gravitational-Wave Observatory, recently announced the
-discovery of gravitational waves, their published Python analysis
-scripts\cite{LIGO-open,alex_nitz_2018_1596771,GW150914-Python,
-PhysRevD.93.122003} imported many different SciPy submodules for:
-signal processing, interpolation, input / output, optimization, statistics,
-integration, and more. SciPy has routines for solving
-classes of generic problems such as optimization, integration,
-interpolation, eigenvalues, and linear systems.  It also provides
-specialized data structures, such as sparse arrays and k-dimensional
-trees. SciPy is built on top of NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
-which provides array data structures and related fast numerical routines.
+language that provides fundamental building blocks for modeling and
+solving scientific problems. 
+SciPy includes algorithms for optimization, integration, interpolation,
+eigenvalue problems, algebraic equations, differential equations, and many other
+classes of problems; it also provides
+specialized data structures, such as sparse arrays
+and $k$-dimensional trees. SciPy is built on top of 
+NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
+which provides array data structures and related fast numerical routines, and
 SciPy is itself the foundation upon which higher level scientific libraries,
 including scikit-learn\cite{pedregosa2011scikit}
-and scikit-image\cite{vanderwalt2014scikit}, are built.
+and scikit-image\cite{vanderwalt2014scikit}, are built. 
+SciPy is relied upon by scientists, engineers, and others 
+around the world. For example, published 
+scripts\cite{alex_nitz_2018_1596771, LIGO-open}
+used in the analysis of gravitational waves
+\cite{PhysRevD.93.122003, abbott2017gw170817} 
+import several submodules of SciPy.
 
 Recently, SciPy released version 1.0, a milestone that traditionally
 signals a library's API (Applications Programming Interface) being
-mature enough to be be trusted in production pipelines.  The SciPy 1.0
-version numbering, however, belies the history of a project that has
+mature enough to be be trusted in production pipelines. This version 
+numbering convention, however, belies the history of a project that has
 become the standard which others follow and has seen extensive
 adoption in research and industry.
 
@@ -188,7 +190,7 @@ esri-revenue,bloom-wolfram}---was preposterous.
 
 Yet, the philosophical motivations behind a fully open toolstack, and
 an excited, friendly community with a singular focus, seemed to have
-proven decisive in the long run.  It led not only to the library
+proven auspicious in the long run.  It led not only to the library
 described in this paper, but also to an entire ecosystem of related
 packages \cite{scipy-ecosystem}, and a variety of social activities centered around
 them\cite{social-python}. The packages in the SciPy ecosystem 
@@ -197,16 +199,16 @@ documentation, and testing, and a culture eager to learn and adopt
 better practices---both for community management and software
 development.
 
-Despite its success, SciPy still faces challenges:
-a low ``bus factor''---meaning that the entire project depends on a small number of
-active contributors---being perhaps the most serious.
+% Despite its success, SciPy still faces challenges:
+% a low ``bus factor''---meaning that the entire project depends on a small number of
+% active contributors---being perhaps the most serious.
 
 In the background section that follows, we capture a selective history
 of some milestones and important events in the growth of SciPy.
 Despite what we might highlight here, it is important to understand
 that a project like SciPy is only possible because of the
 contributions of very many contributors---too many to mention
-individually, but each bringing an important part to the puzzle.
+individually, but each bringing an important piece to the puzzle.
 
 \section*{Background}
 
@@ -218,18 +220,17 @@ CPython\cite{cpython-refman,cpython-source}, which is written
 in the C and Python languages and assumed throughout this paper.
 % https://legacy.python.org/search/hypermail/python-1992/0000.html
 %
-As a general purpose programming language with a ``batteries included''
-standard library, it had no special support for scientific data
-structures or algorithms, unlike many of the other established
+As a general purpose programming language, it had no special support for 
+scientific data structures or algorithms, unlike many of the other established
 computation platforms of the time. Yet, scientists soon discovered the
 language's virtues, such as its ability to wrap C and Fortran
 libraries and to then drive those libraries interactively.  Scientists
 could thereby gain access to a wide variety of existing computational
-libraries, without concerning themselves with low-level programming
+libraries without concerning themselves with low-level programming
 concepts such as memory management.
 
-In 1995, Jim Hugunin, a graduate student from MIT, wrote in the first
-message on the Python Matrix Special Interest Group (Matrix-SIG)
+In 1995, Jim Hugunin, a graduate student from MIT, wrote the first
+message in a new Python Matrix Special Interest Group (Matrix-SIG)
 mailing list\cite{Hugunin-first}:
 \begin{quote}
 There seems to be a fair amount of interest in the Python community
@@ -242,7 +243,7 @@ of numbers.
 \end{quote}
 Over the next several months, conversations on that mailing
 list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
-Hinsen, and Guido van Rossum, led to the creation of an array object
+Hinsen, and Guido van Rossum, led to the creation of a package called Numeric with an array object
 that supported a high number of dimensions.  Jim Hugunin explained the utility
 of Python for numerical computation\cite{Hugunin-whitepaper}:
 \begin{quote}
@@ -255,15 +256,14 @@ programming language.
 This is still a distinguishing feature of Python for science, and one of the
 reasons why it has been so successful in the realm of data science: instead of
 adding general features to a language designed for numerical and scientific
-computing, here scientific features are added to a general purpose language
-instead.  This broadens the scope of problems that can be addressed easily, the
+computing, here scientific features are added to a general purpose language.  
+This broadens the scope of problems that can be addressed easily, expands the
 sources of data that are readily accessible, and increases the size of the
-community that develops general purpose tooling.
+community that develops code for the platform.
 
 The availability of a standard numerical array data structure in
-Python led to a sudden and rapidly growing number of scientific
-packages becoming available for solving various common numeric
-problems.
+Python led to a sudden, rapid growth in the number of scientific
+packages available for solving common numeric problems.
 A number of these packages were written by graduate students and
 postdoctoral researchers to solve the very practical research problems
 that they faced on a daily basis.  While they had access to and were
@@ -287,8 +287,8 @@ manual\cite{Numeric-manual}, and
 %on Numeric, the newly established Python array object.  Paul later
 %became the maintainer for Numeric, and helped fund the writing of the
 %first manual\footnote{https://conference.scipy.org/scipy2010/slides/travis_oliphant_keynote.pdf}
-in 1998 the Space Telescope Science Institute (STScI), in charge of science
-operations of the Hubble Space Telescope, decided to replace their
+in 1998 the Space Telescope Science Institute (STScI), which was in charge of 
+Hubble Space Telescope science operations, decided to replace their
 custom scripting language with Python\cite{STScI-slither}.
 
 
@@ -360,7 +360,7 @@ SciPy's current module set includes the following:
     Splines and Interpolation
     And other stuff.
 \end{verbatim}
-\caption{Excerpt from SciPy 0.1 release announcement.}\label{fig:announce-0.1}
+\caption{Excerpt from SciPy 0.1 release announcement (typos included).}\label{fig:announce-0.1}
 \end{figure}
 
 With a rich programming environment and a numerical array object in
@@ -679,7 +679,6 @@ the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
 
 
 \section*{Architecture and implementation choices}
-
 \subsection*{Project scope}
 
 SciPy provides fundamental algorithms for scientific computing. The
@@ -717,8 +716,7 @@ algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
 for graphics processing units (GPUs) is explicitly out of scope.
 
-\subsection*{Submodule organization}
-
+\subsection*{Package organization}
 \input{subpackages}
 
 \subsection*{Language choices}
@@ -962,6 +960,47 @@ available in SciPy.
 
 \subsection*{Test and benchmark suite}
 
+\subsubsection*{Benchmark suite}
+
+The airspeed velocity (asv\cite{asvref}) library enables benchmarking Python packages
+over their lifetimes, and the performance of the SciPy code base was monitored
+with asv starting in February of 2015 (PR \#4501). In addition to ensuring that
+unit tests are passing (see Test suite section below), confirming 
+that performance generally
+remains constant or improves over the commit hash history of the project allows
+us to objectively measure that our code base is improving, to empower
+scientific applications.
+
+Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
+roughly nine years of project history. These demonstrate the gradual
+performance improvements in a nearest-neighbor search through
+\texttt{scipy.spatial.cKDTree.query()}, and can be run using:
+
+\texttt{python run.py run -e -s 800 --bench "\textbackslash
+btime\_query\textbackslash b" "02de46a546..b3ddb2c"},
+
+where \texttt{run.py} is a light wrapper script around \texttt{asv}
+that is packaged with SciPy.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
+\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query()}
+over a roughly nine year commit history time frame. The results are based on
+Python 2.7 performance on the master branch of the project using NumPy 1.8.2
+and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
+compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
+backward compatibility and sampling of the benchmarks there was no application
+of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
+\label{fig:asvbench}
+\end{figure}
+
+Any pull request can be compared against the \texttt{master} branch with the
+command \texttt{asv continuous master new-feature}. This will provide a
+benchmark against the master branch and the branch a new feature is implemented
+in. More features are available in the \texttt{asv} documentation\cite{asvdocs}, including 
+arguments to select which benchmarks to run.
+
 \subsubsection*{Test suite}
 \label{sec:testsuite}
 
@@ -969,8 +1008,9 @@ The SciPy test suite is orchestrated by a continuous integration matrix that
 includes posix and Windows (32/64-bit) platforms managed by Travis CI and
 AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
 include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There are more than $13,000$
-unit tests in the test suite, which uses the \texttt{pytest} framework, and coverage of SciPy's approximately $204,000$ lines of code
-has held steady at 76.5\% for the last six months (Figure~\ref{fig:coverage}). 
+unit tests in the test suite, which uses the \texttt{pytest} framework, 
+and with 87 \% and 45 \% line coverages for Python and compiled
+code, respectively, at the SciPy 1.0 release point (Figure~\ref{fig:coverage}).
 Documentation for the code is automatically built and hosted by
 the CircleCI service to facilitate evaluation of documentation changes/integrity.  
 Our full test suite also passes with PyPy3, a just-in-time compiled
@@ -1033,29 +1073,6 @@ automatically in our continuous integration suite using the \texttt{pytest-cov}
 and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
 inclusion of additional vendored code.}
 \label{fig:coverage}
-\end{figure}
-
-\subsubsection*{Benchmark suite}
-
-In addition to ensuring that unit tests are passing, it is important to ensure that the
-the performance of the SciPy codebase improves over time. Since February 2015, the 
-performance of the SciPy codebase has been monitored with Airspeed Velocity
-(\texttt{asv}\cite{asvref}) library. Figure~\ref{fig:asvbench}
-shows example benchmark results for \texttt{scipy.spatial.cKDTree.query} over 
-roughly nine years of project history.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query}. 
-The results are based on
-Python 2.7 performance on the master branch of the project using NumPy 1.8.2
-and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
-compatibility). Only the $L^2$ (Euclidean) norm is shown here, and to improve
-backward compatibility and sampling of the benchmarks there was no application
-of toroidal topology to the \texttt{KDTree} (i.e. the \texttt{boxsize} argument 
-is $None$).}
-\label{fig:asvbench}
 \end{figure}
 
 % NOTE: is there a citation for PyPy?
@@ -1215,7 +1232,8 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
     \texttt{signal} & migrate spline functionality to \texttt{interpolate}\\
     \texttt{signal} & Second Order Sections update to match capabilities in other routines\\
     \texttt{linalg} & support a more recent version of LAPACK\\
-    \texttt{ndimage} & migrate to data point model from pixel model\\
+    \texttt{ndimage} & clarify usage of the ``data point'' coordinate
+    model, and add additional wrapping modes\\
     \texttt{sparse} & incorporate sparse arrays from Sparse package\cite{abbasi2018sparse} \\
     \texttt{sparse.linalg} & add PROPACK wrappers for faster SVD\\
     \texttt{spatial} & add support for (quaternion) rotation matrices\\
@@ -1256,7 +1274,7 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{supporting_info/knn_complexity_confirm}
-\caption{Assessment of cKDTree nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
+\caption{Assessment of \texttt{cKDTree} nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
 \label{fig:knn-complexity}
 \end{figure}
 
@@ -1342,7 +1360,7 @@ The \texttt{scipy.optimize} module provides functions for the numerical solution
     has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
     \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
     point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
-    can deal with constraints on the variables. We distinguish between: \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
+    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
     \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
   \begin{tabular}{cccccccccccccc}
       & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
