@@ -739,46 +739,46 @@ Figure~\ref{fig:linguist} provides a breakdown of the programming languages used
 in SciPy. While it is not surprising that Python is predominant, the usage distribution 
 of the other languages warrants discussion. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{static/scipy_languages}
-\caption{Composition of SciPy: lines of code in each programming language as determined by the \texttt{linguist} package.
-Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
-and Makefile (not visible) provide supporting roles in tests,
-building, and documentation.}
-\label{fig:linguist}
-\end{figure}
-
 %\begin{figure}[H]
-    %\centering
-%
-    %\begin{tikzpicture}[font=\sffamily]
-    %\begin{axis}[height=6cm, width=10cm,
-    %ybar, ymax=60, ymin=0,bar width=1cm,
-    %ylabel={\% of Scipy code base},
-    %ytick={0,20,...,60},
-    %axis lines*=left,
-    %axis y line shift=0pt,
-    %enlarge x limits=0.15,
-    %symbolic x coords={py,f,c,cy,cpp},
-    %xticklabels={Python,FORTRAN,C,Cython,C++},
-    %ticklabel style={align=center,font=\sffamily\small,
-    %/pgf/number format/assume math mode=true},
-    %xtick=data,
-    %nodes near coords,
-    %nodes near coords style={/pgf/number format/assume math mode=true}
-    %]
-    %\addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
-    %\end{axis}
-    %\end{tikzpicture}
-    %\caption{The breakdown of programming languages used in the
-             %SciPy library determined using the \texttt{linguist} library.
-    	 %Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
-    	 %and Makefile are excluded for clarity and mostly
-    	 %provide supporting roles in tests, building, and
-    	 %documentation.}
-    %\label{fig:linguist}
+%\centering
+%\includegraphics[width=0.5\textwidth]{static/scipy_languages}
+%\caption{Composition of SciPy: lines of code in each programming language as determined by the \texttt{linguist} package.
+%Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
+%and Makefile (not visible) provide supporting roles in tests,
+%building, and documentation.}
+%\label{fig:linguist}
 %\end{figure}
+
+\begin{figure}[H]
+    \centering
+
+    \begin{tikzpicture}[font=\sffamily]
+    \begin{axis}[height=6cm, width=10cm,
+    ybar, ymax=60, ymin=0,bar width=1cm,
+    ylabel={\% of Scipy code base},
+    ytick={0,20,...,60},
+    axis lines*=left,
+    axis y line shift=0pt,
+    enlarge x limits=0.15,
+    symbolic x coords={py,f,c,cy,cpp},
+    xticklabels={Python,FORTRAN,C,Cython,C++},
+    ticklabel style={align=center,font=\sffamily\small,
+    /pgf/number format/assume math mode=true},
+    xtick=data,
+    nodes near coords,
+    nodes near coords style={/pgf/number format/assume math mode=true}
+    ]
+    \addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{The breakdown of programming languages used in the
+             SciPy library determined using the \texttt{linguist} library.
+    	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
+    	 and Makefile are excluded for clarity and mostly
+    	 provide supporting roles in tests, building, and
+    	 documentation.}
+    \label{fig:linguist}
+\end{figure}
 
 Fortran is an
 extremely well-established scientific programming language, both for historical
