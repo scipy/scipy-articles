@@ -993,9 +993,9 @@ arguments to select which benchmarks to run.
 
 The SciPy test suite is orchestrated by a continuous integration matrix that
 includes posix and Windows (32/64-bit) platforms managed by Travis CI and
-appveyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
-include code linting with pyflakes and pycodestyle. There are more than $13000$
-unit tests in the test suite, which is written for usage with the pytest
+AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
+include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There are more than $13,000$
+unit tests in the test suite, which is written for usage with the \texttt{pytest}
 runner, and with 87 \% and 45 \% line coverages for Python and compiled
 code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}).
 Some of the historical components of the code base would still benefit from increased
@@ -1044,16 +1044,15 @@ v1.0.0 106878 92984 13894 462574 208158 254416
 \end{axis}
 \end{tikzpicture}
 \caption{
-% This paragraph of caption won't compile
-%Python (red) and compiled (blue) code volume in SciPy over time. 
-%Deep-shaded area represents lines of code covered by units tests; 
-%light-shaded area represents lines not covered. With the exception
-%of the removal of $\approx$ 61,000 lines of compiled code for SciPy 
-%v0.14 due to (insert reason), the volume of both compiled and Python
-%code has increased between releases, as has the number of lines
-%covered by unit tests. SciPy v1.0.0 was composed of 462,574 lines of
-%compiled code with test coverage near 45\% and 106,878 lines of Python 
-%code with test coverage near 87\%.
+Python (red) and compiled (blue) code volume in SciPy over time.
+Deep-shaded area represents lines of code covered by units tests;
+light-shaded area represents lines not covered. With the exception
+of the removal of $\approx 61,000$ lines of compiled code for SciPy
+v0.14, the volume of both compiled and Python
+code has increased between releases, as has the number of lines
+covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
+compiled code with test coverage near $45 \%$ and $106,878$ lines of 
+Python code with test coverage near $87 \%$.\\
 The reconstitution of historical
 build and test environments was performed using a docker-based approach
 \cite{scipy-cov}. Analysis of lines of source code covered is performed 
