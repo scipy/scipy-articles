@@ -1026,16 +1026,16 @@ inclusion of additional vendored code.}
 
 \subsubsection*{Benchmark suite}
 
-The airspeed velocity (asv\cite{asvref}) library enables benchmarking Python packages
+The airspeed velocity (\texttt{asv}\cite{asvref}) library enables benchmarking Python packages
 over their lifetimes, and the performance of the SciPy code base was monitored
-with asv starting in February of 2015 (PR \#4501). In addition to ensuring that
+with \texttt{asv} starting in February of 2015 (PR \#4501). In addition to ensuring that
 unit tests are passing (see Test suite section below), confirming 
 that performance generally
 remains constant or improves over the commit hash history of the project allows
 us to objectively measure that our code base is improving, to empower
 scientific applications.
 
-Consider the asv benchmark results shown in Figure~\ref{fig:asvbench}, spanning
+Consider the (\texttt{asv} benchmark results shown in Figure~\ref{fig:asvbench}, spanning
 roughly nine years of project history. These demonstrate the gradual
 performance improvements in a nearest-neighbor search through
 \texttt{scipy.spatial.cKDTree.query()}, and can be run using:
@@ -1049,11 +1049,11 @@ that is packaged with SciPy.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query()}
+\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query}
 over a roughly nine year commit history time frame. The results are based on
 Python 2.7 performance on the master branch of the project using NumPy 1.8.2
 and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
-compatibility). Only the L2 (Euclidean) norm is shown here, and to improve
+compatibility). Only the $L^2$ (Euclidean) norm is shown here, and to improve
 backward compatibility and sampling of the benchmarks there was no application
 of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
 \label{fig:asvbench}
@@ -1061,7 +1061,7 @@ of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
 
 Any pull request can be compared against the \texttt{master} branch with the
 command \texttt{asv continuous master new-feature}. This will provide a
-benchmark against the master branch and the branch a new feature is implemented
+benchmark against the \texttt{master} branch and the branch a new feature is implemented
 in. More features are available in the \texttt{asv} documentation\cite{asvdocs}, including 
 arguments to select which benchmarks to run.
 
