@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{pgfplotstable}
 \usepackage[multiple]{footmisc}
+\usepackage{booktabs,siunitx}
 
 \pgfplotsset{compat=newest}
 \usepackage{listings, textcomp}
@@ -725,19 +726,28 @@ Python, Cython, Fortran, C and C++ are the programming languages used to
 implement scientific algorithms in the SciPy library. An analysis of our code
 base using the \texttt{linguist} library\cite{linguistref} provides a 
 detailed breakdown as \% composition by programming language in 
-SciPy (Figure~\ref{fig:linguist}).
+SciPy (Table~\ref{tab:linguist}).
 
-\begin{figure}[H]
-    \centering
-		\includegraphics[width=\textwidth]{static/composition}
-    \caption{The breakdown of programming languages used in the
-             SciPy library determined using the linguist library.
-    	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
-    	 and Makefile are excluded for clarity and mostly
-    	 provide supporting roles in tests, building, and
-    	 documentation.}
-    \label{fig:linguist}
-\end{figure}
+\begin{table}
+\centering
+\begin{tabular}{p{3cm}S[table-format = <0.1]}
+\toprule
+Language & {Percent}\\
+\midrule
+Python  & 49.5 \\
+Fortran & 25.6 \\
+C       & 19.5 \\
+Cython  & 3.0  \\
+C++     & 2.3  \\[\defaultaddspace]
+{\TeX, Matlab, Shell, and Makefile} & <0.5 \\
+\bottomrule
+\end{tabular}
+\caption{Language composition of SciPy codebase: lines of code in each
+programming language as determined by the \texttt{linguist} package.
+The last row denotes tools used in supporting roles in tests,
+building, and documentation.}
+\label{tab:linguist}
+\end{table}
 
 For implementing new functionality, we have a clear order of language
 preference.  First Python, if performance is not an issue. If it is, then in
