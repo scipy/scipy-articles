@@ -107,13 +107,16 @@ Here we summarize the scope and capabilities of each subpackage.
     combinatorial functions \texttt{comb} and \texttt{factorial};
     and more.
 \item[\texttt{stats}]
-    The \texttt{stats} subpackage provides a large collection of continuous
-    and discrete probability distributions, each with methods to compute
+    The \texttt{stats} subpackage provides: a large collection of continuous
+    and discrete \emph{probability distributions}, each with methods to compute
     the PDF or PMF, CDF, moments and other statistics, generation of random
     variates, and more;
-    statistical tests, including Pearson's correlation, Spearman's rank-order
-    correlations, Kendall's tau, chi-squared test and its generalization as the
-    Cressie-Read power divergence, contingency table tests including Fisher's
-    exact test and Mood's median test, and many more;
-    and assorted transformations and statistics of data.
+    statistical tests, including tests on equality of means / medians /
+    variance (such as the t-test) and tests whether a sample is drawn from a
+    certain distribution (such as the Kolmogorov-Smirnov test);
+    measures of correlation, including Pearson's, Kendall's and Spearman's
+    coefficients;
+    descriptive statistics including trimmed values;
+    kernel density estimation;
+    and transformations of data such as the Box-Cox power transformation.
 \end{description}
