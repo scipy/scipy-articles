@@ -857,18 +857,13 @@ equivalent NumPy API where possible.
 \subsubsection*{LowLevelCallable}
 
 As of SciPy version 0.19, it is possible for users to wrap low-level functions
-in a \texttt{scipy.LowLevelCallable()} object that reduces the overhead for
-calling compiled C functions directly from Python.  Supported low-level
-functions include \texttt{PyCapsule} objects, ctypes function pointers, and
-cffi function pointers. The low level function signature must be consistent
-with the expectations of the routine it is passed to. For example, the
-documentation for \texttt{scipy.ndimage.generic\_filter} defines two acceptable
-C callback function signatures that may be used to produce functions that
-operate on each element of image data with low overhead. The C code may be
-generated using numba or Cython, for example, as long as the function call
-signature matches the specifications. Furthermore, it is even possible to
-generate a low-level callback function automatically from a Cython module using
-\texttt{scipy.LowLevelCallable.from\_cython}.
+in a \texttt{scipy.LowLevelCallable} object that reduces the overhead of
+calling compiled C functions, such as those generated using \texttt{numba}
+or Cython, directly from Python.
+Supported low-level functions include \texttt{PyCapsule}
+objects, \texttt{ctypes} function pointers, and \texttt{cffi} function pointers.
+Furthermore, it is even possible to generate a low-level callback function
+automatically from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 
 \subsection*{Cython bindings for BLAS, LAPACK, and special}
 
