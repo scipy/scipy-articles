@@ -105,7 +105,9 @@ has become a \emph{de facto} standard for leveraging scientific algorithms
 in the Python programming language, with more than 600
 unique code contributors, millions of downloads per year, 161 dependent
 packages, and 28700 dependent repositories. This includes usage of SciPy
-in almost half of all machine learning projects on GitHub.
+in almost half of all machine learning projects on GitHub, and usage by
+high profile projects including LIGO gravitational wave analysis and creation
+of the first-ever image of a black hole (M87).
 The library includes functionality spanning clustering, Fourier transforms,
 integration, interpolation, file I/O, linear algebra, image processing,
 orthogonal distance regression, minimization algorithms, signal processing,
@@ -170,7 +172,8 @@ around the world. For example, published
 scripts\cite{alex_nitz_2018_1596771, LIGO-open}
 used in the analysis of gravitational waves
 \cite{PhysRevD.93.122003, abbott2017gw170817} 
-import several submodules of SciPy.
+import several submodules of SciPy, and the M87 black
+hole imaging project directly cites SciPy\cite{2019ApJ875L3E}.
 
 Recently, SciPy released version 1.0, a milestone that traditionally
 signals a library's API (Applications Programming Interface) being
@@ -647,9 +650,7 @@ called PyData.
 At the time of writing, the SciPy library consists of nearly 
 600,000 lines of code organized in 16 subpackages. 
 Over 85,000 GitHub repositories and almost 5000 packages depend
-on SciPy. SciPy's GitHub repository attracts approximately 20,000 unique 
-visitors every two weeks, and more than 100 people contribute to a 
-new release every six months. Some of the major
+on SciPy. Some of the major
 feature highlights from the three years preceding
 SciPy 1.0 are discussed in Section \ref{sec:technical_improvements}, 
 and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
@@ -729,26 +730,7 @@ SciPy (Figure~\ref{fig:linguist}).
 
 \begin{figure}[H]
     \centering
-
-    \begin{tikzpicture}[font=\sffamily]
-    \begin{axis}[height=6cm, width=10cm,
-    ybar, ymax=60, ymin=0,bar width=1cm,
-    ylabel={\% of Scipy codebase},
-    ytick={0,20,...,60},
-    axis lines*=left,
-    axis y line shift=0pt,
-    enlarge x limits=0.15,
-    symbolic x coords={py,f,c,cy,cpp},
-    xticklabels={Python,FORTRAN,C,Cython,C++},
-    ticklabel style={align=center,font=\sffamily\small,
-    /pgf/number format/assume math mode=true},
-    xtick=data,
-    nodes near coords,
-    nodes near coords style={/pgf/number format/assume math mode=true}
-    ]
-    \addplot coordinates {(py,49.5) (f,25.6) (c,19.5) (cy, 3.0) (cpp,2.3)};
-    \end{axis}
-    \end{tikzpicture}
+		\includegraphics[width=\textwidth]{static/composition}
     \caption{The breakdown of programming languages used in the
              SciPy library determined using the linguist library.
     	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
@@ -1005,14 +987,12 @@ arguments to select which benchmarks to run.
 \label{sec:testsuite}
 
 The SciPy test suite is orchestrated by a continuous integration matrix that
-includes posix and Windows (32/64-bit) platforms managed by Travis CI and
-appveyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
-include code linting with pyflakes and pycodestyle. There are more than $13000$
-unit tests in the test suite, which is written for usage with the pytest
-runner, and with 87 \% and 45 \% line coverages for Python and compiled
-code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}).
-Some of the historical components of the code base would still benefit from increased
-test coverage. Documentation for the code is automatically built and hosted by
+includes POSIX and Windows (32/64-bit) platforms managed by Travis CI and
+AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
+include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There are more than $13,000$
+unit tests in the test suite, which is written for usage with the \texttt{pytest}
+framework, and with 87 \% and 45 \% line coverages for Python and compiled
+code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}). Documentation for the code is automatically built and hosted by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3, a just-in-time compiled
 version of the Python language.
@@ -1057,16 +1037,15 @@ v1.0.0 106878 92984 13894 462574 208158 254416
 \end{axis}
 \end{tikzpicture}
 \caption{
-% This paragraph of caption won't compile
-%Python (red) and compiled (blue) code volume in SciPy over time. 
-%Deep-shaded area represents lines of code covered by units tests; 
-%light-shaded area represents lines not covered. With the exception
-%of the removal of $\approx$ 61,000 lines of compiled code for SciPy 
-%v0.14 due to (insert reason), the volume of both compiled and Python
-%code has increased between releases, as has the number of lines
-%covered by unit tests. SciPy v1.0.0 was composed of 462,574 lines of
-%compiled code with test coverage near 45\% and 106,878 lines of Python 
-%code with test coverage near 87\%.
+Python (red) and compiled (blue) code volume in SciPy over time.
+Deep-shaded area represents lines of code covered by units tests;
+light-shaded area represents lines not covered. With the exception
+of the removal of $\approx 61,000$ lines of compiled code for SciPy
+v0.14, the volume of both compiled and Python
+code has increased between releases, as has the number of lines
+covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
+compiled code with test coverage near $45 \%$ and $106,878$ lines of 
+Python code with test coverage near $87 \%$.\\
 The reconstitution of historical
 build and test environments was performed using a docker-based approach
 \cite{scipy-cov}. Analysis of lines of source code covered is performed 
@@ -1082,51 +1061,15 @@ inclusion of additional vendored code.}
 
 \subsection*{Governance}
 
-SciPy adopted an official Governance Document on August 3,
-2017\cite{SciPyProjectGovernance}.  We have a Benevolent Dictator for Life
-(BDFL), Pauli Virtanen, leading the project, following a detailed discussion of
-the governance model with the community on the mailing list.  In practice, the
-overruling authority of the BDFL is anticipated to be used only when the
-Steering Council cannot agree on a matter.  The BDFL is expected to consider
-any strong indications that they should step down; although the BDFL may
-appoint a successor it is generally expected that the Steering Council will be
-consulted on the matter.
+SciPy adopted an official Governance Document on August 3, 2017\cite{SciPyProjectGovernance}. A Steering Council, currently composed of 18 members, oversees daily development of the project by contributing code and reviewing contributions from the community. Council Members have commit rights to the project repository, but they are expected to merge changes only when there are no substantive community objections. The Chair of the Steering Council, Ralf Gommers, is responsible for initiating biannual technical reviews of project direction and summarizing any private Council activities to the broader community. The project's Benevolent Dictator for Life (BDFL), Pauli Virtanen, has overruling authority on any matter, but the BDFL is expected to act in good faith and only exercise this authority when the Steering Council cannot reach agreement.
 
-The (currently) 18 member Steering Council is chaired by Ralf Gommers and
-performs a number of tasks including nominating and voting on new Council
-Members, and actively contributing to the progress of the project (could be
-code review but also outreach activities, etc.). Generally, one year of sustained
-and substantial contributions (not restricted to source code contributions)
-that improve the project are the prerequisites for nomination of new Council
-Members. Council Members do not get special treatment for the vast majority of
-the day to day project activities (code submission / review), though it is
-anticipated that their experience with the project will serve as helpful
-guidance in many matters.  Council Members have commit rights to the project,
-but will typically only incorporate changes when there are no substantive
-community objections. The Chair of the Steering Council is responsible for
-starting more formal technical reviews of the direction of the project,
-ensuring that the composition of the Council remains current, and communicating
-/ summarizing any Council activities performed privately to the broader
-community. We also describe in some detail how institutional partners may
-contribute to the project, but no financial weight from grants or other sources
-may be leveraged to circumvent or overrule the technical direction of the
-project decided upon by the Steering Committee. The Chair does not have a fixed
-term, but is nominated by the Steering Committee and is expected to yield to
-substantive claims that stepping down is the appropriate action.
-
-SciPy adopted an official Code of Conduct on October 24, 2017
-\cite{SciPyCodeOfConduct}, drawing inspiration from the Apache Foundation Code
-of Conduct\cite{ApacheCodeOfConduct}, the Contributor Covenant
-\cite{ContributorConvenant}, the Jupyter Code of Conduct \cite{Jupyter_COC},
-and the Open Source Guides - Code of Conduct\cite{OSG_COC}. In short, we stated
-five specific guidelines: \emph{be open} (to anyone participating in our
-community), \emph{be empathetic and patient} (in resolving conflicts), \emph{be
-collaborative} (we depend on each other to build up the tools in the library),
-\emph{be inquisitive} (identifying issues early on can be helpful to everyone),
-and \emph{be careful with wording} (do not harass or exclude).  We outlined a
-broad diversity inclusion statement, and provide instructions for contacting
-the three members of our Code of Conduct Committee or an external
-representative on the NumFOCUS Board of Directors.
+SciPy's official Code of Conduct was approved on October 24, 2017. In summary, there are five Specific Guidelines:
+\emph{be open} to everyone participating in our community;
+\emph{be empathetic and patient} in resolving conflicts;
+\emph{be collaborative}, as we depend on each other to build the library;
+\emph{be inquisitive}, as early identification of issues can prevent serious consequences; and
+\emph{be careful with wording}.
+The Code of Conduct specifies how breaches can be reported to a Code of Conduct Committee, and outlines procedures for the Committee's response. Our Diversity Statement ``welcomes and encourages participation by everyone''.
 
 
 \subsection*{Community beyond the SciPy library}
@@ -1136,14 +1079,14 @@ of domain-specific software libraries building on top
 of SciPy features, and then returning to the base SciPy library
 to suggest and even implement improvements to enable
 more effective science applications. For example, there
-are common contributors to the SciPy and astropy core
+are common contributors to the SciPy and Astropy core
 libraries\cite{astropy-2018}, and what works well for 
 one of the codebases, infrastructures, or communities 
-is often transferred in some form to the other. At the
-codebase level, the \texttt{binned\_statistic} functionality
+is often transferred in some form to the other. At the codebase 
+level, the \texttt{binned\_statistic} functionality
 is one such cross-project contribution---it was initially
 developed in an Astropy-affiliated package
-and then placed in SciPy after the fact.
+and then placed in SciPy afterwards.
 
 \subsection*{Maintainers and contributors}
 
@@ -1159,17 +1102,12 @@ Guide\cite{scipy-dev-guide} provides guidance on how to do that.
 
 \section*{Discussion}
 
-\fixme{The Discussion should be succinct and must not contain subheadings.}
-
-\subsection*{Impact now}
-
-% While Paul was one of the early adopters at the national laboratories,
-% Python's presence is now ubiquitous.
+% The Discussion should be succinct and must not contain subheadings.
 
 SciPy has a strong developer community and a massive user base. GitHub traffic
 metrics report roughly 20,000 unique visitors to the source website between May
 14 and May 27, 2018, with 721 unique copies (``clones") of the codebase over
-that roughly two-week period. The developer community consists of 610 unique
+that roughly two-week period. The developer community at that time consisted of 610 unique
 contributors of source code, with $>19,000$ commits accepted into the codebase
 (GitHub page data).
 
@@ -1181,11 +1119,9 @@ website\cite{SciPylib}, which has been the default citation in the absence of a
 peer-reviewed paper, has been cited $>3000$ times. Some of the most prominent
 usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
 scientific collaboration that lead to the observation of gravitational waves
-\cite{PhysRevLett.116.061102}, and the fact that SciPy is shipped directly with
-MacOS and in the Intel Distribution for Python\cite{intel-python}. SciPy is used
+\cite{PhysRevLett.116.061102}, the fact that SciPy is shipped directly with
+MacOS and in the Intel Distribution for Python\cite{intel-python}, and that SciPy is used
 by 47 \% of all machine learning projects on GitHub\cite{octoverse-scipy}.
-
-\subsection*{Future Work}
 
 The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev} is a
 continuously-updated document
