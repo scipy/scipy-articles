@@ -858,7 +858,8 @@ equivalent NumPy API where possible.
 
 As of SciPy version 0.19, it is possible for users to wrap low-level functions
 in a \texttt{scipy.LowLevelCallable} object that reduces the overhead of
-calling compiled C functions directly from Python.  
+calling compiled C functions, such as those generated using \texttt{numba}
+or Cython, directly from Python.  
 Supported low-level functions include \texttt{PyCapsule} 
 objects, \texttt{ctypes} function pointers, and \texttt{cffi} function pointers. 
 Furthermore, it is even possible to generate a low-level callback function 
