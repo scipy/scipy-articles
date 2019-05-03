@@ -723,8 +723,8 @@ for graphics processing units (GPUs) is explicitly out of scope.
 \subsection*{Language choices}
 
 Python, Cython, Fortran, C and C++ are the programming languages used to
-implement scientific algorithms in the SciPy library. An analysis of our code
-base using the \texttt{linguist} library\cite{linguistref} provides a 
+implement scientific algorithms in the SciPy library. An analysis of our
+codebase using the \texttt{linguist} library\cite{linguistref} provides a 
 detailed breakdown as \% composition by programming language in 
 SciPy (Figure~\ref{fig:linguist}).
 
@@ -835,10 +835,10 @@ and column-compressed formats (CSR and CSC, respectively).
 These offer fast major-axis indexing and fast matrix-vector multiplication,
 and are used heavily in scikit-learn.
 
-Over the last three years our sparse matrix handling internals have been
+Over the last three years, our sparse matrix handling internals have been
 rewritten and performance has been improved. Iterating over and slicing of CSC
 and CSR matrices is now faster by up to 35\% (Figure~\ref{fig:sparse-iter}),
- and the COO / DIA to CSR / CSC matrix format
+ and the coordinate (COO) / diagonal (DIA) to CSR / CSC matrix format
 conversions are now faster (Figure~\ref{fig:sparse-conv}). Importantly,
 SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
 low-level implementations leveraged by a subset of our \texttt{sparse}
@@ -874,8 +874,8 @@ generate a low-level callback function automatically from a Cython module using
 
 SciPy has provided special functions and leveraged BLAS and
 LAPACK\cite{LAPACK} routines for many years. SciPy now additionally
-includes Cython\cite{behnel2011cython} wrappers for:
-many BLAS and LAPACK routines (added in 2015), and the special functions 
+includes Cython\cite{behnel2011cython} wrappers for
+many BLAS and LAPACK routines (added in 2015) and the special functions 
 provided in the \texttt{scipy.{\allowbreak}special} submodule (added in 2016).  
 These Cython wrappers are available in the modules
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas},
@@ -894,7 +894,7 @@ extensions avoid the complexity of finding and using the correct libraries.
 Avoiding this complexity is especially important when wrapping libraries
 written in Fortran.  Not only can these low-level wrappers be used without a
 Fortran compiler, they can also be used without having to handle all the
-different Fortran compiler ABI's and name mangling schemes.
+different Fortran compiler ABIs and name mangling schemes.
 
 Most of these low-level Cython wrappers are generated automatically to help
 with both correctness and ease of maintenance.  The wrappers for BLAS and
