@@ -1019,25 +1019,13 @@ inclusion of additional vendored code.}
 
 \subsubsection*{Benchmark suite}
 
-The Airspeed Velocity (\texttt{asv}\cite{asvref}) library enables benchmarking Python packages
-over their lifetimes, and the performance of the SciPy code base was monitored
-with \texttt{asv} starting in February of 2015 (PR \#4501). In addition to ensuring that
-unit tests are passing, confirming 
-that performance generally
-remains constant or improves over the commit hash history of the project allows
-us to objectively measure that our code base is improving, to empower
-scientific applications.
-
-Consider the (\texttt{asv} benchmark results shown in Figure~\ref{fig:asvbench}, spanning
-roughly nine years of project history. These demonstrate the gradual
-performance improvements in a nearest-neighbor search through
-\texttt{scipy.spatial.cKDTree.query()}, and can be run using:
-
-\texttt{python run.py run -e -s 800 --bench "\textbackslash
-btime\_query\textbackslash b" "02de46a546..b3ddb2c"},
-
-where \texttt{run.py} is a light wrapper script around \texttt{asv}
-that is packaged with SciPy.
+In addition to ensuring that unit tests are passing, it is important to confirm that the
+the performance of the SciPy codebase improves over time. Since February 2015, the
+performance of SciPy has been monitored with Airspeed Velocity (\texttt{asv} \cite{asvref}).
+SciPy's \texttt{run.py} script conveniently wraps \texttt{asv} features such that benchmark 
+results over time can be generated with a single console command. For example,
+Figure~\ref{fig:asvbench} illustrates the improvement of\texttt{scipy.spatial.cKDTree.query}
+over roughly nine years of project history.
 
 \begin{figure}[H]
 \centering
@@ -1051,12 +1039,6 @@ backward compatibility and sampling of the benchmarks there was no application
 of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
 \label{fig:asvbench}
 \end{figure}
-
-Any pull request can be compared against the \texttt{master} branch with the
-command \texttt{asv continuous master new-feature}. This will provide a
-benchmark against the \texttt{master} branch and the branch a new feature is implemented
-in. More features are available in the \texttt{asv} documentation\cite{asvdocs}, including 
-arguments to select which benchmarks to run.
 
 \section*{Project organization and community}
 
