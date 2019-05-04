@@ -1,0 +1,70 @@
+# SciPy 1.0.0 coverage assessment
+# command used: docker run -it --env-file env-scipy-1.0.0 scipy-cov
+# Python line coverage total: 87%
+# Compiled language line coverage total: 45 %
+
+# SciPy 0.19.1 coverage assessment
+# command used: docker run -it --env-file env_files/env-scipy-0.19.1 scipy-cov
+# Python line coverage total: 83%
+# Compiled language line coverage total: 46 %
+
+# SciPy 0.18.1 coverage assessment
+# command used: docker run -it --env-file env_files/env-scipy-0.18.1 scipy-cov
+# SciPy 0.18.1 full test suite requires exclusion
+# of test_gzip_py3(); see: https://github.com/scipy/scipy/issues/2152
+# Python line coverage total: 81%
+# Compiled language line coverage total: 49 %
+
+# SciPy 0.17.1 coverage assessment
+# command used: docker run -it --env-file env_files/env-scipy-0.17.1 scipy-cov
+# Python line coverage total: 81%
+# Compiled language line coverage total: 50 %
+
+# SciPy 0.16.1 coverage assessment
+# command used: docker run -it --env-file env_files/env-scipy-0.16.1 scipy-cov
+# required exclusion of test_gzip_py3() again & a symlink outlined
+# in the Dockerfile
+# Python line coverage total: 80%
+# Compiled language line coverage total: 52 %
+
+# SciPy 0.15.1 coverage assessment
+# command used: docker run -it --env-file env_files/env-scipy-0.15.1 scipy-cov
+# required exclusion of test_gzip_py3() again & a symlink outlined
+# in the Dockerfile
+# required scale back to NumPy 1.12
+# Python line coverage total: 79%
+# Compiled language line coverage total: 52 %
+
+# SciPy 0.14.1 coverage assessment
+# similar constraints / workflow as 0.15.1 above
+# command used: docker run -it --env-file env_files/env-scipy-0.14.1 scipy-cov
+# Python line coverage total: 82%
+# Compiled language line coverage total: 53 %
+
+# SciPy 0.13.3 coverage assessment
+# required checkout of runtests.py from v0.14.1 to support gcov argument
+# had to dial Cython back to 0.21 & NumPy to 1.7.0
+# command used: docker run -it --env-file env_files/env-scipy-0.13.3 scipy-cov
+# Python line coverage total: 79 %
+# Compiled language line coverage total: 51 %
+
+# SciPy 0.12.1 coverage assessment
+# similar control flow to 0.13.3 above
+# command used: docker run -it --env-file env_files/env-scipy-0.12.1 scipy-cov
+# Python line coverage total: 76 %
+# Compiled language line coverage total: 52 %
+
+# in addition to detailed notes above, a summary data
+# table that can be parsed with NumPy / matplotlib
+# is helpful below
+
+# SciPy commit hash | Python line % | Compiled line %
+v1.0.0 87 45
+v0.19.1 83 46
+v0.18.1 81 49
+v0.17.1 81 50
+v0.16.1 80 52
+v0.15.1 79 52
+v0.14.1 82 53
+v0.13.3 79 51
+v0.12.1 76 52
