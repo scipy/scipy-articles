@@ -722,17 +722,15 @@ for graphics processing units (GPUs) is explicitly out of scope.
 
 \subsection*{Language choices}
 
-Python, Cython, Fortran, C and C++ are the programming languages used to
-implement scientific algorithms in the SciPy library. An analysis of our
-codebase using the \texttt{linguist} library\cite{linguistref} provides a 
-detailed breakdown as \% composition by programming language in 
-SciPy (Figure~\ref{fig:linguist}).
+Figure~\ref{fig:linguist} provides a breakdown of the programming languages used
+in SciPy. While it is not surprising that Python is predominant, the usage distribution 
+of the other languages warrants discussion. 
 
 \begin{figure}[H]
     \centering
 		\includegraphics[width=\textwidth]{static/composition}
     \caption{The breakdown of programming languages used in the
-             SciPy library determined using the linguist library.
+             SciPy library determined using the \texttt{linguist} library.
     	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
     	 and Makefile are excluded for clarity and mostly
     	 provide supporting roles in tests, building, and
@@ -740,53 +738,44 @@ SciPy (Figure~\ref{fig:linguist}).
     \label{fig:linguist}
 \end{figure}
 
-For implementing new functionality, we have a clear order of language
-preference.  First Python, if performance is not an issue. If it is, then in
-order of preference: Cython, C, C++, Fortran. The main motivation for this is
-maintainability: Cython has the highest abstraction level and most Python
-developers will understand it. C is also widely known, and easier to deal with
-for the core development team than C++ and especially Fortran.
-
-While it is not surprising that Python is heavily used in SciPy, the usage
-distribution of the other languages warrants some discussion. Fortran is an
-extremely well-established scientific programming language, both for historical
-reasons and because of its continued excellent
-performance\cite{Koelbel:1993:HPF:562354}. We wrap the FFTPACK Fortran library
-for performing Fourier transforms\cite{SWARZTRAUBER198445, SWARZTRAUBER198251}
-since this library has been a standard in the field for 33 years and has a
-license that is compatible with our own. Likewise, we wrap the Fortran source
-for ODEPACK\cite{citeulike:2644528} as it has been  trusted for the initial
-value problem for ordinary differential equation systems for 30 years. For
-similar reasons we also wrap the Fortran libraries
-QUADPACK\cite{1983qspa.book.....P} (for numerical integration of
-one-dimensional functions), FITPACK\cite{Dierckx:1993:CSF:151103}
-(curve-fitting / interpolation), ODRPACK\cite{ODRPACK_Boggs} (orthogonal
-distance regression), MINPACK\cite{osti_6997568} (minimization of linear and
-nonlinear equations), ARPACK\cite{leh:sor:yan96} (solving large scale
-eigenvalue problems), ALGORITHM 644\cite{Amos:1986:APP:7921.214331} (handling
-Bessel Functions), and CDFLIB\cite{CDFLIB_site} (evaluation of cumulative
-density functions).
+Fortran, despite its age, is still a high-performance scientific programming language with 
+continued contemporary usage\cite{Koelbel:1993:HPF:562354}. Thus, we wrap the following excellent, field-tested Fortran
+libraries in order to provide Python convenience while benefiting from their performance: 
+FFTPACK\cite{SWARZTRAUBER198445, SWARZTRAUBER198251}, % for performing Fourier transforms, 
+ODEPACK\cite{citeulike:2644528}, % for solving ordinary differential equation initial value problems,
+QUADPACK\cite{1983qspa.book.....P}, % for numerical integration of one-dimensional functions,
+FITPACK\cite{Dierckx:1993:CSF:151103}, % for curve-fitting and interpolation,
+ODRPACK\cite{ODRPACK_Boggs}, % for orthogonal distance regression, 
+MINPACK\cite{osti_6997568}, % for minimization of linear and nonlinear equations, 
+ARPACK\cite{leh:sor:yan96}, % for solving large scale eigenvalue problems,
+ALGORITHM 644\cite{Amos:1986:APP:7921.214331}, and % for Bessel Functions, and 
+CDFLIB\cite{CDFLIB_site}. % for evaluation of cumulative density functions.
 
 Rounding out the top three languages in SciPy is C, which is also extremely
 well-established over several decades\cite{Kernighan:1988:CPL:576122} of
-scientific computing. Alongside its objected-oriented relative C++, C can be
-leveraged in Python after being exposed using the Cython language. Cython has
-been described as a creole language that mixes the best parts of Python and
-lower-level C / C++ paradigms\cite{behnel2011cython}. We thus often use Cython
-as a glue between well-established low-level scientific computing libraries and
-the Python interface offered by SciPy. We also use Cython to enable performance
-enhancements in Python code, especially for cases where heavily used inner
-loops benefit from a compiled code with static typing. Some of the C libraries
-that we wrap in SciPy include trlib\cite{doi:10.1080/10556788.2018.1449842}
-(iterative solving of the trust region problem),
-SuperLU\cite{li05,superlu_ug99} (solution of large, sparse, nonsymmetric
-systems of linear equations), Qhull\cite{Barber:1996:QAC:235815.235821}
-(computational geometry), and Cephes\cite{cephes_netlib} (mathematics
-algorithms). 
+scientific computing. The C libraries that we wrap in SciPy include 
+trlib\cite{doi:10.1080/10556788.2018.1449842}, % (iterative solving of the trust region problem),
+SuperLU\cite{li05,superlu_ug99}, % (solution of large, sparse, nonsymmetric systems of linear equations),
+Qhull\cite{Barber:1996:QAC:235815.235821}, and % (computational geometry) 
+Cephes\cite{cephes_netlib}. % (mathematics algorithms).
 
-Therefore, the relative abundance of different programming languages in the
-SciPy library results from a combination of the usage of powerful performance
-enhancing languages that interact well with Python (i.e., Cython), and the
+Cython has been described as a creole language that mixes the best parts of Python and
+lower-level C / C++ paradigms\cite{behnel2011cython}. We often use Cython
+as a glue between well-established low-level scientific computing libraries written
+in C / C++ and the Python interface offered by SciPy. We also use Cython to enable performance
+enhancements in Python code, especially for cases where heavily used inner
+loops benefit from a compiled code with static typing. 
+
+For implementing new functionality, Python is the still the language of choice. If Python 
+performance is an issue, then we prefer the use of Cython followed by C, C++, or Fortran (in that
+order). The main motivation for this is maintainability: Cython has the 
+highest abstraction level and most Python developers will understand it. C is 
+also widely known, and easier for the current core development team to manage
+than C++ and especially Fortran. 
+
+The distribution of secondary programming languages in SciPy is a compromise between
+a powerful, performance-
+enhancing language that interacts well with Python (i.e. Cython) and the
 usage of languages (and their libraries) that have proven reliable and
 performant over many decades. The position that SciPy occupies near the
 foundation of the scientific Python ecosystem is such that adoption of new
