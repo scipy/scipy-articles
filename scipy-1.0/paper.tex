@@ -921,14 +921,14 @@ changes to the interface of that submodule.
 \subsection*{Statistical distributions}
 
 The \texttt{scipy.stats} module contains more than 100 probability
-distributions (96 continuous and 13 dicrete univariate distributions
-and 10 multivariate distributions). The implementation relies on a
+distributions: 96 continuous and 13 discrete univariate distributions
+and 10 multivariate distributions. The implementation relies on a
 consistent framework that provides methods to sample random variates,
-to evaluate the cumulative distribution function (cdf), the probability
+to evaluate the cumulative distribution function (cdf) and the probability
 density function (pdf) and to fit parameters for every distribution. 
 Generally, the methods rely on specific implementations for each
-distribution if available (such as a closed form expression of the
-cdf or a sampling algorithm). Otherwise, default methods are used
+distribution such as a closed form expression of the cdf or a sampling 
+algorithm, if available. Otherwise, default methods are used
 based on generic code, e.g., numerical integration of the pdf to
 obtain the cdf. 
 Key recent distributions added to \texttt{scipy.stats} include the
