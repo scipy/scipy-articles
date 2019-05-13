@@ -905,27 +905,22 @@ changes to the interface of that submodule.
 
 \subsection*{Statistical distributions}
 
-The \texttt{scipy.stats} module provides more than 100 probability
-distributions and a framework to implement additional distributions. Given an
-expression for a probability distribution function (pdf), the framework will
-calculate moments, cumulative distribution function (cdf), differential
-entropy, and more. Those properties are calculated based on generic code, e.g.,
-numerical integration of the pdf to obtain the cdf.  Where possible, the
-generic code is replaced by explicit formulas or more accurate or efficient
-implementations. For example, most distributions have an explicit formula for
-the cdf, so it is used instead of integrating the pdf. The distributions
-framework also allows the user to draw random variates from the distribution.
-Drawing random variates now accepts a \texttt{random\_state} parameter, which
-is either a \texttt{numpy.random.RandomState} object or an integer used to
-generate such an object, to provide fine-grained user-level control over the
-random state of a workflow.  Currently about 80 continuous univariate
-distributions, 12 discrete univariate distributions and 10 multivariate
-distributions are implemented.  Key recent distributions added to
-\texttt{scipy.stats} include the histogram-based distribution in
-\texttt{scipy.stats.rv\_histogram} and the multinomial distribution in
-\texttt{scipy.stats.multinomial} (used, for example, in natural language
-processing\cite{Griffiths5228}). \texttt{multinomial} is the first and so far
-the only multivariate discrete distribution available in SciPy.
+The \texttt{scipy.stats} module contains more than 100 probability
+distributions: 96 continuous and 13 discrete univariate distributions
+and 10 multivariate distributions. The implementation relies on a
+consistent framework that provides methods to sample random variates,
+to evaluate the cumulative distribution function (cdf) and the probability
+density function (pdf) and to fit parameters for every distribution. 
+Generally, the methods rely on specific implementations for each
+distribution such as a closed form expression of the cdf or a sampling 
+algorithm, if available. Otherwise, default methods are used
+based on generic code, e.g., numerical integration of the pdf to
+obtain the cdf. 
+Key recent distributions added to \texttt{scipy.stats} include the
+histogram-based distribution in \texttt{scipy.stats.rv\_histogram}
+and the multinomial distribution in \texttt{scipy.stats.multinomial}
+(used, for example, in natural language processing, see
+\cite{Griffiths5228}).
 
 \subsection*{Polynomial interpolators}
 
