@@ -1,6 +1,7 @@
-The \texttt{cKDTree} module was rewritten in C++ with templated classes, and support for
-periodic boundary conditions was added. A periodic boundary condition is typically 
-used in computer simulations of physical processes.
+The \texttt{cKDTree} module, which implements a space-partitioning data structure that
+organizes points in $k$-dimensional space, was rewritten in C++ with templated classes. 
+Support was added for periodic boundary conditions, which are often used 
+in simulations of physical processes. 
 
 In 2013, the time complexity of the $k$-nearest neighbor search from
 \texttt{cKDTree.query} was approximately loglinear \cite{knn-jake},
@@ -16,14 +17,14 @@ approximate sparse distance matrices between \texttt{KDTree} objects by ignoring
 all distances that exceed a user-provided value. Also, this routine is not 
 limited to the conventional L2 (Euclidean) norm but supports any Minkowski 
 p-norm between 1 and infinity. By default, the returned data structure is a 
-Dictionary Of Keys based sparse matrix (DOK), which is very efficient for matrix 
+Dictionary Of Keys (DOK) based sparse matrix, which is very efficient for matrix 
 construction. This hashing approach to sparse matrix assembly can be 7 times 
-faster than constructing with Compressed Sparse Row format (CSR) 
-\cite{10.1007/978-3-540-75755-9_107} and the C++ level sparse matrix construction 
+faster than constructing with CSR format
+\cite{10.1007/978-3-540-75755-9_107}, and the C++ level sparse matrix construction 
 releases the Python GIL for increased performance. Once the matrix is constructed, 
 distance value retrieval has an amortized constant time complexity 
 \cite{Cormen:2001:IA:580470}, and the DOK structure can be efficiently converted 
-to a CSR, Compressed Sparse Column (CSC) or COOrdinate (COO) matrix to allow for 
+to a CSR, CSC, or COO matrix to allow for 
 speedy arithmetic operations.
 
 In 2015 the \texttt{cKDTree} dual tree counting algorithm\cite{Moore2000ar}
