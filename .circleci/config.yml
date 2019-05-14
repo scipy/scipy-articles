@@ -6,8 +6,8 @@ jobs:
       - image: person142/latex:latest
     steps:
       - checkout
-      - command: sudo apt install texlive-scientific
       - run: |
+          sudo apt install texlive-scientific
           mkdir /papers/artifacts
           cd scipy-1.0
           make
