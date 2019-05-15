@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{pgfplotstable}
 \usepackage[multiple]{footmisc}
+\usepackage{booktabs,siunitx}
 
 \pgfplotsset{compat=newest}
 \usepackage{listings, textcomp}
@@ -722,21 +723,32 @@ for graphics processing units (GPUs) is explicitly out of scope.
 
 \subsection*{Language choices}
 
-Figure~\ref{fig:linguist} provides a breakdown of the programming languages used
-in SciPy. While it is not surprising that Python is predominant, the usage distribution 
-of the other languages warrants discussion. 
+Python, Cython, Fortran, C and C++ are the programming languages used to
+implement scientific algorithms in the SciPy library. An analysis of our code
+base using the \texttt{linguist} library\cite{linguistref} provides a 
+detailed breakdown as \% composition by programming language in 
+SciPy (Table~\ref{tab:linguist}).
 
-\begin{figure}[H]
-    \centering
-		\includegraphics[width=\textwidth]{static/composition}
-    \caption{The breakdown of programming languages used in the
-             SciPy library determined using the \texttt{linguist} library.
-    	 Small ($<0.5 \%$) amounts of TeX, Matlab, Shell,
-    	 and Makefile are excluded for clarity and mostly
-    	 provide supporting roles in tests, building, and
-    	 documentation.}
-    \label{fig:linguist}
-\end{figure}
+\begin{table}
+\centering
+\begin{tabular}{p{3cm}S[table-format = <0.1]}
+\toprule
+Language & {Percent}\\
+\midrule
+Python  & 49.5 \\
+Fortran & 25.6 \\
+C       & 19.5 \\
+Cython  & 3.0  \\
+C++     & 2.3  \\[\defaultaddspace]
+{\TeX, Matlab, Shell, and Makefile} & <0.5 \\
+\bottomrule
+\end{tabular}
+\caption{Language composition of SciPy codebase: lines of code in each
+programming language as determined by the \texttt{linguist} package.
+The last row denotes tools used in supporting roles in tests,
+building, and documentation.}
+\label{tab:linguist}
+\end{table}
 
 Fortran, despite its age, is still a high-performance scientific programming language with 
 continued contemporary usage\cite{Koelbel:1993:HPF:562354}. Thus, we wrap the following excellent, field-tested Fortran

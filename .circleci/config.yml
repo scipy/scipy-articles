@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - run: |
+          apt-get install -y texlive-science
           mkdir /papers/artifacts
           cd scipy-1.0
           make
