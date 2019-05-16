@@ -10,9 +10,7 @@ Here we summarize the scope and capabilities of each subpackage.
 \begin{description}[leftmargin=!, labelwidth=\widthof{\bfseries \texttt{interpolate}}]
 \itemsep0em
 \item[\texttt{cluster}]
-    The \texttt{cluster} subpackage contains two modules:
-    \texttt{cluster.vq} provides vector quantization and $k$-means algorithms,
-    and \texttt{cluster.hierarchy} provides functions for hierarchical and
+    The \texttt{cluster} subpackage contains \texttt{cluster.vq}, which provides vector quantization and $k$-means algorithms, and \texttt{cluster.hierarchy}, which provides functions for hierarchical and
     agglomerative clustering.
 \item[\texttt{constants}]
     Physical and mathematical constants, including the CODATA recommended
@@ -47,7 +45,7 @@ Here we summarize the scope and capabilities of each subpackage.
     and functions to create specialized matrices, such as diagonal, Toeplitz,
     Hankel, companion, Hilbert, and more.
 \item[\texttt{ndimage}]
-    This package contains various functions for multi-dimensional image
+    This subpackage contains various functions for multi-dimensional image
     processing, including convolution and assorted linear and nonlinear
     filters (Gaussian filter, median filter, Sobel filter, etc.);
     interpolation; region labeling and processing; and mathematical morphology
@@ -55,12 +53,12 @@ Here we summarize the scope and capabilities of each subpackage.
 \item[\texttt{misc}]
     A collection of functions that did not fit into the other subpackages.
     While this subpackage still exists in SciPy 1.0, effort is underway
-    to deprecate or relocate the contents of this subpackage and eventually remove it.
+    to deprecate or relocate the contents of this subpackage and remove it.
 \item[\texttt{odr}]
     Orthogonal distance regression, including Python wrappers for the Fortran
     library ODRPACK.
 \item[\texttt{optimize}]
-    The package includes the following, with additional details in the SI:
+    This subpackage includes the following, with additional details in the SI:
     simplex and interior-point linear programming solvers,
 		implementations of many nonlinear minimization algorithms,  
 		a routine for least-squares curve fitting, and 
@@ -73,15 +71,11 @@ Here we summarize the scope and capabilities of each subpackage.
     window functions; wavelet computations; peak finding; and spectral
     analysis.  
 \item[\texttt{sparse}]
-    This package includes implementations of several representations of
-    sparse matrices.  It contains two modules, 
-    \texttt{scipy.sparse.linalg} and \texttt{scipy.sparse.csgraph}.
-
-    \texttt{scipy.sparse.linalg} provides a collection of linear algebra
-    routines that work with sparse matrices, including linear equation
-    solvers, eigenvalue decomposition, singular value decomposition
-    and LU factorization.
-
+    This subpackage includes implementations of several representations of
+    sparse matrices.\newline % \texttt{scipy.sparse.linalg} extends past margin
+		\texttt{scipy.sparse.linalg} provides a collection of linear algebra routines that work with
+		sparse matrices, including linear equation solvers, eigenvalue decomposition, singular value
+		decomposition and LU factorization.
     \texttt{scipy.sparse.csgraph} provides a collections of graph algorithms
     for which the graph is represented using a sparse matrix.  Algorithms
     include connected components, shortest path, minimum spanning tree
@@ -89,7 +83,7 @@ Here we summarize the scope and capabilities of each subpackage.
 \item[\texttt{spatial}]
     This subpackage provides spatial data structures and algorithms,
     including the $k$-d tree, Delaunay triangulation, convex hulls and Voronoi
-    diagrams.  The subpackage \texttt{scipy.spatial.distance} provides
+    diagrams. \texttt{scipy.spatial.distance} provides
     a large collection of distance functions, along with functions for
     computing the distance between all pairs of vectors in a given collection
     of points or between all pairs from two collections of points.

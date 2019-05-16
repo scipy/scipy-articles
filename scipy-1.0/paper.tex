@@ -173,7 +173,7 @@ around the world. For example, published
 scripts\cite{alex_nitz_2018_1596771, LIGO-open}
 used in the analysis of gravitational waves
 \cite{PhysRevD.93.122003, abbott2017gw170817} 
-import several submodules of SciPy, and the M87 black
+import several subpackages of SciPy, and the M87 black
 hole imaging project directly cites SciPy\cite{2019ApJ875L3E}.
 
 Recently, SciPy released version 1.0, a milestone that traditionally
@@ -813,8 +813,8 @@ changes that improve clarity in the API of the library but strongly discourage
 breaking backwards compatibility given our position near the base of the 
 scientific Python computing stack.
 
-In addition to the Python API, SciPy has C and Cython interfaces in a number
-of submodules. Therefore, we have to also consider the application binary
+In addition to the Python API, SciPy has C and Cython interfaces.
+Therefore, we have to also consider the application binary
 interface (ABI). This ABI has been stable for a long time, and we aim to
 evolve it only in a backwards compatible way.
 
@@ -872,8 +872,8 @@ SciPy has provided special functions and leveraged BLAS and
 LAPACK\cite{LAPACK} routines for many years. SciPy now additionally
 includes Cython\cite{behnel2011cython} wrappers for
 many BLAS and LAPACK routines (added in 2015) and the special functions 
-provided in the \texttt{scipy.{\allowbreak}special} submodule (added in 2016).  
-These Cython wrappers are available in the modules
+provided in the \texttt{scipy.{\allowbreak}special} subpackage (added in 2016).
+These Cython wrappers are available in 
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_blas},
 \texttt{scipy.{\allowbreak}linalg.{\allowbreak}cython\_lapack}, and
 \texttt{scipy.{\allowbreak}special.{\allowbreak}cython\_special} respectively.
@@ -909,7 +909,7 @@ supported LAPACK versions.  The standard BLAS interface provided by the various
 existing BLAS libraries is not currently changing, so changes are not generally
 needed in the wrappers provided by SciPy.  Changes to the Cython wrappers for
 the functions in \texttt{scipy.{\allowbreak}special} follow corresponding
-changes to the interface of that submodule.
+changes to the interface of that subpackage.
 
 \subsection*{Numerical optimization}
 
@@ -917,7 +917,7 @@ changes to the interface of that submodule.
 
 \subsection*{Statistical distributions}
 
-The \texttt{scipy.stats} module contains more than 100 probability
+The \texttt{scipy.stats} subpackage contains more than 100 probability
 distributions: 96 continuous and 13 discrete univariate distributions
 and 10 multivariate distributions. The implementation relies on a
 consistent framework that provides methods to sample random variates,
@@ -1139,7 +1139,7 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
 \begin{table}[H]
 \caption{Summary of SciPy Roadmap items following 1.0 release}
 \begin{tabular}{ c|c }
-    SciPy submodule & Summary of Change \\
+    SciPy subpackage & Summary of Change \\
     \hline
     \texttt{optimize} & a few more high quality global optimizers\\
     \texttt{fftpack} & reduce overlap with NumPy equivalent \\
@@ -1253,7 +1253,7 @@ compatible with FITPACK. We recommend that users work with
 tuples of knots, coefficients and the spline degree.
 
 \section*{Numerical Optimization: Additional Details}
-The \texttt{scipy.optimize} module provides functions for the numerical solution of several classes of root finding and optimization problems:
+The \texttt{scipy.optimize} subpackage provides functions for the numerical solution of several classes of root finding and optimization problems:
 \begin{enumerate}
 \item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
 \item linear sum assignment problems (\texttt{linear\textunderscore sum\textunderscore assignment}),
