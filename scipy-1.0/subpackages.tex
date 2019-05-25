@@ -28,10 +28,11 @@ Here we summarize the scope and capabilities of each subpackage.
     The \texttt{interpolate} subpackage contains spline functions and
     classes, one-dimensional and multi-dimensional (univariate and
     multivariate) interpolation classes, Lagrange and Taylor polynomial
-    interpolators, and wrappers for FITPACK and DFITPACK functions.
+    interpolators, and wrappers for FITPACK\cite{Dierckx:1993:CSF:151103} and DFITPACK functions.
 \item[\texttt{io}]
-    A collection of functions and classes for reading and writing MATLAB, IDL,
-    Matrix Market, Fortran, NetCDF, Harwell-Boeing, WAV and ARFF data files. 
+    A collection of functions and classes for reading and writing MATLAB\cite{matlab}, IDL,
+    Matrix Market\cite{boisvert1997matrix}, Fortran, NetCDF\cite{rew1990netcdf},
+		Harwell-Boeing\cite{harwellboeing}, WAV and ARFF data files.
 \item[\texttt{linalg}]
     Linear algebra functions, including
     elementary functions of a matrix, such as the trace, determinant, norm and
@@ -56,7 +57,7 @@ Here we summarize the scope and capabilities of each subpackage.
     to deprecate or relocate the contents of this subpackage and remove it.
 \item[\texttt{odr}]
     Orthogonal distance regression, including Python wrappers for the Fortran
-    library ODRPACK.
+    library ODRPACK\cite{ODRPACK_Boggs}.
 \item[\texttt{optimize}]
     This subpackage includes the following, with additional details in the SI:
     simplex and interior-point linear programming solvers,
@@ -66,9 +67,9 @@ Here we summarize the scope and capabilities of each subpackage.
 \item[\texttt{signal}]
     The \texttt{signal} subpackage focuses on signal processing and
     basic linear systems theory.  Functionality includes
-    convolution and correlation; splines; filtering and filter design;
-    continuous and discrete time linear systems; waveform generation;
-    window functions; wavelet computations; peak finding; and spectral
+    convolution and correlation, splines, filtering and filter design,
+    continuous and discrete time linear systems, waveform generation,
+    window functions, wavelet computations, peak finding, and spectral
     analysis.  
 \item[\texttt{sparse}]
     This subpackage includes implementations of several representations of

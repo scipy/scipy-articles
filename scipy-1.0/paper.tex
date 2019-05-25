@@ -183,12 +183,12 @@ numbering convention, however, belies the history of a project that has
 become the standard which others follow and has seen extensive
 adoption in research and industry.
 
-SciPy's arrival at this point is surprising, and somewhat anomalous.
+SciPy's arrival at this point is surprising and somewhat anomalous.
 When started, the library had little funding, and was written mainly
 by graduate students---many of them without a computer science education, and often without the
 blessing of their advisors.  To even imagine that a small group of
 ``rogue'' student programmers could upend the already well-established
-ecosystem of research software---backed by millions in funding, and
+ecosystem of research software---backed by millions in funding and
 many hundreds of highly qualified engineers\cite{mathworks-globe-97,
 esri-revenue,bloom-wolfram}---was preposterous.
 
@@ -247,7 +247,7 @@ of numbers.
 \end{quote}
 Over the next several months, conversations on that mailing
 list by, among others, Jim Fulton, Jim Hugunin, Paul Dubois, Konrad
-Hinsen, and Guido van Rossum, led to the creation of a package called Numeric with an array object
+Hinsen, and Guido van Rossum led to the creation of a package called Numeric with an array object
 that supported a high number of dimensions.  Jim Hugunin explained the utility
 of Python for numerical computation\cite{Hugunin-whitepaper}:
 \begin{quote}
@@ -581,7 +581,7 @@ The informal workshops grew into international conferences with many
 hundreds of attendees. Special issues were organized and published in a
 leading scientific journal\cite{dubois2007guest}, and the scope of the SciPy library
 narrowed, while the breadth of the ecosystem grew
-through a new type of auxiliary package, the scikit\cite{scikits-general}. 
+through a new type of auxiliary package: the scikit\cite{scikits-general}.
 The tooling, development, and release processes became more professional.
 SciPy was expanded carefully, with the patience affordable in open source 
 projects and via best practices common in industry \cite{millman2014developing}.
@@ -648,7 +648,7 @@ At the time of writing, the SciPy library consists of nearly
 Over 85,000 GitHub repositories and almost 5000 packages depend
 on SciPy. Some of the major
 feature highlights from the three years preceding
-SciPy 1.0 are discussed in Section \ref{sec:technical_improvements}, 
+SciPy 1.0 are discussed in the Key Technical Improvements section below,
 and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
 % At the time of writing, SciPy produces a new release
 % approximately every six months, and some of the major
@@ -661,7 +661,7 @@ and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
 \centering
 \includegraphics[width=0.95\textwidth]{static/scipy_timeline}
 \caption{Major milestones from SciPy's initial release in 2001 to
-the release of SciPy 1.0 in 2017. Logos reprinted with permission.}
+the release of SciPy 1.0 in 2017.}
 \label{fig:timeline}
 \end{figure}
 
@@ -719,10 +719,9 @@ for graphics processing units (GPUs) is explicitly out of scope.
 \subsection*{Language choices}
 
 Python, Cython, Fortran, C and C++ are the programming languages used to
-implement scientific algorithms in the SciPy library. An analysis of our code
-base using the \texttt{linguist} library\cite{linguistref} provides a 
-detailed breakdown as \% composition by programming language in 
-SciPy (Table~\ref{tab:linguist}).
+implement scientific algorithms in the SciPy library. An analysis of our codebase
+using the \texttt{linguist} library\cite{linguistref} provides a
+detailed breakdown of SciPy's composition (Table~\ref{tab:linguist}).
 
 \begin{table}
 \centering
@@ -768,7 +767,7 @@ Cephes\cite{cephes_netlib}. % (mathematics algorithms).
 
 Cython has been described as a creole language that mixes the best parts of Python and
 lower-level C / C++ paradigms\cite{behnel2011cython}. We often use Cython
-as a glue between well-established low-level scientific computing libraries written
+as a glue between well-established, low-level scientific computing libraries written
 in C / C++ and the Python interface offered by SciPy. We also use Cython to enable performance
 enhancements in Python code, especially for cases where heavily used inner
 loops benefit from a compiled code with static typing. 
@@ -837,8 +836,8 @@ low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
 
 From a new features standpoint, \texttt{scipy.sparse} matrices and linear
-operators now support the Python matrix multiplication (@) operator when
-available. We've added \texttt{scipy.sparse.norm} and
+operators now support the Python matrix multiplication (@) operator.
+We've added \texttt{scipy.sparse.norm} and
 \texttt{scipy.sparse.random} for computing sparse matrix norms and drawing
 random variates from arbitrary distributions, respectively. Also, we've made a
 concerted effort to bring the \texttt{scipy.sparse} API into line with the
@@ -945,7 +944,7 @@ unit tests in the test suite, which is written for usage with the \texttt{pytest
 framework, and with 87 \% and 45 \% line coverages for Python and compiled
 code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}). Documentation for the code is automatically built and hosted by
 the CircleCI service to facilitate evaluation of documentation changes /
-integrity.  Our full test suite also passes with PyPy3, a just-in-time compiled
+integrity.  Our full test suite also passes with PyPy3\cite{Bolz:2009:TMP:1565824.1565827}, a just-in-time compiled
 version of the Python language.
 
 \begin{figure}[H]
