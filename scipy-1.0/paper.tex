@@ -1100,36 +1100,32 @@ scientific collaboration that lead to the observation of gravitational waves
 MacOS and in the Intel Distribution for Python\cite{intel-python}, and that SciPy is used
 by 47 \% of all machine learning projects on GitHub\cite{octoverse-scipy}.
 
-The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev} is a
+Nevertheless, SciPy continually strives to improve.
+The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev}, summarized in Table~\ref{table:roadmap}, is a
 continuously-updated document
 maintained by the community that describes some of the major directions for
 improvement for the project, as well as specific limitations and matters that
 require assistance moving forward.
-
-We are still striving to increase the number of SciPy usage tutorials beyond
-our current 15 section offering\cite{SciPy_tutorials}, but our standard
-documentation for library features is already in excellent shape.
-
-The low-level Cython code in our library (which interacts with C-level code and
+In addition to the items on the roadmap, 
+we are still working to increase the number of SciPy usage tutorials beyond
+our current 15 section offering\cite{SciPy_tutorials}. 
+Also, the low-level Cython code in our library (which interacts with C-level code and
 exposes it for Python usage) could use some measure of modernization, including
-migration to typed memoryviews to handle NumPy arrays instead of the older
-syntax:
+migration to typed memoryviews to handle NumPy arrays.
 
-\begin{lstlisting}[language=Python]
-# example of a function that takes a single
-# 3 dimensional typed memoryview as an argument
-# this allows Cython-level handling of a NumPy
-# array object
-cpdef int func_new(int[:, :, :] arr):
-    pass
-
-# example of the old syntax for handling
-# the same scenario
-cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
-    pass
-\end{lstlisting}
-
-Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
+%\begin{lstlisting}[language=Python]
+%# example of a function that takes a single
+%# 3 dimensional typed memoryview as an argument
+%# this allows Cython-level handling of a NumPy
+%# array object
+%cpdef int func_new(int[:, :, :] arr):
+    %pass
+%
+%# example of the old syntax for handling
+%# the same scenario
+%cpdef int func_old(object[int, ndim=3, mode='strided'] arr):
+    %pass
+%\end{lstlisting}
 
 \begin{table}[H]
 \caption{Summary of SciPy Roadmap items following 1.0 release}
@@ -1154,6 +1150,9 @@ Some additional roadmap items are summarized in Table~\ref{table:roadmap}.
     \texttt{special} & precision improvements for hypergeometric, parabolic cylinder, and spheroidal wave functions\\
 \end{tabular}\label{table:roadmap}
 \end{table}
+
+A problem faced by many open source projects is attracting and retaining developers.  While it is normal for some individuals to contribute to a project for a while and then move on, too much turnover can result in the loss of institutional memory, leading to mistakes of the past being repeated, APIs of new code becoming inconsistent with the old code, and a drifting project scope.
+We are fortunate that the SciPy project continues to attract enthusiastic and competent new developers while maintaining the involvement of a small but dedicated ``old guard''. Pauli Virtanen, our BDFL, has been with the project for more than 10 years, and is still actively contributing code.  While the person acting as the release manager might change from one release to the next, Ralf Gommers acts as a general manager, keeping the release process moving smoothly and ensuring that pull requests get reviewed and merged where appropriate. Ralf is approaching his tenth year anniversary on the SciPy project and shows no signs of slowing down. There are early contributors, such as Robert Kern and St\'{e}fan van der Walt, who contributed much to SciPy over the last 10 or more years and while not currently writing code for SciPy, still contribute to discussions of bug reports and reviews of new code contributions. There are an additional half dozen or so currently active developers who have been contributing steadily for five or more years. The combination of a committed old guard and a host of new contributors ensures that SciPy will continue to grow while maintaining a high level of quality.
 
 \bibliography{references}
 
