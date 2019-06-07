@@ -828,9 +828,10 @@ and are used heavily throughout SciPy and dependent packages.
 
 Over the last three years, our sparse matrix handling internals have been
 rewritten and performance has been improved. Iterating over and slicing of CSC
-and CSR matrices is now faster by up to 35\% (Figure~\ref{fig:sparse-iter}),
- and the coordinate (COO) / diagonal (DIA) to CSR / CSC matrix format
-conversions are now faster (Figure~\ref{fig:sparse-conv}). Importantly,
+and CSR matrices is now faster by up to 35\%, % (Figure~\ref{fig:sparse-iter}),
+and the coordinate (COO) / diagonal (DIA) to CSR / CSC matrix format
+conversions are now faster. % (Figure~\ref{fig:sparse-conv}).
+Importantly,
 SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
 low-level implementations leveraged by a subset of our \texttt{sparse}
 offerings.
@@ -1156,25 +1157,17 @@ We are fortunate that the SciPy project continues to attract enthusiastic and co
 
 \bibliography{references}
 
-\section*{Acknowledgments}
-
-\fixme{TODO}
-
-%Acknowledgements should be brief, and should not include thanks to anonymous
-%referees and editors, or effusive comments. Grant or contribution numbers may
-%be acknowledged.
-
 \section*{Author contributions statement}
 
-\fixme{TODO}
+M.H. edited the manuscript, created figures, compiled the author list and contributions statements, and drafted the \texttt{linprog} technical improvements section.
 
 %Must include all authors, identified by initials, for example: A.A.
 %conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A.
 %and D.A. analysed the results.  All authors reviewed the manuscript.
 
-\section*{Additional information}
-
-\fixme{TODO}
+%\section*{Additional information}
+%
+%\fixme{TODO}
 
 \section*{Supporting Information}
 
@@ -1184,28 +1177,30 @@ We are fortunate that the SciPy project continues to attract enthusiastic and co
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{supporting_info/knn_complexity_confirm}
-\caption{Assessment of \texttt{cKDTree} nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
-\label{fig:knn-complexity}
-\end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_iteration_bench}
-\caption{Airspeed velocity benchmarks for SciPy CSC and CSR matrix row iteration over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, NumPy 1.8.2, and the indicated non-zero element density fractions were used. The partial performance regression observed shortly after the 1.0 release is likely related to a correctness fix\cite{sparse-regress}. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
-\label{fig:sparse-iter}
-\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\textwidth]{supporting_info/knn_complexity_confirm}
+%\caption{Assessment of \texttt{cKDTree} nearest neighbor query time complexity as a function of the number of input points (N) along with similar assessment for related algorithms in scikit-learn. The calculations are based on code previously reported\cite{knn-jake}, but updated to use SciPy 1.0.0, Python 3.6, NumPy 1.13.1, and Cython 0.27.3.}
+%\label{fig:knn-complexity}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_iteration_bench}
+%\caption{Airspeed velocity benchmarks for SciPy CSC and CSR matrix row iteration over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, NumPy 1.8.2, and the indicated non-zero element density fractions were used. The partial performance regression observed shortly after the 1.0 release is likely related to a correctness fix\cite{sparse-regress}. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+%\label{fig:sparse-iter}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_coo_dia_to_csr_csc}
+%\caption{Airspeed velocity benchmarks for SciPy COO / DIA to CSR / CSC matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
+%\label{fig:sparse-conv}
+%\end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{supporting_info/asv_bench/sparse/sparse_coo_dia_to_csr_csc}
-\caption{Airspeed velocity benchmarks for SciPy COO / DIA to CSR / CSC matrix format conversion over roughly three years of commits prior to the release of version 1.0. Python version 2.7, Cython version 0.27.3, and NumPy 1.8.2 were used. The values were obtained from our regularly-updated suite of performance results available online at \url{http://pv.github.io/scipy-bench/}.}
-\label{fig:sparse-conv}
-\end{figure}
-
-\section{Polynomial Interpolators: Additional Details}
+\subsection*{Polynomial Interpolators: Additional Details}
 FITPACK provides a collection of routines for calculating
 smoothing splines and automatic knot selection. One issue 
 with FITPACK and its Python wrappers in SciPy, \code{UnivariateSpline}
@@ -1246,7 +1241,7 @@ compatible with FITPACK. We recommend that users work with
 \code{BSpline} objects instead of directly manipulating \code{tck}
 tuples of knots, coefficients and the spline degree.
 
-\section*{Numerical Optimization: Additional Details}
+\subsection*{Numerical Optimization: Additional Details}
 The \texttt{scipy.optimize} subpackage provides functions for the numerical solution of several classes of root finding and optimization problems:
 \begin{enumerate}
 \item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
@@ -1258,6 +1253,7 @@ The \texttt{scipy.optimize} subpackage provides functions for the numerical solu
 \item general, nonlinear, global optimization problems of several variables (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
 \end{enumerate}
 
+\setlength{\tabcolsep}{3pt}
 \begin{table}[H]
   \centering
   \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
