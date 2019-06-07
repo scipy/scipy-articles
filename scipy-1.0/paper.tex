@@ -1019,14 +1019,8 @@ over roughly nine years of project history.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{static/asv_time_query_ckdtree}
-\caption{Airspeed velocity benchmarks for \texttt{scipy.spatial.cKDTree.query}
-over a roughly nine year commit history time frame. The results are based on
-Python 2.7 performance on the master branch of the project using NumPy 1.8.2
-and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward
-compatibility). Only the $L^2$ (Euclidean) norm is shown here, and to improve
-backward compatibility and sampling of the benchmarks there was no application
-of toroidal topology to the \texttt{KDTree} (boxsize argument was ignored).}
+\includegraphics[width=\textwidth]{static/asv}
+\caption{Results of the \texttt{scipy.spatial.cKDTree.query} benchmark from the introduction of \texttt{cKDTree} to the release of SciPy 1.0. The benchmark generates a $k$-d tree from 10,000 uniformly distributed points in an $m$-dimensional unit hypercube, then finds the nearest (Euclidean) neighbor in the tree for each of 1,000 query points. Each marker in the figure indicates the execution time of the benchmark for a commit in the master branch of SciPy. Substantial performance improvements were realized when \texttt{cKDTree} was fully Cythonized and again when it was rewritten in C++. The tree was generated without application of toroidal topology (\texttt{boxsize=None}), and tests were performed by Airspeed Velocity 0.4 using Python 2.7, NumPy 1.8.2, and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward compatibility).}
 \label{fig:asvbench}
 \end{figure}
 
