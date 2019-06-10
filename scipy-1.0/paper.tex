@@ -1155,27 +1155,31 @@ migration to typed memoryviews to handle NumPy arrays.
 A problem faced by many open source projects is attracting and retaining developers. While it is normal for some individuals to contribute to a project for a while and then move on, too much turnover can result in the loss of institutional memory, leading to mistakes of the past being repeated, APIs of new code becoming inconsistent with the old code, and a drifting project scope.
 We are fortunate that the SciPy project continues to attract enthusiastic and competent new developers while maintaining the involvement of a small but dedicated ``old guard''. There are contributors who were present in the early years of the project who still contribute to discussions of bug reports and reviews of new code contributions. Our BDFL has been with the project for more than 10 years and is still actively contributing code, and the head of our Steering Council, who also acts as a general manager, is approaching his eleventh anniversary. An additional half dozen or so active developers have been contributing steadily for five or more years. The combination of a committed old guard and a host of new contributors ensures that SciPy will continue to grow while maintaining a high level of quality.
 
+\section*{Data Availability}
+% The statement should be provided as a separate section (titled 'Data Availability') at the end of the main text, before the 'References' section. 
+All SciPy library source code and all data generated for the current study are available in the SciPy GitHub repository, \url{https://github.com/scipy}.
+
 \bibliography{references}
 
-\section*{Author contributions statement}
+\section*{Author Contributions Statement}
 
-M.H. edited the manuscript, created figures, compiled the author list and contributions statements, and drafted the \texttt{linprog} technical improvements section.
+All authors have contributed code to SciPy, and all authors reviewed the manuscript. In the author list, the names of authors who contributed text to the manuscript are indicated with $\dagger$, and the primary manuscript editors are denoted with $\ddagger$.
 
 %Must include all authors, identified by initials, for example: A.A.
 %conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A.
 %and D.A. analysed the results.  All authors reviewed the manuscript.
 
-%\section*{Additional information}
-%
-%\fixme{TODO}
+\section*{Competing Interests}
 
-\section*{Supporting Information}
+The authors declare no competing interests.
+
+%\section*{Supporting Information}
 
 % separate Figure / Table numbering for SI
-\renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\thetable}{S\arabic{table}}
-\setcounter{figure}{0}
-\setcounter{table}{0}
+%\renewcommand{\thefigure}{S\arabic{figure}}
+%\renewcommand{\thetable}{S\arabic{table}}
+%\setcounter{figure}{0}
+%\setcounter{table}{0}
 
 
 %
@@ -1200,114 +1204,60 @@ M.H. edited the manuscript, created figures, compiled the author list and contri
 %\label{fig:sparse-conv}
 %\end{figure}
 
-\subsection*{Polynomial Interpolators: Additional Details}
-FITPACK provides a collection of routines for calculating
-smoothing splines and automatic knot selection. One issue 
-with FITPACK and its Python wrappers in SciPy, \code{UnivariateSpline}
-and the \code{splrep}/\code{splev} combination, is the monolithic design:
-specific algorithms for construction of interpolating and 
-smoothing splines and knot selection are tightly coupled 
-at the Fortran level. The library offers a very
-limited degree of user control over the details 
-of the spline fitting it performs. 
+%\subsection*{Polynomial Interpolators: Additional Details}
+%FITPACK provides a collection of routines for calculating
+%smoothing splines and automatic knot selection. One issue 
+%with FITPACK and its Python wrappers in SciPy, \code{UnivariateSpline}
+%and the \code{splrep}/\code{splev} combination, is the monolithic design:
+%specific algorithms for construction of interpolating and 
+%smoothing splines and knot selection are tightly coupled 
+%at the Fortran level. The library offers a very
+%limited degree of user control over the details 
+%of the spline fitting it performs. 
+%%
+%Routines for manipulating piecewise polynomials and b-splines were either
+%not available or lacking in ease of use and/or performance characteristics.
 %
-Routines for manipulating piecewise polynomials and b-splines were either
-not available or lacking in ease of use and/or performance characteristics.
+%An alternative set of spline interpolation routines was implemented in the
+%(now deprecated) \code{splmake}/\code{spleval} combination, and used as a
+%backend of the \code{interp1d} routine. To further complicate matters,
+%the spline format used by \code{splmake}/\code{spleval} was incompatible 
+%with \code{splrep}/\code{splev}.
+%
+%Using \code{UnivariateSpline} in new code is not recommended. Given data points,
+%the helper function \code{make\_interp\_spline} constructs a \code{BSpline}
+%instance, representing a spline which interpolates the data. Interpolated values
+%at intermediate points can be computed either via its \code{\_\_call\_\_} method,
+%or by calling \code{splev(xnew, BSpline\_object)} --- the \code{splev} routine
+%accepts both \code{tck} tuples and \code{Bspline} instances.
+%
+%Fitting \emph{smoothing} splines to data can currently only be done with 
+%FITPACK. Building alternative algorithms is certainly possible,
+%but is still to be implemented.
+%
+%Interpolation with known or estimated derivatives, i.e., cubic or
+%higher-order Hermite splines, can be constructed by either
+%subclassing \code{PPoly} or \code{BPoly}, or using the factory
+%method \code{BPoly.from\_derivatives}.
+%
+%The spline representation used by \code{BSpline} is directly
+%compatible with FITPACK. We recommend that users work with
+%\code{BSpline} objects instead of directly manipulating \code{tck}
+%tuples of knots, coefficients and the spline degree.
+%
+%\subsection*{Numerical Optimization: Additional Details}
+%The \texttt{scipy.optimize} subpackage provides functions for the numerical solution of several classes of root finding and optimization problems:
+%\begin{enumerate}
+%\item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
+%\item linear sum assignment problems (\texttt{linear\textunderscore sum\textunderscore assignment}),
+%\item linear and nonlinear sum-of-squares problems (\texttt{leastsq}, \texttt{least\textunderscore squares}, \texttt{nnls}, \texttt{lsq\textunderscore linear}, and \texttt{curve\textunderscore fit}),
+%\item general, linear optimization problems (\texttt{linprog}),
+%\item general, nonlinear, local optimization problems of a single variable (\texttt{minimize\textunderscore scalar}),
+%\item general, nonlinear, local optimization problems of several variables (\texttt{minimize}), and
+%\item general, nonlinear, global optimization problems of several variables (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
+%\end{enumerate}
 
-An alternative set of spline interpolation routines was implemented in the
-(now deprecated) \code{splmake}/\code{spleval} combination, and used as a
-backend of the \code{interp1d} routine. To further complicate matters,
-the spline format used by \code{splmake}/\code{spleval} was incompatible 
-with \code{splrep}/\code{splev}.
 
-Using \code{UnivariateSpline} in new code is not recommended. Given data points,
-the helper function \code{make\_interp\_spline} constructs a \code{BSpline}
-instance, representing a spline which interpolates the data. Interpolated values
-at intermediate points can be computed either via its \code{\_\_call\_\_} method,
-or by calling \code{splev(xnew, BSpline\_object)} --- the \code{splev} routine
-accepts both \code{tck} tuples and \code{Bspline} instances.
-
-Fitting \emph{smoothing} splines to data can currently only be done with 
-FITPACK. Building alternative algorithms is certainly possible,
-but is still to be implemented.
-
-Interpolation with known or estimated derivatives, i.e., cubic or
-higher-order Hermite splines, can be constructed by either
-subclassing \code{PPoly} or \code{BPoly}, or using the factory
-method \code{BPoly.from\_derivatives}.
-
-The spline representation used by \code{BSpline} is directly
-compatible with FITPACK. We recommend that users work with
-\code{BSpline} objects instead of directly manipulating \code{tck}
-tuples of knots, coefficients and the spline degree.
-
-\subsection*{Numerical Optimization: Additional Details}
-The \texttt{scipy.optimize} subpackage provides functions for the numerical solution of several classes of root finding and optimization problems:
-\begin{enumerate}
-\item nonlinear root finding problems (\texttt{brentq}, \texttt{brenth}, \texttt{ridder}, \texttt{bisect}, \texttt{newton}, and \texttt{root}),
-\item linear sum assignment problems (\texttt{linear\textunderscore sum\textunderscore assignment}),
-\item linear and nonlinear sum-of-squares problems (\texttt{leastsq}, \texttt{least\textunderscore squares}, \texttt{nnls}, \texttt{lsq\textunderscore linear}, and \texttt{curve\textunderscore fit}),
-\item general, linear optimization problems (\texttt{linprog}),
-\item general, nonlinear, local optimization problems of a single variable (\texttt{minimize\textunderscore scalar}),
-\item general, nonlinear, local optimization problems of several variables (\texttt{minimize}), and
-\item general, nonlinear, global optimization problems of several variables (\texttt{basinhopping}, \texttt{brute}, \texttt{differential\textunderscore evolution}).
-\end{enumerate}
-
-\setlength{\tabcolsep}{3pt}
-\begin{table}[H]
-  \centering
-  \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
-    The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
-    (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
-    indicates whether first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
-    with $\sim$ the algorithm does not requires second-order derivatives from
-    the user; it computes an approximation internally and uses it to accelerate method convergence.
-    \textit{Iterative Hessian factorization} denotes algorithms that factorize the Hessian in an iterative way,
-    which does not require explicit matrix factorization or storage of the Hessian.
-    \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
-    iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
-    has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
-    \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
-    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
-    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
-    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
-  \begin{tabular}{cccccccccccccc}
-      & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
-    \hline
-    Version added &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.9 &  0.6* &  0.6* & 0.13 & 0.13 & 0.19 & 1.0 \\
-    \hline
-    Wrapper & & & \cmark & & & \cmark & \cmark & \cmark & &  & & & \cmark \\
-    \hline
-    \nth{1} derivatives &  & & & \cmark  & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
-    \hline
-    \nth{2} derivatives &  &  &  &  & $\sim$ & $\sim$ & $\sim$ & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
-    \hline
-    \makecell{Iterative Hessian \\
-    factorization} & & & &  & & & & \cmark & \cmark &  & \cmark &  & \cmark \\
-    \hline
-    Local convergence& & & & L & S &  L & S & S$^*$ & S$^*$ & Q & S$^*$ & Q & S$^*$  \\
-    \hline
-    Global convergence & & &  &   & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark  \\
-    \hline
-    \makecell{Line-search (LS) or\\ trust-region (TR)} & Neither  & LS &  TR & LS & LS & LS & LS & LS & LS & TR & TR & TR & TR \\
-    \hline
-    Bound constraints &&&\cmark&&&&\cmark&\cmark&\cmark&&&& \\
-    \hline
-    Equality constraints &&&&&&&\cmark&&&&& \\
-    \hline
-    Inequality constraint &&&\cmark&&&&\cmark&&&&& \\
-    \hline
-    References & \cite{nelder_simplex_1965, wright_direct_1996} & \cite{powell_efficient_1964} &
-      \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
-      \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
-      \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
-      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
-      \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
-      \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, lenders_trlib:_2016} \\
-    \hline
-  \end{tabular}
-  \label{tab:minimize-si}
-\end{table}
 
 %To include, in this order: \textbf{Accession codes} (where applicable);
 %\textbf{Competing financial interests} (mandatory statement).
