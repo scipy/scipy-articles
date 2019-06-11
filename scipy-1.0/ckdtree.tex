@@ -9,8 +9,9 @@ consistent with its formal description \cite{kdtree-search-algo}.
 Since then, we've enhanced \texttt{cKDTree.query} by reimplementing it in
 C++, removing memory leaks, and allowing release of the global interpreter lock (GIL) so that
 multiple threads may be used\cite{gh-4374}. This generally improved
-performance on any given problem (Figure~\ref{fig:asvbench}) while
-preserving the asymptotic complexity (Figure~\ref{fig:knn-complexity}).
+performance on any given problem (Figure~\ref{fig:asvbench})
+while preserving the asymptotic complexity.
+%(Figure~\ref{fig:knn-complexity}).
 
 In 2015, SciPy added the \texttt{sparse\_distance\_matrix} routine for generating 
 approximate sparse distance matrices between \texttt{KDTree} objects by ignoring 
