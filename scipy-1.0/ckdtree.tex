@@ -15,8 +15,8 @@ while preserving the asymptotic complexity.
 
 In 2015, SciPy added the \texttt{sparse\_distance\_matrix} routine for generating 
 approximate sparse distance matrices between \texttt{KDTree} objects by ignoring 
-all distances that exceed a user-provided value. Also, this routine is not 
-limited to the conventional L2 (Euclidean) norm but supports any Minkowski 
+all distances that exceed a user-provided value. This routine is not 
+limited to the conventional L2 (Euclidean) norm, but supports any Minkowski 
 $p$-norm between 1 and infinity. By default, the returned data structure is a
 Dictionary Of Keys (DOK) based sparse matrix, which is very efficient for matrix 
 construction. This hashing approach to sparse matrix assembly can be 7 times 
