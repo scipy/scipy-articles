@@ -693,11 +693,11 @@ scikit-learn\cite{pedregosa2011scikit} covers machine learning; and
 PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and 
 PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
 scikit-image\cite{vanderwalt2014scikit} provides image processing
-capabilities beyond \texttt{scipy.ndimage}, sympy\cite{meurer2017sympy}
+capabilities beyond SciPy's \texttt{ndimage}, sympy\cite{meurer2017sympy}
 provides a Python interface for symbolic computation, and
-NetworkX\cite{hagberg2008networkx} is a Python library for probing
-graphs and networks in a more specialized way than SciPy components
-like \texttt{sparse.csgraph} or \texttt{spatial}.
+while \texttt{sparse.csgraph} or \texttt{spatial} offers basic tools
+for working with graphs and networks compared to a more specialized
+Python library like NetworkX\cite{hagberg2008networkx}.
 
 We use the following criteria to determine whether or not to include new
 functionality in SciPy:
@@ -711,7 +711,7 @@ functionality in SciPy:
 In terms of software systems and architecture, SciPy's scope matches NumPy's:
 algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
-for graphics processing units (GPUs) is explicitly out of scope.
+for graphics processing units (GPUs) are explicitly out of scope.
 
 \subsection*{Package organization}
 \input{subpackages}
@@ -942,8 +942,8 @@ includes POSIX and Windows (32/64-bit) platforms managed by Travis CI and
 AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
 include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There are more than $13,000$
 unit tests in the test suite, which is written for usage with the \texttt{pytest}
-framework, and with 87 \% and 45 \% line coverages for Python and compiled
-code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}). Documentation for the code is automatically built and hosted by
+framework, and with 87\% and 45\% line coverages for Python and compiled
+code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}). Documentation for the code is automatically built and published by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3\cite{Bolz:2009:TMP:1565824.1565827}, a just-in-time compiled
 version of the Python language.
@@ -995,8 +995,8 @@ of the removal of $\approx 61,000$ lines of compiled code for SciPy
 v0.14, the volume of both compiled and Python
 code has increased between releases, as has the number of lines
 covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
-compiled code with test coverage near $45 \%$ and $106,878$ lines of 
-Python code with test coverage near $87 \%$.\\
+compiled code with test coverage near $45\%$ and $106,878$ lines of 
+Python code with test coverage near $87\%$.\\
 The reconstitution of historical
 build and test environments was performed using a docker-based approach
 \cite{scipy-cov}. Analysis of lines of source code covered is performed 
@@ -1005,8 +1005,6 @@ and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflec
 inclusion of additional vendored code.}
 \label{fig:coverage}
 \end{figure}
-
-% NOTE: is there a citation for PyPy?
 
 \subsubsection*{Benchmark suite}
 
@@ -1093,7 +1091,7 @@ usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
 scientific collaboration that lead to the observation of gravitational waves
 \cite{PhysRevLett.116.061102}, the fact that SciPy is shipped directly with
 MacOS and in the Intel Distribution for Python\cite{intel-python}, and that SciPy is used
-by 47 \% of all machine learning projects on GitHub\cite{octoverse-scipy}.
+by 47\% of all machine learning projects on GitHub\cite{octoverse-scipy}.
 
 Nevertheless, SciPy continually strives to improve.
 The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev}, summarized in Table~\ref{table:roadmap}, is a
