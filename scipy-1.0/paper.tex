@@ -107,7 +107,7 @@ version 0.1 release. SciPy
 has become a \emph{de facto} standard for leveraging scientific algorithms
 in the Python programming language, with more than 600
 unique code contributors, millions of downloads per year, 161 dependent
-packages, and 28700 dependent repositories. This includes usage of SciPy
+packages, and 28,700 dependent repositories. This includes usage of SciPy
 in almost half of all machine learning projects on GitHub, and usage by
 high profile projects including LIGO gravitational wave analysis and creation
 of the first-ever image of a black hole (M87).
@@ -620,7 +620,7 @@ Dubois. However, Python was still sufficiently niche that the average reader
 would need additional information in order to decide whether it would
 ``be useful in their own work.''
 The follow-up CiSE March/April 2011 Python for Scientists and Engineers
-special issue\cite{millman2011python}, focused more on the core parts
+special issue\cite{millman2011python} focused more on the core parts
 of the scientific Python ecosystem\cite{perez2011python} including
 NumPy\cite{vanderwalt2011numpy}, Cython\cite{behnel2011cython},
 and Mayavi\cite{ramachandran2011mayavi}. Python became so pervasive that 
@@ -647,7 +647,7 @@ called PyData.
 \subsection*{SciPy Today}
 At the time of writing, the SciPy library consists of nearly 
 600,000 lines of code organized in 16 subpackages. 
-Over 85,000 GitHub repositories and almost 5000 packages depend
+Over 85,000 GitHub repositories and almost 5,000 packages depend
 on SciPy. Some of the major
 feature highlights from the three years preceding
 SciPy 1.0 are discussed in the Key Technical Improvements section below,
@@ -695,7 +695,7 @@ scikit-learn\cite{pedregosa2011scikit} covers machine learning; and
 PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and 
 PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
 scikit-image\cite{vanderwalt2014scikit} provides image processing
-capabilities beyond SciPy's \texttt{ndimage}, sympy\cite{meurer2017sympy}
+capabilities beyond SciPy's \texttt{ndimage}, SymPy\cite{meurer2017sympy}
 provides a Python interface for symbolic computation, and
 while \texttt{sparse.csgraph} or \texttt{spatial} offers basic tools
 for working with graphs and networks compared to a more specialized
@@ -800,9 +800,9 @@ development workflow.
 \subsection*{API and ABI evolution}
 
 The application programming interface (API) for SciPy consists of approximately
-1500 functions and classes.  Our policy for evolving the API over time is that
+1,500 functions and classes.  Our policy for evolving the API over time is that
 new functionality can be added, while removing or changing existing
-functionality can only be done if the benefits of that exceeds the (often
+functionality can only be done if the benefits exceed the (often
 significant) costs to users, \textit{and} only after giving clear deprecation
 warnings to those users for at least one year. In general, we encourage
 changes that improve clarity in the API of the library but strongly discourage
@@ -830,9 +830,9 @@ and are used heavily throughout SciPy and dependent packages.
 
 Over the last three years, our sparse matrix handling internals have been
 rewritten and performance has been improved. Iterating over and slicing of CSC
-and CSR matrices is now faster by up to 35\%, % (Figure~\ref{fig:sparse-iter}),
-and the coordinate (COO) / diagonal (DIA) to CSR / CSC matrix format
-conversions are now faster. % (Figure~\ref{fig:sparse-conv}).
+and CSR matrices is now up to 35\% faster, % (Figure~\ref{fig:sparse-iter}),
+and the speed of coordinate (COO) / diagonal (DIA) to CSR / CSC matrix format
+conversions has increased. % (Figure~\ref{fig:sparse-conv}).
 Importantly,
 SuperLU\cite{superlu_ug99} was updated to version 5.2.1, enhancing the
 low-level implementations leveraged by a subset of our \texttt{sparse}
@@ -860,7 +860,7 @@ calling compiled C functions, such as those generated using \texttt{numba}
 or Cython, directly from Python.
 Supported low-level functions include \texttt{PyCapsule}
 objects, \texttt{ctypes} function pointers, and \texttt{cffi} function pointers.
-Furthermore, it is even possible to generate a low-level callback function
+Furthermore, it is possible to generate a low-level callback function
 automatically from a Cython module using \texttt{scipy.LowLevelCallable.from\_cython}.
 
 \subsection*{Cython bindings for BLAS, LAPACK, and special}
@@ -918,13 +918,13 @@ The \texttt{scipy.stats} subpackage contains more than 100 probability
 distributions: 96 continuous and 13 discrete univariate distributions
 and 10 multivariate distributions. The implementation relies on a
 consistent framework that provides methods to sample random variates,
-to evaluate the cumulative distribution function (cdf) and the probability
-density function (pdf) and to fit parameters for every distribution. 
+to evaluate the cumulative distribution function (CDF) and the probability
+density function (PDF) and to fit parameters for every distribution.
 Generally, the methods rely on specific implementations for each
-distribution such as a closed form expression of the cdf or a sampling 
+distribution such as a closed form expression of the CDF or a sampling
 algorithm, if available. Otherwise, default methods are used
-based on generic code, e.g., numerical integration of the pdf to
-obtain the cdf. 
+based on generic code, e.g., numerical integration of the PDF to
+obtain the CDF.
 Key recent distributions added to \texttt{scipy.stats} include the
 histogram-based distribution in \texttt{scipy.stats.rv\_histogram}
 and the multinomial distribution in \texttt{scipy.stats.multinomial}
@@ -1049,7 +1049,7 @@ In addition, the project currently has 15 active maintainers: people who review
 the contributions of others and do everything else needed to ensure that the
 software and the project move forward. Maintainers are critical to the health
 of the project\cite{eghbal2016}; their skills and efforts largely determine how
-fast the project moves forward, and they enable input from the much
+fast the project progresses, and they enable input from the much
 larger group of contributors. Anyone can become a maintainer, too, as they
 are selected on a rolling basis from contributors with a significant history of
 high-quality contributions.
@@ -1088,7 +1088,7 @@ Packaging Index (PyPI)\cite{pypinfo} and 5,776,017 via the default channel of th
 bound on the total number of downloads by users given that
 PyPI and \texttt{conda} are only two of several popular methods for installing SciPy.  The SciPy
 website\cite{SciPylib}, which has been the default citation in the absence of a
-peer-reviewed paper, has been cited $>3000$ times\cite{googlescholar}. Some of the most prominent
+peer-reviewed paper, has been cited $>3,000$ times\cite{googlescholar}. Some of the most prominent
 usages of or demonstrations of credibility for SciPy include the LIGO / Virgo
 scientific collaboration that lead to the observation of gravitational waves
 \cite{PhysRevLett.116.061102}, the fact that SciPy is shipped directly with
