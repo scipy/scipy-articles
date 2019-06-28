@@ -339,27 +339,6 @@ Gary Strangman, a postdoctoral fellow at Harvard Medical School,
 published several descriptive and inferential statistical 
 routines\cite{Strangman-modules}.
 
-\begin{figure}
-\begin{verbatim}
-SciPy is an open source package that builds on the strengths of Python and
-Numeric providing a wide range of fast scientific and numeric functionality.
-SciPy's current module set includes the following:
-
-    Special Functions (Bessel, hanker, Airy, etc.)
-    Signal/Image Processing
-    2D Plotting capabilities
-    Integration
-    ODE solvers
-    Optimization (simplex, BFGS, Netwon-CG, etc.)
-    Genetic Algorithms
-    Numeric -> C++ expression compiler
-    Parallel programming tools
-    Splines and Interpolation
-    And other stuff.
-\end{verbatim}
-\caption{Excerpt from SciPy 0.1 release announcement (typos included).}\label{fig:announce-0.1}
-\end{figure}
-
 With a rich programming environment and a numerical array object in
 place, the time was ripe for the development of a full scientific
 software stack.
@@ -659,14 +638,6 @@ and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
 % section below. Some longer-term milestone events are
 % highlighted in Figure~\ref{fig:timeline}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{static/scipy_timeline}
-\caption{Major milestones from SciPy's initial release in 2001 to
-the release of SciPy 1.0 in 2017.}
-\label{fig:timeline}
-\end{figure}
-
 % Release management
 
 % Jarrod
@@ -724,27 +695,6 @@ Python, Cython, Fortran, C and C++ are the programming languages used to
 implement scientific algorithms in the SciPy library. An analysis of our codebase
 using the \texttt{linguist} library\cite{linguistref} provides a
 detailed breakdown of SciPy's composition (Table~\ref{tab:linguist}).
-
-\begin{table}
-\centering
-\begin{tabular}{p{3cm}S[table-format = <0.1]}
-\toprule
-Language & {Percent}\\
-\midrule
-Python  & 49.5 \\
-Fortran & 25.6 \\
-C       & 19.5 \\
-Cython  & 3.0  \\
-C++     & 2.3  \\[\defaultaddspace]
-{\TeX, Matlab, Shell, and Makefile} & <0.5 \\
-\bottomrule
-\end{tabular}
-\caption{Language composition of SciPy codebase: lines of code in each
-programming language as determined by the \texttt{linguist} package.
-The last row denotes tools used in supporting roles in tests,
-building, and documentation.}
-\label{tab:linguist}
-\end{table}
 
 Fortran, despite its age, is still a high-performance scientific programming language with 
 continued contemporary usage\cite{Koelbel:1993:HPF:562354}. Thus, we wrap the following excellent, field-tested Fortran
@@ -950,64 +900,6 @@ the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3\cite{Bolz:2009:TMP:1565824.1565827}, a just-in-time compiled
 version of the Python language.
 
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[]
-\pgfplotstableread[column/ver/.style=string type]{
-ver totpyline covpyline uncovpyline totcompline covcompline uncovcompline
-v0.12.1 33844 25721 8123 273634  142290 131344
-v0.13.3 36638 28944 7694 338926  172852 166074
-v0.14.1 37301 30587 6714 277643  147151 130492
-v0.15.1 38339 30288 8051 304898  158547 146351
-v0.16.1 40094 32075 8019 322398  167647 154751
-v0.17.1 42566 34478 8088 340903  170452 170451
-v0.18.1 44711 36216 8495 353417  173174 180243
-v0.19.1 43823 36373 7450 436900  200974 235926
-v1.0.0 106878 92984 13894 462574 208158 254416
-}\covtable
-    \begin{axis}[
-    width=\textwidth,
-    height=7cm,
-    enlargelimits=false,
-    ymin=0,
-    ymax=6e5,
-    stack plots=y,%   
-    area style,
-    xtick=data,
-    ytick={2e5,4e5,6e5},
-    xticklabels from table={\covtable}{ver},
-    scaled y ticks=false,
-    y tick label style={/pgf/number format/.cd, fixed, 1000 sep={}},
-    legend entries={Compiled (covered),Compiled (uncovered),Python (covered),Python (uncovered)},
-    legend style={draw=none,fill=none, cells={align=left},/tikz/every even column/.append style={column sep=3mm}},
-    legend columns=-1,
-    legend image code/.code={\fill[#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm);},
-    ]
-  \addplot+[fill=blue!50] table[x expr=\coordindex, y=covcompline] {\covtable} \closedcycle;
-  \addplot+[fill=blue!10] table[x expr=\coordindex, y=uncovcompline] {\covtable} \closedcycle;
-  \addplot+[fill=red!70] table[x expr=\coordindex, y=covpyline] {\covtable} \closedcycle;
-  \addplot+[fill=red!30] table[x expr=\coordindex, y=uncovpyline] {\covtable} \closedcycle;
-\end{axis}
-\end{tikzpicture}
-\caption{
-Python (red) and compiled (blue) code volume in SciPy over time.
-Deep-shaded area represents lines of code covered by units tests;
-light-shaded area represents lines not covered. With the exception
-of the removal of $\approx 61,000$ lines of compiled code for SciPy
-v0.14, the volume of both compiled and Python
-code has increased between releases, as has the number of lines
-covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
-compiled code with test coverage near $45\%$ and $106,878$ lines of 
-Python code with test coverage near $87\%$.\\
-The reconstitution of historical
-build and test environments was performed using a docker-based approach
-\cite{scipy-cov}. Analysis of lines of source code covered is performed 
-automatically in our continuous integration suite using the \texttt{pytest-cov}
-and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
-inclusion of additional vendored code.}
-\label{fig:coverage}
-\end{figure}
-
 \subsubsection*{Benchmark suite}
 
 In addition to ensuring that unit tests are passing, it is important to confirm that the
@@ -1017,13 +909,6 @@ SciPy's \texttt{run.py} script conveniently wraps \texttt{asv} features such tha
 results over time can be generated with a single console command. For example,
 Figure~\ref{fig:asvbench} illustrates the improvement of\texttt{scipy.spatial.cKDTree.query}
 over roughly nine years of project history.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{static/asv}
-\caption{Results of the \texttt{scipy.spatial.cKDTree.query} benchmark from the introduction of \texttt{cKDTree} to the release of SciPy 1.0. The benchmark generates a $k$-d tree from 10,000 uniformly distributed points in an $m$-dimensional unit hypercube, then finds the nearest (Euclidean) neighbor in the tree for each of 1,000 query points. Each marker in the figure indicates the execution time of the benchmark for a commit in the master branch of SciPy. Substantial performance improvements were realized when \texttt{cKDTree} was fully Cythonized and again when it was rewritten in C++. The tree was generated without application of toroidal topology (\texttt{boxsize=None}), and tests were performed by Airspeed Velocity 0.4 using Python 2.7, NumPy 1.8.2, and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward compatibility).}
-\label{fig:asvbench}
-\end{figure}
 
 \section*{Project organization and community}
 
@@ -1122,6 +1007,86 @@ migration to typed memoryviews to handle NumPy arrays.
     %pass
 %\end{lstlisting}
 
+A problem faced by many open source projects is attracting and retaining developers. While it is normal for some individuals to contribute to a project for a while and then move on, too much turnover can result in the loss of institutional memory, leading to mistakes of the past being repeated, APIs of new code becoming inconsistent with the old code, and a drifting project scope.
+We are fortunate that the SciPy project continues to attract enthusiastic and competent new developers while maintaining the involvement of a small but dedicated ``old guard''. There are contributors who were present in the early years of the project who still contribute to discussions of bug reports and reviews of new code contributions. Our BDFL has been with the project for more than 10 years and is still actively contributing code, and the head of our Steering Council, who also acts as a general manager, is approaching his eleventh anniversary. An additional half dozen or so active developers have been contributing steadily for five or more years. The combination of a committed old guard and a host of new contributors ensures that SciPy will continue to grow while maintaining a high level of quality.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{3cm}S[table-format = <0.1]}
+\toprule
+Language & {Percent}\\
+\midrule
+Python  & 49.5 \\
+Fortran & 25.6 \\
+C       & 19.5 \\
+Cython  & 3.0  \\
+C++     & 2.3  \\[\defaultaddspace]
+{\TeX, Matlab, Shell, and Makefile} & <0.5 \\
+\bottomrule
+\end{tabular}
+\caption{Language composition of SciPy codebase: lines of code in each
+programming language as determined by the \texttt{linguist} package.
+The last row denotes tools used in supporting roles in tests,
+building, and documentation.}
+\label{tab:linguist}
+\end{table}
+
+\setlength{\tabcolsep}{3pt}
+\begin{table}[H]
+  \centering
+  \caption{Optimization methods from \texttt{minimize}, which solves problems of the form $\min_x f(x)$, where $x \in \mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}$ .  The field \textit{version added} specifies the algorithm's first appearance in SciPy. Algorithms with \textit{version added} ``0.6*'' were added in version 0.6 or before.
+    The field \textit{wrapper} indicates whether the implementation available in SciPy wraps a function written in a compiled language
+    (e.g. C or FORTRAN). The fields \textit{\nth{1}} and \textit{\nth{2} derivatives}
+    indicates whether first or second order derivatives are required. When \textit{\nth{2} derivatives} is flagged
+    with $\sim$ the algorithm does not requires second-order derivatives from
+    the user; it computes an approximation internally and uses it to accelerate method convergence.
+    \textit{Iterative Hessian factorization} denotes algorithms that factorize the Hessian in an iterative way,
+    which does not require explicit matrix factorization or storage of the Hessian.
+    \textit{Local convergence} gives a lower bound on the rate of convergence of the iterations sequence once the
+    iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
+    has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
+    \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
+    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
+    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
+    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
+  \begin{tabular}{cccccccccccccc}
+      & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
+    \hline
+    Version added &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.6* &  0.9 &  0.6* &  0.6* & 0.13 & 0.13 & 0.19 & 1.0 \\
+    \hline
+    Wrapper & & & \cmark & & & \cmark & \cmark & \cmark & &  & & & \cmark \\
+    \hline
+    \nth{1} derivatives &  & & & \cmark  & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \nth{2} derivatives &  &  &  &  & $\sim$ & $\sim$ & $\sim$ & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\
+    \hline
+    \makecell{Iterative Hessian \\
+    factorization} & & & &  & & & & \cmark & \cmark &  & \cmark &  & \cmark \\
+    \hline
+    Local convergence& & & & L & S &  L & S & S$^*$ & S$^*$ & Q & S$^*$ & Q & S$^*$  \\
+    \hline
+    Global convergence & & &  &   & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark  \\
+    \hline
+    \makecell{Line-search (LS) or\\ trust-region (TR)} & Neither  & LS &  TR & LS & LS & LS & LS & LS & LS & TR & TR & TR & TR \\
+    \hline
+    Bound constraints &&&\cmark&&&&\cmark&\cmark&\cmark&&&& \\
+    \hline
+    Equality constraints &&&&&&&\cmark&&&&& \\
+    \hline
+    Inequality constraint &&&\cmark&&&&\cmark&&&&& \\
+    \hline
+    References & \cite{nelder_simplex_1965, wright_direct_1996} & \cite{powell_efficient_1964} &
+      \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
+      \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
+      \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
+      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
+      \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
+      \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, lenders_trlib:_2016} \\
+    \hline
+  \end{tabular}
+  \label{tab:minimize-si}
+\end{table}
+
 \begin{table}[H]
 \caption{Summary of SciPy Roadmap items following 1.0 release}
 \begin{tabular}{ c|c }
@@ -1146,8 +1111,99 @@ migration to typed memoryviews to handle NumPy arrays.
 \end{tabular}\label{table:roadmap}
 \end{table}
 
-A problem faced by many open source projects is attracting and retaining developers. While it is normal for some individuals to contribute to a project for a while and then move on, too much turnover can result in the loss of institutional memory, leading to mistakes of the past being repeated, APIs of new code becoming inconsistent with the old code, and a drifting project scope.
-We are fortunate that the SciPy project continues to attract enthusiastic and competent new developers while maintaining the involvement of a small but dedicated ``old guard''. There are contributors who were present in the early years of the project who still contribute to discussions of bug reports and reviews of new code contributions. Our BDFL has been with the project for more than 10 years and is still actively contributing code, and the head of our Steering Council, who also acts as a general manager, is approaching his eleventh anniversary. An additional half dozen or so active developers have been contributing steadily for five or more years. The combination of a committed old guard and a host of new contributors ensures that SciPy will continue to grow while maintaining a high level of quality.
+\begin{figure}[H]
+\begin{verbatim}
+SciPy is an open source package that builds on the strengths of Python and
+Numeric providing a wide range of fast scientific and numeric functionality.
+SciPy's current module set includes the following:
+
+    Special Functions (Bessel, hanker, Airy, etc.)
+    Signal/Image Processing
+    2D Plotting capabilities
+    Integration
+    ODE solvers
+    Optimization (simplex, BFGS, Netwon-CG, etc.)
+    Genetic Algorithms
+    Numeric -> C++ expression compiler
+    Parallel programming tools
+    Splines and Interpolation
+    And other stuff.
+\end{verbatim}
+\caption{Excerpt from SciPy 0.1 release announcement (typos included).}\label{fig:announce-0.1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{static/scipy_timeline}
+\caption{Major milestones from SciPy's initial release in 2001 to
+the release of SciPy 1.0 in 2017.}
+\label{fig:timeline}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[]
+\pgfplotstableread[column/ver/.style=string type]{
+ver totpyline covpyline uncovpyline totcompline covcompline uncovcompline
+v0.12.1 33844 25721 8123 273634  142290 131344
+v0.13.3 36638 28944 7694 338926  172852 166074
+v0.14.1 37301 30587 6714 277643  147151 130492
+v0.15.1 38339 30288 8051 304898  158547 146351
+v0.16.1 40094 32075 8019 322398  167647 154751
+v0.17.1 42566 34478 8088 340903  170452 170451
+v0.18.1 44711 36216 8495 353417  173174 180243
+v0.19.1 43823 36373 7450 436900  200974 235926
+v1.0.0 106878 92984 13894 462574 208158 254416
+}\covtable
+    \begin{axis}[
+    width=\textwidth,
+    height=7cm,
+    enlargelimits=false,
+    ymin=0,
+    ymax=6e5,
+    stack plots=y,%   
+    area style,
+    xtick=data,
+    ytick={2e5,4e5,6e5},
+    xticklabels from table={\covtable}{ver},
+    scaled y ticks=false,
+    y tick label style={/pgf/number format/.cd, fixed, 1000 sep={}},
+    legend entries={Compiled (covered),Compiled (uncovered),Python (covered),Python (uncovered)},
+    legend style={draw=none,fill=none, cells={align=left},/tikz/every even column/.append style={column sep=3mm}},
+    legend columns=-1,
+    legend image code/.code={\fill[#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm);},
+    ]
+  \addplot+[fill=blue!50] table[x expr=\coordindex, y=covcompline] {\covtable} \closedcycle;
+  \addplot+[fill=blue!10] table[x expr=\coordindex, y=uncovcompline] {\covtable} \closedcycle;
+  \addplot+[fill=red!70] table[x expr=\coordindex, y=covpyline] {\covtable} \closedcycle;
+  \addplot+[fill=red!30] table[x expr=\coordindex, y=uncovpyline] {\covtable} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+\caption{
+Python (red) and compiled (blue) code volume in SciPy over time.
+Deep-shaded area represents lines of code covered by units tests;
+light-shaded area represents lines not covered. With the exception
+of the removal of $\approx 61,000$ lines of compiled code for SciPy
+v0.14, the volume of both compiled and Python
+code has increased between releases, as has the number of lines
+covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
+compiled code with test coverage near $45\%$ and $106,878$ lines of 
+Python code with test coverage near $87\%$.\\
+The reconstitution of historical
+build and test environments was performed using a docker-based approach
+\cite{scipy-cov}. Analysis of lines of source code covered is performed 
+automatically in our continuous integration suite using the \texttt{pytest-cov}
+and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
+inclusion of additional vendored code.}
+\label{fig:coverage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{static/asv}
+\caption{Results of the \texttt{scipy.spatial.cKDTree.query} benchmark from the introduction of \texttt{cKDTree} to the release of SciPy 1.0. The benchmark generates a $k$-d tree from 10,000 uniformly distributed points in an $m$-dimensional unit hypercube, then finds the nearest (Euclidean) neighbor in the tree for each of 1,000 query points. Each marker in the figure indicates the execution time of the benchmark for a commit in the master branch of SciPy. Substantial performance improvements were realized when \texttt{cKDTree} was fully Cythonized and again when it was rewritten in C++. The tree was generated without application of toroidal topology (\texttt{boxsize=None}), and tests were performed by Airspeed Velocity 0.4 using Python 2.7, NumPy 1.8.2, and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward compatibility).}
+\label{fig:asvbench}
+\end{figure}
 
 \section*{Data Availability}
 % The statement should be provided as a separate section (titled 'Data Availability') at the end of the main text, before the 'References' section. 
