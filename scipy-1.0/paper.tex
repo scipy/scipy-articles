@@ -967,17 +967,18 @@ Python (red) and compiled (blue) code volume in SciPy over time.
 Deep-shaded area represents lines of code covered by units tests;
 light-shaded area represents lines not covered. With the exception
 of the removal of $\approx 61,000$ lines of compiled code for SciPy
-v0.14, the volume of both compiled and Python
+v0.14, the volume of both compiled (C, C++, and Fortran) and Python
 code has increased between releases, as has the number of lines
-covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
-compiled code with test coverage near $45\%$ and $106,878$ lines of 
-Python code with test coverage near $87\%$.\\
-The reconstitution of historical
-build and test environments was performed using a docker-based approach
-\cite{scipy-cov}. Analysis of lines of source code covered is performed 
-automatically in our continuous integration suite using the \texttt{pytest-cov}
-and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
-inclusion of additional vendored code.}
+covered by unit tests. In SciPy v1.0.0, tests covered approximately
+45\% of $462,574$ lines of compiled code (many of which
+are automatically generated from Cython source), and nearly 87\% of
+106,878 lines of Python code.\\
+Coverage analysis is performed automatically in our continuous integration
+suite using the \texttt{pytest-cov} and \texttt{gcov} libraries for 
+Python and compiled code, respectively. The
+the reconstitution of historical build and test environments for this
+figure was performed using a Docker-based approach\cite{scipy-cov}.
+}
 \label{fig:coverage}
 \end{figure}
 
