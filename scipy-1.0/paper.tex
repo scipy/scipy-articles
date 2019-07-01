@@ -582,12 +582,23 @@ hundreds of attendees. Special issues were organized and published in a
 leading scientific journal\cite{dubois2007guest}, and the scope of the SciPy library
 narrowed, while the breadth of the ecosystem grew
 through a new type of auxiliary package: the scikit\cite{scikits-general}.
-The tooling, development, and release processes became more professional.
+The tooling, development, documentation, and release processes became more professional.
 SciPy was expanded carefully, with the patience affordable in open source 
 projects and via best practices common in industry \cite{millman2014developing}.
 
-
-
+Early versions of SciPy had minimal documentation, but this began to change
+with the 2006 release of a \emph{Guide to NumPy}\cite{oliphant2006guide}. 
+In 2007, Sphinx\cite{sphinx} made it possible to render hypertext and 
+PDF-formatted documents automatically from plain text (docstrings) 
+interspersed with Python code, and in 2008, \texttt{pydocweb}\cite{pydocweb}
+enabled collaborative documentation development in a wiki-like fashion.
+The SciPy Documentation Project \cite{van2008scipy, harrington2008scipy} 
+used these tools to complete documentation of SciPy's user-facing
+functionality: offering t-shirts to contributors from around the world in 
+exchange for high-quality text, it collected contributions from over 75 people 
+to produce an 884 page manual\cite{harrington2009scipy}. Since then,
+SciPy has remained committed to maintaining high-quality documentation as 
+part of the normal development cycle.
 
 %http://conference.scipy.org/proceedings/scipy2008/paper\_0/full\_text.pdf
 %http://conference.scipy.org/proceedings/scipy2008/paper\_1/full\_text.pdf
@@ -640,36 +651,6 @@ Matplotlib.
 Among its other projects, NumFOCUS organizes a global network of 
 community driven educational programs, meetups, and conferences
 called PyData.
-
-
-\subsection{*Documentation}
-Early versions of SciPy had minimal documentation.  Travis
-Oliphant wrote \textit{A guide to NumPy}, an 8000 word e-book, which
-documented the underpinnings and API for compiled components, but did
-not provide reference documentation for the $\sim$2000 routines then in
-NumPy, nor said much about SciPy.  Realizing that the package had gotten too large for a single
-person to document, Joseph Harrington founded the SciPy Documentation
-Project in late Spring 2008, hiring Stefan van der Walt as documentation
-editor.  Pauli Virtanen, Emmanuelle Gouillart, and Gael Varoquaux wrote
-numpydoc, a system for collecting, reviewing, and safely integrating
-documentation with the Python sources.  The system, based on Sphinx,
-produced text, hypertext, and PDF-formatted documents from a single
-source document.  Harrington proposed and they established a
-documentation template and a review system.  Using the SciPy mailing
-list, they solicited community help, and by the end of the summer had
-high-quality documentation for the most frequently used NumPy and SciPy
-routines.  Each contributor of 1000 words or more received a T-shirt
-reading "SciPy Documentation Marathon: I WTFM", emphasizing that the
-project was no mere coding sprint.  In 2009, van der Walt became a core
-developer and David Goldsmith stepped up as lead editor.  The lead
-editor's job included maintaining discussion and interest on the mailing
-lists, which led to high participation.  By 2010, over 75 people had
-contributed significantly to over 1000 printed pages of reference
-documentation\cite{harrington2008scipy, harrington2009scipy}.
-At this point, most user-facing routines had documentation, and the doc project took its place in the
-normal development cycle.  The SciPy project remains committed to
-high-quality, current user documentation.
-
 
 \subsection*{SciPy Today}
 At the time of writing, the SciPy library consists of nearly 
