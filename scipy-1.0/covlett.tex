@@ -2,6 +2,14 @@
 % https://tex.stackexchange.com/questions/15532/looking-for-cover-letter-template
 
 \documentclass[10pt,stdletter,dateno]{newlfm}
+
+% to adjust vertical spacing properties of
+% newlfm class see: https://tex.stackexchange.com/a/65533/43006
+\topmarginsize{2mm}
+\topmarginskip{0in}
+\headermarginsize{0in}
+\headermarginskip{0in}
+
 \usepackage{kpfonts}
 \usepackage{url}
 
@@ -9,7 +17,7 @@
 \clubpenalty=1000
 
 \newlfmP{headermarginskip=10pt}
-\newlfmP{sigsize=50pt}
+\newlfmP{sigsize=30pt}
 \newlfmP{dateskipafter=20pt}
 %\newlfmP{addrfromphone}
 %\newlfmP{addrfromemail}
