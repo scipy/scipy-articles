@@ -721,31 +721,7 @@ for graphics processing units (GPUs) are explicitly out of scope.
 
 \subsection*{Language choices}
 
-Python, Cython, Fortran, C and C++ are the programming languages used to
-implement scientific algorithms in the SciPy library. An analysis of our codebase
-using the \texttt{linguist} library\cite{linguistref} provides a
-detailed breakdown of SciPy's composition (Table~\ref{tab:linguist}).
-
-\begin{table}
-\centering
-\begin{tabular}{p{3cm}S[table-format = <0.1]}
-\toprule
-Language & {Percent}\\
-\midrule
-Python  & 49.5 \\
-Fortran & 25.6 \\
-C       & 19.5 \\
-Cython  & 3.0  \\
-C++     & 2.3  \\[\defaultaddspace]
-{\TeX, Matlab, Shell, and Makefile} & <0.5 \\
-\bottomrule
-\end{tabular}
-\caption{Language composition of SciPy codebase: lines of code in each
-programming language as determined by the \texttt{linguist} package.
-The last row denotes tools used in supporting roles in tests,
-building, and documentation.}
-\label{tab:linguist}
-\end{table}
+According to analysis using the \texttt{linguist} library\cite{linguistref}, SciPy is approximately 50\% Python, 25\% Fortran, 20\% C, 3\% Cython, and 2\% C++, with a dash of \TeX, MATLAB, shell script, and Make. The distribution of secondary programming languages in SciPy is a compromise between a powerful, performance-enhancing language that interacts well with Python (i.e. Cython) and the usage of languages (and their libraries) that have proven reliable and performant over many decades.
 
 Fortran, despite its age, is still a high-performance scientific programming language with 
 continued contemporary usage\cite{Koelbel:1993:HPF:562354}. Thus, we wrap the following excellent, field-tested Fortran
@@ -782,11 +758,7 @@ highest abstraction level and most Python developers will understand it. C is
 also widely known, and easier for the current core development team to manage
 than C++ and especially Fortran. 
 
-The distribution of secondary programming languages in SciPy is a compromise between
-a powerful, performance-
-enhancing language that interacts well with Python (i.e. Cython) and the
-usage of languages (and their libraries) that have proven reliable and
-performant over many decades. The position that SciPy occupies near the
+The position that SciPy occupies near the
 foundation of the scientific Python ecosystem is such that adoption of new
 languages or major dependencies is generally unlikely---our choices are strongly
 driven by long-term stability. GPU acceleration, new transpiling libraries, and
