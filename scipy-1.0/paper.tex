@@ -31,71 +31,23 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\fixme}[1]{\textcolor{red}{{#1}}} 
 
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@maketitle}
+ {\noindent
+{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{color1}\large\sffamily\textbf{ABSTRACT}}}}
+ {\newpage\noindent
+{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{color1}\large\sffamily\textbf{ABSTRACT}}}}
+ {}{}
+\makeatother
+
 \title{SciPy 1.0---Fundamental Algorithms for Scientific Computing in Python}
 
-\author[1]{Pauli Virtanen}
-\author[2,*]{Ralf Gommers}
-\author[3,4]{Tyler Reddy}
-\author[5]{Anne Archibald}
-\author[6]{Andrew R. J. Nelson}
-\author[7]{Charles Harris}
-\author[8]{CJ Carey}
-\author[9]{Denis Laxalde}
-\author[10]{Eric Larson}
-\author[11]{Eric Moore}
-\author[12]{Eric Quintero}
-\author[13]{Evgeni Burovski}
-\author[14]{Jaime Fernández del Río}
-\author[15]{Josef Perktold}
-\author[16]{Josh Wilson}
-\author[17]{Matthew Brett}
-\author[18]{Nikolay Mayorov}
-\author[19]{Warren Weckesser}
-\author[20]{Matt Haberland}
-\author[21]{Scott Sievert}
-\author[22]{Yu Feng}
-\author[23]{Antonio Horta Ribeiro}
-\author[24]{Ian Henriksen}
-\author[3,25]{K. Jarrod Millman}
-\author[3]{St\'efan J. van der Walt}
-\author[26]{\.{I}lhan Polat}
-
-\affil[1]{Affiliation, department, city, postcode, country}
-\affil[2]{Affiliation, department, city, postcode, country}
-\affil[2]{Affiliation, department, city, postcode, country}
-\affil[3]{Berkeley Institute for Data Science, University of California, Berkeley, CA, 94720, USA}
-\affil[4]{Los Alamos National Laboratory,
-	  Theoretical Division 6,
-          Los Alamos, NM, 87545, USA}
-\affil[5]{Affiliation, department, city, postcode, country}
-\affil[6]{Australian Nuclear Science and Technology Organisation, Locked Bag 2001, Kirrawee DC, NSW 2232, Australia}
-\affil[7]{Affiliation, department, city, postcode, country}
-\affil[8]{Affiliation, department, city, postcode, country}
-\affil[9]{Affiliation, department, city, postcode, country}
-\affil[10]{University of Washington, Institute for Learning and Brain Sciences, Seattle, WA, 98195, USA}
-\affil[11]{Affiliation, department, city, postcode, country}
-\affil[12]{Affiliation, department, city, postcode, country}
-\affil[13]{Affiliation, department, city, postcode, country}
-\affil[14]{Affiliation, department, city, postcode, country}
-\affil[15]{Affiliation, department, city, postcode, country}
-\affil[16]{Affiliation, department, city, postcode, country}
-\affil[17]{Affiliation, department, city, postcode, country}
-\affil[18]{Affiliation, department, city, postcode, country}
-\affil[19]{Affiliation, department, city, postcode, country}
-\affil[20]{BioResource and Agricultural Engineering, California Polytechnic State University, San Luis Obispo, CA, 93407, USA}
-\affil[21]{Affiliation, department, city, postcode, country}
-\affil[22]{Affiliation, department, city, postcode, country}
-\affil[23]{Affiliation, department, city, postcode, country}
-\affil[24]{University of Texas at Austin,
-           Oden Institute for Computational Engineering and Sciences,
-	   Austin, TX, 78712, USA}
-\affil[25]{Division of Biostatistics, University of California,
-  Berkeley, CA, 94720, USA}
-\affil[26]{Affiliation, department, city, postcode, country}
-
-\affil[*]{ralf.gommers@gmail.com}
+\input{core-dev}
 
 \keywords{Scientific computing, Python, Mathematics}
+
+
 
 % NOTE: some usage stats below are from https://libraries.io/pypi/scipy
 % as well as github metrics; normally one doesn't put citations directly
@@ -1142,9 +1094,14 @@ All SciPy library source code and most data generated for the current study are 
 
 \bibliography{references}
 
+\section*{Acknowledgements}
+
+We thank everyone who has contributed to SciPy 1.0, from those who have posted one comment about an issue through those who have made several small patches and beyond!
+
 \section*{Author Contributions Statement}
 
-All authors have contributed code to SciPy, and all authors reviewed the manuscript. In the author list, the names of authors who contributed text to the manuscript are indicated with $\dagger$, and the primary manuscript editors are denoted with $\ddagger$.
+P.V. is SciPy's Benevolent Dictator for Life, R.G. is the Chair of the SciPy Steering Council, and together they have led the development of SciPy for over 10 years. T.E.O., E.J., and P.P. created SciPy. T.J.R. and M.H. composed the manuscript with input from others. Other named authors are SciPy Core Developers. All authors have contributed significant code, documentation, and/or expertise to the SciPy project. All authors reviewed the manuscript.
+
 
 %Must include all authors, identified by initials, for example: A.A.
 %conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A.
@@ -1247,6 +1204,10 @@ The authors declare no competing interests.
 %\href{http://www.nature.com/srep/policies/index.html#competing}{competing
 %financial interests statement} on behalf of all authors of the paper. This
 %statement must be included in the submitted article file.
+
+\section*{Consortium}
+\subsection*{SciPy 1.0 Contributors}
+\input{consortium}
 
 \end{document}
 
