@@ -925,10 +925,13 @@ and the multinomial distribution in \texttt{scipy.stats.multinomial}
 The SciPy test suite is orchestrated by a continuous integration matrix that
 includes POSIX and Windows (32/64-bit) platforms managed by Travis CI and
 AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
-include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There are more than $13,000$
-unit tests in the test suite, which is written for usage with the \texttt{pytest}
-framework, and with 87\% and 45\% line coverages for Python and compiled
-code, respectively at the SciPy 1.0 release point (Figure~\ref{fig:coverage}). Documentation for the code is automatically built and published by
+include code linting with \texttt{pyflakes} and \texttt{pycodestyle}. There
+are more than $13,000$ unit tests in the test suite, which is written for usage
+with the \texttt{pytest}\cite{pytest} framework.
+Test coverage at the SciPy 1.0 release point (Figure~\ref{fig:coverage}) was at
+87\% for Python code according to \texttt{pytest-cov}\cite{pytest-cov} and
+45\% for compiled (C, C++, and Fortran) code according to \texttt{gcov}\cite{gcov}.
+Documentation for the code is automatically built and published by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3\cite{Bolz:2009:TMP:1565824.1565827}, a just-in-time compiled
 version of the Python language.
@@ -977,17 +980,18 @@ Python (red) and compiled (blue) code volume in SciPy over time.
 Deep-shaded area represents lines of code covered by units tests;
 light-shaded area represents lines not covered. With the exception
 of the removal of $\approx 61,000$ lines of compiled code for SciPy
-v0.14, the volume of both compiled and Python
+v0.14, the volume of both compiled (C, C++, and Fortran) and Python
 code has increased between releases, as has the number of lines
-covered by unit tests. SciPy v1.0.0 was composed of $462,574$ lines of
-compiled code with test coverage near $45\%$ and $106,878$ lines of 
-Python code with test coverage near $87\%$.\\
-The reconstitution of historical
-build and test environments was performed using a docker-based approach
-\cite{scipy-cov}. Analysis of lines of source code covered is performed 
-automatically in our continuous integration suite using the \texttt{pytest-cov}
-and \texttt{gcov} libraries. Some decreases in compiled code coverage may reflect
-inclusion of additional vendored code.}
+covered by unit tests. In SciPy v1.0.0, tests covered approximately
+45\% of $462,574$ lines of compiled code (many of which
+are automatically generated from Cython source), and nearly 87\% of
+106,878 lines of Python code.\\
+Coverage analysis is performed automatically in our continuous integration
+suite using the \texttt{pytest-cov} and \texttt{gcov} libraries for 
+Python and compiled code, respectively.
+The reconstitution of historical build and test environments for this
+figure was performed using a Docker-based approach\cite{scipy-cov}.
+}
 \label{fig:coverage}
 \end{figure}
 
@@ -1134,7 +1138,7 @@ We are fortunate that the SciPy project continues to attract enthusiastic and co
 
 \section*{Data Availability}
 % The statement should be provided as a separate section (titled 'Data Availability') at the end of the main text, before the 'References' section. 
-All SciPy library source code and all data generated for the current study are available in the SciPy GitHub repository, \url{https://github.com/scipy}.
+All SciPy library source code and most data generated for the current study are available in the SciPy GitHub repository, \url{https://github.com/scipy}. Some supporting code and data have also been stored in other public repositories cited by this manuscript.
 
 \bibliography{references}
 
