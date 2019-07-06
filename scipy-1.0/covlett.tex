@@ -1,0 +1,89 @@
+% based on template:
+% https://tex.stackexchange.com/questions/15532/looking-for-cover-letter-template
+
+\documentclass[10pt,stdletter,dateno]{newlfm}
+
+% to adjust vertical spacing properties of
+% newlfm class see: https://tex.stackexchange.com/a/65533/43006
+\topmarginsize{2mm}
+\topmarginskip{0in}
+\headermarginsize{0in}
+\headermarginskip{0in}
+
+\usepackage{kpfonts}
+\usepackage{url}
+
+\widowpenalty=1000
+\clubpenalty=1000
+
+\newlfmP{headermarginskip=10pt}
+\newlfmP{sigsize=30pt}
+\newlfmP{dateskipafter=20pt}
+%\newlfmP{addrfromphone}
+%\newlfmP{addrfromemail}
+%\PhrPhone{Phone}
+%\PhrEmail{Email}
+
+\namefrom{Ralf Gommers,
+          Matt Haberland,
+          and Tyler Reddy}
+\addrfrom{%
+    \today\\[10pt]
+    Quansight Labs,\\
+    The Netherlands\\
+    \\
+    BioResource and Agricultural Engineering,\\
+    California Polytechnic State University,\\
+    San Luis Obispo, CA, 93407, USA\\
+    \\
+    CCS-7 Applied Computer Science Group,\\
+    Los Alamos National Laboratory,\\
+    Los Alamos, NM, 87545, USA
+}
+
+\addrto{%
+Prof. Syma Khalid,\\
+School of Chemistry,\\
+University of Southampton,\\
+Highfield Campus,\\
+Southampton,\\
+SO17 1BJ, U.K.}
+
+\greetto{Dear Prof. Khalid,}
+\closeline{Sincerely,}
+\begin{document}
+\begin{newlfm}
+
+We are submitting the enclosed manuscript describing a milestone
+1.0 release of SciPy for consideration to be published in
+\emph{Scientific Reports}. SciPy is the fundamental scientific 
+computing library in the Python programming language. 
+Hundreds of experts have contributed to our library, which
+has been downloaded millions of times and has over 100,000 dependent
+code repositories.
+
+We have specifically chosen \emph{Scientific Reports} because
+the breadth of acceptable topics matches the variety of algorithms
+our library provides. High-profile manuscripts citing SciPy range
+from the biosciences to recent reports on gravitational waves and
+black holes. Lacking a better alternative, these citations all point
+to the SciPy website; instead, we think the package now merits a
+formal publication in a highly visible journal.
+
+We suggest the following three peer reviewers as suitable candidates,
+and we do not have any specific reviewer exclusion requests:
+
+\begin{enumerate}
+    \item Alan Edelman, \texttt{edelman@math.mit.edu}, co-creator of Julia
+    programming language and Faculty at MIT.
+    \item William Stein, \texttt{wstein@gmail.com}, originator and
+    lead developer of SageMath.
+    \item Kazunori Akiyama, \texttt{kazu@haystack.mit.edu}, first author
+    of event horizon imaging paper that cites SciPy.
+\end{enumerate}
+
+Thank you for your consideration.  We look forward to
+hearing from you.
+
+\end{newlfm}
+\end{document}
