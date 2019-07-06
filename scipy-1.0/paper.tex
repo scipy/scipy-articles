@@ -31,6 +31,16 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\fixme}[1]{\textcolor{red}{{#1}}} 
 
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@maketitle}
+ {\noindent
+{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{color1}\large\sffamily\textbf{ABSTRACT}}}}
+ {\newpage\noindent
+{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{color1}\large\sffamily\textbf{ABSTRACT}}}}
+ {}{}
+\makeatother
+
 \title{SciPy 1.0---Fundamental Algorithms for Scientific Computing in Python}
 
 \input{core-dev}
