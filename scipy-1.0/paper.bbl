@@ -1,0 +1,1261 @@
+\begin{thebibliography}{100}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname doiprefix\endcsname\relax\def\doiprefix{DOI }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{oliphant2006guide}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \emph{\bibinfo{title}{Guide to {NumPy}}} (\bibinfo{publisher}{Trelgol
+  Publishing USA}, \bibinfo{year}{2006}), \bibinfo{edition}{1st} edn.
+\newblock \urlprefix\url{https://oez.es/Guide%20to%20NumPy.pdf}.
+
+\bibitem{vanderwalt2011numpy}
+\bibinfo{author}{van~der Walt, S.}, \bibinfo{author}{Colbert, S.~C.} \&
+  \bibinfo{author}{Varoquaux, G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The {NumPy} array: a structure for
+  efficient numerical computation}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{22--30}
+  (\bibinfo{year}{2011}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2011.37}.
+
+\bibitem{pedregosa2011scikit}
+\bibinfo{author}{Pedregosa, F.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Scikit-learn: Machine learning in
+  {P}ython}}.
+\newblock {\emph{\JournalTitle{Journal of Machine Learning Research}}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{2825--2830}
+  (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{http://www.jmlr.org/papers/volume12/pedregosa11a/pedregosa11a.pdf}.
+
+\bibitem{vanderwalt2014scikit}
+\bibinfo{author}{van~der Walt, S.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{scikit-image}: image processing in
+  {P}ython}}.
+\newblock {\emph{\JournalTitle{PeerJ}}} \textbf{\bibinfo{volume}{2}},
+  \bibinfo{pages}{e453} (\bibinfo{year}{2014}).
+\newblock \urlprefix\url{https://doi.org/10.7717/peerj.453}.
+
+\bibitem{alex_nitz_2018_1596771}
+\bibinfo{author}{Nitz, A.} \emph{et~al.}
+\newblock \bibinfo{title}{gwastro/pycbc: {PyCBC} v1.13.2 release}
+  (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://doi.org/10.5281/zenodo.1596771}.
+
+\bibitem{LIGO-open}
+\bibinfo{author}{Vallisneri, M.}, \bibinfo{author}{Kanner, J.},
+  \bibinfo{author}{Williams, R.}, \bibinfo{author}{Weinstein, A.} \&
+  \bibinfo{author}{Stephens, B.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The {LIGO} open science center}}.
+\newblock {\emph{\JournalTitle{Journal of Physics: Conference Series}}}
+  \textbf{\bibinfo{volume}{610}}, \bibinfo{pages}{012021}
+  (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{https://doi.org//10.1088/1742-6596/610/1/012021}.
+
+\bibitem{PhysRevD.93.122003}
+\bibinfo{author}{Abbott, B.~P.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{GW150914}: First results from the
+  search for binary black hole coalescence with {Advanced LIGO}}}.
+\newblock {\emph{\JournalTitle{Phys. Rev. D}}} \textbf{\bibinfo{volume}{93}},
+  \bibinfo{pages}{122003} (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://doi.org/10.1103/PhysRevD.93.122003}.
+
+\bibitem{abbott2017gw170817}
+\bibinfo{author}{Abbott, B.~P.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{GW170817}: Observation of
+  gravitational waves from a binary neutron star inspiral}}.
+\newblock {\emph{\JournalTitle{Physical Review Letters}}}
+  \textbf{\bibinfo{volume}{119}}, \bibinfo{pages}{161101}
+  (\bibinfo{year}{2017}).
+\newblock \urlprefix\url{https://doi.org/10.1103/PhysRevLett.119.161101}.
+
+\bibitem{2019ApJ875L3E}
+\bibinfo{author}{{The Event Horizon Telescope Collaboration}} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{First {M87} event horizon telescope
+  results. {III}. data processing and calibration}}.
+\newblock {\emph{\JournalTitle{The Astrophysical Journal Letters}}}
+  \textbf{\bibinfo{volume}{875}}, \bibinfo{pages}{L3} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://doi.org/10.3847/2041-8213/ab0c57}.
+
+\bibitem{mathworks-globe-97}
+\bibinfo{author}{Blanton, K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{A}t {Mathworks}, support + fun =
+  success: {CEO} {J}ack {L}ittle believes in power of his workers -- and their
+  ideas {(20 Apr. 1997)}}}.
+\newblock {\emph{\JournalTitle{The Boston Globe}}} \bibinfo{pages}{J5}.
+\newblock
+  \urlprefix\url{https://www.newspapers.com/clip/26952040/the_boston_globe/}.
+
+\bibitem{esri-revenue}
+\bibinfo{author}{Howell, D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{J}ack {D}angermond's digital
+  mapping lays it all out {(14 Aug. 2009)}}}.
+\newblock {\emph{\JournalTitle{Investor's Business Daily}}}
+  \urlprefix\url{https://web.archive.org/web/20100510064955/http://www.investors.com/NewsAndAnalysis/Article.aspx?id=503454}.
+
+\bibitem{bloom-wolfram}
+\bibinfo{author}{Port, O.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{S}imple solutions {(3 Oct.
+  2005)}}}.
+\newblock {\emph{\JournalTitle{{BusinessWeek}}}} \bibinfo{pages}{24--24}.
+\newblock
+  \urlprefix\url{https://www.scribd.com/document/134233902/Business-Week-03-Oct-2005}.
+
+\bibitem{scipy-ecosystem}
+\bibinfo{author}{{Open Source Community}}.
+\newblock \bibinfo{title}{Numeric and scientific} (\bibinfo{year}{2017}).
+\newblock \urlprefix\url{https://wiki.python.org/moin/NumericAndScientific}.
+
+\bibitem{social-python}
+\bibinfo{author}{{Open Source Community}}.
+\newblock \bibinfo{title}{{P}ython conferences} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://wiki.python.org/moin/PythonConferences}.
+
+\bibitem{cpython-refman}
+\bibinfo{author}{van Rossum, G.}
+\newblock \bibinfo{title}{{P}ython/{C} {API} reference manual}
+  (\bibinfo{year}{2001}).
+\newblock
+  \urlprefix\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.211.6702\&rep=rep1\&type=pdf}.
+
+\bibitem{cpython-source}
+\bibinfo{author}{Developers, C.}
+\newblock \bibinfo{title}{The {P}ython programming language}
+  (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/python/cpython}.
+
+\bibitem{Hugunin-first}
+\bibinfo{author}{Hugunin, J.}
+\newblock \bibinfo{title}{The matrix object proposal (very long)}
+  (\bibinfo{year}{1995}).
+\newblock
+  \urlprefix\url{https://mail.python.org/pipermail/matrix-sig/1995-August/000002.html}.
+
+\bibitem{Hugunin-whitepaper}
+\bibinfo{author}{Hugunin, J.}
+\newblock \bibinfo{title}{Extending {P}ython for numerical computation}
+  (\bibinfo{year}{1995}).
+\newblock \urlprefix\url{http://hugunin.net/papers/hugunin95numpy.html}.
+
+\bibitem{Travis-Keynote-2010}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{title}{Moving forward from the last decade of {SciPy}}
+  (\bibinfo{year}{2010}).
+\newblock
+  \urlprefix\url{https://conference.scipy.org/scipy2010/slides/travis\_oliphant\_keynote.pdf}.
+
+\bibitem{Travis-some-modules}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{title}{Some {P}ython modules} (\bibinfo{year}{1999}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/19990125091242/http://oliphant.netpedia.net:80/}.
+
+\bibitem{Travis-enhance}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{title}{Modules to enhance numerical {P}ython}
+  (\bibinfo{year}{2000}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/20001206213500/http://oliphant.netpedia.net:80/}.
+
+\bibitem{multipack}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{title}{Multipack (a collection of {FORTRAN} routines
+  interfaced with {NumPy})}.
+\newblock \urlprefix\url{http://pylab.sourceforge.net/multipack.html}.
+
+\bibitem{hindmarsh1983odepack}
+\bibinfo{author}{Hindmarsh, A.~C.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{ODEPACK}, a systematized
+  collection of {ODE} solvers}}.
+\newblock {\emph{\JournalTitle{Scientific Computing}}} \bibinfo{pages}{55--64}
+  (\bibinfo{year}{1983}).
+\newblock
+  \urlprefix\url{https://www3.nd.edu/~powers/ame.60636/hindmarsh1983.pdf}.
+
+\bibitem{piessens1983quadpack}
+\bibinfo{author}{Piessens, R.}, \bibinfo{author}{de~Doncker-Kapenga, E.},
+  \bibinfo{author}{{\"U}berhuber, C.~W.} \& \bibinfo{author}{Kahaner, D.~K.}
+\newblock \emph{\bibinfo{title}{{QUADPACK}: a subroutine package for automatic
+  integration}} (\bibinfo{publisher}{Springer-Verlag}, \bibinfo{address}{New
+  York, NY, USA}, \bibinfo{year}{1983}).
+\newblock \urlprefix\url{https://doi.org/10.1007/978-3-642-61786-7}.
+
+\bibitem{osti_6997568}
+\bibinfo{author}{Mor{\'e}, J.~J.}, \bibinfo{author}{Garbow, B.~S.} \&
+  \bibinfo{author}{Hillstrom, K.~E.}
+\newblock \bibinfo{title}{User guide for {MINPACK-1}}.
+\newblock \bibinfo{type}{Tech. Rep.} \bibinfo{number}{ANL-80-74},
+  \bibinfo{institution}{Argonne National Laboratory},
+  \bibinfo{address}{Argonne, IL, USA} (\bibinfo{year}{1980}).
+\newblock
+  \urlprefix\url{http://cds.cern.ch/record/126569/files/CM-P00068642.pdf}.
+
+\bibitem{peterson2009f2py}
+\bibinfo{author}{Peterson, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{F2PY}: a tool for connecting
+  {F}ortran and {P}ython programs}}.
+\newblock {\emph{\JournalTitle{International Journal of Computational Science
+  and Engineering}}} \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{296--305}
+  (\bibinfo{year}{2009}).
+\newblock \urlprefix\url{https://doi.org/10.1504/IJCSE.2009.029165}.
+
+\bibitem{Strangman-modules}
+\bibinfo{author}{Strangman, G.}
+\newblock \bibinfo{title}{{P}ython modules} (\bibinfo{year}{2000}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/20001022231108/http://www.nmr.mgh.harvard.edu/Neural\_Systems\_Group/gary/python.html}.
+
+\bibitem{archived-scipyorg}
+\bibinfo{author}{{SciPy Developers}}.
+\newblock \bibinfo{title}{{SciPy.org}} (\bibinfo{year}{2001}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/20010309040805/http://scipy.org:80/}.
+
+\bibitem{new-scipy-list}
+\bibinfo{author}{Vaught, T.~N.}
+\newblock \bibinfo{title}{{SciPy} developer mailing list now online}
+  (\bibinfo{year}{2001}).
+\newblock
+  \urlprefix\url{https://mail.python.org/pipermail/scipy-dev/2001-June/000000.html}.
+
+\bibitem{first-scipy-rel}
+\bibinfo{author}{Jones, E.}
+\newblock \bibinfo{title}{{ANN}: {SciPy} 0.10 {--} scientific computing with
+  {P}ython} (\bibinfo{year}{2001}).
+\newblock
+  \urlprefix\url{https://mail.python.org/pipermail/python-list/2001-August/106419.html}.
+
+\bibitem{first-scipy-docs}
+\bibinfo{author}{Vaught, T.~N.}
+\newblock \bibinfo{title}{Reference documentation and tutorial documentation
+  are now available for download as tarballs} (\bibinfo{year}{2002}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/20021013204556/http://www.scipy.org:80/scipy/site\_content/site\_news/docs\_released1}.
+
+\bibitem{first-scipy-workshop}
+\bibinfo{author}{Vaught, T.~N.}
+\newblock \bibinfo{title}{{[ANN] SciPy} '02 - {P}ython for scientific computing
+  workshop} (\bibinfo{year}{2002}).
+\newblock
+  \urlprefix\url{https://mail.python.org/pipermail/numpy-discussion/2002-June/001511.html}.
+
+\bibitem{Numeric-manual}
+\bibinfo{author}{Ascher, D.}, \bibinfo{author}{Dubois, P.~F.},
+  \bibinfo{author}{Hinsen, K.}, \bibinfo{author}{Hugunin, J.} \&
+  \bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{title}{An open source project: Numerical {P}ython}
+  (\bibinfo{year}{2001}).
+\newblock \urlprefix\url{http://www.numpy.org/\_downloads/numeric-manual.pdf}.
+
+\bibitem{STScI-slither}
+\bibinfo{author}{Greenfield, P.}
+\newblock \bibinfo{title}{How {P}ython slithered into astronomy}
+  (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{https://conference.scipy.org/scipy2011/slides/greenfield\_keynote\_astronomy.pdf}.
+
+\bibitem{schroeder:2006:VTK}
+\bibinfo{author}{Schroeder, W.}, \bibinfo{author}{Martin, K.} \&
+  \bibinfo{author}{Lorensen, B.}
+\newblock \emph{\bibinfo{title}{The Visualization Toolkit: An Object-Oriented
+  Approach to {3D} Graphics}} (\bibinfo{publisher}{Kitware},
+  \bibinfo{year}{2004}), \bibinfo{edition}{3rd} edn.
+\newblock
+  \urlprefix\url{http://cds.cern.ch/record/798217/files/1930934122_TOC.pdf}.
+
+\bibitem{mayavi-intro}
+\bibinfo{author}{Ramachandran, P.}
+\newblock \bibinfo{title}{{MayaVi} uses {P}ython for scientific data
+  visualization} (\bibinfo{year}{2003}).
+\newblock
+  \urlprefix\url{https://web.archive.org/web/20030731122452/http://pythonology.org/success\&story=mayavi}.
+
+\bibitem{Kluyver:2016aa}
+\bibinfo{author}{Kluyver, T.} \emph{et~al.}
+\newblock \bibinfo{title}{{Jupyter Notebooks} -- a publishing format for
+  reproducible computational workflows}.
+\newblock In \bibinfo{editor}{Loizides, F.} \& \bibinfo{editor}{Schmidt, B.}
+  (eds.) \emph{\bibinfo{booktitle}{Positioning and Power in Academic
+  Publishing: Players, Agents and Agendas}}, \bibinfo{pages}{87 -- 90}
+  (\bibinfo{organization}{IOS Press}, \bibinfo{year}{2016}).
+\newblock \urlprefix\url{http://doi.org/10.3233/978-1-61499-649-1-87}.
+
+\bibitem{matlab}
+ \emph{\bibinfo{title}{{MATLAB}}} (\bibinfo{publisher}{The {MathWorks}, Inc.},
+  \bibinfo{address}{Natick, MA, United States}).
+\newblock \urlprefix\url{https://www.mathworks.com/products/matlab.html}.
+
+\bibitem{matplotlib-rel}
+\bibinfo{author}{Hunter, J.}
+\newblock \bibinfo{title}{{ANN: matplotlib 0.1}} (\bibinfo{year}{2003}).
+\newblock
+  \urlprefix\url{https://mail.python.org/pipermail/python-list/2003-April/193167.html}.
+
+\bibitem{greenfield2003numarray}
+\bibinfo{author}{Greenfield, P.}, \bibinfo{author}{Miller, J.~T.},
+  \bibinfo{author}{Hsu, J.} \& \bibinfo{author}{White, R.~L.}
+\newblock \bibinfo{journal}{\bibinfo{title}{numarray: A new scientific array
+  package for {Python}}}.
+\newblock {\emph{\JournalTitle{PyCon DC}}}  (\bibinfo{year}{2003}).
+\newblock
+  \urlprefix\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.112.9899&rep=rep1&type=pdf}.
+
+\bibitem{numpy-1.0-tag}
+\bibinfo{author}{{NumPy Developers}}.
+\newblock \bibinfo{title}{{v1.0}} (\bibinfo{year}{2006}).
+\newblock \urlprefix\url{https://github.com/numpy/numpy/releases/tag/v1.0}.
+
+\bibitem{dubois2007guest}
+\bibinfo{author}{Dubois, P.~F.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython: Batteries included}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{7--9} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.51}.
+
+\bibitem{oliphant2007python}
+\bibinfo{author}{Oliphant, T.~E.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython for scientific
+  computing}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{10--20} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.58}.
+
+\bibitem{perez2007ipython}
+\bibinfo{author}{P{\'e}rez, F.} \& \bibinfo{author}{Granger, B.~E.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{IP}ython: a system for interactive
+  scientific computing}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.53}.
+
+\bibitem{hunter2007matplotlib}
+\bibinfo{author}{Hunter, J.~D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Matplotlib: A {2D} graphics
+  environment}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{90--95} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.55}.
+
+\bibitem{myers2007python}
+\bibinfo{author}{Myers, C.~R.}, \bibinfo{author}{Gutenkunst, R.~N.} \&
+  \bibinfo{author}{Sethna, J.~P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython unleashed on systems
+  biology}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.60}.
+
+\bibitem{greenfield2007reaching}
+\bibinfo{author}{Greenfield, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Reaching for the stars with
+  {P}ython}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{38--40} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.62}.
+
+\bibitem{krauss2007python}
+\bibinfo{author}{Krauss, R.~W.} \& \bibinfo{author}{Book, W.~J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A {P}ython module for modeling and
+  control design of flexible robots}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{41--45} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.44}.
+
+\bibitem{bienstman2007python}
+\bibinfo{author}{Bienstman, P.}, \bibinfo{author}{Vanholme, L.},
+  \bibinfo{author}{Bogaerts, W.}, \bibinfo{author}{Dumon, P.} \&
+  \bibinfo{author}{Vandersteegen, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython in nanophotonics
+  research}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{46--47} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.59}.
+
+\bibitem{mardal2007using}
+\bibinfo{author}{Mardal, K.-A.}, \bibinfo{author}{Skavhaug, O.},
+  \bibinfo{author}{Lines, G.~T.}, \bibinfo{author}{Staff, G.~A.} \&
+  \bibinfo{author}{{\O}deg{\aa}rd, {\AA}.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Using {P}ython to solve partial
+  differential equations}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{48--51} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.64}.
+
+\bibitem{millman2007analysis}
+\bibinfo{author}{Millman, K.~J.} \& \bibinfo{author}{Brett, M.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Analysis of functional magnetic
+  resonance imaging in {P}ython}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{52--55} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.46}.
+
+\bibitem{shi2007python}
+\bibinfo{author}{Shi, X.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython for internet {GIS}
+  applications}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{56--59} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.57}.
+
+\bibitem{backer2007computational}
+\bibinfo{author}{B{\"a}cker, A.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Computational physics education
+  with {P}ython}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{30--33} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.48}.
+
+\bibitem{myers2007pythona}
+\bibinfo{author}{Myers, C.~R.} \& \bibinfo{author}{Sethna, J.~P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython for education:
+  Computational methods for nonlinear systems}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{75--79} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2007.56}.
+
+\bibitem{scikits-general}
+\bibinfo{author}{{SciPy Developers}}.
+\newblock \bibinfo{title}{{Scikits}} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://www.scipy.org/scikits.html}.
+
+\bibitem{millman2014developing}
+\bibinfo{author}{Millman, K.~J.} \& \bibinfo{author}{P{\'e}rez, F.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Developing open-source scientific
+  practice}}.
+\newblock {\emph{\JournalTitle{Implementing Reproducible Research. CRC Press,
+  Boca Raton, FL}}} \bibinfo{pages}{149--183} (\bibinfo{year}{2014}).
+\newblock
+  \urlprefix\url{http://www.jarrodmillman.com/publications/millman2014developing.pdf}.
+
+\bibitem{sphinx}
+\bibinfo{author}{Brandl, G.} \& \bibinfo{author}{{the Sphinx Team}}.
+\newblock \bibinfo{title}{Sphinx - {P}ython documentation generator}
+  (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{http://www.sphinx-doc.org/en/master/}.
+
+\bibitem{pydocweb}
+\bibinfo{author}{Virtanen, P.} \emph{et~al.}
+\newblock \bibinfo{title}{{pydocweb}: A tool for collaboratively documenting
+  {P}ython modules via the web} (\bibinfo{year}{2008}).
+\newblock \urlprefix\url{https://code.google.com/archive/p/pydocweb/}.
+
+\bibitem{vanderwalt2008scipy}
+\bibinfo{author}{van~der Walt, S.}
+\newblock \bibinfo{title}{The {SciPy} documentation project (technical
+  overview)}.
+\newblock In \bibinfo{editor}{Varoquaux, G.}, \bibinfo{editor}{Vaught, T.} \&
+  \bibinfo{editor}{Millman, K.~J.} (eds.) \emph{\bibinfo{booktitle}{Proceedings
+  of the 7th {P}ython in Science Conference (SciPy 2008)}},
+  \bibinfo{pages}{27--28} (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2008/paper_5/}.
+
+\bibitem{harrington2008scipy}
+\bibinfo{author}{Harrington, J.}
+\newblock \bibinfo{title}{The {SciPy} documentation project}.
+\newblock In \bibinfo{editor}{Varoquaux, G.}, \bibinfo{editor}{Vaught, T.} \&
+  \bibinfo{editor}{Millman, K.~J.} (eds.) \emph{\bibinfo{booktitle}{Proceedings
+  of the 7th {P}ython in Science Conference (SciPy 2008)}},
+  \bibinfo{pages}{33--35} (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2008/paper_7/}.
+
+\bibitem{harrington2009scipy}
+\bibinfo{author}{Harrington, J.} \& \bibinfo{author}{Goldsmith, D.}
+\newblock \bibinfo{title}{Progress report: {NumPy} and {SciPy} documentation in
+  2009}.
+\newblock In \bibinfo{editor}{Varoquaux, G.}, \bibinfo{editor}{van~der Walt,
+  S.} \& \bibinfo{editor}{Millman, K.~J.} (eds.)
+  \emph{\bibinfo{booktitle}{Proceedings of the 8th {P}ython in Science
+  Conference (SciPy 2009)}}, \bibinfo{pages}{84--87} (\bibinfo{year}{2009}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2009/paper_14/}.
+
+\bibitem{siamcse09}
+\bibinfo{author}{P{\'e}rez, F.}, \bibinfo{author}{Langtangen, H.~P.} \&
+  \bibinfo{author}{LeVeque, R.}
+\newblock \bibinfo{title}{{CSE} 2009: {P}ython for scientific computing at
+  {CSE} 2009}.
+\newblock \bibinfo{howpublished}{SIAM News} (\bibinfo{year}{2009}).
+\newblock \urlprefix\url{https://archive.siam.org/news/news.php?id=1595}.
+
+\bibitem{millman2011python}
+\bibinfo{author}{Millman, K.~J.} \& \bibinfo{author}{Aivazis, M.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython for scientists and
+  engineers}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{9--12} (\bibinfo{year}{2011}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2011.36}.
+
+\bibitem{perez2011python}
+\bibinfo{author}{P\'{e}rez, F.}, \bibinfo{author}{Granger, B.~E.} \&
+  \bibinfo{author}{Hunter, J.~D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{P}ython: an ecosystem for
+  scientific computing}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{13--21}
+  (\bibinfo{year}{2011}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2010.119}.
+
+\bibitem{behnel2011cython}
+\bibinfo{author}{Behnel, S.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Cython: The best of both worlds}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{31--39}
+  (\bibinfo{year}{2011}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2010.118}.
+
+\bibitem{ramachandran2011mayavi}
+\bibinfo{author}{Ramachandran, P.} \& \bibinfo{author}{Varoquaux, G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Mayavi: {3D} visualization of
+  scientific data}}.
+\newblock {\emph{\JournalTitle{Computing in Science \& Engineering}}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{40--51}
+  (\bibinfo{year}{2011}).
+\newblock \urlprefix\url{https://doi.org/10.1109/MCSE.2011.35}.
+
+\bibitem{python-FIN}
+\bibinfo{author}{Muller, E.} \emph{et~al.}
+\newblock \bibinfo{title}{Research topic: {P}ython in neuroscience}
+  (\bibinfo{year}{2008}).
+\newblock \urlprefix\url{http://doi.org/10.3389/fninf.2015.00011}.
+
+\bibitem{numfocus}
+\bibinfo{author}{{NumFocus Team}}.
+\newblock \bibinfo{title}{{NumFocus}: Open code = better science}
+  (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://numfocus.org}.
+
+\bibitem{dependents}
+\bibinfo{author}{{GitHub}}.
+\newblock \bibinfo{title}{Network dependents - scipy/scipy}
+  (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/network/dependents}.
+
+\bibitem{boisvert1991guide}
+\bibinfo{author}{Boisvert, R.~F.}, \bibinfo{author}{Howe, S.~E.} \&
+  \bibinfo{author}{Kahaner, D.~K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The guide to available mathematical
+  software problem classification system}}.
+\newblock {\emph{\JournalTitle{Communications in Statistics-Simulation and
+  Computation}}} \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{811--842}
+  (\bibinfo{year}{1991}).
+\newblock \urlprefix\url{https://doi.org/10.1080/03610919108812986}.
+
+\bibitem{statsmodels2010}
+\bibinfo{author}{Seabold, S.} \& \bibinfo{author}{Perktold, J.}
+\newblock \bibinfo{title}{Statsmodels: Econometric and statistical modeling
+  with {P}ython}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 9th {P}ython in
+  Science Conference (SciPy 2010)}}, \bibinfo{pages}{57--61}
+  (\bibinfo{year}{2010}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2010/pdfs/seabold.pdf}.
+
+\bibitem{10.7717/peerj-cs.55}
+\bibinfo{author}{Salvatier, J.}, \bibinfo{author}{Wiecki, T.~V.} \&
+  \bibinfo{author}{Fonnesbeck, C.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Probabilistic programming in
+  {P}ython using {PyMC3}}}.
+\newblock {\emph{\JournalTitle{PeerJ Computer Science}}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{e55} (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://doi.org/10.7717/peerj-cs.55}.
+
+\bibitem{2013PASP-emcee}
+\bibinfo{author}{{Foreman-Mackey}, D.}, \bibinfo{author}{{Hogg}, D.~W.},
+  \bibinfo{author}{{Lang}, D.} \& \bibinfo{author}{{Goodman}, J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{emcee: The {MCMC} Hammer}}}.
+\newblock {\emph{\JournalTitle{Publications of the Astronomical Society of the
+  Pacific}}} \textbf{\bibinfo{volume}{125}}, \bibinfo{pages}{306}
+  (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://doi.org/10.1086/670067}.
+\newblock \eprint{1202.3665}.
+
+\bibitem{pystan-ref}
+\bibinfo{author}{{Stan Development Team}}.
+\newblock \bibinfo{title}{{PyStan}: the {P}ython interface to {Stan}}
+  (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{http://mc-stan.org}.
+
+\bibitem{meurer2017sympy}
+\bibinfo{author}{Meurer, A.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{SymPy}: symbolic computing in
+  {P}ython}}.
+\newblock {\emph{\JournalTitle{PeerJ Computer Science}}}
+  \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{e103} (\bibinfo{year}{2017}).
+\newblock \urlprefix\url{https://doi.org/10.7717/peerj-cs.103}.
+
+\bibitem{hagberg2008networkx}
+\bibinfo{author}{Hagberg, A.}, \bibinfo{author}{Schult, D.} \&
+  \bibinfo{author}{Swart, P.}
+\newblock \bibinfo{title}{Exploring network structure, dynamics, and function
+  using {NetworkX}}.
+\newblock In \bibinfo{editor}{Varoquaux, G.}, \bibinfo{editor}{Vaught, T.} \&
+  \bibinfo{editor}{Millman, K.~J.} (eds.) \emph{\bibinfo{booktitle}{Proceedings
+  of the 7th {P}ython in Science Conference (SciPy 2008)}},
+  \bibinfo{pages}{11--15} (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2008/paper_2/}.
+
+\bibitem{CODATA2014}
+\bibinfo{author}{Mohr, P.~J.}, \bibinfo{author}{Newell, D.~B.} \&
+  \bibinfo{author}{Taylor, B.~N.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{CODATA} recommended values of the
+  fundamental physical constants: 2014}}.
+\newblock {\emph{\JournalTitle{Journal of Physical and Chemical Reference
+  Data}}} \textbf{\bibinfo{volume}{45}}, \bibinfo{pages}{043102}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://doi.org/10.1063/1.4954402}.
+
+\bibitem{Dierckx:1993:CSF:151103}
+\bibinfo{author}{Dierckx, P.}
+\newblock \emph{\bibinfo{title}{Curve and Surface Fitting with Splines}}
+  (\bibinfo{publisher}{Oxford University Press, Inc.}, \bibinfo{address}{New
+  York, NY, USA}, \bibinfo{year}{1993}).
+
+\bibitem{boisvert1997matrix}
+\bibinfo{author}{Boisvert, R.~F.}, \bibinfo{author}{Pozo, R.},
+  \bibinfo{author}{Remington, K.}, \bibinfo{author}{Barrett, R.~F.} \&
+  \bibinfo{author}{Dongarra, J.~J.}
+\newblock \bibinfo{title}{{Matrix Market}: a web resource for test matrix
+  collections}.
+\newblock In \emph{\bibinfo{booktitle}{Quality of Numerical Software}},
+  \bibinfo{pages}{125--137} (\bibinfo{publisher}{Springer},
+  \bibinfo{year}{1997}).
+\newblock \urlprefix\url{https://doi.org/10.1007/978-1-5041-2940-4_9}.
+
+\bibitem{rew1990netcdf}
+\bibinfo{author}{Rew, R.} \& \bibinfo{author}{Davis, G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{NetCDF}: an interface for
+  scientific data access}}.
+\newblock {\emph{\JournalTitle{IEEE Computer Graphics and Applications}}}
+  \textbf{\bibinfo{volume}{10}}, \bibinfo{pages}{76--82}
+  (\bibinfo{year}{1990}).
+\newblock \urlprefix\url{https://doi.org/10.1109/38.56302}.
+
+\bibitem{harwellboeing}
+\bibinfo{author}{Duff, I.~S.}, \bibinfo{author}{Grimes, R.~G.} \&
+  \bibinfo{author}{Lewis, J.~G.}
+\newblock \bibinfo{title}{Users' guide for the {Harwell-Boeing} sparse matrix
+  collection ({Release I})} (\bibinfo{year}{1992}).
+\newblock
+  \urlprefix\url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.8922}.
+
+\bibitem{ODRPACK_Boggs}
+\bibinfo{author}{Boggs, P.~T.}, \bibinfo{author}{Byrd, R.~H.},
+  \bibinfo{author}{Rogers, J.~E.} \& \bibinfo{author}{Schnabel, R.~B.}
+\newblock \emph{\bibinfo{title}{User's Reference Guide for {ODRPACK} Version
+  2.01: Software for Weight Orthogonal Distance Regression}}
+  (\bibinfo{publisher}{U.S. Department of Commerce, National Institute of
+  Standards and Technology}, \bibinfo{year}{1992}).
+
+\bibitem{linguistref}
+\bibinfo{author}{{Linguist developers}}.
+\newblock \bibinfo{title}{{L}inguist: Language savant} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/github/linguist}.
+
+\bibitem{Koelbel:1993:HPF:562354}
+\bibinfo{author}{Koelbel, C.~H.} \& \bibinfo{author}{Zosel, M.~E.}
+\newblock \emph{\bibinfo{title}{The High Performance {FORTRAN} Handbook}}
+  (\bibinfo{publisher}{MIT Press}, \bibinfo{address}{Cambridge, MA, USA},
+  \bibinfo{year}{1993}).
+\newblock \urlprefix\url{https://doi.org/10.1063/1.4823319}.
+
+\bibitem{SWARZTRAUBER198445}
+\bibinfo{author}{Swarztrauber, P.~N.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{FFT} algorithms for vector
+  computers}}.
+\newblock {\emph{\JournalTitle{Parallel Computing}}}
+  \textbf{\bibinfo{volume}{1}}, \bibinfo{pages}{45 -- 63}
+  (\bibinfo{year}{1984}).
+\newblock \urlprefix\url{https://doi.org/10.1016/S0167-8191(84)90413-7}.
+
+\bibitem{SWARZTRAUBER198251}
+\bibinfo{author}{Swarztrauber, P.~N.}
+\newblock \bibinfo{title}{Vectorizing the {FFT}s}.
+\newblock In \emph{\bibinfo{booktitle}{Parallel Computations}},
+  \bibinfo{pages}{51 -- 83} (\bibinfo{publisher}{Academic Press},
+  \bibinfo{year}{1982}).
+\newblock \urlprefix\url{https://doi.org/10.1016/B978-0-12-592101-5.50007-5}.
+
+\bibitem{leh:sor:yan96}
+\bibinfo{author}{Lehoucq, R.~B.}, \bibinfo{author}{Sorensen, D.~C.} \&
+  \bibinfo{author}{Yang, C.}
+\newblock \bibinfo{title}{{ARPACK} users' guide: Solution of large scale
+  eigenvalue problems with implicitly restarted {A}rnoldi methods.}
+\newblock \bibinfo{type}{Tech. Rep.}, \bibinfo{institution}{Rice University}
+  (\bibinfo{year}{1997}).
+\newblock \urlprefix\url{https://doi.org/10.1137/1.9780898719628}.
+
+\bibitem{Amos:1986:APP:7921.214331}
+\bibinfo{author}{Amos, D.~E.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Algorithm 644: A portable package
+  for {B}essel functions of a complex argument and nonnegative order}}.
+\newblock {\emph{\JournalTitle{ACM Trans. Math. Softw.}}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{265--273}
+  (\bibinfo{year}{1986}).
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/7921.214331}.
+
+\bibitem{CDFLIB_site}
+\bibinfo{author}{Brown, B.}, \bibinfo{author}{Lovato, J.} \&
+  \bibinfo{author}{Russell, K.}
+\newblock \bibinfo{title}{{CDFLIB}}.
+\newblock
+  \urlprefix\url{https://people.sc.fsu.edu/~jburkardt/f_src/cdflib/cdflib.html}.
+
+\bibitem{Kernighan:1988:CPL:576122}
+\bibinfo{author}{Kernighan, B.~W.}
+\newblock \emph{\bibinfo{title}{The C Programming Language}}
+  (\bibinfo{publisher}{Prentice Hall Professional Technical Reference},
+  \bibinfo{year}{1988}), \bibinfo{edition}{2nd} edn.
+
+\bibitem{doi:10.1080/10556788.2018.1449842}
+\bibinfo{author}{Lenders, F.}, \bibinfo{author}{Kirches, C.} \&
+  \bibinfo{author}{Potschka, A.}
+\newblock \bibinfo{journal}{\bibinfo{title}{\texttt{trlib}: a vector-free
+  implementation of the {GLTR} method for iterative solution of the trust
+  region problem}}.
+\newblock {\emph{\JournalTitle{Optimization Methods and Software}}}
+  \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{420--449}
+  (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://doi.org/10.1080/10556788.2018.1449842}.
+
+\bibitem{li05}
+\bibinfo{author}{Li, X.~S.}
+\newblock \bibinfo{journal}{\bibinfo{title}{An overview of {SuperLU}:
+  Algorithms, implementation, and user interface}}.
+\newblock {\emph{\JournalTitle{ACM Trans. Math. Software}}}
+  \textbf{\bibinfo{volume}{31}}, \bibinfo{pages}{302--325}
+  (\bibinfo{year}{2005}).
+\newblock \urlprefix\url{https://doi.org/10.1145/1089014.1089017}.
+
+\bibitem{superlu_ug99}
+\bibinfo{author}{Li, X.} \emph{et~al.}
+\newblock \bibinfo{title}{{SuperLU} users' guide}.
+\newblock \bibinfo{type}{Tech. Rep.} \bibinfo{number}{LBNL-44289},
+  \bibinfo{institution}{Lawrence Berkeley National Laboratory}
+  (\bibinfo{year}{1999}).
+\newblock
+  \urlprefix\url{http://www.secs.oakland.edu/~frick/SuperLU/superlu_ug.pdf}.
+
+\bibitem{Barber:1996:QAC:235815.235821}
+\bibinfo{author}{Barber, C.~B.}, \bibinfo{author}{Dobkin, D.~P.} \&
+  \bibinfo{author}{Huhdanpaa, H.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The quickhull algorithm for convex
+  hulls}}.
+\newblock {\emph{\JournalTitle{ACM Trans. Math. Softw.}}}
+  \textbf{\bibinfo{volume}{22}}, \bibinfo{pages}{469--483}
+  (\bibinfo{year}{1996}).
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/235815.235821}.
+
+\bibitem{cephes_netlib}
+\bibinfo{author}{Moshier, S.~L.}
+\newblock \bibinfo{title}{{cephes}}.
+\newblock \urlprefix\url{http://www.netlib.org/cephes/}.
+
+\bibitem{Lam:2015:NLP:2833157.2833162}
+\bibinfo{author}{Lam, S.~K.}, \bibinfo{author}{Pitrou, A.} \&
+  \bibinfo{author}{Seibert, S.}
+\newblock \bibinfo{title}{Numba: A {LLVM}-based {P}ython {JIT} compiler}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the Second Workshop on
+  the LLVM Compiler Infrastructure in HPC}}, LLVM '15,
+  \bibinfo{pages}{7:1--7:6} (\bibinfo{publisher}{ACM}, \bibinfo{address}{New
+  York, NY, USA}, \bibinfo{year}{2015}).
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/2833157.2833162}.
+
+\bibitem{Bolz:2009:TMP:1565824.1565827}
+\bibinfo{author}{Bolz, C.~F.}, \bibinfo{author}{Cuni, A.},
+  \bibinfo{author}{Fijalkowski, M.} \& \bibinfo{author}{Rigo, A.}
+\newblock \bibinfo{title}{Tracing the meta-level: {PyPy}'s tracing {JIT}
+  compiler}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 4th Workshop on the
+  Implementation, Compilation, Optimization of Object-Oriented Languages and
+  Programming Systems}}, ICOOOLPS '09, \bibinfo{pages}{18--25}
+  (\bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{year}{2009}).
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/1565824.1565827}.
+
+\bibitem{knn-jake}
+\bibinfo{author}{{VanderPlas}, J.}
+\newblock \bibinfo{title}{Benchmarking nearest neighbor searches in {P}ython}
+  (\bibinfo{year}{2013}).
+\newblock
+  \urlprefix\url{https://jakevdp.github.io/blog/2013/04/29/benchmarking-nearest-neighbor-searches-in-python/}.
+
+\bibitem{kdtree-search-algo}
+\bibinfo{author}{Maneewongvatana, S.} \& \bibinfo{author}{Mount, D.~M.}
+\newblock \bibinfo{title}{Analysis of approximate nearest neighbor searching
+  with clustered point sets} (\bibinfo{year}{1999}).
+\newblock \urlprefix\url{https://arxiv.org/pdf/cs/9901013.pdf}.
+
+\bibitem{gh-4374}
+\bibinfo{author}{Molden, S.}
+\newblock \bibinfo{title}{{ENH}: Enhancements to {spatial.cKDTree}}
+  (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/pull/4374/}.
+
+\bibitem{10.1007/978-3-540-75755-9_107}
+\bibinfo{author}{Aspn{\"a}s, M.}, \bibinfo{author}{Signell, A.} \&
+  \bibinfo{author}{Westerholm, J.}
+\newblock \bibinfo{title}{Efficient assembly of sparse matrices using hashing}.
+\newblock In \bibinfo{editor}{K{\aa}gstr{\"o}m, B.}, \bibinfo{editor}{Elmroth,
+  E.}, \bibinfo{editor}{Dongarra, J.} \& \bibinfo{editor}{Wa{\'{s}}niewski, J.}
+  (eds.) \emph{\bibinfo{booktitle}{Applied Parallel Computing. State of the Art
+  in Scientific Computing}}, \bibinfo{pages}{900--907}
+  (\bibinfo{publisher}{Springer Berlin Heidelberg}, \bibinfo{address}{Berlin,
+  Heidelberg}, \bibinfo{year}{2007}).
+\newblock \urlprefix\url{https://doi.org/10.1007/978-3-540-75755-9_107}.
+
+\bibitem{Cormen:2001:IA:580470}
+\bibinfo{author}{Cormen, T.~H.}, \bibinfo{author}{Stein, C.},
+  \bibinfo{author}{Rivest, R.~L.} \& \bibinfo{author}{Leiserson, C.~E.}
+\newblock \emph{\bibinfo{title}{Introduction to Algorithms}}
+  (\bibinfo{publisher}{McGraw-Hill Higher Education}, \bibinfo{year}{2001}),
+  \bibinfo{edition}{2nd} edn.
+
+\bibitem{Moore2000ar}
+\bibinfo{author}{Moore, A.~W.} \emph{et~al.}
+\newblock \bibinfo{title}{{Fast algorithms and efficient statistics: N-point
+  correlation functions}}.
+\newblock In \bibinfo{editor}{Banday, A.~J.}, \bibinfo{editor}{Zaroubi, S.} \&
+  \bibinfo{editor}{Bartelmann, M.} (eds.) \emph{\bibinfo{booktitle}{{European
+  Southern Observatory Symposia: Mining the Sky}}}
+  (\bibinfo{publisher}{Springer, Berlin, Heidelberg}, \bibinfo{year}{2001}).
+\newblock \urlprefix\url{https://doi.org/10.1007/10849171_5}.
+
+\bibitem{ckdtree-weights}
+\bibinfo{author}{Feng, Y.}
+\newblock \bibinfo{title}{{ENH}: Faster \texttt{count\_neighour} in {cKDTree} /
+  + weighted input data} (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/pull/5647}.
+
+\bibitem{0004-637X-750-1-38}
+\bibinfo{author}{Martin, A.~M.}, \bibinfo{author}{Giovanelli, R.},
+  \bibinfo{author}{Haynes, M.~P.} \& \bibinfo{author}{Guzzo, L.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The clustering characteristics of
+  {HI}-selected galaxies from the 40\% {ALFALFA} survey}}.
+\newblock {\emph{\JournalTitle{The Astrophysical Journal}}}
+  \textbf{\bibinfo{volume}{750}}, \bibinfo{pages}{38} (\bibinfo{year}{2012}).
+\newblock \urlprefix\url{https://doi.org/10.1088/0004-637X/750/1/38}.
+
+\bibitem{LAPACK}
+\bibinfo{author}{Anderson, E.} \emph{et~al.}
+\newblock \emph{\bibinfo{title}{{LAPACK} Users' Guide}}
+  (\bibinfo{publisher}{Society for Industrial and Applied Mathematics},
+  \bibinfo{address}{Philadelphia, PA}, \bibinfo{year}{1999}),
+  \bibinfo{edition}{3rd} edn.
+
+\bibitem{blas-lapack-wrappers-scipy-2015}
+\bibinfo{author}{Henriksen, I.}
+\newblock \bibinfo{title}{{C}ircumventing the linker: Using {S}ci{P}y's {BLAS}
+  and {LAPACK} within {C}ython}.
+\newblock In \bibinfo{editor}{Huff, K.} \& \bibinfo{editor}{Bergstra, J.}
+  (eds.) \emph{\bibinfo{booktitle}{{P}roceedings of the 14th {P}ython in
+  {S}cience {C}onference (SciPy 2015)}}, \bibinfo{pages}{49 -- 52}
+  (\bibinfo{year}{2015}).
+\newblock
+  \urlprefix\url{http://conference.scipy.org/proceedings/scipy2015/ian_henriksen.html}.
+
+\bibitem{andersen2000mosek}
+\bibinfo{author}{Andersen, E.~D.} \& \bibinfo{author}{Andersen, K.~D.}
+\newblock \bibinfo{title}{The {MOSEK} interior point optimizer for linear
+  programming: an implementation of the homogeneous algorithm}.
+\newblock In \emph{\bibinfo{booktitle}{High Performance Optimization}},
+  \bibinfo{pages}{197--232} (\bibinfo{publisher}{Springer},
+  \bibinfo{year}{2000}).
+\newblock \urlprefix\url{https://doi.org/10.1007/978-1-4757-3216-0_8}.
+
+\bibitem{netlib}
+\bibinfo{title}{The {NETLIB LP} test problem set}.
+\newblock \urlprefix\url{http://www.numerical.rl.ac.uk/cute/netlib.html}.
+
+\bibitem{andersen1995presolving}
+\bibinfo{author}{Andersen, E.~D.} \& \bibinfo{author}{Andersen, K.~D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Presolving in linear programming}}.
+\newblock {\emph{\JournalTitle{Mathematical Programming}}}
+  \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{221--245}
+  (\bibinfo{year}{1995}).
+\newblock \urlprefix\url{https://doi.org/10.1007/BF01586000}.
+
+\bibitem{Wormington1999}
+\bibinfo{author}{Wormington, M.}, \bibinfo{author}{Panaccione, C.},
+  \bibinfo{author}{M., M.~K.} \& \bibinfo{author}{Bowen, D.~K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Characterization of structures from
+  {X}-ray scattering data using genetic algorithms}}.
+\newblock {\emph{\JournalTitle{Phil. Trans. R. Soc. Lond. A}}}
+  \textbf{\bibinfo{volume}{357}}, \bibinfo{pages}{2827–2848}
+  (\bibinfo{year}{1999}).
+\newblock \urlprefix\url{https://doi.org/10.1098/rsta.1999.0469}.
+
+\bibitem{Storn1997}
+\bibinfo{author}{Storn, R.} \& \bibinfo{author}{Price, K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Differential evolution - a simple
+  and efficient heuristic for global optimization over continuous spaces}}.
+\newblock {\emph{\JournalTitle{Journal of Global Optimization}}}
+  \textbf{\bibinfo{volume}{11}}, \bibinfo{pages}{341--359}
+  (\bibinfo{year}{1997}).
+\newblock \urlprefix\url{https://doi.org/10.1023/A:1008202821328}.
+
+\bibitem{nelder_simplex_1965}
+\bibinfo{author}{Nelder, J.~A.} \& \bibinfo{author}{Mead, R.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A simplex method for function
+  minimization}}.
+\newblock {\emph{\JournalTitle{The Computer Journal}}}
+  \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{308--313}
+  (\bibinfo{year}{1965}).
+\newblock \urlprefix\url{https://doi.org/10.1093/comjnl/7.4.308}.
+
+\bibitem{wright_direct_1996}
+\bibinfo{author}{Wright, M.~H.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Direct search methods: {{Once}}
+  scorned, now respectable}}.
+\newblock {\emph{\JournalTitle{Pitman Research Notes in Mathematics Series}}}
+  \bibinfo{pages}{191--208} (\bibinfo{year}{1996}).
+
+\bibitem{powell_efficient_1964}
+\bibinfo{author}{Powell, M.~J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{An efficient method for finding the
+  minimum of a function of several variables without calculating derivatives}}.
+\newblock {\emph{\JournalTitle{The Computer Journal}}}
+  \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{155--162}
+  (\bibinfo{year}{1964}).
+\newblock \urlprefix\url{https://doi.org/10.1093/comjnl/7.2.155}.
+
+\bibitem{powell_direct_1994}
+\bibinfo{author}{Powell, M.~J.}
+\newblock \bibinfo{title}{A direct search optimization method that models the
+  objective and constraint functions by linear interpolation}.
+\newblock In \emph{\bibinfo{booktitle}{Advances in Optimization and Numerical
+  Analysis}}, \bibinfo{pages}{51--67} (\bibinfo{publisher}{Springer},
+  \bibinfo{year}{1994}).
+\newblock \urlprefix\url{https://doi.org/10.1007/978-94-015-8330-5_4}.
+
+\bibitem{powell_direct_1998}
+\bibinfo{author}{Powell, M.~J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Direct search algorithms for
+  optimization calculations}}.
+\newblock {\emph{\JournalTitle{Acta numerica}}} \textbf{\bibinfo{volume}{7}},
+  \bibinfo{pages}{287--336} (\bibinfo{year}{1998}).
+\newblock \urlprefix\url{https://doi.org/10.1017/S0962492900002841}.
+
+\bibitem{powell_view_2007}
+\bibinfo{author}{Powell, M.~J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A view of algorithms for
+  optimization without derivatives}}.
+\newblock {\emph{\JournalTitle{Mathematics Today-Bulletin of the Institute of
+  Mathematics and its Applications}}} \textbf{\bibinfo{volume}{43}},
+  \bibinfo{pages}{170--174} (\bibinfo{year}{2007}).
+
+\bibitem{polak_note_1969}
+\bibinfo{author}{Polak, E.} \& \bibinfo{author}{Ribiere, G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Note sur la convergence de
+  m{\'e}thodes de directions conjugu{\'e}es}}.
+\newblock {\emph{\JournalTitle{Revue fran{\c c}aise d'informatique et de
+  recherche op{\'e}rationnelle. S{\'e}rie rouge}}}
+  \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{35--43} (\bibinfo{year}{1969}).
+\newblock
+  \urlprefix\url{http://www.numdam.org/article/M2AN_1969__3_1_35_0.pdf}.
+
+\bibitem{nocedal_numerical_2006}
+\bibinfo{author}{Nocedal, J.} \& \bibinfo{author}{Wright, S.}
+\newblock \emph{\bibinfo{title}{Numerical Optimization}}
+  (\bibinfo{publisher}{{Springer Science \& Business Media}},
+  \bibinfo{year}{2006}), \bibinfo{edition}{2nd} edn.
+\newblock \urlprefix\url{https://doi.org/10.1007/978-0-387-40065-5}.
+
+\bibitem{byrd_limited_1995}
+\bibinfo{author}{Byrd, R.~H.}, \bibinfo{author}{Lu, P.},
+  \bibinfo{author}{Nocedal, J.} \& \bibinfo{author}{Zhu, C.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A limited memory algorithm for
+  bound constrained optimization}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Scientific Computing}}}
+  \textbf{\bibinfo{volume}{16}}, \bibinfo{pages}{1190--1208}
+  (\bibinfo{year}{1995}).
+\newblock \urlprefix\url{https://doi.org/10.1137/0916069}.
+
+\bibitem{zhu_algorithm_1997}
+\bibinfo{author}{Zhu, C.}, \bibinfo{author}{Byrd, R.~H.}, \bibinfo{author}{Lu,
+  P.} \& \bibinfo{author}{Nocedal, J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Algorithm 778:
+  {{L}}-{{BFGS}}-{{B}}: {{Fortran}} subroutines for large-scale
+  bound-constrained optimization}}.
+\newblock {\emph{\JournalTitle{ACM Transactions on Mathematical Software
+  (TOMS)}}} \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{550--560}
+  (\bibinfo{year}{1997}).
+\newblock \urlprefix\url{https://doi.org/10.1145/279232.279236}.
+
+\bibitem{schittkowski_nonlinear_1982}
+\bibinfo{author}{Schittkowski, K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The nonlinear programming method of
+  {Wilson}, {Han}, and {Powell} with an augmented {Lagrangian} type line search
+  function. {P}art 1: Convergence analysis.}}
+\newblock {\emph{\JournalTitle{Numerische Mathematik}}}
+  \textbf{\bibinfo{volume}{38}}, \bibinfo{pages}{83--114}
+  (\bibinfo{year}{1982}).
+\newblock \urlprefix\url{https://doi.org/10.1007/BF01395810}.
+
+\bibitem{schittkowski_nonlinear_1982-1}
+\bibinfo{author}{Schittkowski, K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The nonlinear programming method of
+  {Wilson}, {Han}, and {Powell} with an augmented {Lagrangian} type line search
+  function. {P}art 2: An efficient implementation with linear least squares
+  subproblems}}.
+\newblock {\emph{\JournalTitle{Numerische Mathematik}}}
+  \textbf{\bibinfo{volume}{38}}, \bibinfo{pages}{115--127}
+  (\bibinfo{year}{1982}).
+\newblock \urlprefix\url{https://doi.org/10.1007/BF01395811}.
+
+\bibitem{schittkowski_convergence_1983}
+\bibinfo{author}{Schittkowski, K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{On the convergence of a sequential
+  quadratic programming method with an augmented {L}agrangian line search
+  function}}.
+\newblock {\emph{\JournalTitle{Mathematische Operationsforschung und Statistik.
+  Series Optimization}}} \textbf{\bibinfo{volume}{14}},
+  \bibinfo{pages}{197--216} (\bibinfo{year}{1983}).
+\newblock \urlprefix\url{https://doi.org/10.1080/02331938308842847}.
+
+\bibitem{kraft_software_1988}
+\bibinfo{author}{Kraft, D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A software package for sequential
+  quadratic programming}}.
+\newblock {\emph{\JournalTitle{Forschungsbericht- Deutsche Forschungs- und
+  Versuchsanstalt fur Luft- und Raumfahrt}}}  (\bibinfo{year}{1988}).
+
+\bibitem{nash_newton-type_1984}
+\bibinfo{author}{Nash, S.~G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Newton-type minimization via the
+  {{Lanczos}} method}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Numerical Analysis}}}
+  \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{770--788}
+  (\bibinfo{year}{1984}).
+\newblock \urlprefix\url{https://doi.org/10.1137/0721052}.
+
+\bibitem{powell_new_1970}
+\bibinfo{author}{Powell, M.~J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A new algorithm for unconstrained
+  optimization}}.
+\newblock {\emph{\JournalTitle{Nonlinear programming}}} \bibinfo{pages}{31--65}
+  (\bibinfo{year}{1970}).
+\newblock \urlprefix\url{https://doi.org/10.1016/B978-0-12-597050-1.50006-3}.
+
+\bibitem{steihaug_conjugate_1983}
+\bibinfo{author}{Steihaug, T.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The conjugate gradient method and
+  trust regions in large scale optimization}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Numerical Analysis}}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{626--637}
+  (\bibinfo{year}{1983}).
+\newblock \urlprefix\url{https://doi.org/10.1137/0720042}.
+
+\bibitem{conn_trust_2000}
+\bibinfo{author}{Conn, A.~R.}, \bibinfo{author}{Gould, N.~I.} \&
+  \bibinfo{author}{Toint, P.~L.}
+\newblock \emph{\bibinfo{title}{Trust Region Methods}}
+  (\bibinfo{publisher}{{SIAM}}, \bibinfo{year}{2000}).
+\newblock \urlprefix\url{https://doi.org/10.1137/1.9780898719857}.
+
+\bibitem{more_computing_1983}
+\bibinfo{author}{Mor{\'e}, J.~J.} \& \bibinfo{author}{Sorensen, D.~C.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Computing a trust region step}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Scientific and Statistical
+  Computing}}} \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{553--572}
+  (\bibinfo{year}{1983}).
+\newblock \urlprefix\url{https://doi.org/10.1137/0904038}.
+
+\bibitem{gould_solving_1999}
+\bibinfo{author}{Gould, N. I.~M.}, \bibinfo{author}{Lucidi, S.},
+  \bibinfo{author}{Roma, M.} \& \bibinfo{author}{Toint, P.~L.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Solving the trust-region subproblem
+  using the {{Lanczos}} method}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Optimization}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{504--525}
+  (\bibinfo{year}{1999}).
+\newblock \urlprefix\url{https://doi.org/10.1137/S1052623497322735}.
+
+\bibitem{Griffiths5228}
+\bibinfo{author}{Griffiths, T.~L.} \& \bibinfo{author}{Steyvers, M.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Finding scientific topics}}.
+\newblock {\emph{\JournalTitle{Proceedings of the National Academy of
+  Sciences}}} \textbf{\bibinfo{volume}{101}}, \bibinfo{pages}{5228--5235}
+  (\bibinfo{year}{2004}).
+\newblock \urlprefix\url{https://doi.org/10.1073/pnas.0307752101}.
+
+\bibitem{FITPACK}
+\bibinfo{author}{Dierckx, P.}
+\newblock \bibinfo{title}{{FITPACK}}.
+\newblock \urlprefix\url{http://netlib.org/dierckx/}.
+
+\bibitem{scipy-gh2885}
+\bibinfo{author}{Virtanen, P.}
+\newblock \bibinfo{title}{{ENH}: interpolate: rewrite ppform evaluation in
+  {Cython}} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/pull/2885}.
+
+\bibitem{scipy-gh3174}
+\bibinfo{author}{Burovski, E.}
+\newblock \bibinfo{title}{add b-splines} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/pull/3174}.
+
+\bibitem{deBoor1978}
+\bibinfo{author}{de~Boor, C.}
+\newblock \emph{\bibinfo{title}{A practical guide to splines}}
+  (\bibinfo{publisher}{Springer-Verlag}, \bibinfo{year}{1978}).
+\newblock \urlprefix\url{http://cds.cern.ch/record/103783}.
+
+\bibitem{scipy-gh5653}
+\bibinfo{author}{Mayorov, N.}
+\newblock \bibinfo{title}{{ENH}: {CubicSpline} interpolator}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://github.com/scipy/scipy/pull/5653}.
+
+\bibitem{FritschCarlson1980}
+\bibinfo{author}{Fritsch, F.~N.} \& \bibinfo{author}{Carlson, R.~E.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Monotone piecewise cubic
+  interpolation}}.
+\newblock {\emph{\JournalTitle{SIAM Journal on Numerical Analysis}}}
+  \textbf{\bibinfo{volume}{17}}, \bibinfo{pages}{238--246}
+  (\bibinfo{year}{1980}).
+\newblock \urlprefix\url{https://doi.org/10.1137/0717021}.
+
+\bibitem{Akima1970}
+\bibinfo{author}{Akima, H.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A new method of interpolation and
+  smooth curve fitting based on local procedures}}.
+\newblock {\emph{\JournalTitle{Journal of ACM}}} \textbf{\bibinfo{volume}{17}},
+  \bibinfo{pages}{589--602} (\bibinfo{year}{1970}).
+\newblock \urlprefix\url{https://doi.org/10.1145/321607.321609}.
+
+\bibitem{pytest}
+\bibinfo{author}{Krekel, H.} \emph{et~al.}
+\newblock \bibinfo{title}{pytest: helps you write better programs}.
+\newblock \urlprefix\url{https://docs.pytest.org/en/latest/}.
+
+\bibitem{pytest-cov}
+\bibinfo{author}{Schlaich, M.}
+\newblock \bibinfo{title}{pytest-cov - {PyPI}}.
+\newblock \urlprefix\url{https://pypi.org/project/pytest-cov/}.
+
+\bibitem{gcov}
+\bibinfo{title}{\texttt{gcov}—a test coverage program}.
+\newblock \urlprefix\url{https://gcc.gnu.org/onlinedocs/gcc/Gcov.html}.
+
+\bibitem{scipy-cov}
+\bibinfo{author}{Reddy, T.}
+\newblock \bibinfo{title}{{Track SciPy code base \% line coverage over time}}
+  (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/tylerjereddy/scipy-cov-track}.
+
+\bibitem{asvref}
+\bibinfo{author}{{Airspeed Velocity Developers}}.
+\newblock \bibinfo{title}{{Airspeed Velocity}: A simple {P}ython benchmarking
+  tool with web-based reporting} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/airspeed-velocity/asv}.
+
+\bibitem{SciPyProjectGovernance}
+\bibinfo{author}{{The SciPy Project Community}}.
+\newblock \bibinfo{title}{{SciPy} project governance} (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{https://docs.scipy.org/doc/scipy/reference/dev/governance/governance.html}.
+
+\bibitem{scipy-dev-guide}
+\bibinfo{author}{{SciPy Developers}}.
+\newblock \bibinfo{title}{{SciPy Developer Guide}} (\bibinfo{year}{2019}).
+\newblock
+  \urlprefix\url{http://scipy.github.io/devdocs/dev/core-dev/index.html}.
+
+\bibitem{eghbal2016}
+\bibinfo{author}{Eghbal, N.}
+\newblock \bibinfo{title}{Roads and bridges: The unseen labor behind our
+  digital infrastructure}.
+\newblock \bibinfo{type}{Tech. Rep.}, \bibinfo{institution}{Ford Foundation}
+  (\bibinfo{year}{2016}).
+\newblock
+  \urlprefix\url{http://brochures.sisalp.fr/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure.pdf}.
+
+\bibitem{astropy-2018}
+\bibinfo{author}{Collaboration, T.~A.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{The {A}stropy project: Building an
+  open-science project and status of the v2.0 core package}}.
+\newblock {\emph{\JournalTitle{The Astronomical Journal}}}
+  \textbf{\bibinfo{volume}{156}}, \bibinfo{pages}{123} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://doi.org/10.3847/1538-3881/aabc4f}.
+
+\bibitem{pypinfo}
+\bibinfo{author}{Lev, O.}, \bibinfo{author}{Dufresne, J.},
+  \bibinfo{author}{Kasim, R.}, \bibinfo{author}{Skinn, B.} \&
+  \bibinfo{author}{Wilk, J.}
+\newblock \bibinfo{title}{pypinfo: View {PyPI} download statistics with ease}
+  (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://github.com/ofek/pypinfo}.
+
+\bibitem{condainfo}
+\bibinfo{author}{{Anaconda, Inc.}}
+\newblock \bibinfo{title}{Conda package download data} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://github.com/ContinuumIO/anaconda-package-data}.
+
+\bibitem{SciPylib}
+\bibinfo{author}{Jones, E.}, \bibinfo{author}{Oliphant, T.~E.},
+  \bibinfo{author}{Peterson, P.} \emph{et~al.}
+\newblock \bibinfo{title}{{SciPy}: Open source scientific tools for {Python}}
+  (\bibinfo{year}{2001--}).
+\newblock \urlprefix\url{http://www.scipy.org/}.
+
+\bibitem{googlescholar}
+\bibinfo{author}{{Google Scholar}}.
+\newblock \bibinfo{title}{{Scipy - Google Scholar}} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://scholar.google.com/scholar?q=SciPy}.
+
+\bibitem{PhysRevLett.116.061102}
+\bibinfo{author}{Abbott, B.~P.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Observation of gravitational waves
+  from a binary black hole merger}}.
+\newblock {\emph{\JournalTitle{Phys. Rev. Lett.}}}
+  \textbf{\bibinfo{volume}{116}}, \bibinfo{pages}{061102}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://doi.org/10.1103/PhysRevLett.116.061102}.
+
+\bibitem{intel-python}
+\bibinfo{author}{{Intel Software}}.
+\newblock \bibinfo{title}{The {I}ntel distribution for {P}ython}
+  (\bibinfo{year}{2018}).
+\newblock
+  \urlprefix\url{https://software.intel.com/en-us/articles/intel-optimized-packages-for-the-intel-distribution-for-python}.
+
+\bibitem{octoverse-scipy}
+\bibinfo{author}{Elliott, T.}
+\newblock \bibinfo{title}{The state of the {Octoverse}: Machine learning}
+  (\bibinfo{year}{2019}).
+\newblock
+  \urlprefix\url{https://github.blog/2019-01-24-the-state-of-the-octoverse-machine-learning/}.
+
+\bibitem{SciPy_roadmap_1}
+\bibinfo{author}{{The SciPy Project Community}}.
+\newblock \bibinfo{title}{Scipy {R}oadmap} (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{https://docs.scipy.org/doc/scipy-1.0.0/reference/roadmap.html}.
+
+\bibitem{SciPy_roadmap_dev}
+\bibinfo{author}{{The SciPy Project Community}}.
+\newblock \bibinfo{title}{Scipy {R}oadmap} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://scipy.github.io/devdocs/roadmap.html}.
+
+\bibitem{SciPy_tutorials}
+\bibinfo{author}{{The SciPy Project Community}}.
+\newblock \bibinfo{title}{Scipy {T}utorial} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://docs.scipy.org/doc/scipy/reference/tutorial/}.
+
+\bibitem{abbasi2018sparse}
+\bibinfo{author}{Abbasi, H.}
+\newblock \bibinfo{title}{Sparse: A more modern sparse array library}.
+\newblock In \bibinfo{editor}{Akici, F.}, \bibinfo{editor}{Lippa, D.},
+  \bibinfo{editor}{Niederhut, D.} \& \bibinfo{editor}{Pacer, M.} (eds.)
+  \emph{\bibinfo{booktitle}{{P}roceedings of the 17th {P}ython in {S}cience
+  {C}onference}}, \bibinfo{pages}{27--30} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://doi.org/10.25080/Majora-4af1f417-00a}.
+
+\end{thebibliography}
