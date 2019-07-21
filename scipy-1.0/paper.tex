@@ -118,7 +118,7 @@ eigenvalue problems, algebraic equations, differential equations, and many other
 classes of problems; it also provides
 specialized data structures, such as sparse arrays
 and $k$-dimensional trees. SciPy is built on top of 
-NumPy\cite{vanderwalt2011numpy,Oliphant-2015},
+NumPy\cite{oliphant2006guide, vanderwalt2011numpy},
 which provides array data structures and related fast numerical routines, and
 SciPy is itself the foundation upon which higher level scientific libraries,
 including scikit-learn\cite{pedregosa2011scikit}
@@ -270,7 +270,7 @@ package, and provided algorithms for signal processing, special
 functions, sparse matrices, quadrature, optimization, Fast Fourier
 Transforms, and more.  One of these packages, Multipack\cite{multipack}, was a set of
 extension modules that wrapped Fortran and C libraries such as
-ODEPACK\cite{citeulike:2644528}, QUADPACK\cite{1983qspa.book.....P}, and MINPACK\cite{osti_6997568}, to solve and minimize nonlinear
+ODEPACK\cite{hindmarsh1983odepack}, QUADPACK\cite{piessens1983quadpack}, and MINPACK\cite{osti_6997568}, to solve and minimize nonlinear
 equations, integrate differential equations, and fit splines (the
 latter implemented by Pearu Peterson).  Robert Kern, then an
 undergraduate student (and currently a SciPy core developer), provided
@@ -547,7 +547,7 @@ In 2007, Sphinx\cite{sphinx} made it possible to render hypertext and
 PDF-formatted documents automatically from plain text (docstrings) 
 interspersed with Python code, and in 2008, \texttt{pydocweb}\cite{pydocweb}
 enabled collaborative documentation development in a wiki-like fashion.
-The SciPy Documentation Project \cite{van2008scipy, harrington2008scipy} 
+The SciPy Documentation Project \cite{vanderwalt2008scipy, harrington2008scipy} 
 used these tools to complete documentation of SciPy's user-facing
 functionality: offering t-shirts to contributors from around the world in 
 exchange for high-quality text, it collected contributions from over 75 people 
@@ -689,8 +689,8 @@ Fortran, despite its age, is still a high-performance scientific programming lan
 continued contemporary usage\cite{Koelbel:1993:HPF:562354}. Thus, we wrap the following excellent, field-tested Fortran
 libraries in order to provide Python convenience while benefiting from their performance: 
 FFTPACK\cite{SWARZTRAUBER198445, SWARZTRAUBER198251}, % for performing Fourier transforms, 
-ODEPACK\cite{citeulike:2644528}, % for solving ordinary differential equation initial value problems,
-QUADPACK\cite{1983qspa.book.....P}, % for numerical integration of one-dimensional functions,
+ODEPACK\cite{hindmarsh1983odepack}, % for solving ordinary differential equation initial value problems,
+QUADPACK\cite{piessens1983quadpack}, % for numerical integration of one-dimensional functions,
 FITPACK\cite{Dierckx:1993:CSF:151103}, % for curve-fitting and interpolation,
 ODRPACK\cite{ODRPACK_Boggs}, % for orthogonal distance regression, 
 MINPACK\cite{osti_6997568}, % for minimization of linear and nonlinear equations, 
