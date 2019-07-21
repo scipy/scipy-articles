@@ -5,10 +5,26 @@
 
 % to adjust vertical spacing properties of
 % newlfm class see: https://tex.stackexchange.com/a/65533/43006
-\topmarginsize{2mm}
+%\unprtop{0mm}
+\topmarginsize{0mm}
 \topmarginskip{0in}
 \headermarginsize{0in}
 \headermarginskip{0in}
+\MinHead{0in}
+%\dateskipafter{0pt}
+%\dateskipbefore{0pt}
+%\sigskipbefore{0pt}
+%\sigskipafter{0pt}
+\closeskipbefore{1pt}
+%\closeskipafter{0pt}
+%\addrfromskipbefore{0pt}
+\addrfromskipafter{0in}
+\addrtoskipbefore{0in}
+%\addrtoskipafter{0pt}
+\newlfmP{Headlinewd=0pt,Footlinewd=0pt}
+\newlfmP{sigsize=10pt}
+\bottommarginskip{0pt}
+\MinFoot{0pt}
 
 \usepackage{kpfonts}
 \usepackage{url}
@@ -16,59 +32,62 @@
 \widowpenalty=1000
 \clubpenalty=1000
 
-\newlfmP{headermarginskip=10pt}
-\newlfmP{sigsize=30pt}
-\newlfmP{dateskipafter=20pt}
-%\newlfmP{addrfromphone}
-%\newlfmP{addrfromemail}
-%\PhrPhone{Phone}
-%\PhrEmail{Email}
-
 \namefrom{Ralf Gommers,
           Matt Haberland,
           and Tyler Reddy}
 \addrfrom{%
     \today\\[10pt]
+    Ralf Gommers,\\
     Quansight Labs,\\
-    The Netherlands\\
+    The Netherlands,\\
+    \texttt{ralf.gommers@gmail.com},\\
+    %phone number\\
     \\
+    Matt Haberland,\\
     BioResource and Agricultural Engineering,\\
     California Polytechnic State University,\\
-    San Luis Obispo, CA, 93407, USA\\
+    San Luis Obispo, CA, 93407, USA,\\
+    \texttt{mhaberla@calpoly.edu},\\
+    %phone number\\
     \\
+    Tyler Reddy,\\
     CCS-7 Applied Computer Science Group,\\
     Los Alamos National Laboratory,\\
-    Los Alamos, NM, 87545, USA
+    Los Alamos, NM, 87545, USA,\\
+    \texttt{treddy@lanl.gov},\\
+    %phone number\\
 }
 
 \addrto{%
-Prof. Syma Khalid,\\
-School of Chemistry,\\
-University of Southampton,\\
-Highfield Campus,\\
-Southampton,\\
-SO17 1BJ, U.K.}
+Dr. Rita Strack,\\
+Nature Methods Editorial Office,\\
+One New York Plaza Suite 4500,\\
+New York, NY 10004,\\
+USA}
 
-\greetto{Dear Prof. Khalid,}
+\greetto{Dear Dr. Strack,}
 \closeline{Sincerely,}
 \begin{document}
 \begin{newlfm}
 
 We are submitting the enclosed manuscript describing a milestone
 1.0 release of SciPy for consideration to be published in
-\emph{Scientific Reports}. SciPy is the fundamental scientific 
+\emph{Nature Methods}, as informally discussed.
+SciPy is the fundamental scientific 
 computing library in the Python programming language. 
 Hundreds of experts have contributed to our library, which
 has been downloaded millions of times and has over 100,000 dependent
-code repositories.
+code repositories, including many used in the life sciences.
 
-We have specifically chosen \emph{Scientific Reports} because
-the breadth of acceptable topics matches the variety of algorithms
-our library provides. High-profile manuscripts citing SciPy range
-from the biosciences to recent reports on gravitational waves and
+We have specifically chosen \emph{Nature Methods} because
+SciPy lies at the base of the entire ecosystem of scientific methods
+described in the journal scope, and because SciPy is effectively an
+ever-improving methodological library. High-profile manuscripts citing SciPy 
+extend beyond the biosciences to recent reports on gravitational waves and
 black holes. Lacking a better alternative, these citations all point
 to the SciPy website; instead, we think the package now merits a
-formal publication in a highly visible journal.
+formal publication in a highly visible journal. A pre-print will likely
+soon be made available on arXiv.
 
 We suggest the following three peer reviewers as suitable candidates,
 and we do not have any specific reviewer exclusion requests:
@@ -83,7 +102,6 @@ and we do not have any specific reviewer exclusion requests:
 \end{enumerate}
 
 Thank you for your consideration.  We look forward to
-hearing from you.
-
+    hearing from you.\vspace*{0.1cm}
 \end{newlfm}
 \end{document}
