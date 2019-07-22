@@ -4,6 +4,5 @@
 *.fdb_latexmk
 *.fls
 *.log
-*.bbl
 *.out
 *.blg
