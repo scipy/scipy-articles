@@ -13,7 +13,7 @@
 \MinHead{0in}
 %\dateskipafter{0pt}
 %\dateskipbefore{0pt}
-%\sigskipbefore{0pt}
+\sigskipbefore{40pt}
 %\sigskipafter{0pt}
 \closeskipbefore{1pt}
 %\closeskipafter{0pt}
@@ -23,12 +23,17 @@
 %\addrtoskipafter{0pt}
 \newlfmP{Headlinewd=0pt,Footlinewd=0pt}
 \newlfmP{sigsize=10pt}
-\bottommarginskip{0pt}
+\bottommarginskip{60pt}
 \MinFoot{0pt}
 
 \usepackage{kpfonts}
+\usepackage{hyperref}
 \usepackage{url}
 
+\hypersetup{%
+  linkbordercolor=blue,% hyperlink borders will be blue
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
 \widowpenalty=1000
 \clubpenalty=1000
 
@@ -82,12 +87,20 @@ code repositories, including many used in the life sciences.
 We have specifically chosen \emph{Nature Methods} because
 SciPy lies at the base of the entire ecosystem of scientific methods
 described in the journal scope, and because SciPy is effectively an
-ever-improving methodological library. High-profile manuscripts citing SciPy 
-extend beyond the biosciences to recent reports on gravitational waves and
-black holes. Lacking a better alternative, these citations all point
+ever-improving methodological library. Among the 3000+ articles that 
+cite the SciPy library are hundreds in the field of biology,
+including several in \emph{Nature Methods}\footnote{\href{
+https://www.nature.com/articles/s41592-018-0114-z}{
+Gruber \emph{et al.} (2018) \textbf{15}: 832-836}
+\href{https://www.nature.com/articles/s41592-019-0403-1}{
+; Moen \emph{et al.} (2019)}}, one of which\footnote{
+\href{https://www.nature.com/articles/nmeth.f.303}{
+Caporaso \emph{et al.} (2010) \textbf{7}: 335-336}} is cited
+15,800 times. Citations in recent reports on gravitational waves and
+black holes are also striking. Lacking a better alternative, these citations all point
 to the SciPy website; instead, we think the package now merits a
-formal publication in a highly visible journal. A pre-print will likely
-soon be made available on arXiv.
+formal publication in a highly visible journal. A preprint was recently
+made \href{https://arxiv.org/abs/1907.10121}{available on arXiv}.
 
 We suggest the following three peer reviewers as suitable candidates,
 and we do not have any specific reviewer exclusion requests:
@@ -101,7 +114,8 @@ and we do not have any specific reviewer exclusion requests:
     of event horizon imaging paper that cites SciPy.
 \end{enumerate}
 
+\vspace*{1cm}
 Thank you for your consideration.  We look forward to
-    hearing from you.\vspace*{0.1cm}
+    hearing from you.
 \end{newlfm}
 \end{document}
