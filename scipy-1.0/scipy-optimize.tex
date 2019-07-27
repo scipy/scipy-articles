@@ -1,7 +1,7 @@
 \newcommand{\RR}{\ensuremath{\mathbb{R}}}
 The \texttt{scipy.optimize} subpackage provides functions for the numerical
 solution of several classes of root finding and optimization problems.
-Here we highlight recent additions through SciPy 1.0.
+Here we highlight recent additions through SciPy~1.0.
 
 %\subsubsection{Root Finding}
 %The general ``root finding'' problem is to find a root $\mathbf{x} \in \RR^m$ of $\mathbf{f}: \RR^m \rightarrow \RR^m$, that is, to solve
@@ -13,7 +13,7 @@ Here we highlight recent additions through SciPy 1.0.
 
 \subsubsection*{Linear Optimization}
 
-A new interior-point optimizer for continuous linear programming problems, \texttt{linprog} with \texttt{method='interior-point'}, was released with SciPy 1.0. Implementing the core algorithm of the commercial solver MOSEK \cite{andersen2000mosek}, it solves all of the 90+ NETLIB LP benchmark problems \cite{netlib} tested. Unlike some interior point methods, this homogeneous self-dual formulation provides certificates of infeasibility or unboundedness as appropriate. 
+A new interior-point optimizer for continuous linear programming problems, \texttt{linprog} with \texttt{method='interior-point'}, was released with SciPy~1.0. Implementing the core algorithm of the commercial solver MOSEK \cite{andersen2000mosek}, it solves all of the 90+ NETLIB LP benchmark problems \cite{netlib} tested. Unlike some interior point methods, this homogeneous self-dual formulation provides certificates of infeasibility or unboundedness as appropriate.
 
 A presolve routine \cite{andersen1995presolving} solves trivial problems and otherwise performs problem simplifications, such as bound tightening and removal of fixed variables, and one of several routines for eliminating redundant equality constraints is automatically chosen to reduce the chance of numerical difficulties caused by singular matrices. Although the main solver implementation is pure Python, end-to-end sparse matrix support and heavy use of SciPy's compiled linear system solvers---often for the same system with multiple right hand sides due to the predictor-corrector approach---provide speed sufficient for problems with tens of thousands of variables and constraints.
 
@@ -41,9 +41,9 @@ As \texttt{minimize} may return any local minimum, some problems require the use
     iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
     has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
     \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
-    point (i.e. a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
-    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e. $x^l \le x \le x^u$),
-    \textit{equality constraints} (i.e. $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e. $c_{\text{ineq}}(x) \ge 0$).}
+    point (i.e.\ a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
+    can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e.\ $x^l \le x \le x^u$),
+    \textit{equality constraints} (i.e.\ $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e.\ $c_{\text{ineq}}(x) \ge 0$).}
   \begin{tabular}{cccccccccccccc}
       & \rotatebox{80}{\texttt{Nelder-Mead}} & \rotatebox{80}{\texttt{Powell}} & \rotatebox{80}{\texttt{COBYLA}} & \rotatebox{80}{\texttt{CG}} & \rotatebox{80}{\texttt{BFGS}}&  \rotatebox{80}{\texttt{L-BFGS-B}} & \rotatebox{80}{\texttt{SLSQP}} & \rotatebox{80}{\texttt{TNC}} & \rotatebox{80}{\texttt{Newton-CG}} & \rotatebox{80}{\texttt{dogleg}} & \rotatebox{80}{\texttt{trust-ncg}} & \rotatebox{80}{\texttt{trust-exact}} & \rotatebox{80}{\texttt{trust-krylov}} \\
     \hline
@@ -74,7 +74,7 @@ As \texttt{minimize} may return any local minimum, some problems require the use
       \cite{powell_direct_1994, powell_direct_1998, powell_view_2007} &
       \cite{polak_note_1969, nocedal_numerical_2006} & \cite{nocedal_numerical_2006} & \cite{byrd_limited_1995, zhu_algorithm_1997} &
       \cite{schittkowski_nonlinear_1982, schittkowski_nonlinear_1982-1, schittkowski_convergence_1983, kraft_software_1988} &
-      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  & 
+      \cite{nash_newton-type_1984} & \cite{nocedal_numerical_2006}  &
       \cite{powell_new_1970, nocedal_numerical_2006} &  \cite{steihaug_conjugate_1983, nocedal_numerical_2006} &
       \cite{conn_trust_2000, more_computing_1983} & \cite{gould_solving_1999, doi:10.1080/10556788.2018.1449842} \\
     \hline
