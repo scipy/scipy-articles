@@ -667,6 +667,7 @@ and \texttt{spatial} offer basic tools
 for working with graphs and networks compared to specialized
 libraries like NetworkX\cite{hagberg2008networkx}.
 
+
 We use the following criteria to determine whether or not to include new
 functionality in SciPy:
 \begin{itemize}
@@ -778,9 +779,9 @@ offerings.
 
 From a new features standpoint, \texttt{scipy.sparse} matrices and linear
 operators now support the Python matrix multiplication (\texttt{@}) operator.
-We've added \texttt{scipy.sparse.norm} and
+We have added \texttt{scipy.sparse.norm} and
 \texttt{scipy.sparse.random} for computing sparse matrix norms and drawing
-random variates from arbitrary distributions, respectively. Also, we've made a
+random variates from arbitrary distributions, respectively. Also, we have made a
 concerted effort to bring the \texttt{scipy.sparse} API into line with the
 equivalent NumPy API where possible.
 
@@ -794,7 +795,7 @@ equivalent NumPy API where possible.
 
 As of SciPy version 0.19, it is possible for users to wrap low-level functions
 in a \texttt{scipy.LowLevelCallable} object that reduces the overhead of
-calling compiled C functions, such as those generated using \texttt{numba}
+calling compiled C functions, such as those generated using Numba
 or Cython, directly from Python.
 Supported low-level functions include \texttt{PyCapsule}
 objects, \texttt{ctypes} function pointers, and \texttt{cffi} function pointers.
