@@ -41,7 +41,9 @@ As \texttt{minimize} may return any local minimum, some problems require the use
     iterate is sufficiently close to the solution: linear (L), superlinear (S) and quadratic (Q). Convergence rates denoted S$^*$ indicate that the algorithm
     has a superlinear rate for the parameters used in SciPy, but can  achieve a quadratic convergence rate with other parameter choices.
     \textit{Global convergence} is marked for the algorithms with guarantees of convergence to a stationary
-    point (i.e.\ a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum. The table also indicates which algorithms
+    point (i.e.\ a point $x^*$ for which $\nabla f(x^*) = 0$); this is \emph{not} a guarantee of convergence to a global minimum.
+		\textit{Lines-search (LS) or trust-region (TR)} indicates which of the two globalization approaches is employed by the algorithm.
+		The table also indicates which algorithms
     can deal with constraints on the variables. We distinguish among \textit{bound constraints} (i.e.\ $x^l \le x \le x^u$),
     \textit{equality constraints} (i.e.\ $c_{\text{eq}}(x) = 0$) and \textit{inequality constraints} (i.e.\ $c_{\text{ineq}}(x) \ge 0$).}
   \begin{tabular}{cccccccccccccc}
