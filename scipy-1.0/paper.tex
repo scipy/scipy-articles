@@ -33,6 +33,7 @@
 \newcommand{\xmark}{\ding{55}}%
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\fixme}[1]{\textcolor{red}{{#1}}}
+\newcommand{\inlinecite}[1]{\footnotesize\citen{#1}}
 
 \usepackage{etoolbox}
 \makeatletter
@@ -275,8 +276,8 @@ Transforms, and more.  One of these packages, Multipack\cite{multipack}, was a s
 extension modules that wrapped Fortran and C libraries such as
 ODEPACK\cite{hindmarsh1983odepack}, QUADPACK\cite{piessens1983quadpack},
 and MINPACK\cite{osti_6997568}, to solve nonlinear equations and least
-squares problems, integrate differential equations, and fit splines (the
-latter implemented by Pearu Peterson).  Robert Kern, then an
+squares problems, integrate differential equations, and fit splines.
+Robert Kern, then an
 undergraduate student (and currently a SciPy core developer), provided
 compilation instructions under Windows.
 % 2001 PhD Tallinn Technical University
@@ -660,10 +661,11 @@ PyMC3\cite{10.7717/peerj-cs.55}, emcee\cite{2013PASP-emcee} and
 PyStan\cite{pystan-ref} cover Bayesian statistics and probabilistic modeling.
 scikit-image\cite{vanderwalt2014scikit} provides image processing
 capabilities beyond SciPy's \texttt{ndimage}, SymPy\cite{meurer2017sympy}
-provides a Python interface for symbolic computation, and
-while \texttt{sparse.csgraph} or \texttt{spatial} offer basic tools
-for working with graphs and networks compared to a more specialized
-Python library like NetworkX\cite{hagberg2008networkx}.
+provides a Python interface for symbolic computation, and \texttt{sparse.csgraph}
+and \texttt{spatial} offer basic tools
+for working with graphs and networks compared to specialized
+libraries like NetworkX\cite{hagberg2008networkx}.
+
 
 We use the following criteria to determine whether or not to include new
 functionality in SciPy:
@@ -1037,7 +1039,7 @@ by 47\% of all machine learning projects on GitHub\cite{octoverse-scipy}.
 
 Nevertheless, SciPy continually strives to improve.
 The SciPy Roadmap\cite{SciPy_roadmap_1,SciPy_roadmap_dev}, summarized in Table~\ref{table:roadmap}, is a
-continuously-updated document
+continually updated document
 maintained by the community that describes some of the major directions for
 improvement for the project, as well as specific limitations and matters that
 require assistance moving forward.
