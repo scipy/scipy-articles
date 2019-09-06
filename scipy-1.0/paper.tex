@@ -885,7 +885,9 @@ are more than \num{13000}~unit tests in the test suite, which is written for usa
 with the \texttt{pytest}\cite{pytest} framework.
 Test coverage at the SciPy~1.0 release point (Figure~\ref{fig:coverage}) was at
 87\% for Python code according to \texttt{pytest-cov}\cite{pytest-cov} and
-45\% for compiled (C, C++, and Fortran) code according to \texttt{gcov}\cite{gcov}.
+45\% for compiled (C, C++, and Fortran) code according to
+\texttt{gcov}\cite{gcov}, the latter primarily due to the vendoring of several
+large, well-vetted Fortran libraries from repositories such as NETLIB.
 Documentation for the code is automatically built and published by
 the CircleCI service to facilitate evaluation of documentation changes /
 integrity.  Our full test suite also passes with PyPy3\cite{Bolz:2009:TMP:1565824.1565827}, a just-in-time compiled
