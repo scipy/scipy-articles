@@ -877,6 +877,12 @@ and the multinomial distribution in \texttt{scipy.stats.multinomial}
 
 \subsubsection*{Test suite}
 
+Test-driven development has been described as a way to manage fear and
+uncertainity when making code changes\cite{TDD-Beck}. For each component of SciPy, we write multiple small executable
+tests that verify its intended behavior. The collection of these, known as a \emph{test suite}, increases confidence in
+the correctness and accuracy of the library, and lets us make code modifications known not to alter desired behavior. Monitoring the number of lines
+of code in SciPy covered by unit tests is one way we maintain
+some certainty that changes and new features are correctly implemented.
 The SciPy test suite is orchestrated by a continuous integration matrix that
 includes POSIX and Windows (32/64-bit) platforms managed by Travis CI and
 AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
