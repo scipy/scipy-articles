@@ -882,9 +882,15 @@ uncertainity when making code changes\cite{TDD-Beck}. For each component of
 SciPy, we write multiple small executable tests that verify its intended
 behavior. The collection of these, known as a \emph{test suite}, increases
 confidence in the correctness and accuracy of the library, and lets us make
-code modifications known not to alter desired behavior. Monitoring the number
+code modifications known not to alter desired behavior.
+According to the practice of continuous integration, all proposed contributions
+to SciPy are temporarily integrated with the master branch of the library
+before the test suite is run, and all tests must pass before the contribution
+is permanently merged.
+Continuously monitoring the number
 of lines of code in SciPy covered by unit tests is one way we maintain
 some certainty that changes and new features are correctly implemented.
+
 The SciPy test suite is orchestrated by a continuous integration matrix that
 includes POSIX and Windows (32/64-bit) platforms managed by Travis CI and
 AppVeyor, respectively. Our tests cover Python versions 2.7, 3.4, 3.5, 3.6, and
