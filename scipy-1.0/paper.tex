@@ -352,45 +352,6 @@ manual\cite{Numeric-manual}, and
 the Space Telescope Science Institute (STScI), which was in charge of
 Hubble Space Telescope science operations, decided to replace their
 custom scripting language and analysis pipeline with Python\cite{STScI-slither}.
-
-As SciPy, the algorithms library of the ecosystem, began attracting the attention
-of large research organizations,
-the next generation of graduate students and postdocs were already exploring
-other aspects of the computational environment.
-In 2000, Prabhu Ramachandran, a PhD student at the Indian Institute of
-Technology, started work on a 3D visualization application, based on
-Kitware's C++ Visualization Toolkit\cite{schroeder:2006:VTK}, called
-Mayavi\cite{mayavi-intro}.
-In 2001, Fernando Pérez, a graduate student at the University of
-Colorado, Boulder, created the IPython interactive shell, which
-eventually blossomed into Project Jupyter\cite{Kluyver:2016aa}.
-% IPython hosted on SciPy:
-% https://mail.python.org/pipermail/scipy-user/2003-March/001455.html
-John Hunter, a postdoc
-%John got his PhD in 2001, then a post-doc with John Milton (dept of
-%Neurology, UChicago?) a couple of years; then research professor
-%under Kurt Hecox, whereafter at Tradelink from 2006
-at the University
-of Chicago, liked the plotting functionality
-available in MATLAB\cite{matlab}, but had problems accessing their laboratory's
-license, which was governed by a hardware dongle.  In response, he
-wrote a plotting library from scratch, and Matplotlib 0.1 was released
-April 2003\cite{matplotlib-rel}.
-
-% https://mail.python.org/pipermail/scipy-dev/2002-June/001007.html
-% https://str.llnl.gov/str/News896.html
-
-
-%2002—https://web.archive.org/web/20021020215937/http://www.scipy.org:80/site_content/scipy02/scipy02_agenda.htm
-%2003—https://web.archive.org/web/20031207151811/http://www.scipy.org:80/site_content/scipy03/
-%2004—Jim Hugunin
-%https://web.archive.org/web/20040920080225/http://www.scipy.org:80/wikis/scipy04
-%Travis Oliphant 2005—https://web.archive.org/web/20051103155042/http://www.scipy.org:80/wikis/scipy05/FrontPage
-%Guido—2006 https://scipy.github.io/old-wiki/pages/SciPy2006.html
-%Martelli—2008 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2004.html
-%Norvig—2009 https://scipy.github.io/old-wiki/pages/Developer_Zone/Conferences/SciPy2005.html
-
-
 As STScI continued to use Python for an increasingly large portion
 of the Hubble Space Telescope data analysis pipeline, they encountered
 problems with the Python numerical array container.
@@ -401,55 +362,9 @@ to write NumArray\cite{greenfield2003numarray}, a library that could handle data
 scale.  Unfortunately, NumArray proved inefficient for small arrays,
 presenting the community with a rather unfortunate choice.  In 2005,
 Travis Oliphant combined the best elements of Numeric and NumArray,
-thereby solving the dilemma and paving the way for Python to become
-a very significant player in the Data Science movement. NumPy
-1.0 was released in October 2006\cite{numpy-1.0-tag}, with about 30
-authors recognized for major contributions in its release notes.
-
-% Future directions for SciPy after meeting at Berkeley
-% https://mail.python.org/pipermail/scipy-user/2005-March/004164.html
-
-%In April 2006, Paul
-%Dubois\footnote{https://mail.python.org/pipermail/numpy-discussion/2006-April/007487.html} wrote
-%to the NumPy mailing list:
-%\begin{quote}
-%IEEE's magazine, Computing in Science and Engineering (CiSE), has asked me
-%to put together a theme issue on the use of Python in Science and
-%Engineering. I will write an overview to be accompanied by 3-5 articles [. . .]
-%that show a diverse set of applications or
-%tools, to give our readers a sense of whether or not Pyth%on might be useful
-%in their own work.
-%\end{quote}
-In a May/June 2007 special issue of IEEE Computing in Science and
-Engineering, Paul Dubois wrote\cite{dubois2007guest}:
-\begin{quote}
-LLNL now has many Python-based efforts built from scratch or wrapped around
-legacy codes \textelp{} hundreds of thousands
-of lines of C++, Python, and Fortran~95, all working together just as we hoped,
-doing compute-intensive calculations on massively parallel computers.
-\end{quote}
-While it is now more commonly accepted, Dubois took the time to explain to
-the 2007 reader that ``interpreted doesn't mean slow or only interactive.''
-He also shared his own interest in Python for ``computational steering''
-where ``Python serves as the input language to a scientific application, and the actual
-computations are performed both in Python itself and in compiled extensions.''
-%https://www.computer.org/csdl/mags/cs/2007/03/c3007.html
-Using Python for computational steering was one of the earliest uses of Python
-in large scientific processing pipelines.
-In addition to Dubois' overview there were also articles introducing
-Python and SciPy \cite{oliphant2007python}, IPython \cite{perez2007ipython},
-and  Matplotlib \cite{hunter2007matplotlib}.
-There was also a diverse set of
-research applications including
-systems biology\cite{myers2007python},
-astronomy\cite{greenfield2007reaching},
-robotics\cite{krauss2007python},
-nanophotonics\cite{bienstman2007python},
-partial differential equations\cite{mardal2007using},
-neuroimaging\cite{millman2007analysis},
-geographic information systems\cite{shi2007python}, and
-education\cite{backer2007computational, myers2007pythona}.
-
+thereby solving the dilemma. NumPy 1.0 was released in October
+2006\cite{numpy-1.0-tag}, paving the way for the reunified scientific
+Python community to mature.
 
 \subsection*{SciPy Matures}
 
