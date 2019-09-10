@@ -570,7 +570,9 @@ functionality in SciPy:
 In terms of software systems and architecture, SciPy's scope matches NumPy's:
 algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
-for graphics processing units (GPUs) are explicitly out of scope.
+for graphics processing units (GPUs) were explicitly out of scope at the 1.0
+release point, but this has been revised in our roadmap at the time of writing
+(see below).
 
 \subsection*{Package organization}
 \input{subpackages}
@@ -618,12 +620,13 @@ foundation of the scientific Python ecosystem is such that adoption of new
 languages or major dependencies is generally unlikely---our choices are strongly
 driven by long-term stability. GPU acceleration, new transpiling libraries, and
 the latest JIT compilation approaches (i.e.,
-Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall
+Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but have traditionally fallen
 outside the remit of the main SciPy library. That said, we have recently
 increased our efforts to support compatibility with some of these options, and
-having our full test suite pass with the PyPy JIT
-compiler\cite{Bolz:2009:TMP:1565824.1565827} is now a requirement in our
-development workflow.
+while the exact approach we will adopt across the entire library remains unclear,
+we do now have a concrete implementation of a submodule that allows for the experimental
+use of multiple backends such as GPU-tractable data structures in the new
+\texttt{scipy.fft}. This will be described in detail in a future report.
 
 \subsection*{API and ABI evolution}
 
