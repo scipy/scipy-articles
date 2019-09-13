@@ -570,7 +570,9 @@ functionality in SciPy:
 In terms of software systems and architecture, SciPy's scope matches NumPy's:
 algorithms for in-memory computing on single machines, with support for a wide
 range of data types and process architectures. Distributed computing and support
-for graphics processing units (GPUs) are explicitly out of scope.
+for graphics processing units (GPUs) were explicitly out of scope at the 1.0
+release point, but this has been revised in our roadmap at the time of writing
+(see Discussion).
 
 \subsection*{Package organization}
 \input{subpackages}
@@ -618,12 +620,11 @@ foundation of the scientific Python ecosystem is such that adoption of new
 languages or major dependencies is generally unlikely---our choices are strongly
 driven by long-term stability. GPU acceleration, new transpiling libraries, and
 the latest JIT compilation approaches (i.e.,
-Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but currently fall
+Numba\cite{Lam:2015:NLP:2833157.2833162}) are very powerful, but have traditionally fallen
 outside the remit of the main SciPy library. That said, we have recently
 increased our efforts to support compatibility with some of these options, and
-having our full test suite pass with the PyPy JIT
-compiler\cite{Bolz:2009:TMP:1565824.1565827} is now a requirement in our
-development workflow.
+our full test suite passed with the PyPy JIT compiler\cite{Bolz:2009:TMP:1565824.1565827}
+at the 1.0 release point.
 
 \subsection*{API and ABI evolution}
 
@@ -996,6 +997,15 @@ migration to typed memoryviews to handle NumPy arrays.
 
 A problem faced by many open source projects is attracting and retaining developers. While it is normal for some individuals to contribute to a project for a while and then move on, too much turnover can result in the loss of institutional memory, leading to mistakes of the past being repeated, APIs of new code becoming inconsistent with the old code, and a drifting project scope.
 We are fortunate that the SciPy project continues to attract enthusiastic and competent new developers while maintaining the involvement of a small but dedicated ``old guard''. There are contributors who were present in the early years of the project who still contribute to discussions of bug reports and reviews of new code contributions. Our BDFL has been with the project for more than 10~years and is still actively contributing code, and the head of our Steering Council, who also acts as a general manager, is approaching his eleventh anniversary. An additional half dozen or so active developers have been contributing steadily for five or more years. The combination of a committed old guard and a host of new contributors ensures that SciPy will continue to grow while maintaining a high level of quality.
+
+A final important challenge to address is the accommodation of GPU and distributed
+computing without disrupting our conventional and heavily-used algorithm / API
+infrastructure. While the exact approach we will adopt across the entire library
+to leverage these emerging technologies remains unclear, and was not a priority
+at the 1.0 release point, we do now have a concrete implementation of a subpackage
+that allows for the experimental use of multiple backends, such as GPU-tractable
+data structures, in the new \texttt{scipy.fft}. This will be described in detail
+in a future report.
 
 \section*{Data Availability}
 % The statement should be provided as a separate section (titled 'Data Availability') at the end of the main text, before the 'References' section.
