@@ -1,0 +1,98 @@
+% based on template:
+% https://tex.stackexchange.com/questions/15532/looking-for-cover-letter-template
+
+\documentclass[10pt,stdletter,dateno]{newlfm}
+
+% to adjust vertical spacing properties of
+% newlfm class see: https://tex.stackexchange.com/a/65533/43006
+%\unprtop{0mm}
+\topmarginsize{0mm}
+\topmarginskip{0in}
+\headermarginsize{0in}
+\headermarginskip{0in}
+\MinHead{0in}
+%\dateskipafter{0pt}
+%\dateskipbefore{0pt}
+\sigskipbefore{40pt}
+%\sigskipafter{0pt}
+\closeskipbefore{1pt}
+%\closeskipafter{0pt}
+%\addrfromskipbefore{0pt}
+\addrfromskipafter{0in}
+\addrtoskipbefore{0in}
+%\addrtoskipafter{0pt}
+\newlfmP{Headlinewd=0pt,Footlinewd=0pt}
+\newlfmP{sigsize=10pt}
+\bottommarginskip{10pt}
+\MinFoot{0pt}
+\leftmarginsize{0.95in}
+\rightmarginsize{0.95in}
+
+\usepackage{kpfonts}
+\usepackage{hyperref}
+\usepackage{url}
+
+\hypersetup{%
+  linkbordercolor=blue,% hyperlink borders will be blue
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+\widowpenalty=1000
+\clubpenalty=1000
+
+\namefrom{Ralf Gommers,
+          Matt Haberland,
+          and Tyler Reddy}
+\addrfrom{%
+    \today\\[10pt]
+    Ralf Gommers\\
+    Quansight Labs\\
+    The Netherlands\\
+    \texttt{ralf.gommers@gmail.com}\\
+    %phone number\\
+    \\
+    Matt Haberland\\
+    BioResource and Agricultural Engineering\\
+    California Polytechnic State University\\
+    San Luis Obispo, CA 93407, USA\\
+    \texttt{mhaberla@calpoly.edu}\\
+    %phone number\\
+    \\
+    Tyler Reddy\\
+    CCS-7 Applied Computer Science Group\\
+    Los Alamos National Laboratory\\
+    Los Alamos, NM 87545, USA\\
+    \texttt{treddy@lanl.gov}\\
+    %phone number\\
+}
+
+\addrto{%
+Dr. Rita Strack\\
+Nature Methods Editorial Office\\
+One New York Plaza Suite 4500\\
+New York, NY 10004, USA}
+
+\greetto{Dear Dr. Strack,}
+\closeline{Sincerely,}
+\begin{document}
+\begin{newlfm}
+
+We appreciate the careful review and helpful suggestions from you and the reviewers. Each comment is quoted and addressed below; we also link the relevant GitHub issues in which we discussed and implemented each suggestion. As requested, the corresponding changes are underlined in the revised manuscript.
+
+\begin{quote}
+I would like a longer discussion about the future of SciPy particularly SciPy’s lack of the two features that are starting to become understood as essential to scientific computing: built-in automatic reverse-mode differentiation and heterogenous computation (e.g. CPU, DSP, GPU, etc.). Will SciPy adapt to support these increasingly vital features? Is it even possible without a substantial rewrite?
+\end{quote}
+
+The SciPy maintainers have discussed the inclusion of automatic differentiation capabilities several times in recent years, but the conclusion has been that this need is currently fulfilled by existing libraries such as JAX (\url{https://github.com/google/jax}), a Google research project. JAX can automatically perform AD on generic Python and NumPy code with minimal modifications, so it cooperates well with SciPy. Users who need AD capabilities with a more permissive license can use Autograd (\url{https://github.com/HIPS/autograd}), a core component of JAX, and ad (\url{https://pythonhosted.org/ad/}). However, the latter packages are no longer actively maintained, so we will continue to evaluate the demand to add their capabilities -- and our ability to maintain them -- as part of SciPy.
+
+At the SciPy 1.0 release point, support for heterogeneous computation was explicitly out of scope, but we have since added to the roadmap our intention to support distributed and GPU arrays. NumPy is changing its API such that many parts of SciPy will be able to accept any array that implements the \texttt{ndarray} interface; support for parts that don't immediately work well with distributed/GPU arrays will be added over time. For instance, SciPy 1.4 will feature a backend system in \texttt{scipy.fft} that allows calling SciPy functions on GPU and even multi-GPU systems via CuPy and Dask. This will be extended to most other subpackages in subsequent releases, with \texttt{linalg} and \texttt{special} high on the list. There are not immediate plans to tailor algorithms for distributed or GPU arrays, but in the meantime SciPy provides a reference implementation of algorithms and an API on which downstream libraries can model their code.
+
+To address this comment, we have made changes to the Project Scope and Discussion sections as discussed in GitHub \#245 (\url{https://github.com/scipy/scipy-articles/pull/245}).
+
+
+
+
+
+
+
+\end{newlfm}
+\end{document}
