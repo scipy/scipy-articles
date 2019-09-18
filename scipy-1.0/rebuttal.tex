@@ -82,17 +82,83 @@ We appreciate the careful review and helpful suggestions from you and the review
 I would like a longer discussion about the future of SciPy particularly SciPy’s lack of the two features that are starting to become understood as essential to scientific computing: built-in automatic reverse-mode differentiation and heterogenous computation (e.g. CPU, DSP, GPU, etc.). Will SciPy adapt to support these increasingly vital features? Is it even possible without a substantial rewrite?
 \end{quote}
 
+\begin{quote}
+Page 6. Distributed and GPU is considered out of scope but is conversely is believed to be required in the future for data and scientific analysis. A discussion of alternatives and how you interact with other ecosystems should be considered (e.g., RAPIDS, Dask, etc). How does SciPy progress with the rapidly evolving hardware?
+\end{quote}
+
 The SciPy maintainers have discussed the inclusion of automatic differentiation capabilities several times in recent years, but the conclusion has been that this need is currently fulfilled by existing libraries such as JAX (\url{https://github.com/google/jax}), a Google research project. JAX can automatically perform AD on generic Python and NumPy code with minimal modifications, so it cooperates well with SciPy. Users who need AD capabilities with a more permissive license can use Autograd (\url{https://github.com/HIPS/autograd}), a core component of JAX, and ad (\url{https://pythonhosted.org/ad/}). However, the latter packages are no longer actively maintained, so we will continue to evaluate the demand to add their capabilities -- and our ability to maintain them -- as part of SciPy.
 
 At the SciPy 1.0 release point, support for heterogeneous computation was explicitly out of scope, but we have since added to the roadmap our intention to support distributed and GPU arrays. NumPy is changing its API such that many parts of SciPy will be able to accept any array that implements the \texttt{ndarray} interface; support for parts that don't immediately work well with distributed/GPU arrays will be added over time. For instance, SciPy 1.4 will feature a backend system in \texttt{scipy.fft} that allows calling SciPy functions on GPU and even multi-GPU systems via CuPy and Dask. This will be extended to most other subpackages in subsequent releases, with \texttt{linalg} and \texttt{special} high on the list. There are not immediate plans to tailor algorithms for distributed or GPU arrays, but in the meantime SciPy provides a reference implementation of algorithms and an API on which downstream libraries can model their code.
 
 To address this comment, we have made changes to the Project Scope and Discussion sections as discussed in GitHub \#245 (\url{https://github.com/scipy/scipy-articles/pull/245}).
 
+\begin{quote}
+Scientific software is depressingly underfunded. I imagine the economic cost of SciPy is in the tens (if not hundreds) of millions of dollars yet, as you mention, the actual direct financial contributions were a magnitude (or two) less. How did the SciPy community address this disparity? Are there lessons to be learned for the larger scientific community?
+\end{quote}
 
+We added a ``Funding'' subsection to the ``Project organization and community'' section on page 13 to address this (GitHub \#246, \url{https://github.com/scipy/scipy-articles/pull/245}). 
 
+\begin{quote}
+A clear distinction between CPython and Python is stressed, which might not be relevant to many audiences as alternatives like PyPI are likely not well understood. This is also an example of where the paper may delve too much into technical details.
+\end{quote}
 
+We've removed the sentence referring to CPython on page 2 of the manuscript--we agree that this is indeed too technical to be of interest for the likely audience (GitHub \#238, \url{https://github.com/scipy/scipy-articles/pull/238}). 
 
+\begin{quote}
+Page 3. Figure 1. There should be a date on when the announcement was initially released and potentially medium used.
+\end{quote}
 
+The exact date of the announcement and the name of the mailing list that was used have been added to the caption to Figure 1 on page 3 (GitHub \#237, \url{https://github.com/scipy/scipy-articles/pull/237}). 
+
+\begin{quote}
+Page 5. A very brief mention of what GitHub is should be stated; bench chemist may be unaware of this platform.
+\end{quote}
+
+We've introduced GitHub in a new sentence added to the ``SciPy today'' section, page 5 (GitHub \#233, \url{https://github.com/scipy/scipy-articles/pull/233}). 
+
+\begin{quote}
+Page 5. Figure 2. The term ``SciKit'' is only briefly mentioned before this figure and is never fleshed out. With the current phrasing, it is unclear if SciKits are competitors or extensions of SciPy, their relationship should be well defined.
+\end{quote}
+
+The nature of SciKits is now discussed in more detail in a modified sentence on page 4, prior to their mention in Figure 2 (GitHub \#235, \url{https://github.com/scipy/scipy-articles/pull/235}). 
+
+\begin{quote}
+Page 5. Figure 2. The term ``continuous integration'' needs to be defined before this image.
+\end{quote}
+
+Continuous integration is now defined in the ``Test and benchmark suite'' section, page 11 (GitHub \#239, \url{https://github.com/scipy/scipy-articles/pull/239}). As the definition did not fit in any context before the figure, and because readers might also be unfamiliar with Cython, BLAS/LAPACK, and other terms mentioned in the figure, the figure caption now refers the interested reader to the corresponding sections (GitHub \#253, \url{https://github.com/scipy/scipy-articles/pull/253}).
+
+\begin{quote}
+Page 7. Many Fortran packages like ODEPACK and ARPACK are discussed without context. Readers are unlikely to be familiar with these libraries (even BLAS is questionable). While enumerating the capabilities of each package is clearly beyond scope simply categorizing them in some fashion would be worthwhile.
+\end{quote}
+
+The ``Language choices'' section (page 7) has been revised: the external Fortran packages have been grouped into six distinct categories based on what the libraries provide, and the purpose of each C library used by SciPy is briefly mentioned. BLAS and LAPACK are now defined on page 8 (GitHub \#240, \url{https://github.com/scipy/scipy-articles/pull/240}). 
+
+\begin{quote}
+Page 11. From the text, it is unclear why testing and code coverage are useful metrics. Some mention of correctness is likely required and could be a good time to mention that these metrics give both contributors courage that they are not breaking the package and maintainers some faith that a contribution does not harm the package.
+\end{quote}
+
+Page 11 of the revised manuscript now contains a new paragraph outlining the value and purpose of test-driven development, including the suggested mention of increasing confidence in code changes (GitHub \#234, \url{https://github.com/scipy/scipy-articles/pull/234}). 
+
+\begin{quote}
+Page 11. The compiled coverage of 45\% seems surprisingly low and perhaps should be remarked on. The maintainers also appear to have allowed remarkable amounts of untested compiled code in recent years. One could make an argument that the correctness of SciPy is much more important than the feature set as it is currently thought of as a dependable resource.
+\end{quote}
+
+The ``Test suite'' subsection on page 11 now explains why the compiled code is more robust than the raw 45 \% coverage figure might suggest (GitHub \#250, \url{https://github.com/scipy/scipy-articles/pull/250}). 
+
+\begin{quote}
+Links to SciPy cookbooks or tutorials would be useful to highlight to give readers immediate examples of how SciPy would be helpful. These tutorials are only linked in your Discussion section and maybe missed.
+\end{quote}
+
+We've added a mention of the SciPy Tutorial and API Reference much earlier in a new sentence of the ``Package organization'' subsection on page 6 (GitHub \#241, \url{https://github.com/scipy/scipy-articles/pull/241}). 
+
+\begin{quote}
+Overall the paper is well written, but some additional attention to presenting this towards a general audience should be exercised. In particular, the “Background” section should be greatly minimized and moved to another part of the paper (or removed entirely) so that readers can be first presented with capabilities.
+\end{quote}
+
+Per the editor's recommendation, we have substantially streamlined the Background section from $\approx$2000 words to $\approx$1500 words (GitHub \#242, \url{https://github.com/scipy/scipy-articles/pull/242}; \#243, \url{https://github.com/scipy/scipy-articles/pull/243}; and \#244, \url{https://github.com/scipy/scipy-articles/pull/244}).
+
+Thank you again for your helpful comments and for your consideration of the revised manuscript.
 
 \end{newlfm}
 \end{document}
