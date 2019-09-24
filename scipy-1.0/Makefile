@@ -15,4 +15,8 @@ clean:
 
 .PHONY: word
 word:
-	pandoc -s paper.tex --bibliography=references.bib --csl static/nature.csl -o paper.docx
+	pandoc  -s paper.tex \
+		--filter pandoc-crossref \
+		--bibliography=references.bib \
+		--csl static/nature.csl \
+		-o paper.docx
