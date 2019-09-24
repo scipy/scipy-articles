@@ -1,4 +1,4 @@
-\documentclass[fleqn,10pt]{wlscirep}
+\documentclass[fleqn,10pt]{article}
 
 % Packages
 \usepackage[super]{nth}
@@ -517,7 +517,7 @@ and milestones in its history are highlighted in Figure~\ref{fig:timeline}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{static/scipy_timeline}
+\includegraphics[width=0.95\textwidth]{static/scipy_timeline.pdf}
 \caption{Major milestones from SciPy's initial release in 2001 to
 the release of SciPy 1.0 in 2017. Note that SciKits and GitHub 
 have been introduced in the ``Background'' section;  more 
@@ -880,7 +880,7 @@ over roughly nine years of project history.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{static/asv}
+\includegraphics[width=\textwidth]{static/asv.pdf}
 \caption{Results of the \texttt{scipy.spatial.cKDTree.query} benchmark from the introduction of \texttt{cKDTree} to the release of SciPy~1.0. The benchmark generates a $k$-d tree from \num{10000} uniformly distributed points in an $m$-dimensional unit hypercube, then finds the nearest (Euclidean) neighbor in the tree for each of \num{1000}~query points. Each marker in the figure indicates the execution time of the benchmark for a commit in the master branch of SciPy. Substantial performance improvements were realized when \texttt{cKDTree} was fully Cythonized and again when it was rewritten in C++. The tree was generated without application of toroidal topology (\texttt{boxsize=None}), and tests were performed by Airspeed Velocity 0.4 using Python~2.7, NumPy~1.8.2, and Cython versions 0.27.3, 0.21.1, and 0.18 (for improved backward compatibility).}
 \label{fig:asvbench}
 \end{figure}
