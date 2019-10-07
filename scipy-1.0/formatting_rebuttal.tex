@@ -1,0 +1,138 @@
+% based on template:
+% https://tex.stackexchange.com/questions/15532/looking-for-cover-letter-template
+
+\documentclass[10pt,stdletter,dateno]{newlfm}
+
+% to adjust vertical spacing properties of
+% newlfm class see: https://tex.stackexchange.com/a/65533/43006
+%\unprtop{0mm}
+\topmarginsize{0mm}
+\topmarginskip{0in}
+\headermarginsize{0in}
+\headermarginskip{0in}
+\MinHead{0in}
+%\dateskipafter{0pt}
+%\dateskipbefore{0pt}
+\sigskipbefore{40pt}
+%\sigskipafter{0pt}
+\closeskipbefore{1pt}
+%\closeskipafter{0pt}
+%\addrfromskipbefore{0pt}
+\addrfromskipafter{0in}
+\addrtoskipbefore{0in}
+%\addrtoskipafter{0pt}
+\newlfmP{Headlinewd=0pt,Footlinewd=0pt}
+\newlfmP{sigsize=10pt}
+\bottommarginskip{10pt}
+\MinFoot{0pt}
+\leftmarginsize{0.95in}
+\rightmarginsize{0.95in}
+
+\usepackage{kpfonts}
+\usepackage{hyperref}
+\usepackage{url}
+
+\hypersetup{%
+  linkbordercolor=blue,% hyperlink borders will be blue
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+\widowpenalty=1000
+\clubpenalty=1000
+
+\namefrom{Ralf Gommers,
+          Matt Haberland,
+          and Tyler Reddy}
+\addrfrom{%
+    \today\\[10pt]
+    Ralf Gommers\\
+    Quansight Labs\\
+    The Netherlands\\
+    \texttt{ralf.gommers@gmail.com}\\
+    %phone number\\
+    \\
+    Matt Haberland\\
+    BioResource and Agricultural Engineering\\
+    California Polytechnic State University\\
+    San Luis Obispo, CA 93407, USA\\
+    \texttt{mhaberla@calpoly.edu}\\
+    %phone number\\
+    \\
+    Tyler Reddy\\
+    CCS-7 Applied Computer Science Group\\
+    Los Alamos National Laboratory\\
+    Los Alamos, NM 87545, USA\\
+    \texttt{treddy@lanl.gov}\\
+    %phone number\\
+}
+
+\addrto{%
+Dr. Rita Strack\\
+Nature Methods Editorial Office\\
+One New York Plaza Suite 4500\\
+New York, NY 10004, USA}
+
+\greetto{Dear Dr. Strack,}
+\closeline{Sincerely,}
+\begin{document}
+\begin{newlfm}
+
+Thank you for helping us prepare the manuscript for submission. Each of your comments are addressed below.
+
+\begin{quote}
+Our standard word limit is 3000 words for the Introduction, Results and Discussion. We appreciate that shortening to this length is impossible, but we do ask that you try to trim to below 6000 words. Based on the formatting in your paper, it might make sense to have some sections, like Package Organization, as a separate Box. This would take that part out of the word count and allow you to keep the current formatting. I think figure 1 should also be its own Box (Box 1) because it is all text.
+\end{quote}
+
+Figure 1 is now Box 1, and the Package Organization section is now Box 2. The word count in the main text has been reduced from over 7,000 to fewer than 6,300. If additional reductions to the main text are required, we can quickly move paragraphs 2-4 (200 words) of the Language Choices section to a box. The first message in the Matrix-SIG mailing list (70 words) could also be moved to a box if required.
+
+\begin{quote}
+Your abstract must be fewer than 80 words and should not include citations.
+\end{quote}
+
+The length of the abstract has been reduced to 74 words. 
+
+\begin{quote}
+As a guideline, Articles/Brief Communications allow up to 50 references in the main text. Please shorten if possible.
+\end{quote}
+
+This guideline was later amended:
+
+\begin{quote}
+You can keep your references. I agree 50 is not possible in this case.
+\end{quote}
+
+Thank you for understanding the difficulty in trimming the reference list. 
+
+\begin{quote}
+Equations and symbols that will be set apart from the text must be in an editable format. Do not use embedded images for equations or symbols.
+\end{quote}
+
+We have attempted to satisfy this requirement; please let us know if any of the symbols are not editable.
+
+\begin{quote}
+All figures and tables, including Supplementary items, must be cited in the text in numerical order. Please renumber figures after you’ve made any additional Boxes and be sure to call out each Box in order.
+\end{quote}
+
+All figures, tables, and boxes are mentioned in the text and numbered according to the order in which they are mentioned. 
+
+\begin{quote}
+Figure legends should be concise. Begin with a brief title and then describe what is presented in the figure and detail all relevant statistical information. Avoid inappropriate methodological detail and any interpretation or discussion of figures.
+\end{quote}
+
+Methodological detail and interpretation of figures has been moved from figure legends to the main text.
+
+\begin{quote}
+Please see the attached file with comments for revising your figures, tables and their legends.
+\end{quote}
+
+Per the attached ``Guide to Preparing Final Artwork'', figures are now 180mm wide PDFs with all text in Arial font, 7 pt. 
+ 
+\begin{quote}
+As mentioned in our previous letter, all corresponding authors on a manuscript should have an ORCID – please visit your account in our manuscript system to link your ORCID to your profile, or to create one if necessary. Any author who wishes to add their ORCID must do so before the paper is accepted – this will no longer be possible to add at proof stage. For more information please see our previous letter or visit www.springernature.com/orcid.
+\end{quote}
+
+The corresponding authors have added their ORCIDs. 
+
+Thank you for your consideration of the revised manuscript.
+
+\end{newlfm}
+\end{document}
