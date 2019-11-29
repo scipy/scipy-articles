@@ -12,3 +12,11 @@ covlett: $(TEX)
 clean:
 	@rm -f *~
 	latexmk -CA
+
+.PHONY: word
+word:
+	pandoc  -s paper.tex \
+		--filter pandoc-crossref \
+		--bibliography=references.bib \
+		--csl static/nature.csl \
+		-o paper.docx
