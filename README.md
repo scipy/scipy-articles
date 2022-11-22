@@ -1,6 +1,6 @@
 # scipy-articles
 This repository is meant for storing and collaborating on publications about
-SciPy written by the SciPy development team.
+SciPy written by the SciPy development team
 
 **Repo organization**: one independent directory per article.  Within that
 directory should be placed:
