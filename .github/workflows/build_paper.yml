@@ -1,4 +1,4 @@
-name: Pixi Build (scipy-2.0)
+name: Build SciPy 2.0 paper
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - "main"
     paths:
       - "scipy-2.0/**"
-      - ".github/workflows/pixi-build.yml"
+      - ".github/workflows/build_paper.yml"
   pull_request:
     paths:
       - "scipy-2.0/**"
-      - ".github/workflows/pixi-build.yml"
+      - ".github/workflows/build_paper.yml"
   workflow_dispatch:
 
 jobs:
