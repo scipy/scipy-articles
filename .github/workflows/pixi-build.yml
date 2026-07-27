@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup Pixi
         uses: prefix-dev/setup-pixi@v0.8.14
+        with:
+          manifest-path: scipy-2.0/pixi.toml
 
       - name: Run build
         working-directory: scipy-2.0
