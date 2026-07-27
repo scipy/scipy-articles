@@ -2,6 +2,8 @@ name: Pixi Build (scipy-2.0)
 
 on:
   push:
+    branches:
+      - "main"
     paths:
       - "scipy-2.0/**"
       - ".github/workflows/pixi-build.yml"
