@@ -1,0 +1,14 @@
+[workspace]
+name = "SciPy 2.0 paper"
+channels = ["conda-forge"]
+platforms = [
+    "linux-64",
+    "osx-64",
+    "osx-arm64",
+]
+
+[dependencies]
+tectonic = "*"
+
+[tasks]
+build = "tectonic --keep-logs --outdir build article/paper.tex"

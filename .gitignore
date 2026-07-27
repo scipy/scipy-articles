@@ -7,4 +7,8 @@
 *.bbl
 *.out
 *.blg
+*.bcf
+*.xml
+*.gz
+*.cut
 paper.pdf
