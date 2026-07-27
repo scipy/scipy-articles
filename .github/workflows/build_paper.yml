@@ -26,6 +26,10 @@ jobs:
         with:
           manifest-path: scipy-2.0/pixi.toml
 
+      - name: Lint paper
+        working-directory: scipy-2.0
+        run: pixi run lint
+
       - name: Run build
         working-directory: scipy-2.0
         run: pixi run build

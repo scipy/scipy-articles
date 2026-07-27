@@ -10,6 +10,8 @@ platforms = [
 
 [dependencies]
 tectonic = "*"
+chktex = "*"
 
 [tasks]
 build = "tectonic --keep-logs --outdir build article/paper.tex"
+lint = "chktex article/paper.tex"
