@@ -38,5 +38,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: scipy-2.0-paper-pdf
-          path: scipy-2.0/build/paper.pdf
+          path: scipy-2.0/build/paper/paper.pdf
           if-no-files-found: error

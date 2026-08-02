@@ -1,0 +1,10 @@
+[doc]
+name = "scipy-2.0"
+bundle = "https://data1.fullyjustified.net/tlextras-2022.0r0.tar"
+
+[[output]]
+name = "paper"
+type = "pdf"
+inputs = [
+    "paper.tex",
+]
