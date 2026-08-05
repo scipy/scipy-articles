@@ -12,3 +12,4 @@
 *.gz
 *.cut
 paper.pdf
+/.vscode/*
