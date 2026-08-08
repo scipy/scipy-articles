@@ -206,20 +206,22 @@
 \section{Modernisation of legacy compiled codes}
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
-to the convenient Python interfaces it provides to popular compiled codes that are
-otherwise normally accessed
-through the likes of the Netlib repository~\cite{netlib}. This includes:
+to the convenient Python interfaces it provides to popular compiled numerical libraries
+that were otherwise distributed primarily as standalone Fortran or C/Fortran source
+packages, such as those available through the Netlib repository~\cite{netlib}.
+This includes:
 ODEPACK~\cite{Hindmarsh1983ODEPACK},
 VODE/ZVODE~\cite{Brown1989}, and DOPRI5~\cite{Hairer1987} for solving initial value
 problems; QUADPACK~\cite{Piessens1983} for quadrature; FITPACK~\cite{dierckx1995curve}
-for spline fitting; ID~\cite{martinsson2008id,Halko2011}; ODRPACK~\cite{Boggs1989}
+for spline fitting; ID~\cite{martinsson2008id,Halko2011} for interpolative
+matrix decompostion; ODRPACK~\cite{Boggs1989}
 for orthogonal distance regression; COBYLA~\cite{Powell1994}, L-BFGS-B~\cite{Morales2011},
 SLSQP~\cite{Kraft1994,Kraft1988SQP}, MINPACK~\cite{More1980}, and
 NNLS~\cite{Lawson1995} for optimization;
 ARPACK-NG~\cite{Lehoucq2023ARPACKNG} and PROPACK~\cite{Larsen1998} for sparse eigenvalue problems
 and singular value decompositions respectively; AMOS~\cite{Amos1986} and
 SPECFUN~\cite{Zhang1997} for special functions;
-cdflib~\cite{Brown1994CDFLIB}, mvndist~\cite{Genz1992}, and
+CDFLIB~\cite{Brown1994CDFLIB}, mvndist~\cite{Genz1992}, and
 statlib~\cite{Dinneen1976,Best1975,Royston1995,Maclaren1985} for probability
 distributions and statistical functions;
 and FFTPACK~\cite{Swarztrauber1982} for fast Fourier transforms.
@@ -227,26 +229,28 @@ and FFTPACK~\cite{Swarztrauber1982} for fast Fourier transforms.
 Despite the enormous utility these codes have provided, they also presented a number
 of challenges on the road to SciPy 2.0. A number of the above codes are not reentrant
 meaning that they cannot be safely called from multiple threads simultaneously.
-Previously, SciPy has used locking to prevent this. However, CPython version 3.14
-brought with it free-threaded Python, which for the first time allows multiple threads
-to execute Python code simultaneously~\cite{gross2023pep703}. Unfortunately,
+Previously, SciPy has used locking to prevent this. However, the introduction of
+free-threaded CPython 3.13, and its subsequent maturation in CPython 3.14, which for the
+first time allows multiple threads
+to execute Python code concurrently without the Global
+Interpreter Lock (GIL)~\cite{gross2023pep703}. Unfortunately,
 users of these non-reentrant codes would not be able to take advantage of this
 new feature. Likewise, another exciting development SciPy wished to support was
-WebAssembly~\cite{Haas2017} technologies like pyodide~\cite{pyodide_2021}, which allow
+WebAssembly~\cite{Haas2017} environments such as pyodide~\cite{pyodide_2021}, which allow
 Python code to run in web browsers. To support this, SciPy needed a large number of
 custom patches to build these codes, which made maintenance challenging.
-Other challenges presented by these codes were lack of support for
+Other challenges presented by these codes include a lack of support for
 64-bit integer types (ILP64) and lack of control over the random number generator used.
 Finally, many of these codes are no longer actively maintained, meaning that the
-SciPy developers were responsible for fixing any bugs that arose. Unfortunately,
+SciPy developers were effectively responsible for fixing any bugs that arose. Unfortunately,
 due to a lack of expertise in Fortran 77, the language in which many of these codes
-were written, this often led to bugs remaining unresolved.
+were written, this often led to bugs remaining unresolved indefinitely.
 
 To alleviate these issues for SciPy 2.0, these codes have either been replaced with
 modern alternatives or have been translated from their original Fortran 77 source code
 in a combination of pure Python,
-Cython~\cite{Behnel2011}, and C/C++. For example, COBYLA has been replace with
-pyprima~\cite{Zhang_2023}, FFTPACK has been replaced with
+Cython~\cite{Behnel2011}, and C/C++. For example, COBYLA has been replaced with
+a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
 have been replaced with counterparts from Boost.\@Math. Translation of the remaining
 codes posed a significant undertaking, requiring over \todo{\#} lines
