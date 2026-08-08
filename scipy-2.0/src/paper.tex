@@ -231,6 +231,44 @@ SciPy provides. Addressing this gap has been a major focus of SciPy 2.0.
 
 \todo{Coverage}
 
+\begin{table}
+  \caption{Coverage of modules in SciPy 2.0 supporting alternative array packages.
+  \todo{Complete once SciPy 2.0 is released}}\label{tab:coverage}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Module & CuPy & \multicolumn{2}{c}{PyTorch} & \multicolumn{3}{c}{JAX}\\
+    & GPU & CPU & GPU & CPU & GPU & JIT\\
+    \midrule
+    cluster.hierarchy \\
+    cluster.vq \\
+    constants \\
+    differentiate \\
+    fft \\
+    integrate \\
+    interpolate \\
+    io \\
+    linalg \\
+    linalg.interpolative \\
+    ndimage \\
+    optimize \\
+    optimize.elementwise \\
+    signal \\
+    signal.windows \\
+    sparse \\
+    sparse.csgraph \\
+    sparse.linalg \\
+    spatial \\
+    spatial.distance \\
+    spatial.transform \\
+    special \\
+    stats \\
+    stats.contingency \\
+    stats.qmc \\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
