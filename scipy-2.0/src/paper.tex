@@ -99,6 +99,8 @@
 %% the next command will enable that style.
 %%\citestyle{acmauthoryear}
 
+\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+
 
 %%
 %% end of the preamble, start of the body of the document source.
@@ -200,6 +202,34 @@
 
 
 \section{Introduction}
+
+
+\section{Support for graphics processing units (GPUs) and just-in-Time (JIT) compilation
+through the Python array API standard}
+
+Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array packages for
+Python, Numeric~\cite{Dubois1996,ascher2000numerical} and
+numarray~\cite{Greenfield2003numarrayA}, for most of its existence,
+of SciPy's functionality has been built on top of NumPy arrays. However, driven in part
+by the increasing use of machine learning and artificial intelligence, graphics
+processing units (GPUs) have become an increasingly
+important tool for scientific computing. Likewise, just-in-time (JIT) compilation
+and automatic differentiation are becoming increasingly common in
+scientific workflows. This posed a problem for SciPy, as while NumPy has been the de
+facto standard for array computing in Python, it does not support GPUs, JIT compilation,
+or automatic differentiation. This has led to the proliferation of other array packages
+for Python, such as CuPy~\cite{cupy_learningsys2017}, JAX~\cite{jax2018github}, and
+PyTorch~\cite{Ansel2024}, which fill these gaps. This has effectively led to a
+dichotomy: SciPy cannot utilize the new features offered by these array packages, and
+these new array packages cannot make full use of the large amount of functionality
+SciPy provides. Addressing this gap has been a major focus of SciPy 2.0.
+
+
+\todo{the how}
+
+\todo{Performance}
+
+\todo{Coverage}
 
 %%
 %% The next two lines define the bibliography style to be used, and
