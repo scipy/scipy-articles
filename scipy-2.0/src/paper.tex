@@ -207,7 +207,7 @@
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
 to the convenient Python interfaces it provides to popular compiled numerical libraries
-that were otherwise distributed primarily as standalone Fortran or C/Fortran source
+that were otherwise distributed primarily as standalone Fortran source
 packages, such as those available through the Netlib repository~\cite{netlib}.
 This includes:
 ODEPACK~\cite{Hindmarsh1983ODEPACK},
@@ -247,9 +247,9 @@ due to a lack of expertise in Fortran 77, the language in which many of these co
 were written, this often led to bugs remaining unresolved indefinitely.
 
 To alleviate these issues for SciPy 2.0, these codes have either been replaced with
-modern alternatives or have been translated from their original Fortran 77 source code
-in a combination of pure Python,
-Cython~\cite{Behnel2011}, and C/C++. For example, COBYLA has been replaced with
+more recent, actively maintained alternatives or have been translated from their
+original Fortran 77 source code to either pure Python,
+Cython~\cite{Behnel2011}, or C/C++. For example, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
 have been replaced with counterparts from Boost.\@Math. Translation of the remaining
