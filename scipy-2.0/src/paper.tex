@@ -203,7 +203,7 @@
 
 \section{Introduction}
 
-\section{Modernisation of legacy compiled codes}
+\section{A new look at language choices}
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
 to the convenient Python interfaces it provides to popular compiled numerical libraries
@@ -225,6 +225,8 @@ CDFLIB~\cite{Brown1994CDFLIB}, mvndist~\cite{Genz1992}, and
 statlib~\cite{Dinneen1976,Best1975,Royston1995,Maclaren1985} for probability
 distributions and statistical functions;
 and FFTPACK~\cite{Swarztrauber1982} for fast Fourier transforms.
+Consequently, SciPy 1.0 consisted of approximately $50\%$ Python, $25\%$ Fortran,
+$20\%$ C, $3\%$ Cython, and $2\%$ C++ code~\cite{Virtanen2020}.
 
 Despite the enormous utility these codes have provided, they also presented a number
 of challenges on the road to SciPy 2.0. A number of the above codes are not reentrant
@@ -258,7 +260,11 @@ of code to be rewritten. The completion of this work has been a major milestone 
 SciPy 2.0 leading to the resolution of the issues described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
 future development and improvements, for example, improved special functions,
-see \todo{Forward Ref} for more details.
+see \todo{Forward Ref} for more details. Following these changes, SciPy 2.0
+consists of approximately $66.0\%$ Python, $21.4\%$ C, $8.3\%$ C++, and $3.8\%$ Cython code,
+with remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured
+using the \texttt{github-linguist} command, see \url{https://github.com/github-linguist/linguist}}.
+
 
 %%
 %% The next two lines define the bibliography style to be used, and
