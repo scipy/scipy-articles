@@ -204,8 +204,8 @@
 \section{Introduction}
 
 
-\section{Support for graphics processing units (GPUs) and just-in-Time (JIT) compilation
-through the Python array API standard}
+\section{Support for Graphics Processing Units (GPUs) and Just-in-Time (JIT) Compilation
+Through the Python Array API Standard}
 
 Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array packages for
 Python, Numeric~\cite{Dubois1996,ascher2000numerical} and
@@ -230,12 +230,18 @@ programming interfaces (APIs) and behaviours for arrays and
 associated operations. Most importantly for SciPy, this enables
 ``array-consuming libraries to accept and operate on arrays from multiple different
 array libraries''~\cite{Meurer2023}. In principle, by rewriting SciPy's functionality
-in terms of these standardised\todo{...}
-
-
-\todo{the how}
+in terms of these standardised APIs, SciPy can support any array package that
+implements the standard. One caveat to this NumPy, CuPy, JAX, and PyTorch all predate
+the standard\footnote{The first version of the Python array API standard was released
+in December 2021, with new revisions appearing annually.} meaning they themselves are not
+fully compliant. To resolve this, the array-api-compat package provides a lightweight
+wrapper around these libraries to make them compliant with the standard. Likewise,
+some functionality is not covered by the standard for a variety of reasons so the
+array-api-extra package provides generic implementations of these operations.
 
 \todo{example?}
+
+\todo{Compiled code and delegation}
 
 \todo{Performance}
 
