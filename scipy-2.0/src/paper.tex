@@ -99,6 +99,18 @@
 %% the next command will enable that style.
 %%\citestyle{acmauthoryear}
 
+\usepackage{listings}
+
+\usepackage[svgnames]{xcolor}
+  \definecolor{diffincl}{named}{Green}
+  \definecolor{diffrem}{named}{OrangeRed}
+
+\lstdefinelanguage{diff}[]{Python}{
+  basicstyle=\ttfamily\small,
+  morecomment=[f][\color{diffincl}]{+\ },
+  morecomment=[f][\color{diffrem}]{-\ },
+}
+
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 
 
@@ -239,7 +251,29 @@ wrapper around these libraries to make them compliant with the standard. Likewis
 some functionality is not covered by the standard for a variety of reasons so the
 array-api-extra package provides generic implementations of these operations.
 
-\todo{example?}
+\begin{lstlisting}[language=diff,caption={Example rewriting \texttt{scipy.linalg.fielder} to support the Python array API standard.},label={lst:fiedler}]
++ @xp_capabilities()  # Register function with coverage table
+  def fiedler(a):
++     xp = array_namespace(a)  # get the namespace of the input array
+-     a = np.atleast_1d(a)
++     a = xpx.atleast_nd(xp.asarray(a), ndim=1)  # from array-api-extra
+
+-     if a.size == 0:
++     if xp_size(a) == 0:  # from array-api-compat
+-         return np.array([], dtype=float)
++         return xp.empty((0, 0), dtype=xp.float64)
+-     elif a.size == 1:
++     elif xp_size(a) == 1:
+-         return np.array([[0.]])
++         return xp.asarray([[0.]])
+      else:
+-         return np.abs(a[..., :, None] - a[..., None, :])
++         return xp.abs(a[..., :, xp.newaxis] - a[..., xp.newaxis, :])
+\end{lstlisting}
+
+Listings~\ref{lst:fiedler} shows how a typical Python function in SciPy is rewritten.
+Firstly, the function is decorated with \texttt{@xp\_capabilities()} to register it with
+the 
 
 \todo{Compiled code and delegation}
 
