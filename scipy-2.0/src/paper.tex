@@ -229,40 +229,51 @@ Consequently, SciPy 1.0 consisted of approximately $50\%$ Python, $25\%$ Fortran
 $20\%$ C, $3\%$ Cython, and $2\%$ C++ code~\cite{Virtanen2020}.
 
 Despite the enormous utility these codes have provided, they also presented a number
-of challenges on the road to SciPy 2.0. A number of the above codes are not reentrant
-meaning that they cannot be safely called from multiple threads simultaneously.
-Previously, SciPy has used locking to prevent this. However, the introduction of
-free-threaded CPython 3.13, and its subsequent maturation in CPython 3.14, which for the
-first time allows multiple threads
-to execute Python code concurrently without the Global
-Interpreter Lock (GIL)~\cite{gross2023pep703}. Unfortunately,
+of challenges on the road to SciPy 2.0. By far the most significant of these was
+limited availability of Fortran compilers for Windows and
+emerging new platforms such as WebAssembly~\cite{Haas2017}. This left SciPy
+in a precarious position where distributing SciPy was challenging and required
+a custom MinGW toolchain to build SciPy on Windows~\cite{obermeier2023eu}.
+While tools such as \texttt{flang-new} (now \texttt{flang})
+and \texttt{LFortran} showed promise in addressing this issue, they were not
+mature enough to be adopted by SciPy at the time and waiting for them to mature was not a
+viable approach for something so integral to the project's future.
+
+In addition, there were a number of further issues pertaining to the Fortran 77
+implementations of these codes. A number of them were not reentrant,
+meaning that they could not be safely called from multiple threads simultaneously.
+Previously, SciPy used locking to prevent this. However, the introduction of
+free-threading in CPython 3.13, and its subsequent maturation in CPython 3.14, meant
+that, for the first time, multiple threads could execute Python code concurrently
+without the Global Interpreter Lock (GIL)~\cite{gross2023pep703}. Unfortunately,
 users of these non-reentrant codes would not be able to take advantage of this
-new feature. Likewise, another exciting development SciPy wished to support was
-WebAssembly~\cite{Haas2017} environments such as pyodide~\cite{pyodide_2021}, which allow
-Python code to run in web browsers. To support this, SciPy needed a large number of
-custom patches to build these codes, which made maintenance challenging.
+new feature.
 Other challenges presented by these codes include a lack of support for
 64-bit integer types (ILP64) and lack of control over the random number generator used.
 Finally, many of these codes are no longer actively maintained, meaning that the
-SciPy developers were effectively responsible for fixing any bugs that arose. Unfortunately,
-due to a lack of expertise in Fortran 77, the language in which many of these codes
-were written, this often led to bugs remaining unresolved indefinitely.
+SciPy developers were effectively responsible for fixing any bugs that arose.
+However, being a Python library, few members of the SciPy developer had expertise
+to tackle these issues. This often led to bugs remaining unresolved indefinitely.
 
-To alleviate these issues for SciPy 2.0, these codes have either been replaced with
-more recent, actively maintained alternatives or have been translated from their
+After careful evaluation of the above issues, it was decided that for SciPy 2.0, these
+codes needed either to be replaced with a
+more recent, actively maintained alternatives or to be translated from their
 original Fortran 77 source code to either pure Python,
-Cython~\cite{Behnel2011}, or C/C++. For example, COBYLA has been replaced with
+Cython~\cite{Behnel2011}, or C/C++ in order to secure the long term future of the
+project. Consequently, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
-have been replaced with counterparts from Boost.\@Math. Translation of the remaining
+mentioned have been replaced with counterparts from Boost.\@Math. Translation of the remaining
 codes posed a significant undertaking, requiring over \todo{\#} lines
-of code to be rewritten. The completion of this work has been a major milestone for
-SciPy 2.0 leading to the resolution of the issues described above as well as many
+of code to be translated by hand. The completion of this work has been a major milestone for
+SciPy 2.0 leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
 future development and improvements, for example, improved special functions,
-see \todo{Forward Ref} for more details. Following these changes, SciPy 2.0
+see \todo{Forward Ref} for more details. These developments would not have originally
+been possible due to the lack of expertise in Fortran 77 within the SciPy developer community.
+Following these changes, SciPy 2.0
 consists of approximately $66.0\%$ Python, $21.4\%$ C, $8.3\%$ C++, and $3.8\%$ Cython code,
-with remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured
+with the remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured
 using the \texttt{github-linguist} command, see \url{https://github.com/github-linguist/linguist}}.
 
 
