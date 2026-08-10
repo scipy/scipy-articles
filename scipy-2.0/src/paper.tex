@@ -211,10 +211,10 @@ Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array pack
 Python, Numeric~\cite{Dubois1996,ascher2000numerical} and
 numarray~\cite{Greenfield2003numarrayA}, for most of its existence,
 SciPy's functionality has been built on top of NumPy arrays. However, driven in part
-by the increasing popularity of machine learning and artificial intelligence, graphics
+by the boom in machine learning and artificial intelligence, graphics
 processing units (GPUs) have become an
 important tool for scientific computing. Likewise, just-in-time (JIT) compilation
-and automatic differentiation are becoming progressively more common in
+and automatic differentiation are becoming more common in
 scientific workflows. This posed a problem for SciPy, as while NumPy has been the de
 facto standard for array computing in Python, it does not support GPUs, JIT compilation,
 or automatic differentiation. This has led to the proliferation of other array packages
@@ -222,10 +222,20 @@ for Python, such as CuPy~\cite{cupy_learningsys2017}, JAX~\cite{jax2018github}, 
 PyTorch~\cite{Ansel2024}, which fill these gaps. This has effectively led to a
 dichotomy: SciPy cannot utilize the new features offered by these array packages, and
 these new array packages cannot make full use of the large amount of functionality
-SciPy provides. Addressing this gap using the Python array API standard has been a major focus of SciPy 2.0.
+SciPy provides.
+
+Addressing this fragmentation using the Python array API standard~\cite{Meurer2023} has been a
+major focus of SciPy 2.0. The standard defines standardised application
+programming interfaces (APIs) and behaviours for arrays and
+associated operations. Most importantly for SciPy, this enables
+``array-consuming libraries to accept and operate on arrays from multiple different
+array libraries''~\cite{Meurer2023}. In principle, by rewriting SciPy's functionality
+in terms of these standardised\todo{...}
 
 
 \todo{the how}
+
+\todo{example?}
 
 \todo{Performance}
 
@@ -237,6 +247,9 @@ SciPy provides. Addressing this gap using the Python array API standard has been
   \begin{tabular}{lcccccc}
     \toprule
     Module & CuPy & \multicolumn{2}{c}{PyTorch} & \multicolumn{3}{c}{JAX}\\
+    \cmidrule(lr){2-2}
+    \cmidrule(lr){3-4}
+    \cmidrule(lr){5-7}
     & GPU & CPU & GPU & CPU & GPU & JIT\\
     \midrule
     cluster.hierarchy \\
