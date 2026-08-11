@@ -240,7 +240,7 @@ mature enough to be adopted by SciPy at the time and waiting for them to mature 
 viable approach for something so integral to the project's future.
 
 In addition, there were a number of further issues pertaining to the Fortran 77
-implementations of these codes. A number of them were not reentrant,
+implementations of these codes. A number of them were not thread-safe,
 meaning that they could not be safely called from multiple threads simultaneously.
 Previously, SciPy used locking to prevent this. However, the introduction of
 free-threading in CPython 3.13, and its subsequent maturation in CPython 3.14, meant
