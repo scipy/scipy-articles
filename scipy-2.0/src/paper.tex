@@ -250,9 +250,17 @@ fully compliant. To resolve this, the array-api-compat package provides a lightw
 wrapper around these libraries to make them compliant with the standard. Likewise,
 some functionality is not covered by the standard for a variety of reasons so the
 array-api-extra package provides generic implementations of these operations.
+Listings~\ref{lst:fiedler} shows how a typical Python function is rewritten
+to support the standard.
 
-\begin{lstlisting}[language=diff,caption={Example rewriting \texttt{scipy.linalg.fielder} to support the Python array API standard.},label={lst:fiedler}]
-+ @xp_capabilities()  # Register function with coverage table
+\begin{lstlisting}[language=diff,caption={Example showing the changes made to
+  \texttt{scipy.linalg.fielder} in order to support the Python array API standard.
+  Changes include registering the function with an automated documentation and testing
+  system that generates array type compatibility tables and test skips, using
+  the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
+  using array-api-compat and array-api-extra functionality when required.},
+  label={lst:fiedler}]
++ @xp_capabilities()  # Register with documentation and testing framework
   def fiedler(a):
 +     xp = array_namespace(a)  # get the namespace of the input array
 -     a = np.atleast_1d(a)
@@ -271,11 +279,29 @@ array-api-extra package provides generic implementations of these operations.
 +         return xp.abs(a[..., :, xp.newaxis] - a[..., xp.newaxis, :])
 \end{lstlisting}
 
-Listings~\ref{lst:fiedler} shows how a typical Python function in SciPy is rewritten.
-Firstly, the function is decorated with \texttt{@xp\_capabilities()} to register it with
-the 
-
-\todo{Compiled code and delegation}
+While the recipe shown in Listing~\ref{lst:fiedler} can be applied to most of SciPy's
+Python code, a significant amount of SciPy's functionality is implemented in Cython
+and C/C++. This is typically the case when a Python implementation would not provide
+satisfactory performance, such as when it is not possible to write the code in terms
+of vectorised array operations. This presents a challenge as this means that these
+functions cannot be converted by simply rewriting them in terms of standardised APIs.
+SciPy has adopted to three approaches to address this.
+The first, and simplest, is that if the array is stored on the CPU, then we can convert
+it to a NumPy array, perform the computation, and then convert the result back to the
+original array type. However, this approach is not feasible for arrays stored on the
+GPU, due to the overhead of transferring data between the CPU and GPU. The second
+approach uses the fact that array libraries such as JAX and CuPy have reimplemented
+a subset of SciPy's functionality, in which case we \emph{delegate} to their
+implementation. We also delegate for Python functions under the assumption that a
+native implementation provides better performance than a generic implementation.
+The final approach is to maintain two code
+paths, the original compiled code path for NumPy arrays, and a new Python code path
+written in terms of standardised APIs. While this allows SciPy to add support for
+alternative array types, it does so at the cost of code duplication and increased
+maintenance burden. Hence, this approach is used sparingly in situations when
+maintaining two code paths brings a significant performance benefit. In the future,
+SciPy also hopes to utilise the DLPack~\cite{dlpack}, which is an open in-memory structure for sharing
+tensors among frameworks.
 
 \todo{Performance}
 
@@ -283,7 +309,7 @@ the
 
 \begin{table}
   \caption{Coverage of modules in SciPy 2.0 supporting alternative array packages.
-  \todo{Complete once SciPy 2.0 is released}}\label{tab:coverage}
+  \todo{Update once SciPy 2.0 is released}}\label{tab:coverage}
   \begin{tabular}{lcccccc}
     \toprule
     Module & CuPy & \multicolumn{2}{c}{PyTorch} & \multicolumn{3}{c}{JAX}\\
@@ -292,31 +318,38 @@ the
     \cmidrule(lr){5-7}
     & GPU & CPU & GPU & CPU & GPU & JIT\\
     \midrule
-    cluster.hierarchy \\
-    cluster.vq \\
-    constants \\
-    differentiate \\
-    fft \\
-    integrate \\
-    interpolate \\
-    io \\
-    linalg \\
-    linalg.interpolative \\
-    ndimage \\
-    optimize \\
-    optimize.elementwise \\
-    signal \\
-    signal.windows \\
-    sparse \\
-    sparse.csgraph \\
-    sparse.linalg \\
-    spatial \\
-    spatial.distance \\
-    spatial.transform \\
-    special \\
-    stats \\
-    stats.contingency \\
-    stats.qmc \\
+cluster.hierarchy & 26 \% & 90 \% & 26 \% & 90 \% & 26 \% & 26 \% \\
+cluster.vq & 25 \% & 100 \% & 25 \% & 100 \% & 25 \% & 25 \% \\
+constants & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
+differentiate & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
+fft & 75 \% & 100 \% & 75 \% & 94 \% & 75 \% & 75 \% \\
+integrate & 33 \% & 30 \% & 30 \% & 20 \% & 20 \% & 20 \% \\
+interpolate & 13 \% & 50 \% & 3 \% & 47 \% & 3 \% & 3 \% \\
+io & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+io.arff & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+io.matlab & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+io.wavfile & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+linalg & 3 \% & 3 \% & 3 \% & 3 \% & 3 \% & 3 \% \\
+linalg.interpolative & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+ndimage & 92 \% & 99 \% & 0 \% & 99 \% & 1 \% & 1 \% \\
+optimize & 6 \% & 6 \% & 6 \% & 3 \% & 3 \% & 3 \% \\
+optimize.elementwise & 100 \% & 75 \% & 75 \% & 0 \% & 0 \% & 0 \% \\
+signal & 63 \% & 60 \% & 32 \% & 58 \% & 19 \% & 19 \% \\
+signal.windows & 96 \% & 96 \% & 96 \% & 88 \% & 88 \% & 88 \% \\
+sparse & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+sparse.csgraph & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+sparse.linalg & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% \\
+spatial & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+spatial.distance & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+spatial.transform & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% \\
+special & 28 \% & 28 \% & 12 \% & 28 \% & 12 \% & 12 \% \\
+stats & 50 \% & 59 \% & 43 \% & 57 \% & 48 \% & 48 \% \\
+stats.contingency & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+stats.distributions & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% \\
+stats.qmc & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+stats.sampling & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\midrule
+mean & 31 \% & 37 \% & 24 \% & 33 \% & 21 \% & 21 \% \\
   \bottomrule
 \end{tabular}
 \end{table}
