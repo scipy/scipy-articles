@@ -256,19 +256,19 @@ However, being a Python library, few members of the SciPy developer community ha
 to tackle these issues. This often led to bugs remaining unresolved indefinitely.
 
 After careful evaluation of the above issues, it was decided that for SciPy 2.0, these
-codes needed either to be replaced with 
-more recent, actively maintained alternatives or to be translated from their
+codes needed either to be replaced with
+more recent, actively maintained alternatives, or to be translated from their
 original Fortran 77 source code to either pure Python,
 Cython~\cite{Behnel2011}, or C/C++ in order to secure the long term future of the
 project. Consequently, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
-mentioned have been replaced with counterparts from Boost.\@Math. Translation of the remaining
+mentioned have been replaced with counterparts from Boost.\@Math~\cite{boostmath}. Translation of the remaining
 codes posed a significant undertaking, requiring over \todo{\#} lines
 of code to be translated by hand. The completion of this work has been a major milestone for
 SciPy 2.0 leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
-future development and improvements, for example, improved special functions,
+future development and improvements, for example, improved special functions ---
 see \todo{Forward Ref} for more details. These developments would not have originally
 been possible due to the lack of expertise in Fortran 77 within the SciPy developer community.
 Following these changes, SciPy 2.0
