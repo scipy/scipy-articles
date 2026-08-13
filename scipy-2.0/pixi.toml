@@ -27,7 +27,14 @@ jinja2 = "*"
 [feature.coverage-table.tasks]
 array-api-compatibility-table = { cmd = "python scripts/array_api_compatibility_table.py", description = "Generate the array API compatibility table" }
 
+[feature.numpy.dependencies]
+numpy = ">=2.0"
+
+[tasks.run-benchmark-kurtosis]
+cmd = "./scripts/run_benchmark_kurtosis.sh"
+
 [environments]
 latex = ["latex"]
 python = ["python"]
 coverage-table = ["python", "coverage-table"]
+numpy = ["python", "numpy"]
