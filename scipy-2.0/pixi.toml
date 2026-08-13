@@ -14,17 +14,20 @@ watch = { cmd = "tectonic -X watch", description = "Watch the source and rebuild
 lint = { cmd = "chktex src/paper.tex", description = "Lint the LaTeX source" }
 
 [feature.python.dependencies]
-python = ">=3.11"
-pandas = ">=3.0"
-jinja2 = "*"
+python = ">=3.12"
 
 [feature.python.pypi-dependencies]
 scipy = { index = "https://pypi.anaconda.org/scientific-python-nightly-wheels/simple" }
 packaging = "*"
 
-[feature.python.tasks]
-array_api_compatibility_table = { cmd = "python scripts/array_api_compatibility_table.py", description = "Generate the array API compatibility table" }
+[feature.coverage-table.dependencies]
+pandas = ">=3.0"
+jinja2 = "*"
+
+[feature.coverage-table.tasks]
+array-api-compatibility-table = { cmd = "python scripts/array_api_compatibility_table.py", description = "Generate the array API compatibility table" }
 
 [environments]
 latex = ["latex"]
 python = ["python"]
+coverage-table = ["python", "coverage-table"]
