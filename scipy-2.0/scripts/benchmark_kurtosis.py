@@ -7,6 +7,7 @@ import json
 from scipy.stats import kurtosis
 import numpy as np
 backend = sys.argv[1]
+from scipy._lib._array_api import xp_assert_close
 
 def time(func):
     times = repeat(func, number=1, repeat=10)
@@ -47,17 +48,19 @@ else:
 
     for n in ns:
         data = rng.gamma(5, 0.5, size=n)
+        numpy_result = kurtosis(data)
 
         if backend == "NumPy":
             kurtosis(data)
             times.append(time(lambda: kurtosis(data)))
         elif "PyTorch-CPU" in backend:
             data_torch = torch.asarray(data)
-            kurtosis(data_torch)
+            xp_assert_close(kurtosis(data_torch), torch.asarray(numpy_result))
             times.append(time(lambda: kurtosis(data_torch)))
         elif "PyTorch-GPU" in backend:
             data_torch = torch.asarray(data, device="cuda")
-            kurtosis(data_torch)
+            xp_assert_close(kurtosis(data_torch),
+                            torch.asarray(numpy_result, device="cuda"))
             torch.cuda.synchronize()
             def run():
                 kurtosis(data_torch)
@@ -65,15 +68,17 @@ else:
             times.append(time(run))
         elif "JAX-CPU" in backend:
             data_jax = jnp.asarray(data, device=jax.devices("cpu")[0])
-            kurtosis(data_jax).block_until_ready()
+            xp_assert_close(kurtosis(data_jax).block_until_ready(),
+                            jnp.asarray(numpy_result))
             times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "JAX-GPU" in backend:
             data_jax = jnp.asarray(data, device=jax.devices("gpu")[0])
-            kurtosis(data_jax).block_until_ready()
+            xp_assert_close(kurtosis(data_jax).block_until_ready(),
+                            jnp.asarray(numpy_result, device=jax.devices("gpu")[0]))
             times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "CuPy" in backend:
             data_cupy = cp.asarray(data)
-            kurtosis(data_cupy)
+            xp_assert_close(kurtosis(data_cupy), cp.asarray(numpy_result))
             cp.cuda.Stream.null.synchronize()
             def run():
                 kurtosis(data_cupy)
