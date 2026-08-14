@@ -31,6 +31,18 @@ array-api-compatibility-table = { cmd = "python scripts/array_api_compatibility_
 numpy = ">=2.0"
 matplotlib = "*"
 
+[feature.pytorch-cpu.dependencies]
+pytorch-cpu = "*"
+
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.dependencies]
+jax = "*"
+jaxlib = { version = "*", build = "*cpu*" }
+
+[feature.jax-cpu]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+platforms = ["linux-64", "osx-arm64", "linux-aarch64"]
+
 [tasks.run-benchmark-kurtosis]
 cmd = "./scripts/run_benchmark_kurtosis.sh"
 
@@ -39,3 +51,5 @@ latex = ["latex"]
 python = ["python"]
 coverage-table = ["python", "coverage-table"]
 numpy = ["python", "numpy"]
+pytorch-cpu = ["python", "pytorch-cpu"]
+jax-cpu = ["python", "jax-cpu"]
