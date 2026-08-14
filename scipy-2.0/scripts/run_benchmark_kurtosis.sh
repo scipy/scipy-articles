@@ -3,7 +3,7 @@ set -euo pipefail
 
 rm -f scripts/benchmark_kurtosis_results.jsonl
 
-for backend in NumPy PyTorch-CPU JAX-CPU JAX-CPU-JIT; do
+for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU-JIT CuPy; do
     echo
     echo "=============================="
     echo " Benchmarking: $backend"
