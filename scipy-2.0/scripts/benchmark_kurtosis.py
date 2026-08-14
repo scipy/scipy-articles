@@ -1,12 +1,16 @@
 import os
 os.environ["SCIPY_ARRAY_API"] = "1"
-from timeit import timeit
+from timeit import repeat
 import sys
 import json
 
 from scipy.stats import kurtosis
 import numpy as np
 backend = sys.argv[1]
+
+def time(func):
+    times = repeat(func, number=1, repeat=10)
+    return np.min(times)
 
 if backend == "plot":
     import matplotlib.pyplot as plt
@@ -46,27 +50,34 @@ else:
 
         if backend == "NumPy":
             kurtosis(data)
-            times.append(timeit(lambda: kurtosis(data), number=REPEATS))
+            times.append(time(lambda: kurtosis(data)))
         elif "PyTorch-CPU" in backend:
             data_torch = torch.asarray(data)
             kurtosis(data_torch)
-            times.append(timeit(lambda: kurtosis(data_torch), number=REPEATS))
+            times.append(time(lambda: kurtosis(data_torch)))
         elif "PyTorch-GPU" in backend:
             data_torch = torch.asarray(data, device="cuda")
             kurtosis(data_torch)
-            times.append(timeit(lambda: kurtosis(data_torch), number=REPEATS))
+            torch.cuda.synchronize()
+            def run():
+                kurtosis(data_torch)
+                torch.cuda.synchronize()
+            times.append(time(run))
         elif "JAX-CPU" in backend:
-            data_jax = jnp.asarray(data)
+            data_jax = jnp.asarray(data, device=jax.devices("cpu")[0])
             kurtosis(data_jax).block_until_ready()
-            times.append(timeit(lambda: kurtosis(data_jax).block_until_ready(), number=REPEATS))
+            times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "JAX-GPU" in backend:
-            data_jax = jnp.asarray(data)
+            data_jax = jnp.asarray(data, device=jax.devices("gpu")[0])
             kurtosis(data_jax).block_until_ready()
-            times.append(timeit(lambda: kurtosis(data_jax).block_until_ready(), number=REPEATS))
+            times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "CuPy" in backend:
             data_cupy = cp.asarray(data)
             kurtosis(data_cupy)
-            times.append(timeit(lambda: kurtosis(data_cupy), number=REPEATS))
-
+            cp.cuda.Stream.null.synchronize()
+            def run():
+                kurtosis(data_cupy)
+                cp.cuda.Stream.null.synchronize()
+            times.append(time(run))
     with open("scripts/benchmark_kurtosis_results.jsonl", "a") as f:
         f.write(json.dumps({"backend": backend, "ns": ns.tolist(), "times": times}) + "\n")
