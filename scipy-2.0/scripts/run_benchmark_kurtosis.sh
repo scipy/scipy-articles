@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-rm -f scripts/benchmark_kurtosis_results.jsonl
+rm -f scripts/benchmark_timings.jsonl
 
 for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU-JIT CuPy; do
     echo
@@ -12,7 +12,7 @@ for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU
     env="${backend,,}"
     env="${env%-jit}"
 
-    pixi run -e "$env" python scripts/benchmark_kurtosis.py $backend
+    pixi run -e "$env" python scripts/run_benchmark.py --backend $backend
 done
 
-pixi run -e numpy python scripts/benchmark_kurtosis.py plot
+pixi run -e numpy python scripts/plot_benchmark.py
