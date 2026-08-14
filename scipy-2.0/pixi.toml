@@ -29,6 +29,7 @@ array-api-compatibility-table = { cmd = "python scripts/array_api_compatibility_
 
 [feature.numpy.dependencies]
 numpy = ">=2.0"
+matplotlib = "*"
 
 [tasks.run-benchmark-kurtosis]
 cmd = "./scripts/run_benchmark_kurtosis.sh"
