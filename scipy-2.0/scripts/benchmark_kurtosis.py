@@ -1,4 +1,5 @@
 import os
+
 os.environ["SCIPY_ARRAY_API"] = "1"
 from timeit import repeat
 import sys
@@ -6,23 +7,53 @@ import json
 
 from scipy.stats import kurtosis
 import numpy as np
+
 backend = sys.argv[1]
 from scipy._lib._array_api import xp_assert_close
+
 
 def time(func):
     times = repeat(func, number=1, repeat=10)
     return np.min(times)
 
+
 if backend == "plot":
     import matplotlib.pyplot as plt
+
     plt.style.use("scripts/scipy.mplstyle")
+
+    line_styles = {
+        "NumPy": {"color": "black", "linestyle": "-", "marker": None, "linewidth": 2},
+        "PyTorch-CPU": {"color": "tab:orange", "linestyle": "--", "marker": None},
+        "PyTorch-GPU": {"color": "tab:orange", "linestyle": "-", "marker": None},
+        "JAX-CPU": {"color": "tab:green", "linestyle": "--", "marker": None},
+        "JAX-CPU-JIT": {
+            "color": "tab:green",
+            "linestyle": "--",
+            "marker": "o",
+            "markevery": 0.1,
+        },
+        "JAX-GPU": {"color": "tab:green", "linestyle": "-", "marker": None},
+        "JAX-GPU-JIT": {
+            "color": "tab:green",
+            "linestyle": "-",
+            "marker": "o",
+            "markevery": 0.1,
+        },
+        "CuPy": {"color": "tab:red", "linestyle": "-", "marker": None},
+    }
 
     fig, ax = plt.subplots(figsize=(5, 4), layout="constrained")
 
     with open("scripts/benchmark_kurtosis_results.jsonl") as f:
         for line in f:
             data = json.loads(line)
-            ax.loglog(data["ns"], data["times"], label=data["backend"])
+            ax.loglog(
+                data["ns"],
+                data["times"],
+                label=data["backend"],
+                **line_styles[data["backend"]]
+            )
     ax.set_xlabel("Dataset size")
     ax.set_ylabel("Time (s)")
     fig.legend(ncols=3, loc="outside lower center")
@@ -39,9 +70,11 @@ else:
     if "JAX" in backend:
         import jax.numpy as jnp
         import jax
+
         jax.config.update("jax_enable_x64", True)
         if "JIT" in backend:
             from jax import jit
+
             kurtosis = jit(kurtosis)
     if "CuPy" in backend:
         import cupy as cp
@@ -59,30 +92,40 @@ else:
             times.append(time(lambda: kurtosis(data_torch)))
         elif "PyTorch-GPU" in backend:
             data_torch = torch.asarray(data, device="cuda")
-            xp_assert_close(kurtosis(data_torch),
-                            torch.asarray(numpy_result, device="cuda"))
+            xp_assert_close(
+                kurtosis(data_torch), torch.asarray(numpy_result, device="cuda")
+            )
             torch.cuda.synchronize()
+
             def run():
                 kurtosis(data_torch)
                 torch.cuda.synchronize()
+
             times.append(time(run))
         elif "JAX-CPU" in backend:
             data_jax = jnp.asarray(data, device=jax.devices("cpu")[0])
-            xp_assert_close(kurtosis(data_jax).block_until_ready(),
-                            jnp.asarray(numpy_result))
+            xp_assert_close(
+                kurtosis(data_jax).block_until_ready(), jnp.asarray(numpy_result)
+            )
             times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "JAX-GPU" in backend:
             data_jax = jnp.asarray(data, device=jax.devices("gpu")[0])
-            xp_assert_close(kurtosis(data_jax).block_until_ready(),
-                            jnp.asarray(numpy_result, device=jax.devices("gpu")[0]))
+            xp_assert_close(
+                kurtosis(data_jax).block_until_ready(),
+                jnp.asarray(numpy_result, device=jax.devices("gpu")[0]),
+            )
             times.append(time(lambda: kurtosis(data_jax).block_until_ready()))
         elif "CuPy" in backend:
             data_cupy = cp.asarray(data)
             xp_assert_close(kurtosis(data_cupy), cp.asarray(numpy_result))
             cp.cuda.Stream.null.synchronize()
+
             def run():
                 kurtosis(data_cupy)
                 cp.cuda.Stream.null.synchronize()
+
             times.append(time(run))
     with open("scripts/benchmark_kurtosis_results.jsonl", "a") as f:
-        f.write(json.dumps({"backend": backend, "ns": ns.tolist(), "times": times}) + "\n")
+        f.write(
+            json.dumps({"backend": backend, "ns": ns.tolist(), "times": times}) + "\n"
+        )
