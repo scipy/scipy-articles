@@ -17,7 +17,7 @@ backend = args.backend
 
 
 def time(func):
-    times = repeat(func, number=1, repeat=10)
+    times = repeat(func, number=1, repeat=20)
     return np.min(times)
 
 
