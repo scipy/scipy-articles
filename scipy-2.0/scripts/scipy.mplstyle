@@ -1,0 +1,8 @@
+legend.frameon : False
+
+figure.figsize : 5, 3
+
+font.size : 10
+
+text.usetex : True
+text.latex.preamble : \usepackage{amsmath} \usepackage{amssymb} \usepackage[tt=false]{libertine}

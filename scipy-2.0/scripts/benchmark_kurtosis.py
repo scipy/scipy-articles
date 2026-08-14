@@ -10,16 +10,17 @@ backend = sys.argv[1]
 
 if backend == "plot":
     import matplotlib.pyplot as plt
+    plt.style.use("scripts/scipy.mplstyle")
 
-    fig, ax = plt.subplots(layout="constrained")
+    fig, ax = plt.subplots(figsize=(5, 4), layout="constrained")
 
     with open("scripts/benchmark_kurtosis_results.jsonl") as f:
         for line in f:
             data = json.loads(line)
             ax.loglog(data["ns"], data["times"], label=data["backend"])
-    ax.set_xlabel("n")
-    ax.set_ylabel("time (s)")
-    ax.legend()
+    ax.set_xlabel("Dataset size")
+    ax.set_ylabel("Time (s)")
+    fig.legend(ncols=3, loc="outside lower center")
     plt.show()
 
 else:
@@ -32,6 +33,8 @@ else:
         import torch
     if "JAX" in backend:
         import jax.numpy as jnp
+        import jax
+        jax.config.update("jax_enable_x64", True)
         if "JIT" in backend:
             from jax import jit
             kurtosis = jit(kurtosis)
