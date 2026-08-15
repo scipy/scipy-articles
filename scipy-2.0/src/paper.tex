@@ -206,10 +206,10 @@
 \section{A New Look at Language Choices}
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
-to the convenient Python interfaces it provides to popular compiled numerical libraries
+to the convenient Python interfaces it provided to popular compiled numerical libraries
 that were otherwise distributed primarily as standalone Fortran source
 packages, such as those available through the Netlib repository~\cite{netlib}.
-This includes:
+This included:
 ODEPACK~\cite{Hindmarsh1983ODEPACK},
 VODE/ZVODE~\cite{Brown1989}, and DOPRI5~\cite{Hairer1987} for solving initial value
 problems; QUADPACK~\cite{Piessens1983} for quadrature; FITPACK~\cite{dierckx1995curve}
@@ -248,7 +248,7 @@ that, for the first time, multiple threads could execute Python code concurrentl
 without the Global Interpreter Lock (GIL)~\cite{gross2023pep703}. Unfortunately,
 users of these non-reentrant codes would not be able to take advantage of this
 new feature.
-Other challenges presented by these codes include a lack of support for
+Other challenges presented by these codes included a lack of support for
 64-bit integer types (ILP64) and lack of control over the random number generator used.
 Finally, many of these codes are no longer actively maintained, meaning that the
 SciPy developers were effectively responsible for fixing any bugs that arose.
@@ -266,11 +266,11 @@ ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical func
 mentioned have been replaced with counterparts from Boost.\@Math~\cite{boostmath}. Translation of the remaining
 codes posed a significant undertaking, requiring over \todo{\#} lines
 of code to be translated by hand. The completion of this work has been a major milestone for
-SciPy 2.0 leading to the resolution of the challenges described above as well as many
+SciPy 2.0, leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
 future development and improvements, for example, improved special functions ---
-see \todo{Forward Ref} for more details. These developments would not have originally
-been possible due to the lack of expertise in Fortran 77 within the SciPy developer community.
+see \todo{Forward Ref} for more details. Such developments were previously infeasible
+due to the lack of expertise in Fortran 77 within the SciPy developer community.
 Following these changes, SciPy 2.0
 consists of approximately $66.0\%$ Python, $21.4\%$ C, $8.3\%$ C++, and $3.8\%$ Cython code,
 with the remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured
