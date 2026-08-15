@@ -67,8 +67,11 @@ platforms = ["linux-64-cuda"]
 cupy = "*"
 numpy = "<2.5" # https://github.com/cupy/cupy/pull/10037
 
-[tasks.benchmark-kurtosis]
-cmd = "./scripts/run_benchmark_kurtosis.sh"
+[tasks.benchmark-jarque-bera]
+cmd = "./scripts/run_benchmark.sh jarque_bera 2 7 6"
+
+[tasks.benchmark-welch]
+cmd = "./scripts/run_benchmark.sh welch 2.5 6 6"
 
 [feature.cupy]
 platforms = ["linux-64-cuda"]

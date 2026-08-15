@@ -12,7 +12,8 @@ for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU
     env="${backend,,}"
     env="${env%-jit}"
 
-    pixi run -e "$env" python scripts/run_benchmark.py --backend $backend
+    pixi run -e "$env" python scripts/run_benchmark.py "$@" --backend $backend
 done
 
 pixi run -e numpy python scripts/plot_benchmark.py
+pixi run -e numpy python scripts/plot_benchmark.py --timing absolute
