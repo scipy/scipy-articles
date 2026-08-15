@@ -26,14 +26,14 @@ def time(func):
     times = repeat(func, number=1, repeat=repeats)
     return gmean(times)
 
-if args.function == "jarque_bera":
-    from scipy.stats import jarque_bera
+if args.function == "skew":
+    from scipy.stats import skew
     def func(data):
-        return jarque_bera(data, axis=-1).statistic
+        return skew(data, axis=-1)
 
     def data_generator(n):
         rng = np.random.default_rng(738274923759827)
-        return rng.gamma(5, 0.5, size=(2, n))
+        return rng.gamma(5, 0.5, size=(3, n))
 elif args.function == "welch":
     if backend == "PyTorch-GPU":
         exit()
