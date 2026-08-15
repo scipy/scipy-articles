@@ -29,11 +29,11 @@ def time(func):
 if args.function == "jarque_bera":
     from scipy.stats import jarque_bera
     def func(data):
-        return jarque_bera(data).statistic
+        return jarque_bera(data, axis=-1).statistic
 
     def data_generator(n):
         rng = np.random.default_rng(738274923759827)
-        return rng.gamma(5, 0.5, size=n)
+        return rng.gamma(5, 0.5, size=(2, n))
 elif args.function == "welch":
     if backend == "PyTorch-GPU":
         exit()
