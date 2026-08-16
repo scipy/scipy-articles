@@ -16,4 +16,3 @@ for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU
 done
 
 pixi run -e numpy python scripts/plot_benchmark.py
-pixi run -e numpy python scripts/plot_benchmark.py --timing absolute
