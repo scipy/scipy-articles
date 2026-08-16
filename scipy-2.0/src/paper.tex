@@ -319,38 +319,38 @@ structure for sharing tensors among frameworks.
     \cmidrule(lr){5-7}
     & GPU & CPU & GPU & CPU & GPU & JIT\\
     \midrule
-cluster.hierarchy & 26 \% & 90 \% & 26 \% & 90 \% & 26 \% & 26 \% \\
-cluster.vq & 25 \% & 100 \% & 25 \% & 100 \% & 25 \% & 25 \% \\
-constants & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
-differentiate & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
-fft & 75 \% & 100 \% & 75 \% & 94 \% & 75 \% & 75 \% \\
-integrate & 33 \% & 30 \% & 30 \% & 27 \% & 27 \% & 27 \% \\
-interpolate & 30 \% & 53 \% & 3 \% & 53 \% & 3 \% & 3 \% \\
-io & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-io.arff & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-io.matlab & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-io.wavfile & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-linalg & 4 \% & 4 \% & 4 \% & 4 \% & 4 \% & 4 \% \\
-linalg.interpolative & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-ndimage & 92 \% & 99 \% & 0 \% & 99 \% & 1 \% & 1 \% \\
-optimize & 7 \% & 7 \% & 7 \% & 6 \% & 6 \% & 6 \% \\
-optimize.elementwise & 100 \% & 75 \% & 75 \% & 0 \% & 0 \% & 0 \% \\
-signal & 65 \% & 62 \% & 33 \% & 62 \% & 21 \% & 21 \% \\
-signal.windows & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% \\
-sparse & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-sparse.csgraph & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-sparse.linalg & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% \\
-spatial & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-spatial.distance & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-spatial.transform & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% \\
-special & 27 \% & 28 \% & 11 \% & 28 \% & 12 \% & 12 \% \\
-stats & 50 \% & 60 \% & 44 \% & 58 \% & 48 \% & 48 \% \\
-stats.contingency & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-stats.distributions & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% \\
-stats.qmc & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-stats.sampling & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{cluster.hierarchy} & 26 \% & 90 \% & 26 \% & 90 \% & 26 \% & 74 \% \\
+\texttt{cluster.vq} & 25 \% & 100 \% & 25 \% & 100 \% & 25 \% & 25 \% \\
+\texttt{constants} & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
+\texttt{differentiate} & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 0 \% \\
+\texttt{fft} & 75 \% & 100 \% & 75 \% & 94 \% & 75 \% & 94 \% \\
+\texttt{integrate} & 33 \% & 30 \% & 30 \% & 27 \% & 27 \% & 17 \% \\
+\texttt{interpolate} & 30 \% & 53 \% & 3 \% & 53 \% & 3 \% & 3 \% \\
+\texttt{io} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{io.arff} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{io.matlab} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{io.wavfile} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{linalg} & 4 \% & 4 \% & 4 \% & 4 \% & 4 \% & 2 \% \\
+\texttt{linalg.interpolative} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{ndimage} & 92 \% & 99 \% & 0 \% & 99 \% & 1 \% & 1 \% \\
+\texttt{optimize} & 7 \% & 7 \% & 7 \% & 6 \% & 6 \% & 6 \% \\
+\texttt{optimize.elementwise} & 100 \% & 75 \% & 75 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{signal} & 65 \% & 62 \% & 33 \% & 62 \% & 21 \% & 21 \% \\
+\texttt{signal.windows} & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% \\
+\texttt{sparse} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{sparse.csgraph} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{sparse.linalg} & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% \\
+\texttt{spatial} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{spatial.distance} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{spatial.transform} & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% \\
+\texttt{special} & 27 \% & 28 \% & 11 \% & 28 \% & 12 \% & 28 \% \\
+\texttt{stats} & 50 \% & 60 \% & 44 \% & 58 \% & 48 \% & 50 \% \\
+\texttt{stats.contingency} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{stats.distributions} & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% \\
+\texttt{stats.qmc} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{stats.sampling} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
 \midrule
-mean & 31 \% & 37 \% & 24 \% & 34 \% & 22 \% & 22 \% \\
+Overall & 34 \% & 39 \% & 19 \% & 38 \% & 19 \% & 24 \% \\
   \bottomrule
 \end{tabular}
 \end{table}
