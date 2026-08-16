@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-rm -f scripts/benchmark_timings.jsonl
+rm -f scripts/"$1"_benchmark_timings.jsonl
 
 for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU-JIT CuPy; do
     echo
@@ -14,5 +14,3 @@ for backend in NumPy PyTorch-CPU PyTorch-GPU JAX-CPU JAX-CPU-JIT JAX-GPU JAX-GPU
 
     pixi run -e "$env" python scripts/run_benchmark.py "$@" --backend $backend
 done
-
-pixi run -e numpy python scripts/plot_benchmark.py

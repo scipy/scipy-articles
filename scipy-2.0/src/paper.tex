@@ -99,6 +99,7 @@
 %% the next command will enable that style.
 %%\citestyle{acmauthoryear}
 
+\usepackage{subcaption}
 \usepackage{listings}
 
 \definecolor{diffincl}{RGB}{0,128,0}
@@ -213,6 +214,7 @@
 
 
 \section{Introduction}
+\the\textwidth
 
 
 \section{Support for Graphics Processing Units (GPUs) and Just-in-Time (JIT) Compilation
@@ -305,6 +307,12 @@ SciPy also hopes to utilise the DLPack~\cite{dlpack}, which is an open in-memory
 structure for sharing tensors among frameworks.
 
 \todo{Performance: 1 pure python, 1 delegation, 1 compiled code path}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/benchmark.pdf}
+    \caption{\todo{...}}
+\end{figure}
 
 \todo{Coverage}
 

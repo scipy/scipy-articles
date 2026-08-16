@@ -133,5 +133,5 @@ for n in ns:
 
         times.append(time(run))
 
-with open("scripts/benchmark_timings.jsonl", "a") as f:
+with open(f"scripts/{args.function}_benchmark_timings.jsonl", "a") as f:
     f.write(json.dumps({"backend": backend, "ns": ns.tolist(), "times": times}) + "\n")
