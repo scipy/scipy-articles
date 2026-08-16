@@ -84,6 +84,7 @@ plot-benchmark = { cmd = "python scripts/plot_benchmark.py", description = "Plot
 platforms = ["linux-64-cuda"]
 
 [environments]
+default = ["python"]
 latex = ["latex"]
 python = ["python"]
 coverage-table = ["python", "coverage-table"]
