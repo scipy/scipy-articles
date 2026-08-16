@@ -56,6 +56,14 @@ elif args.function == "welch":
         x = amp*np.sin(2*np.pi*freq*time)
         x += rng.normal(scale=np.sqrt(noise_power), size=time.shape)
         return x
+elif args.function == "Rotation.mean":
+    from scipy.spatial.transform import Rotation
+    def func(data):
+        return Rotation.from_euler("xyz", data).mean().as_euler("xyz")
+
+    def data_generator(n):
+        rng = np.random.default_rng(738274923759827)
+        return rng.uniform(-180, 180, size=(n, 3))
 else:
     raise ValueError(f"Unknown function: {args.function}")
 

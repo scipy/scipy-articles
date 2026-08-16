@@ -73,6 +73,9 @@ cmd = "./scripts/run_benchmark.sh skew 2 7 6"
 [tasks.benchmark-welch]
 cmd = "./scripts/run_benchmark.sh welch 2.5 6 6"
 
+[tasks.benchmark-rotation]
+cmd = "./scripts/run_benchmark.sh Rotation.mean 2 6.5 6"
+
 [feature.cupy]
 platforms = ["linux-64-cuda"]
 
