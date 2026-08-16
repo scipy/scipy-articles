@@ -33,7 +33,11 @@ if args.function == "skew":
 
     def data_generator(n):
         rng = np.random.default_rng(738274923759827)
-        return rng.gamma(5, 0.5, size=(3, n))
+        return np.stack([
+            rng.gamma(5, 0.5, size=n),
+            rng.normal(size=n),
+            rng.beta(0.5, 0.5, size=n)
+        ])
 elif args.function == "welch":
     if backend == "PyTorch-GPU":
         exit()
