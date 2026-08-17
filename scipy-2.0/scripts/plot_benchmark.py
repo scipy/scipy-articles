@@ -1,3 +1,4 @@
+"""Plot the results of the benchmarking."""
 import json
 import argparse
 

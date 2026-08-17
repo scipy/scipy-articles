@@ -1,3 +1,4 @@
+"""Generate table showing array API compatibility statistics for the SciPy modules."""
 from scipy._lib._public_api import PUBLIC_MODULES
 from scipy._lib._array_api_docs_tables import calculate_table_statistics
 from scipy._lib._array_api_docs_tables import make_flat_capabilities_table

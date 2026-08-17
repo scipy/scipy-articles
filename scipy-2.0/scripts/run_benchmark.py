@@ -1,5 +1,5 @@
+"""Run benchmark for a given function and array type."""
 import os
-
 os.environ["SCIPY_ARRAY_API"] = "1"
 from timeit import repeat
 import argparse
