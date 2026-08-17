@@ -48,7 +48,6 @@ elif args.function == "welch":
     def data_generator(n):
         rng = np.random.default_rng(738274923759827)
         fs = 10e3
-        N = 1e5
         amp = 2*np.sqrt(2)
         freq = 1234.0
         noise_power = 0.001 * fs / 2

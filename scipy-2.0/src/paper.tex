@@ -257,7 +257,8 @@ to support the standard.
   system that generates array type compatibility tables and test skips, using
   the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
   using array-api-compat and array-api-extra functionality when required.},
-  label={lst:fiedler}]
+  label={lst:fiedler}]fig.legend(ncols=4, loc="outside lower center")
+
 + @xp_capabilities()  # Register with documentation and testing framework
   def fiedler(a):
 +     xp = array_namespace(a)  # get the namespace of the input array
@@ -303,13 +304,52 @@ implementation executed on the CPU --- see \todo{Forward ref}. In the future,
 SciPy also hopes to utilise the DLPack~\cite{dlpack}, which is an open in-memory
 structure for sharing tensors among frameworks.
 
-\todo{Performance: 1 pure python, 1 delegation, 1 compiled code path}
-
 \begin{figure}
     \centering
     \includegraphics{figures/benchmark.pdf}
-    \caption{\todo{...}}
+    \caption{Benchmarks comparing the performance of various SciPy functions with
+    different array types as the size of the problem is increased. Reported timings
+    are given as the geometric mean of ten repeats and are given both as the
+    clock time and relative to NumPy. (a) Computing the skewness of a data set.
+    (b) Estimating power spectral density using Welch’s method.
+    (c) Computing the mean of multiple rotations.}
 \end{figure}
+
+While enabling users to use SciPy with their preferred array types is a significant
+advancement in and of itself, it can also offer significant performance benefits.
+We will demonstrate this through a series of benchmarks covering the different
+approaches for adopting array API standard, as previously discussed. All benchmarks
+were executed on an Intel Core Ultra 7 165H and
+an NVIDIA GeForce RTX 2050. Code to reproduce the benchmarks is available at
+\href{https://github.com/scipy/scipy-articles}{github.com/scipy/scipy-articles}.
+
+The first benchmark considers computing the sample skewness
+$\gamma_1 = \mu_3/\mu_2^{3/2}$, where $\mu_i$ is the biased sample $i$th central
+moment, using \texttt{scipy.stats.skew}.
+This is a function which is implement purely
+in Python so was converted to the array API standard by rewriting in-terms of
+standardised function, similar to the example in Listing~\ref{lst:fiedler}.
+Specifically, the benchmark considers
+computing the skewness of three samples of size $n$ drawn from the gamma (with shape
+and scale parameters 5 and 0.5), standard normal, and
+beta distributions (with shape parameters 0.5 and 0.5). The computation is performed in
+a vectorised fashion, i.e. only one call to \texttt{scipy.stats.skew} is made.
+\todo{results}
+
+The second benchmark looks at estimating the power spectral density of a signal
+using Welch's method~\cite{Welch1967}\todo{\dots}
+
+Finally, the third benchmark performs a series of operations involving rotations using
+\texttt{scipy.spatial.transform.Rotation}. This is an example of functionality where
+SciPy now maintains two code paths, a compiled Cython code path for NumPy arrays and
+a Python code path written in terms of standardised APIs for other array types ---
+the aim of this being to maintain satisfactory performance for NumPy arrays while
+also enabling support for other array types. The benchmark considers converting a
+series of $n$ random rotations represented as Euler angles to quaternions,
+computing the chordal $L_2$ mean~\cite{Hartley2013} of the rotations, and then
+converting the resulting mean back
+to an Euler angle. \todo{results} For further benchmarks of SciPy's rotation and
+rigid body transformation functionality see~\cite{rotaion}.
 
 \todo{Coverage}
 

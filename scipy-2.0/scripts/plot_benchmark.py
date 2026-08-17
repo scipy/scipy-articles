@@ -32,17 +32,23 @@ line_styles = {
 }
 
 funcs = {
-    "skew" : r"\texttt{scipy.stats.skew}",
-    "welch" : r"\texttt{scipy.signal.welch}",
-    "Rotation.mean" : r"\texttt{scipy.spatial.transform.Rotation.mean}",
+    "skew" : ["a)", r"\texttt{scipy.stats.skew}"],
+    "welch" : ["b)", r"\texttt{scipy.signal.welch}"],
+    "Rotation.mean" : ["c)", r"\texttt{scipy.spatial.transform.Rotation.mean}"],
 }
 
 fig = plt.figure(figsize=(5, 7), layout="constrained")
 subfigs = fig.subfigures(3, 1)
 
 for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
-    subfig.suptitle(title)
     (axl, axr) = subfig.subplots(1, 2)
+    subfig.suptitle(title[1])
+    subfig.text(
+        0.1, 0.97, rf"\textbf{{ {title[0]} }}",
+        ha="left",
+        va="top",
+        fontsize="medium",
+    )
     with open(f"scripts/{func}_benchmark_timings.jsonl", "r") as f:
         for line in f:
             data = json.loads(line)
