@@ -176,8 +176,9 @@ project. Consequently, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
 mentioned have been replaced with counterparts from Boost.\@Math~\cite{boostmath}. Translation of the remaining
-codes posed a significant undertaking, requiring over \todo{\#} lines
-of code to be translated by hand. The completion of this work has been a major milestone for
+codes posed a significant undertaking, requiring a significant proportion of SciPy's
+$\sim80{,}000$ source lines of Fortran 77\footnote{Contained in SciPy version $1{.}0$, measured using
+\href{https://github.com/XAMPPRocky/tokei}{github.com/XAMPPRocky/tokei}.} to be translated by hand. The completion of this work has been a major milestone for
 SciPy 2.0, leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
 future development and improvements, for example, improved special functions ---
@@ -185,8 +186,9 @@ see \todo{Forward Ref} for more details. Such developments were previously infea
 due to the lack of expertise in Fortran 77 within the SciPy developer community.
 Following these changes, SciPy 2.0
 consists of approximately $66.0\%$ Python, $21.4\%$ C, $8.3\%$ C++, and $3.8\%$ Cython code,
-with the remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured
-using the \texttt{github-linguist} command, see \url{https://github.com/github-linguist/linguist}}.
+with the remaining $0.5\%$ mostly consisting of build scripts\footnote{Measured as of
+SciPy 2.0.0
+using \href{https://github.com/github-linguist/linguist}{github.com/github-linguist/linguist}.}.
 
 
 \bibliographystyle{ACM-Reference-Format}
