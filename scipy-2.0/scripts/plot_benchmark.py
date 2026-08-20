@@ -12,23 +12,23 @@ args = parser.parse_args()
 
 line_styles = {
     "NumPy": {"color": "black", "linestyle": "-", "marker": None, "linewidth": 2},
-    "PyTorch-CPU": {"color": "tab:orange", "linestyle": "--", "marker": None},
-    "PyTorch-GPU": {"color": "tab:orange", "linestyle": "-", "marker": None},
-    "JAX-CPU": {"color": "tab:green", "linestyle": "--", "marker": None},
+    "PyTorch-CPU": {"color": "tab:orange", "linestyle": "-", "marker": None},
+    "PyTorch-GPU": {"color": "tab:orange", "linestyle": "--", "marker": None},
+    "JAX-CPU": {"color": "tab:green", "linestyle": "-", "marker": None},
     "JAX-CPU-JIT": {
-        "color": "tab:green",
-        "linestyle": "--",
-        "marker": "o",
-        "markevery": 0.1,
-    },
-    "JAX-GPU": {"color": "tab:green", "linestyle": "-", "marker": None},
-    "JAX-GPU-JIT": {
         "color": "tab:green",
         "linestyle": "-",
         "marker": "o",
         "markevery": 0.1,
     },
-    "CuPy": {"color": "tab:red", "linestyle": "-", "marker": None},
+    "JAX-GPU": {"color": "tab:green", "linestyle": "--", "marker": None},
+    "JAX-GPU-JIT": {
+        "color": "tab:green",
+        "linestyle": "--",
+        "marker": "o",
+        "markevery": 0.1,
+    },
+    "CuPy": {"color": "tab:red", "linestyle": "--", "marker": None},
 }
 
 funcs = {
@@ -37,7 +37,7 @@ funcs = {
     "Rotation.mean" : ["c)", r"\texttt{scipy.spatial.transform.Rotation.mean}"],
 }
 
-fig = plt.figure(figsize=(5, 7), layout="constrained")
+fig = plt.figure(figsize=(5, 6), layout="constrained")
 subfigs = fig.subfigures(3, 1)
 
 for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
@@ -67,7 +67,7 @@ for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
                 **line_styles[data["backend"]]
             )
     axl.set_ylabel("Time (s)")
-    axr.set_ylabel("Speed-up relative to NumPy")
+    axr.set_ylabel("Speed-up relative\nto NumPy")
 axl.set_xlabel("Problem size $n$")
 axr.set_xlabel("Problem size $n$")
 fig.legend(ncols=4, loc="outside lower center")

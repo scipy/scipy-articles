@@ -222,8 +222,10 @@ structure for sharing tensors among frameworks.
     \includegraphics{figures/benchmark.pdf}
     \caption{Benchmarks comparing the performance of various SciPy functions with
     different array types as the size of the problem is increased. Reported timings
-    are given as the geometric mean of ten repeats and are given both as the
-    clock time and relative to NumPy. (a) Computing the skewness of a data set.
+    are given as the geometric mean of ten repeats, and are given both as the
+    clock time and relative to NumPy, where greater than one indicates a performance
+    improvement over NumPy.
+    (a) Computing the skewness of a data set.
     (b) Estimating power spectral density using Welch’s method.
     (c) Computing the mean of multiple rotations.}
 \end{figure}
@@ -250,7 +252,13 @@ a vectorised fashion, i.e. only one call to \texttt{scipy.stats.skew} is made.
 \todo{results}
 
 The second benchmark looks at estimating the power spectral density of a signal
-using Welch's method~\cite{Welch1967}\todo{\dots}
+using Welch's method~\cite{Welch1967} using \texttt{scipy.signal.welch}.
+For JAX and CuPy, this function is delegated to their native implementations, otherwise
+the input array is converted to a NumPy array, the computation is performed, and the
+result is converted back to the original array type. Hence, the absence of PyTorch
+GPU from the results. \todo{Describe input}
+This benchmark is also considered
+in~\cite{Meurer2023}, however, here we consider the results in more detail.
 
 Finally, the third benchmark performs a series of operations involving rotations using
 \texttt{scipy.spatial.transform.Rotation}. This is an example of functionality where
@@ -263,8 +271,6 @@ computing the chordal $L_2$ mean~\cite{Hartley2013} of the rotations, and then
 converting the resulting mean back
 to an Euler angle. \todo{results} For further benchmarks of SciPy's rotation and
 rigid body transformation functionality see~\cite{rotaion}.
-
-\todo{Coverage}
 
 \begin{table}
   \caption{Coverage of modules in SciPy 2.0 supporting alternative array packages.
@@ -284,10 +290,6 @@ rigid body transformation functionality see~\cite{rotaion}.
 \texttt{fft} & 75 \% & 100 \% & 75 \% & 94 \% & 75 \% & 94 \% \\
 \texttt{integrate} & 33 \% & 30 \% & 30 \% & 27 \% & 27 \% & 17 \% \\
 \texttt{interpolate} & 30 \% & 53 \% & 3 \% & 53 \% & 3 \% & 3 \% \\
-\texttt{io} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-\texttt{io.arff} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-\texttt{io.matlab} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
-\texttt{io.wavfile} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
 \texttt{linalg} & 4 \% & 4 \% & 4 \% & 4 \% & 4 \% & 2 \% \\
 \texttt{linalg.interpolative} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
 \texttt{ndimage} & 92 \% & 99 \% & 0 \% & 99 \% & 1 \% & 1 \% \\
@@ -308,11 +310,19 @@ rigid body transformation functionality see~\cite{rotaion}.
 \texttt{stats.qmc} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
 \texttt{stats.sampling} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
 \midrule
-Overall & 34 \% & 39 \% & 19 \% & 38 \% & 19 \% & 24 \% \\
+Overall & 35 \% & 40 \% & 20 \% & 39 \% & 19 \% & 25 \% \\
   \bottomrule
 \end{tabular}
 \end{table}
 
+Converting SciPy's large range of functionality to support alternative array types has
+been a significant undertaking. Table~\ref{tab:coverage} shows the current progress
+towards this, as of SciPy 2.0. \todo{Finish this once SciPy 2.0 is actually
+released as it is a bit difficult to comment on coverage when we don't know what it
+is!} Note, this table omits legacy modules and modules that are not within scope for
+conversion. This includes \texttt{scipy.datasets} and \texttt{scipy.io} as both involve
+reading binary files, which would need to be loaded into CPU memory first, so we defer
+to the user to convert to their preferred array type.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

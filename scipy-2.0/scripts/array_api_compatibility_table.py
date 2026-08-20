@@ -18,6 +18,10 @@ included_modules = [
         "scipy.stats.mstats",
         "scipy.linalg.blas",
         "scipy.linalg.lapack",
+        "scipy.io",
+        "scipy.io.arff",
+        "scipy.io.matlab",
+        "scipy.io.wavfile"
     }
 ]
 
