@@ -132,18 +132,16 @@ interoperable ideal.
 Most significantly, NumPy, CuPy, JAX, and PyTorch all predate
 the creation of the standard\footnote{The first version of the Python array API
 standard was released in December 2021, with new revisions appearing annually.}
-and are therefore not fully compliant with it. To resolve this, the array-api-compat package provides a lightweight
-wrapper around these libraries to make these libraries that adapt their interfaces to
-the standard. Likewise,
+and are therefore not fully compliant with it. To resolve this, the array-api-compat package provides lightweight wrappers that adapt these libraries' interface to the standard. Likewise,
 some functionality is not covered by the standard, for a variety of reasons, so the
 array-api-extra package provides generic implementations of these operations.
 These additional packages therefore overcome many of the practical difficulties in
-achieving interoperability. As an example, Listings~\ref{lst:fiedler} shows how a typical
+achieving interoperability. As an example, Listing~\ref{lst:fiedler} shows how a typical
 function from SciPy, written in Python, can be adapted to accept arrays conforming to
 the standard.
 
 \begin{lstlisting}[language=diff,caption={Example showing the changes made to
-  \texttt{scipy.linalg.fielder} in order to support the Python array API standard.
+  \texttt{scipy.linalg.fiedler} in order to support the Python array API standard.
   Changes include registering the function with an automated documentation and testing
   system that generates array type compatibility tables and test skips, using
   the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
@@ -177,8 +175,7 @@ satisfactory performance, for example, when an algorithm cannot be efficiently e
 in terms of vectorised array operations, which would otherwise allow much of the
 computation to be delegated to NumPy's optimised compiled code. This presents
 a challenge because these functions cannot be converted to accept other array libraries
-by simply rewriting them in terms of standardised array operations. SciPy has adopted to
-three approaches to address this.
+by simply rewriting them in terms of standardised array operations. SciPy has adopted three approaches to address this challenge.
 
 The simplest approach is to convert arrays stored on the CPU to NumPy arrays, perform
 the computation, and then convert the result back to the original array type. While this
