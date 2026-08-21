@@ -260,7 +260,7 @@ converting the input array to a NumPy array, it has performance comparable to Nu
 with only a negligible decrease in performance.
 
 Finally, the third benchmark considers a series of operations involving rotations using
-\texttt{scipy.spatial.transform.Rotation}. This is an example of functionality for which
+\path{scipy.spatial.transform.Rotation}. This is an example of functionality for which
 SciPy maintains two code paths: a compiled Cython code path for NumPy arrays and a
 Python code path written in terms of standardised APIs for other array types. The aim is
 to maintain satisfactory performance for NumPy arrays while also supporting other array
