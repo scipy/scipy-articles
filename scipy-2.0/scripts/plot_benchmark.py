@@ -1,4 +1,5 @@
 """Plot the results of the benchmarking."""
+
 import json
 import argparse
 
@@ -32,19 +33,21 @@ line_styles = {
 }
 
 funcs = {
-    "skew" : ["a)", r"\texttt{scipy.stats.skew}"],
-    "welch" : ["b)", r"\texttt{scipy.signal.welch}"],
-    "Rotation.mean" : ["c)", r"\texttt{scipy.spatial.transform.Rotation.mean}"],
+    "skew": ["a)", r"\texttt{scipy.stats.skew}"],
+    "welch": ["b)", r"\texttt{scipy.signal.welch}"],
+    "Rotation.mean": ["c)", r"\texttt{scipy.spatial.transform.Rotation.mean}"],
 }
 
 fig = plt.figure(figsize=(5, 6), layout="constrained")
 subfigs = fig.subfigures(3, 1)
 
 for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
-    (axl, axr) = subfig.subplots(1, 2)
+    axl, axr = subfig.subplots(1, 2)
     subfig.suptitle(title[1])
     subfig.text(
-        0.1, 0.97, rf"\textbf{{ {title[0]} }}",
+        0.1,
+        0.97,
+        rf"\textbf{{ {title[0]} }}",
         ha="left",
         va="top",
         fontsize="medium",
@@ -56,16 +59,12 @@ for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
                 data["ns"],
                 data["times"],
                 label=data["backend"] if i == 0 else None,
-                **line_styles[data["backend"]]
+                **line_styles[data["backend"]],
             )
             if data["backend"] == "NumPy":
                 numpy_times = data["times"]
             relative_times = np.array(numpy_times) / np.array(data["times"])
-            axr.loglog(
-                data["ns"],
-                relative_times,
-                **line_styles[data["backend"]]
-            )
+            axr.loglog(data["ns"], relative_times, **line_styles[data["backend"]])
     axl.set_ylabel("Time (s)")
     axr.set_ylabel("Speed-up relative\nto NumPy")
 axl.set_xlabel("Problem size $n$")
