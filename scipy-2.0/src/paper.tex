@@ -90,7 +90,7 @@ As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be att
 to the convenient Python interfaces it provided to popular compiled numerical libraries
 that were otherwise distributed primarily as standalone Fortran source
 packages, such as those available through the Netlib repository~\cite{netlib}.
-This included:
+These included
 ODEPACK~\cite{Hindmarsh1983ODEPACK},
 VODE/ZVODE~\cite{Brown1989}, and DOPRI5~\cite{Hairer1987} for solving initial value
 problems; QUADPACK~\cite{Piessens1983} for quadrature; FITPACK~\cite{dierckx1995curve}
@@ -100,7 +100,7 @@ for orthogonal distance regression; COBYLA~\cite{Powell1994}, L-BFGS-B~\cite{Mor
 SLSQP~\cite{Kraft1994,Kraft1988SQP}, MINPACK~\cite{More1980}, and
 NNLS~\cite{Lawson1995} for optimization;
 ARPACK-NG~\cite{Lehoucq2023ARPACKNG} and PROPACK~\cite{Larsen1998} for sparse eigenvalue problems
-and singular value decompositions respectively; AMOS~\cite{Amos1986} and
+and singular value decompositions, respectively; AMOS~\cite{Amos1986} and
 SPECFUN~\cite{Zhang1997} for special functions;
 CDFLIB~\cite{Brown1994CDFLIB}, mvndist~\cite{Genz1992}, and
 statlib~\cite{Dinneen1976,Best1975,Royston1995,Maclaren1985} for probability
@@ -140,7 +140,7 @@ After careful evaluation of the above issues, it was decided that for SciPy 2.0,
 codes needed either to be replaced with
 more recent, actively maintained alternatives, or to be translated from their
 original Fortran 77 source code to either pure Python,
-Cython~\cite{Behnel2011}, or C/C++ in order to secure the long term future of the
+Cython~\cite{Behnel2011}, or C/C++ in order to secure the long-term future of the
 project. Consequently, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
 ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
