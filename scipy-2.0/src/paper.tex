@@ -233,12 +233,12 @@ and scale parameters 5 and 0.5), the standard normal distribution, and the beta
 distribution (with shape parameters 0.5 and 0.5). The computation is performed in
 a vectorised fashion, with only one call to \texttt{scipy.stats.skew}.
 As shown in Figure~\ref{fig:benchmarks}(a), JAX JIT compilation provides a
-significant performance benefit, with CPU computations approximately 10--20 times
-faster than NumPy for $n < 10^5$ and GPU computations approximately 45--85 times
-faster for $n > 10^5$. Likewise, CuPy, which only supports GPU execution, provides
-a 10--25$\times$ speedup over NumPy for $n > 10^5$. PyTorch arrays on the CPU provide
-approximately a 2$\times$ speedup over NumPy, while GPU execution provides a
-2.5--4.5$\times$ speedup. Note that PyTorch's performance is currently limited by
+significant performance benefit, with CPU computations approximately 5--40 times
+faster than NumPy and GPU computations approximately 5--90 times
+faster, depending on $n$. Likewise, CuPy, which only supports GPU execution, provides
+a 2--4$\times$ speedup over NumPy for $n \gtrsim 10^5$. PyTorch arrays on the CPU
+approximately comparable NumPy, while GPU execution provides a
+2--4.5$\times$ speedup for $n \gtrsim 10^5$. Note that PyTorch's performance is currently limited by
 SciPy's lack of support for PyTorch's JIT compilation. Finally, across all benchmarks,
 JAX in eager mode is often significantly slower than NumPy because of the per-call
 dispatch overhead associated with individual array operations.
@@ -253,9 +253,9 @@ included. The test signal consists of a \SI{2}{\volt_{\mathrm{RMS}}} sine wave a
 spectral density of \SI{0.001}{\volt\squared\per\hertz}, sampled at \SI{10}{\kilo\hertz}
 for $n$ data points. This benchmark was also considered in~\cite{Meurer2023}; however,
 here we present the results in more detail. Again, JAX JIT compilation provides a
-significant performance benefit, with a $30$--$26340\times$ and $2.5$--$2200\times$
+significant performance benefit, with a 40--15075 times and 2.5--1855 times
 speedup over NumPy for CPU and GPU execution, respectively. CuPy provides a
-$3$--$25\times$ speedup for $n \gtrsim 10^5$. As the PyTorch implementation is based on
+3--25 times speedup for $n \gtrsim 10^5$. As the PyTorch implementation is based on
 converting the input array to a NumPy array, it has performance comparable to NumPy,
 with only a negligible decrease in performance.
 
@@ -267,11 +267,11 @@ to maintain satisfactory performance for NumPy arrays while also supporting othe
 types. The benchmark considers converting a series of $n$ random rotations, represented
 as Euler angles, to quaternions, computing the chordal $L_2$ mean~\cite{Hartley2013} of
 the rotations, and then converting the resulting mean back to Euler angles. As expected,
-when $n \lesssim 10^4$, the compiled Cython code path for NumPy arrays is significantly
+when $n \lesssim 10^4$, the compiled Cython code path for NumPy arrays is generally
 faster than the generic Python code path for other array types. However, for
 $n \gtrsim 10^4$, this gap closes, and alternative array types can provide a modest
-performance benefit. The most significant benefit is provided by JAX JIT compilation,
-which, when executed on the GPU, provides a $5.5$--$25.5\times$ speedup over NumPy. For
+performance benefit. The most significant performance increase is JAX JIT compilation,
+which, when executed on the GPU, provides a 5--25 times speedup over NumPy. For
 further benchmarks of SciPy's rotation and rigid-body transformation functionality,
 see~\cite{rotaion}.
 
