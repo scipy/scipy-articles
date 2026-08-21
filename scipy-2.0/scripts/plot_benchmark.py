@@ -20,14 +20,12 @@ line_styles = {
         "color": "tab:green",
         "linestyle": "-",
         "marker": "o",
-        "markevery": 0.1,
     },
     "JAX-GPU": {"color": "tab:green", "linestyle": "--", "marker": None},
     "JAX-GPU-JIT": {
         "color": "tab:green",
         "linestyle": "--",
         "marker": "o",
-        "markevery": 0.1,
     },
     "CuPy": {"color": "tab:red", "linestyle": "--", "marker": None},
 }

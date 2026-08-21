@@ -1,15 +1,14 @@
 """Run benchmark for a given function and array type."""
 
 import os
+os.environ["SCIPY_ARRAY_API"] = "1"
 from timeit import repeat
 import argparse
 import json
 
-from scipy.stats import gmean
 from scipy._lib._array_api import xp_assert_close
 import numpy as np
 
-os.environ["SCIPY_ARRAY_API"] = "1"
 parser = argparse.ArgumentParser()
 parser.add_argument("function", type=str, help="Function to benchmark")
 parser.add_argument("log_n_start", type=float, help="Starting size of the input data")
@@ -18,18 +17,18 @@ parser.add_argument(
     "n_points", type=int, help="Number of points between n_start and n_end"
 )
 parser.add_argument("--backend", type=str, default="NumPy", help="Backend to benchmark")
-parser.add_argument(
-    "--repeats", type=int, default=30, help="Number of repeats for timing"
-)
+parser.add_argument("--repeats", type=int, default=5, help="samples per size")
+parser.add_argument("--number", type=int, default=100, help="calls per sample")
 args = parser.parse_args()
 
 backend = args.backend
 repeats = args.repeats
+number = args.number
 
 
 def time(func):
-    times = repeat(func, number=1, repeat=repeats)
-    return gmean(times)
+    times = np.asarray(repeat(func, number=number, repeat=repeats, setup=func)) / number
+    return np.min(times)
 
 
 if args.function == "skew":
@@ -77,7 +76,6 @@ else:
     raise ValueError(f"Unknown function: {args.function}")
 
 
-REPEATS = 10
 ns = np.logspace(args.log_n_start, args.log_n_end, args.n_points, dtype=int)
 times = []
 
@@ -111,11 +109,7 @@ for n in ns:
         xp_assert_close(func(data_torch), torch.asarray(numpy_result, device="cuda"))
         torch.cuda.synchronize()
 
-        def run():
-            func(data_torch)
-            torch.cuda.synchronize()
-
-        times.append(time(run))
+        times.append(time(lambda: (func(data_torch), torch.cuda.synchronize())))
     elif "JAX-CPU" in backend:
         data_jax = jnp.asarray(data, device=jax.devices("cpu")[0])
         xp_assert_close(func(data_jax).block_until_ready(), jnp.asarray(numpy_result))
@@ -132,11 +126,7 @@ for n in ns:
         xp_assert_close(func(data_cupy), cp.asarray(numpy_result))
         cp.cuda.Stream.null.synchronize()
 
-        def run():
-            func(data_cupy)
-            cp.cuda.Stream.null.synchronize()
-
-        times.append(time(run))
+        times.append(time(lambda: (func(data_cupy), cp.cuda.Device().synchronize())))
 
 with open(f"scripts/{args.function}_benchmark_timings.jsonl", "a") as f:
     f.write(json.dumps({"backend": backend, "ns": ns.tolist(), "times": times}) + "\n")
