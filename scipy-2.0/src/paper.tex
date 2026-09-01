@@ -82,6 +82,50 @@
 
 \section{Introduction}
 
+\section{When Random is not Good Enough: New Functional for Quasi-Monte Methods}
+
+Both NumPy~\cite{Harris2020} and SciPy provide functionality for generating
+(pseudo)random numbers following a multitude of different distributions. These tools
+often form the basis of Monte Carlo methods, which are frequently applied to tackle
+fundamental tasks such as sampling, estimation, and optimization~\cite{Kroese2014}.
+Monte Carlo methods are especially useful when the dimensionality of the problem is
+high meaning deterministic methods are infeasible.
+
+A prototypical example is the estimation of the integral
+\begin{equation}
+    I = \int_{[0,1]^s} f(\mathbf{x})\, \mathrm{d}\mathbf{x},
+\end{equation}
+which is infeasible to compute via standard quadrature or cubature rules when $s$ is
+large. The Monte Carlo method estimates $I$ by
+\begin{equation}
+    Q = \frac{1}{n}\sum_{i=0}^{n-1} f(\mathbf{t_i}),
+\end{equation}
+where $\mathbf{t_i}$ are independent and identically distributed uniform random samples
+from $[0,1]^s$. It is well known that, provided $f$ is square integrable, the error of
+this estimate is given by
+\begin{equation}
+    \sqrt{\mathbb{E}\left[|I - Q|^2\right]} = \frac{\sigma(f)}{\sqrt{n}},
+\end{equation}
+where $\sigma(f)$ is the square root of the variance of $f$ over $[0,1]^s$. Hence,
+we see that the convergence rate is $O(n^{-1/2})$, which, importantly, is independent
+of the dimensionality $s$.
+
+Why these might fall short
+
+What is QMC and its advantages
+
+New QMC samplers
+
+Discrepancy / geometric discrepancy
+
+GSA
+
+% qmc_quad
+
+Integration with new stats distributions
+
+integration with things like RBF interpolation, differential evolution, shgo, sampling
+
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
