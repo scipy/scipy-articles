@@ -146,7 +146,7 @@ the standard.
   system that generates array type compatibility tables and test skips, using
   the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
   using array-api-compat and array-api-extra functionality when required.},
-  label={lst:fiedler}]fig.legend(ncols=4, loc="outside lower center")
+  label={lst:fiedler}]
 
 + @xp_capabilities()  # Register with documentation and testing framework
   def fiedler(a):
@@ -206,7 +206,7 @@ Figure~\ref{fig:benchmarks}(c).
     \includegraphics{figures/benchmark.pdf}
     \caption{Benchmarks comparing the performance of various SciPy functions
     for different array types as the problem size is increased. Reported
-    timings are the geometric mean of thirty repetitions and are shown both
+    timings are the minimum of five samples of 100 evaluations and are shown both
     as wall-clock time and relative to NumPy, with values greater than one
     indicating improved performance over NumPy.
     (a) Computing the skewness of a data set.
@@ -237,7 +237,7 @@ significant performance benefit, with CPU computations approximately 5--40 times
 faster than NumPy and GPU computations approximately 5--90 times
 faster, depending on $n$. Likewise, CuPy, which only supports GPU execution, provides
 a 2--4$\times$ speedup over NumPy for $n \gtrsim 10^5$. PyTorch arrays on the CPU
-approximately comparable NumPy, while GPU execution provides a
+are approximately comparable NumPy, while GPU execution provides a
 2--4.5$\times$ speedup for $n \gtrsim 10^5$. Note that PyTorch's performance is currently limited by
 SciPy's lack of support for PyTorch's JIT compilation. Finally, across all benchmarks,
 JAX in eager mode is often significantly slower than NumPy because of the per-call
