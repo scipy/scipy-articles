@@ -16,7 +16,7 @@ methods = [
     ("IID uniform", lambda: rng.random((n, 2))),
     ("Sobol'", lambda: qmc.Sobol(d=2, rng=rng).random(n)),
     ("Halton", lambda: qmc.Halton(d=2, rng=rng).random(n)),
-    ("Latin hypercube", lambda: qmc.LatinHypercube(d=2, rng=rng).random(n)),
+    ("Latin HC", lambda: qmc.LatinHypercube(d=2, rng=rng).random(n)),
     ("Poisson disk", lambda: qmc.PoissonDisk(d=2, radius=0.1, rng=rng,
                                              ncandidates=1000, hypersphere="surface").fill_space()),
 ]
