@@ -91,30 +91,26 @@ fundamental tasks such as sampling, estimation, and optimization~\cite{Kroese201
 Monte Carlo methods are especially useful when the dimensionality of the problem is
 high meaning deterministic methods are infeasible.
 
-A prototypical example is the estimation of the integral
-\begin{equation}
-    I = \int_{[0,1]^s} f(\mathbf{x})\, \mathrm{d}\mathbf{x},
-\end{equation}
-which is infeasible to compute via standard quadrature or cubature rules when $s$ is
-large. The Monte Carlo method estimates $I$ by
-\begin{equation}
-    Q = \frac{1}{n}\sum_{i=0}^{n-1} f(\mathbf{t_i}),
-\end{equation}
-where $\mathbf{t_i}$ are independent and identically distributed uniform random samples
-from $[0,1]^s$. It is well known that, provided $f$ is square integrable, the error of
-this estimate is given by
-\begin{equation}
-    \sqrt{\mathbb{E}\left[|I - Q|^2\right]} = \frac{\sigma(f)}{\sqrt{n}},
-\end{equation}
-where $\sigma(f)$ is the square root of the variance of $f$ over $[0,1]^s$. Hence,
-we see that the convergence rate is $O(n^{-1/2})$, which, importantly, is independent
-of the dimensionality $s$.
+A prototypical example of this is the approximation of multidimensional integrals,
+which is infeasible when computed via standard quadrature or cubature rules if the
+dimensionality is large. The Monte Carlo method estimates the integral by evaluating the
+integrand at points that are independent and identically distributed uniform random
+samples. It is well known that, provided the intergrand is square integrable,
+then this approach has a probabilistic error bound of the form $O(n^{-1/2})$, where $n$
+is the number of points the intergrand is sampled at. While this
+convergence rate has the important property of being independent of the dimension $s$,
+it is still rather slow. This led to the development of Quasi-Monte Carlo (QMC) methods,
+for which the sample points are chosen deterministically from a
+\emph{low-discrepancy sequence} to achieve a faster convergence rate.
+This is achieved by choosing points that are more evenly distributed than random points,
+avoiding clustering and large gaps that are typical of random points.
+For a more detailed discussion and introduction of QMC methods, we refer the reader
+to~\cite{Niederreiter1992,Dick2010,Dick2013,Giles2008}.
 
-Why these might fall short
-
-What is QMC and its advantages
-
-New QMC samplers
+SciPy 2.0 contains a new submodule, \texttt{scipy.stats.qmc}, which provides
+convenient building blocks for implementing QMC methods. It implements
+Sobol'~\cite{Sobol1967,Joe2008} and
+Halton~\cite{Halton1960,Halton1964} low-discrepancy sequences
 
 Discrepancy / geometric discrepancy
 
