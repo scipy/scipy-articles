@@ -1,4 +1,6 @@
 \documentclass[acmsmall]{acmart}
+\usepackage{todonotes}
+
 \setcopyright{acmlicensed}
 \copyrightyear{2018}
 \acmYear{2018}
@@ -22,7 +24,7 @@
   morecomment=[f][\color{diffrem}]{-\ },
 }
 
-\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+\newcommand{\jake}[1]{\todo[inline, backgroundcolor=green!20!white]{Jake:~#1}}
 
 
 \begin{document}
@@ -277,7 +279,7 @@ see~\cite{rotaion}.
 
 \begin{table}
   \caption{Coverage of modules in SciPy 2.0 supporting alternative array packages.
-  \todo{Update once SciPy 2.0 is released}}\label{tab:coverage}
+  \jake{Update once SciPy 2.0 is released}}\label{tab:coverage}
   \begin{tabular}{lcccccc}
     \toprule
     Module & CuPy & \multicolumn{2}{c}{PyTorch} & \multicolumn{3}{c}{JAX}\\
@@ -320,7 +322,7 @@ Overall & 35 \% & 40 \% & 20 \% & 39 \% & 19 \% & 25 \% \\
 
 Converting SciPy's extensive range of functionality to support alternative array types
 has been a significant undertaking. Table~\ref{tab:coverage} shows the progress towards
-this goal as of SciPy 2.0. \todo{Finish this once SciPy 2.0 is actually released, as it
+this goal as of SciPy 2.0. \jake{Finish this once SciPy 2.0 is actually released, as it
 is difficult to comment on coverage when we do not yet know what it will be.} Note that
 this table omits legacy modules and modules that are not within the scope of the
 conversion. This includes \texttt{scipy.datasets} and \texttt{scipy.io}, both of which
@@ -396,10 +398,16 @@ codes posed a significant undertaking, requiring a significant proportion of Sci
 $\sim80{,}000$ source lines of Fortran 77 to be translated by hand. The completion of this work has been a major milestone for
 SciPy 2.0, leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
-future development and improvements, for example, improved special functions ---
-see \todo{Forward Ref} for more details. Such developments were previously infeasible
+future development and improvements, for example, improved special functions, as
+discussed below.
+
+\jake{Add a forward reference to the relevant section.}
+
+Such developments were previously infeasible
 due to the lack of expertise in Fortran 77 within the SciPy developer community.
-Following these changes, SciPy 2.0 contains no Fortran. \todo{We may want to revist
+Following these changes, SciPy 2.0 contains no Fortran.
+
+\jake{We may want to revisit
 this and give percentages like in the 1.0 paper but we need to decide if we would
 include the subprojects directory.}
 
