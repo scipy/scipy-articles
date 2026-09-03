@@ -329,6 +329,80 @@ defer conversion to the user's preferred array type. Future versions of SciPy wi
 continue to expand the number of functions supporting alternative array libraries, as
 well as add support for additional features, such as PyTorch's compilation mechanism,
 \texttt{torch.compile}.
+\section{A New Look at Language Choices}
+
+As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
+to the convenient Python interfaces it provided to popular compiled numerical libraries
+that were otherwise distributed primarily as standalone Fortran source
+packages, such as those available through the Netlib repository~\cite{netlib}.
+These included
+ODEPACK~\cite{Hindmarsh1983ODEPACK},
+VODE/ZVODE~\cite{Brown1989}, and DOPRI5~\cite{Hairer1987} for solving initial value
+problems; QUADPACK~\cite{Piessens1983} for quadrature; FITPACK~\cite{dierckx1995curve}
+for spline fitting; ID~\cite{martinsson2008id,Halko2011} for interpolative
+matrix decomposition; ODRPACK~\cite{Boggs1989}
+for orthogonal distance regression; COBYLA~\cite{Powell1994}, L-BFGS-B~\cite{Morales2011},
+SLSQP~\cite{Kraft1994,Kraft1988SQP}, MINPACK~\cite{More1980}, and
+NNLS~\cite{Lawson1995} for optimization;
+ARPACK-NG~\cite{Lehoucq2023ARPACKNG} and PROPACK~\cite{Larsen1998} for sparse eigenvalue problems
+and singular value decompositions, respectively; AMOS~\cite{Amos1986} and
+SPECFUN~\cite{Zhang1996} for special functions;
+CDFLIB~\cite{Brown1994CDFLIB}, mvndist~\cite{Genz1992}, and
+statlib~\cite{Dinneen1976,Best1975,Royston1995,Maclaren1985} for probability
+distributions and statistical functions;
+and FFTPACK~\cite{Swarztrauber1982} for fast Fourier transforms.
+Consequently, SciPy 1.0 consisted of approximately $50\%$ Python, $25\%$ Fortran,
+$20\%$ C, $3\%$ Cython, and $2\%$ C++ code~\cite{Virtanen2020}.
+
+Despite the enormous utility these codes have provided, they also presented a number
+of challenges on the road to SciPy 2.0. By far the most significant of these was
+limited availability of Fortran compilers for Windows and
+emerging new platforms such as WebAssembly~\cite{Haas2017}. This left SciPy
+in a precarious position where distributing SciPy was challenging and required
+a custom MinGW toolchain to build SciPy on Windows~\cite{obermeier2023eu}.
+While tools such as \texttt{flang-new} (now \texttt{flang})
+and \texttt{LFortran} showed promise in addressing this issue, they were not
+mature enough to be adopted by SciPy at the time and waiting for them to mature was
+deemed not viable.
+
+In addition, there were a number of further issues pertaining to the Fortran 77
+implementations of these codes. A number of them were not thread-safe,
+meaning that they could not be safely called from multiple threads simultaneously.
+Previously, SciPy used locking to prevent this. However, the introduction of
+free-threading in CPython 3.13, and its subsequent maturation in CPython 3.14, meant
+that, for the first time, multiple threads could execute Python code concurrently
+without the Global Interpreter Lock (GIL)~\cite{gross2023pep703}. Unfortunately,
+users of these non-reentrant codes would not be able to take advantage of this
+new feature.
+Other challenges presented by these codes included a lack of support for
+64-bit integer types (ILP64) and lack of control over the random number generator used.
+Finally, many of these codes were no longer actively maintained, meaning that the
+SciPy developers were effectively responsible for fixing any bugs that arose.
+This increased the maintenance burden and made it more difficult to resolve bugs and
+improve these routines. This was further compounded by a lack of expertise in Fortran
+77 within the SciPy developer community, which often led to bugs remaining unresolved
+indefinitely.
+
+After careful evaluation of the above issues, it was decided that these
+codes needed either to be replaced with
+more recent, actively maintained alternatives, or to be translated from their
+original Fortran 77 source code to either pure Python,
+Cython~\cite{Behnel2011}, or C/C++ in order to secure the long-term future of the
+project. Consequently, COBYLA has been replaced with
+a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
+ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
+mentioned have been replaced with counterparts from Boost.\@Math~\cite{boostmath}. Translation of the remaining
+codes posed a significant undertaking, requiring a significant proportion of SciPy's
+$\sim80{,}000$ source lines of Fortran 77 to be translated by hand. The completion of this work has been a major milestone for
+SciPy 2.0, leading to the resolution of the challenges described above as well as many
+long-standing bugs. Furthermore, these translations provide the foundation for
+future development and improvements, for example, improved special functions ---
+see \todo{Forward Ref} for more details. Such developments were previously infeasible
+due to the lack of expertise in Fortran 77 within the SciPy developer community.
+Following these changes, SciPy 2.0 contains no Fortran. \todo{We may want to revist
+this and give percentages like in the 1.0 paper but we need to decide if we would
+include the subprojects directory.}
+
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
