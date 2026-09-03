@@ -1,4 +1,6 @@
 \documentclass[acmsmall]{acmart}
+\usepackage{todonotes}
+
 \setcopyright{acmlicensed}
 \copyrightyear{2018}
 \acmYear{2018}
@@ -10,7 +12,7 @@
 \acmArticle{111}
 \acmMonth{8}
 
-\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+\newcommand{\jake}[1]{\todo[inline, backgroundcolor=green!20!white]{Jake:~#1}}
 
 \begin{document}
 
@@ -151,10 +153,16 @@ codes posed a significant undertaking, requiring a significant proportion of Sci
 $\sim80{,}000$ source lines of Fortran 77 to be translated by hand. The completion of this work has been a major milestone for
 SciPy 2.0, leading to the resolution of the challenges described above as well as many
 long-standing bugs. Furthermore, these translations provide the foundation for
-future development and improvements, for example, improved special functions ---
-see \todo{Forward Ref} for more details. Such developments were previously infeasible
+future development and improvements, for example, improved special functions, as
+discussed below.
+
+\jake{Add a forward reference to the relevant section.}
+
+Such developments were previously infeasible
 due to the lack of expertise in Fortran 77 within the SciPy developer community.
-Following these changes, SciPy 2.0 contains no Fortran. \todo{We may want to revist
+Following these changes, SciPy 2.0 contains no Fortran.
+
+\jake{We may want to revisit
 this and give percentages like in the 1.0 paper but we need to decide if we would
 include the subprojects directory.}
 
