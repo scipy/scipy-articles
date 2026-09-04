@@ -2,13 +2,107 @@
 name = "SciPy 2.0 paper"
 authors = ["SciPy Developers"]
 channels = ["https://prefix.dev/conda-forge"]
-platforms = ["osx-arm64", "linux-64", "linux-aarch64", "win-64"]
+platforms = ["osx-arm64",
+             "linux-64",
+             "linux-aarch64",
+             "win-64",
+             { name = "linux-64-cuda", platform = "linux-64", cuda = "12.0" },
+]
 
-[dependencies]
+[feature.latex.dependencies]
 tectonic = "*"
 chktex = "*"
 
-[tasks]
-build = "tectonic -X build --keep-logs"
-watch = "tectonic -X watch"
-lint = "chktex src/paper.tex"
+[feature.latex.tasks]
+build = { cmd = "tectonic -X build --keep-logs", description = "Build the paper PDF" }
+watch = { cmd = "tectonic -X watch", description = "Watch the source and rebuild the paper" }
+lint = { cmd = "chktex src/paper.tex", description = "Lint the LaTeX source" }
+
+[feature.python.dependencies]
+python = ">=3.12"
+
+[feature.python.pypi-dependencies]
+scipy = { index = "https://pypi.anaconda.org/scientific-python-nightly-wheels/simple" }
+packaging = "*"
+
+[feature.coverage-table.dependencies]
+pandas = ">=3.0"
+jinja2 = "*"
+
+[feature.coverage-table.tasks]
+array-api-compatibility-table = { cmd = "python scripts/array_api_compatibility_table.py", description = "Generate the array API compatibility table" }
+
+[feature.numpy.dependencies]
+numpy = ">=2.0"
+
+[feature.pytorch-cpu.dependencies]
+pytorch-cpu = "*"
+
+[feature.pytorch-gpu.dependencies]
+pytorch-gpu = "*"
+
+[feature.pytorch-gpu]
+platforms = ["linux-64-cuda"]
+
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.dependencies]
+jax = "*"
+jaxlib = { version = "*", build = "*cpu*" }
+
+[feature.jax-cpu]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+platforms = ["linux-64", "osx-arm64", "linux-aarch64"]
+
+[feature.jax-gpu.dependencies]
+# JAX 0.6.2 and 0.7.0 segfault on CUDA
+jaxlib = { version = "!=0.6.2,!=0.7.0", build = "cuda12*" }
+jax = "*"
+
+[feature.jax-gpu]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+platforms = ["linux-64-cuda"]
+
+[feature.cupy.dependencies]
+cupy = "*"
+numpy = "<2.5" # https://github.com/cupy/cupy/pull/10037
+
+[feature.run-benchmark]
+platforms = ["osx-arm64",
+             "linux-64",
+             "linux-aarch64"]
+
+[feature.run-benchmark.dependencies]
+bash = ">=4"
+
+[feature.run-benchmark.tasks]
+run-benchmark = {
+cmd = """
+./scripts/run_benchmark.sh skew 2 7 6 &&
+./scripts/run_benchmark.sh welch 2.5 6 6 &&
+./scripts/run_benchmark.sh Rotation.mean 2 6.5 6
+""",
+description = "Run the benchmarks"
+}
+
+[feature.plot.dependencies]
+matplotlib = "*"
+
+[feature.plot.tasks]
+plot-benchmark = { cmd = "python scripts/plot_benchmark.py", description = "Plot the benchmark results" }
+
+[feature.cupy]
+platforms = ["linux-64-cuda"]
+
+[environments]
+default = ["python", "latex"]
+latex = ["latex"]
+python = ["python"]
+coverage-table = ["python", "coverage-table"]
+numpy = ["python", "numpy"]
+pytorch-cpu = ["python", "pytorch-cpu"]
+pytorch-gpu = ["python", "pytorch-gpu"]
+jax-cpu = ["python", "jax-cpu"]
+jax-gpu = ["python", "jax-gpu"]
+cupy = ["python", "cupy"]
+plot = ["python", "plot", "numpy"]
+run-benchmark = ["run-benchmark"]

@@ -12,7 +12,20 @@
 \acmArticle{111}
 \acmMonth{8}
 
+\usepackage{listings}
+\usepackage{siunitx}
+
+\definecolor{diffincl}{RGB}{0,128,0}
+\definecolor{diffrem}{RGB}{255,69,0}
+
+\lstdefinelanguage{diff}{
+  basicstyle=\ttfamily\small,
+  morecomment=[f][\color{diffincl}]{+\ },
+  morecomment=[f][\color{diffrem}]{-\ },
+}
+
 \newcommand{\jake}[1]{\todo[inline, backgroundcolor=green!20!white]{Jake:~#1}}
+
 
 \begin{document}
 
@@ -86,6 +99,238 @@
 
 \section{Introduction}
 
+\section{Support for Graphics Processing Units (GPUs) and Just-in-Time (JIT) Compilation
+Through the Python Array API Standard}
+
+Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array libraries for
+Python, Numeric~\cite{Dubois1996,ascher2000numerical} and
+numarray~\cite{Greenfield2003numarrayA}, SciPy's functionality, for most of its
+existence, has been built on top of NumPy arrays. However, driven in part
+by the boom in machine learning and artificial intelligence, graphics
+processing units (GPUs) have become an
+important tool for scientific computing. At the same time, advanced compiler and
+program-transformation techniques, such as just-in-time (JIT) compilation
+and automatic differentiation, are becoming increasingly common in computational
+workflows. This posed a
+problem for SciPy because, while NumPy has been the de
+facto standard for array computing in Python, it does not natively support GPU computing, JIT
+compilation, or automatic differentiation. This has led to the proliferation of other
+array libraries for Python, such as CuPy~\cite{cupy_learningsys2017},
+JAX~\cite{jax2018github}, and PyTorch~\cite{Ansel2024}, which provide support for these
+capabilities (among other features). This has
+effectively led to a dichotomy: SciPy cannot utilize the new features offered by these
+libraries, and these new array libraries cannot make full use of the large amount of
+functionality SciPy provides.
+
+Addressing this fragmentation through the Python array API standard~\cite{Meurer2023} has been a
+major focus of SciPy 2.0. This standard defines application
+programming interfaces (APIs) and behaviours for arrays and their
+associated operations. Most importantly for SciPy, this enables
+``array-consuming libraries to accept and operate on arrays from multiple different
+array libraries''~\cite{Meurer2023}. In principle, by rewriting SciPy's functionality
+in terms of these standardised APIs, SciPy can support any array package that
+implements the standard. However, in practice, there are a number of barriers to this
+interoperable ideal.
+Most significantly, NumPy, CuPy, JAX, and PyTorch all predate
+the creation of the standard\footnote{The first version of the Python array API
+standard was released in December 2021, with new revisions appearing annually.}
+and are therefore not fully compliant with it. To resolve this, the array-api-compat package provides lightweight wrappers that adapt these libraries' interface to the standard. Likewise,
+some functionality is not covered by the standard, for a variety of reasons, so the
+array-api-extra package provides generic implementations of these operations.
+These additional packages therefore overcome many of the practical difficulties in
+achieving interoperability. As an example, Listing~\ref{lst:fiedler} shows how a typical
+function from SciPy, written in Python, can be adapted to accept arrays conforming to
+the standard.
+
+\begin{lstlisting}[language=diff,caption={Example showing the changes made to
+  \texttt{scipy.linalg.fiedler} in order to support the Python array API standard.
+  Changes include registering the function with an automated documentation and testing
+  system that generates array type compatibility tables and test skips, using
+  the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
+  using array-api-compat and array-api-extra functionality when required.},
+  label={lst:fiedler}]
+
++ @xp_capabilities()  # Register with documentation and testing framework
+  def fiedler(a):
++     xp = array_namespace(a)  # get the namespace of the input array
+-     a = np.atleast_1d(a)
++     a = xpx.atleast_nd(xp.asarray(a), ndim=1)  # from array-api-extra
+
+-     if a.size == 0:
++     if xp_size(a) == 0:  # from array-api-compat
+-         return np.array([], dtype=float)
++         return xp.empty((0, 0), dtype=xp.float64)
+-     elif a.size == 1:
++     elif xp_size(a) == 1:
+-         return np.array([[0.]])
++         return xp.asarray([[0.]])
+      else:
+-         return np.abs(a[..., :, None] - a[..., None, :])
++         return xp.abs(a[..., :, xp.newaxis] - a[..., xp.newaxis, :])
+\end{lstlisting}
+
+While the recipe shown in Listing~\ref{lst:fiedler} can be applied to most of SciPy's
+Python code, a significant amount of SciPy's functionality is implemented in compiled
+languages, such as Cython and C/C++.
+This is typically the case when a Python implementation would not provide
+satisfactory performance, for example, when an algorithm cannot be efficiently expressed
+in terms of vectorised array operations, which would otherwise allow much of the
+computation to be delegated to NumPy's optimised compiled code. This presents
+a challenge because these functions cannot be converted to accept other array libraries
+by simply rewriting them in terms of standardised array operations. SciPy has adopted three approaches to address this challenge.
+
+The simplest approach is to convert arrays stored on the CPU to NumPy arrays, perform
+the computation, and then convert the result back to the original array type. While this
+provides a straightforward means of achieving interoperability, it does not support JIT
+compilation or automatic differentiation. Moreover, it is not a viable approach for
+arrays stored on the GPU because of the significant overhead of transferring data
+between the CPU and GPU. In the future, SciPy also hopes to utilise the
+DLPack~\cite{dlpack} data interchange protocol, which is an open in-memory
+structure for sharing tensors among frameworks.
+
+The second approach exploits the fact that array libraries such as JAX and CuPy have
+already reimplemented a subset of SciPy's functionality, allowing us to \emph{delegate}
+to their implementations. For functionality implemented in Python, we likewise delegate
+to the array library's implementation where available, assuming that a library-specific
+implementation will provide better performance than a generic implementation.
+
+The final approach is to maintain two code paths: the original compiled code path for
+NumPy arrays and a new Python code path written in terms of standardised operations.
+While this allows SciPy to support alternative array libraries, it comes at the cost of code
+duplication and an increased maintenance burden. Consequently, this approach is used
+sparingly, in situations where maintaining two code paths provides a significant
+performance benefit. For example, when executed on a GPU, a Python implementation can
+outperform a compiled implementation executed on the CPU --- see
+Figure~\ref{fig:benchmarks}(c).
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/benchmark.pdf}
+    \caption{Benchmarks comparing the performance of various SciPy functions
+    for different array types as the problem size is increased. Reported
+    timings are the minimum of five samples of 100 evaluations and are shown both
+    as wall-clock time and relative to NumPy, with values greater than one
+    indicating improved performance over NumPy.
+    (a) Computing the skewness of a data set.
+    (b) Estimating the power spectral density using Welch's method.
+    (c) Computing the mean of multiple rotations.}\label{fig:benchmarks}
+\end{figure}
+
+While enabling users to use SciPy with their preferred array types is valuable in its
+own right, it can also provide substantial performance benefits. We quantify these
+benefits through a series of benchmarks covering the different approaches to adopting
+the Array API Standard discussed above. All benchmarks
+were executed on an Intel Core Ultra 7 165H and
+an NVIDIA GeForce RTX 2050. Code to reproduce the benchmarks is available at
+\href{https://github.com/scipy/scipy-articles}{github.com/scipy/scipy-articles}.
+
+The first benchmark considers the computation of the sample skewness,
+$\gamma_1 = \mu_3/\mu_2^{3/2}$, where $\mu_i$ is the biased $i$th central sample
+moment, using \texttt{scipy.stats.skew}. This function is implemented entirely
+in Python and was therefore adapted to accept arrays from other array libraries by
+rewriting it in terms of standardised functions, similar to the example in
+Listing~\ref{lst:fiedler}. Specifically, the benchmark considers computing the
+skewness of three samples of size $n$, drawn from the gamma distribution (with shape
+and scale parameters 5 and 0.5), the standard normal distribution, and the beta
+distribution (with shape parameters 0.5 and 0.5). The computation is performed in
+a vectorised fashion, with only one call to \texttt{scipy.stats.skew}.
+As shown in Figure~\ref{fig:benchmarks}(a), JAX JIT compilation provides a
+significant performance benefit, with CPU computations approximately 5--40 times
+faster than NumPy and GPU computations approximately 5--90 times
+faster, depending on $n$. Likewise, CuPy, which only supports GPU execution, provides
+a 2--4$\times$ speedup over NumPy for $n \gtrsim 10^5$. PyTorch arrays on the CPU
+are approximately comparable NumPy, while GPU execution provides a
+2--4.5$\times$ speedup for $n \gtrsim 10^5$. Note that PyTorch's performance is currently limited by
+SciPy's lack of support for PyTorch's JIT compilation. Finally, across all benchmarks,
+JAX in eager mode is often significantly slower than NumPy because of the per-call
+dispatch overhead associated with individual array operations.
+
+The second benchmark considers estimating the power spectral density of a signal using
+Welch's method~\cite{Welch1967} with \texttt{scipy.signal.welch}. For JAX and CuPy, this
+function is delegated to their native implementations; for other array types, the input
+array is converted to a NumPy array, the computation is performed, and the result is
+converted back to the original array type. Consequently, PyTorch GPU results are not
+included. The test signal consists of a \SI{2}{\volt_{\mathrm{RMS}}} sine wave at
+\SI{1234}{\hertz}, corrupted by additive white Gaussian noise with a one-sided power
+spectral density of \SI{0.001}{\volt\squared\per\hertz}, sampled at \SI{10}{\kilo\hertz}
+for $n$ data points. This benchmark was also considered in~\cite{Meurer2023}; however,
+here we present the results in more detail. Again, JAX JIT compilation provides a
+significant performance benefit, with a 40--15075 times and 2.5--1855 times
+speedup over NumPy for CPU and GPU execution, respectively. CuPy provides a
+3--25 times speedup for $n \gtrsim 10^5$. As the PyTorch implementation is based on
+converting the input array to a NumPy array, it has performance comparable to NumPy,
+with only a negligible decrease in performance.
+
+Finally, the third benchmark considers a series of operations involving rotations using
+\path{scipy.spatial.transform.Rotation}. This is an example of functionality for which
+SciPy maintains two code paths: a compiled Cython code path for NumPy arrays and a
+Python code path written in terms of standardised APIs for other array types. The aim is
+to maintain satisfactory performance for NumPy arrays while also supporting other array
+types. The benchmark considers converting a series of $n$ random rotations, represented
+as Euler angles, to quaternions, computing the chordal $L_2$ mean~\cite{Hartley2013} of
+the rotations, and then converting the resulting mean back to Euler angles. As expected,
+when $n \lesssim 10^4$, the compiled Cython code path for NumPy arrays is generally
+faster than the generic Python code path for other array types. However, for
+$n \gtrsim 10^4$, this gap closes, and alternative array types can provide a modest
+performance benefit. The most significant performance increase is JAX JIT compilation,
+which, when executed on the GPU, provides a 5--25 times speedup over NumPy. For
+further benchmarks of SciPy's rotation and rigid-body transformation functionality,
+see~\cite{rotaion}.
+
+\begin{table}
+  \caption{Coverage of modules in SciPy 2.0 supporting alternative array packages.
+  \jake{Update once SciPy 2.0 is released}}\label{tab:coverage}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Module & CuPy & \multicolumn{2}{c}{PyTorch} & \multicolumn{3}{c}{JAX}\\
+    \cmidrule(lr){2-2}
+    \cmidrule(lr){3-4}
+    \cmidrule(lr){5-7}
+    & GPU & CPU & GPU & CPU & GPU & JIT\\
+    \midrule
+\texttt{cluster.hierarchy} & 26 \% & 90 \% & 26 \% & 90 \% & 26 \% & 74 \% \\
+\texttt{cluster.vq} & 25 \% & 100 \% & 25 \% & 100 \% & 25 \% & 25 \% \\
+\texttt{constants} & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\
+\texttt{differentiate} & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% & 0 \% \\
+\texttt{fft} & 75 \% & 100 \% & 75 \% & 94 \% & 75 \% & 94 \% \\
+\texttt{integrate} & 33 \% & 30 \% & 30 \% & 27 \% & 27 \% & 17 \% \\
+\texttt{interpolate} & 30 \% & 53 \% & 3 \% & 53 \% & 3 \% & 3 \% \\
+\texttt{linalg} & 4 \% & 4 \% & 4 \% & 4 \% & 4 \% & 2 \% \\
+\texttt{linalg.interpolative} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{ndimage} & 92 \% & 99 \% & 0 \% & 99 \% & 1 \% & 1 \% \\
+\texttt{optimize} & 7 \% & 7 \% & 7 \% & 6 \% & 6 \% & 6 \% \\
+\texttt{optimize.elementwise} & 100 \% & 75 \% & 75 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{signal} & 65 \% & 62 \% & 33 \% & 62 \% & 21 \% & 21 \% \\
+\texttt{signal.windows} & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% & 96 \% \\
+\texttt{sparse} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{sparse.csgraph} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{sparse.linalg} & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% & 6 \% \\
+\texttt{spatial} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{spatial.distance} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{spatial.transform} & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% & 75 \% \\
+\texttt{special} & 27 \% & 28 \% & 11 \% & 28 \% & 12 \% & 28 \% \\
+\texttt{stats} & 50 \% & 60 \% & 44 \% & 58 \% & 48 \% & 50 \% \\
+\texttt{stats.contingency} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{stats.distributions} & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% & 25 \% \\
+\texttt{stats.qmc} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\texttt{stats.sampling} & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% & 0 \% \\
+\midrule
+Overall & 35 \% & 40 \% & 20 \% & 39 \% & 19 \% & 25 \% \\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+Converting SciPy's extensive range of functionality to support alternative array types
+has been a significant undertaking. Table~\ref{tab:coverage} shows the progress towards
+this goal as of SciPy 2.0. \jake{Finish this once SciPy 2.0 is actually released, as it
+is difficult to comment on coverage when we do not yet know what it will be.} Note that
+this table omits legacy modules and modules that are not within the scope of the
+conversion. This includes \texttt{scipy.datasets} and \texttt{scipy.io}, both of which
+involve reading binary files that must first be loaded into CPU memory; we therefore
+defer conversion to the user's preferred array type. Future versions of SciPy will
+continue to expand the number of functions supporting alternative array libraries, as
+well as add support for additional features, such as PyTorch's compilation mechanism,
+\texttt{torch.compile}.
 \section{A New Look at Language Choices}
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed

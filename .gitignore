@@ -13,3 +13,4 @@
 *.cut
 paper.pdf
 /.vscode/*
+*.jsonl
