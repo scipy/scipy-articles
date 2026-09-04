@@ -166,6 +166,46 @@ Following these changes, SciPy 2.0 contains no Fortran.
 this and give percentages like in the 1.0 paper but we need to decide if we would
 include the subprojects directory.}
 
+\section{Universal random variate generation methods}
+
+The \texttt{stats} module in SciPy supports calculations for a large number of
+probability distributions, including the generation of random variates.
+These sampling algorithms are often specifically designed for a given
+distribution, e.g., by relying general methods such as inversion of the CDF
+\footnote{Note that accurate and fast CDF inversion is usually non-trivial.} or on the rejection
+principle \cite{vonneumann1951}. In contrast, there are also so-called
+automatic or black-box methods that can sample from large classes of
+distributions using a single piece of code, requiring only basic information
+about the distribution -- such as the density (and optionally its
+derivative), the CDF, and/or the mode (see \cite{hormann2004} for an
+overview). Based on this input, a generator is
+automatically derived in a setup step, which can then be used to draw random
+variates of the distribution.
+
+Although such universal methods were originally motivated by non-standard
+distributions, they offer advantages that make them attractive even for
+standard ones:
+
+\begin{itemize}
+\item They can be used to sample from truncated distributions.
+\item For inversion-based methods, the structural properties of the
+underlying uniform random number generator are preserved, and numerical
+accuracy can be controlled via a parameter -- making these methods
+well-suited to quasi-Monte Carlo (QMC) simulations.
+\item Depending on the use case, one can choose between a fast setup with
+slow marginal generation time, or vice versa.
+\end{itemize}
+
+The \texttt{stats.sampling} sub-module implements several such algorithms for
+continuous distributions, namely transformed density rejection
+\cite{hormann1995, gilks1992}, polynomial- \cite{derflinger2010} or
+Hermite-interpolation-based \cite{hormann2003} CDF inversion, and the simple
+ratio-of-uniforms method \cite{leydold2001, leydold2003}, as well as for
+discrete distributions, i.e., guide-table \cite{chen1974} and alias-urn
+\cite{walker1977} methods, all built on the C library UNU.RAN
+\cite{hormann2007}. The interface is consistent with the rest of the
+distributions infrastructure, e.g., \texttt{rvs} is used for sampling. For
+details and benchmarking, please refer to \cite{baumgarten2022}.
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
