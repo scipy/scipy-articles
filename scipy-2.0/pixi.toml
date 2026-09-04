@@ -66,13 +66,23 @@ platforms = ["linux-64-cuda"]
 cupy = "*"
 numpy = "<2.5" # https://github.com/cupy/cupy/pull/10037
 
-[tasks.run-benchmark]
-description = "Run the benchmarks"
+[feature.run-benchmark]
+platforms = ["osx-arm64",
+             "linux-64",
+             "linux-aarch64"]
+
+[feature.run-benchmark.dependencies]
+bash = ">=4"
+
+[feature.run-benchmark.tasks]
+run-benchmark = {
 cmd = """
 ./scripts/run_benchmark.sh skew 2 7 6 &&
 ./scripts/run_benchmark.sh welch 2.5 6 6 &&
 ./scripts/run_benchmark.sh Rotation.mean 2 6.5 6
-"""
+""",
+description = "Run the benchmarks"
+}
 
 [feature.plot.dependencies]
 matplotlib = "*"
@@ -95,3 +105,4 @@ jax-cpu = ["python", "jax-cpu"]
 jax-gpu = ["python", "jax-gpu"]
 cupy = ["python", "cupy"]
 plot = ["python", "plot", "numpy"]
+run-benchmark = ["run-benchmark"]
