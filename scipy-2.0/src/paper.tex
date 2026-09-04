@@ -12,7 +12,7 @@
 \acmArticle{111}
 \acmMonth{8}
 
-\newcommand{\jake}[1]{\todo[inline, backgroundcolor=green!20!white]{Jake:~#1}}
+\newcommand{\jake}[1]{\todo[inline, backgroundcolor=green!20!white, noinlinepar]{Jake:~#1}}
 
 \begin{document}
 
@@ -170,14 +170,16 @@ include the subprojects directory.}
 \section{When Random is not Good Enough: New Functional for Quasi-Monte Methods}
 
 Both NumPy~\cite{Harris2020} and SciPy provide functionality for generating
-(pseudo)random numbers following a multitude of different distributions. These tools
-often form the basis of Monte Carlo methods, which are frequently applied to tackle
+(pseudo)random numbers following a multitude of different distributions. These
+random number generators
+often form the basis of Monte Carlo (MC) methods, which are frequently applied to tackle
 fundamental tasks such as sampling, estimation, and optimization~\cite{Kroese2014}.
 Monte Carlo methods are especially useful when the dimensionality of the problem is
 high meaning deterministic methods are infeasible.
 
 A prototypical example of this is integration over the unit hypercube,
-which is infeasible when computed via standard quadrature or cubature rules if the
+which is infeasible when computed by taking the tensor product of standard, one
+dimensional quadrature rules or even specialist cubature rules if the
 dimensionality is large. The Monte Carlo method estimates the integral by evaluating the
 integrand at points that are independent and identically distributed (IID) uniform random
 samples~\cite{Hammersley1960}. It is well known that, provided the intergrand is square integrable,
@@ -190,30 +192,33 @@ for which the sample points are chosen deterministically from a
 This is achieved by choosing points that are more evenly distributed than random points,
 avoiding clustering and large gaps that are typical of random points.
 For a more detailed discussion and introduction of QMC methods, we refer the reader
-to~\cite{Niederreiter1992,Dick2010,Dick2013,Giles2008}.
+to~\cite{Niederreiter1992,Dick2010,Dick2013,Giles2008}. While QMC methods have many
+advantages, they generally require more care in their implementation and use than MC
+methods~\cite{Art2020}.
 
 \begin{figure}
     \centering
     \includegraphics{figures/qmc.pdf}
     \caption{Examples of samples generated from MC and QMC methods and their
     associated centred discrepancy. For panels (A)-(D) we generate $n=128$ points in
-    $[0,1]^2$ using (A) IID uniform random sampling, (B) a Sobol' low-discrepancy
-    sequence, (C) a Halton low-discrepancy sequence, and (D) Latin hypercube sampling.
+    $[0,1]^2$ using (A) IID uniform random sampling, (B) Sobol'
+    sequence, (C) Halton sequence, and (D) Latin hypercube sampling.
     Panel (E) is generated using Poisson disk sampling to fill the space with point
     that have a minimum distance of $0.01$ between them.}
     \label{fig:qmc}
 \end{figure}
 
 SciPy 2.0 contains a new submodule, \texttt{scipy.stats.qmc}, which provides
-convenient and accessible building blocks for implementing QMC methods~\cite{Roy2023}.
-It implements Sobol'~\cite{Sobol1967,Joe2008} and
+convenient and accessible building blocks for implementing QMC methods~\cite{Roy2023}
+that are carefully implemented to avoid the common pitfalls, such as those
+discussed in~\cite{Art2020}. It implements Sobol'~\cite{Sobol1967,Joe2008} and
 Halton~\cite{Halton1960,Halton1964} low-discrepancy sequences as well as
 Latin hypercube~\cite{McKay1979,Iman1981} and Poisson disk~\cite{Cook1986,Bridson2007}
 sampling methods, which are some of the most widely used QMC methods. Samples generated
 from these methods are illustrated in Figure~\ref{fig:qmc}. These samples can also
-be scrambled in order to give improved convergence rates and allow for practical error
-estimation~\cite{Owen1998,Owen2003}, similar to those that are easily obtained from Monte Carlo methods.
-Functionality is also provided for measuring the uniformity, known as the
+easily be scrambled in order to give improved convergence rates and allow for practical
+error estimation~\cite{Owen1998,Owen2003}, similar to those that are obtained for Monte
+Carlo methods. Functionality is also provided for measuring the uniformity, known as the
 \emph{discrepancy}, of a set of points, which is used to quantify how well the sample
 points cover the sampling space~\cite{Zhou2013,Warnock1972,Warnock1995}.
 It is possible to reduce the discrepancy of a sequence using one of the inbuilt
@@ -222,14 +227,19 @@ iteration~\cite{Lloyd1982}.
 
 Not only does this new submodule provide users the required tools to implement
 QMC methods, it also provides the foundation for other functionality within SciPy.
-For example, \texttt{scipy.integrate} now contains new functionality for quadrature
-using QMC methods. Likewise,
+For example, returning to the motivating example above, \texttt{scipy.integrate} now
+contains new functionality for quadrature using QMC methods.
+Elsewhere, SciPy's differential evolution~\cite{Storn1997} and
+simplicial homology~\cite{Endres2018} global optimization algorithms now utilise SciPy's
+new QMC functionality to generate their initial populations, providing better coverage
+of the search space than the IID uniform random sampling. This space filling property
+also makes QMC methods the perfect candidate for interpolating high-dimensional
+functions using methods such as radial basis functions and nearest-neighbour
+interpolation implemented in \texttt{scipy.interpolate}.
+
+Integration with new stats distributions, sampling, MultinomialQMC and MultivariateNormalQMC
 
 GSA
-
-Integration with new stats distributions
-
-integration with things like RBF interpolation, differential evolution, shgo, sampling
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
