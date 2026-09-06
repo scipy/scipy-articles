@@ -233,13 +233,28 @@ Elsewhere, SciPy's differential evolution~\cite{Storn1997} and
 simplicial homology~\cite{Endres2018} global optimization algorithms now utilise SciPy's
 new QMC functionality to generate their initial populations, providing better coverage
 of the search space than the IID uniform random sampling. This space filling property
-also makes QMC methods the perfect candidate for interpolating high-dimensional
-functions using methods such as radial basis functions and nearest-neighbour
-interpolation implemented in \texttt{scipy.interpolate}.
+also makes QMC methods the perfect candidate for generating sample points when
+interpolating high-dimensional functions using methods such as radial basis functions
+and nearest-neighbour interpolation implemented in \texttt{scipy.interpolate}.
 
-Integration with new stats distributions, sampling, MultinomialQMC and MultivariateNormalQMC
+QMC methods are also used extensively in SciPy for sampling from distributions.
+Within the \texttt{scipy.stats.qmc} submodule, functionality is provided for generating
+samples from the multinomial and multivariate normal distributions using QMC methods.
+Likewise, QMC methods can to generate samples from black box distributions using
+\texttt{scipy.stats.sampling}, as decribed in \jake{XREF sectrion when written}, and
+from predefined distributions using the new statistical distributions infrastructure
+described in \jake{XREF section when written}.
+\jake{This is the section I am least sure about, is there some theory or liturature
+we can point to about why this is desireable.}
 
-GSA
+Another new feature in SciPy 2.0 that utilizes QMC methods, is the new functionality
+in \texttt{scipy.stats} for global sensitivity analysis (GSA) using Sobol'
+indices~\cite{Sobol1993,Sobol2001}. This function helps users to determine how much
+of the variance in the output of their model can be attributed to each of the input
+parameters and uses QMC methods to generate the function samples required to compute the
+Sobol' indices. This addition helps to improve the accessibility of GSA methods, while
+leaving more specialized methods to other libraries such as SALib~\cite{Herman2017}
+or OpenTURNS~\cite{Baudin2015}.
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
