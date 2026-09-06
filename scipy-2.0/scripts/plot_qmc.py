@@ -17,17 +17,25 @@ methods = [
     ("Sobol'", lambda: qmc.Sobol(d=2, rng=rng).random(n)),
     ("Halton", lambda: qmc.Halton(d=2, rng=rng).random(n)),
     ("Latin HC", lambda: qmc.LatinHypercube(d=2, rng=rng).random(n)),
-    ("Poisson disk", lambda: qmc.PoissonDisk(d=2, radius=0.1, rng=rng,
-                                             ncandidates=1000, hypersphere="surface").fill_space()),
+    (
+        "Poisson disk",
+        lambda: qmc.PoissonDisk(
+            d=2, radius=0.1, rng=rng, ncandidates=1000, hypersphere="surface"
+        ).fill_space(),
+    ),
 ]
 
-for (ax, (title, sampler), letter) in zip(axs, methods, ascii_uppercase):
+for ax, (title, sampler), letter in zip(axs, methods, ascii_uppercase):
     sample = sampler()
     print(sample.shape[0])
     discrepancy = qmc.discrepancy(sample)
     ax.set_title(f"{letter}) {title}")
-    ax.plot(*sample.T, 'k.')
-    ax.text(0.1, -0.15, rf"$\mathrm{{CD}}^2=\num[output-exponent-marker = e]{{{discrepancy}}}$")
+    ax.plot(*sample.T, "k.")
+    ax.text(
+        0.1,
+        -0.15,
+        rf"$\mathrm{{CD}}^2=\num[output-exponent-marker = e]{{{discrepancy}}}$",
+    )
     ax.set_aspect("equal")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
