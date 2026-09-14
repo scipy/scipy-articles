@@ -208,9 +208,13 @@ methods~\cite{Art2020}.
 \end{figure}
 
 SciPy 2.0 contains a new submodule, \texttt{scipy.stats.qmc}, which provides
-convenient and accessible building blocks for implementing QMC methods~\cite{Roy2023}
-that are carefully implemented to help users avoid the common pitfalls, such as those
-discussed in~\cite{Art2020}. The submodule implements Sobol'~\cite{Sobol1967,Joe2008} and
+convenient and accessible building blocks for implementing QMC methods
+that were implemented with the help of leading researchers in the field, as
+detailed in~\cite{Roy2023}. Particular attention was paid to helping SciPy's users avoid the
+common pitfalls associated with QMC methods, such as those discussed
+in~\cite{Art2020}\footnote{This publication was in part influenced by discussions
+arising during the development of \texttt{stats.qmc}}.
+The submodule implements Sobol'~\cite{Sobol1967,Joe2008} and
 Halton~\cite{Halton1960,Halton1964} low-discrepancy sequences as well as
 Latin hypercube~\cite{McKay1979,Iman1981} and Poisson disk~\cite{Cook1986,Bridson2007}
 sampling methods, which are some of the most widely used QMC sampling methods. Samples generated
