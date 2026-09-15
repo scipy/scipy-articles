@@ -174,7 +174,7 @@ random number generators
 often form the basis of Monte Carlo (MC) methods, which are frequently applied to tackle
 fundamental tasks such as sampling, estimation, and optimization~\cite{Kroese2014}.
 Monte Carlo methods are especially useful when the dimensionality of the problem is
-high, meaning deterministic methods are infeasible.
+high, where the curse of dimensionality can make standard deterministic methods infeasible.
 
 A prototypical example of this is integration over the unit hypercube,
 which is infeasible when computed by taking the tensor product of standard
@@ -198,7 +198,7 @@ methods~\cite{Art2020}.
     \centering
     \includegraphics{figures/qmc.pdf}
     \caption{Examples of samples generated from MC and QMC methods and their
-    associated centred discrepancy --- a lower numerical value is better.
+    associated centred discrepancy ($\mathrm{CD}^2$) --- a lower numerical value is better.
     For panels (A)-(D) we generate $n=128$ points in
     $[0,1]^2$ using (A) IID uniform random sampling, (B) Sobol'
     sequence, (C) Halton sequence, and (D) Latin hypercube sampling (LHS).
@@ -233,10 +233,10 @@ QMC methods, it also provides the foundation for other functionality within SciP
 For example, returning to the motivating example above, \texttt{scipy.integrate} now
 contains new functionality for quadrature using QMC methods.
 Elsewhere, SciPy's differential evolution~\cite{Storn1997} and
-simplicial homology~\cite{Endres2018} global optimization algorithms now utilise SciPy's
+simplicial homology~\cite{Endres2018} global optimization algorithms can now use SciPy's
 new QMC functionality to generate their initial populations, as these provide better coverage
 of the search space than the IID uniform random sampling. This space-filling property
-also makes QMC methods the perfect candidates for generating sample points when
+also makes QMC methods useful candidates for generating sample points when
 interpolating high-dimensional functions using methods such as radial basis functions
 and nearest-neighbour interpolation implemented in \texttt{scipy.interpolate}.
 
