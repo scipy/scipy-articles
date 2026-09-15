@@ -219,7 +219,8 @@ The submodule implements Sobol'~\cite{Sobol1967,Joe2008} and
 Halton~\cite{Halton1960,Halton1964} low-discrepancy sequences as well as
 Latin hypercube~\cite{McKay1979,Iman1981} and Poisson disk~\cite{Cook1986,Bridson2007}
 sampling methods, which are some of the most widely used QMC sampling methods. Samples generated
-from these methods are illustrated in Figure~\ref{fig:qmc}. These samples can also
+from these methods are illustrated in Figure~\ref{fig:qmc}. With the exception of
+Poisson disk sampling, these samples can also
 easily be scrambled in order to give improved convergence rates and allow for practical
 error estimation~\cite{Owen1998,Owen2003}, similar to those that are obtained for Monte
 Carlo methods. Functionality is also provided for measuring the uniformity, known as the
