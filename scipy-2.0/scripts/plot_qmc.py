@@ -32,9 +32,10 @@ for ax, (title, sampler), letter in zip(axs, methods, ascii_uppercase):
     ax.set_title(f"{letter}) {title}")
     ax.plot(*sample.T, "k.")
     ax.text(
-        0.1,
+        0.03,
         -0.15,
-        rf"$\mathrm{{CD}}^2=\num[output-exponent-marker = e]{{{discrepancy}}}$",
+        rf"$\mathrm{{CD}}^2=\num{{{discrepancy}}}$",
+        fontsize=7,
     )
     ax.set_aspect("equal")
     ax.set_xlim(0, 1)
