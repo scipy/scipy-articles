@@ -140,9 +140,10 @@ interoperable ideal.
 Most significantly, NumPy, CuPy, JAX, and PyTorch all predate
 the creation of the standard\footnote{The first version of the Python array API
 standard was released in December 2021, with new revisions appearing annually.}
-and differ in their degree of compliance with it. To resolve this, the array-api-compat package provides lightweight wrappers that adapt these libraries' interface to the standard. Likewise,
+and differ in their degree of compliance with it. To resolve this, the
+array-api-compat\footnote{\url{https://github.com/data-apis/array-api-compat}} package provides lightweight wrappers that adapt these libraries' interface to the standard. Likewise,
 some functionality is not covered by the standard, for a variety of reasons, so the
-array-api-extra package provides generic implementations of these operations.
+array-api-extra\footnote{\url{https://github.com/data-apis/array-api-extra}} package provides generic implementations of these operations.
 These additional packages therefore overcome many of the practical difficulties in
 achieving interoperability. As an example, Listing~\ref{lst:fiedler} shows how a typical
 function from SciPy, written in Python, can be adapted to accept arrays conforming to
