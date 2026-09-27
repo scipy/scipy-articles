@@ -175,6 +175,8 @@ the standard.
 +         return xp.abs(a[..., :, xp.newaxis] - a[..., xp.newaxis, :])
 \end{lstlisting}
 
+\subsection{Strategies for Compilied Code and General Design Principles}
+
 While the recipe shown in Listing~\ref{lst:fiedler} can be applied to most of SciPy's
 Python code, a significant amount of SciPy's functionality is implemented in compiled
 languages, such as Cython and C/C++.
@@ -219,6 +221,8 @@ penalty. Instead, any device transfers (e.g.\ to ensure all arrays are on the sa
 device) must be explicitly performed by the user. These principles help to avoid
 unexpected performance issues and scenarios where it is ambiguous what the correct
 behaviour should be.
+
+\subsection{Progress Towards Adopting the Python Array API Standard}
 
 \begin{figure}
     \centering
@@ -288,6 +292,8 @@ NumPy array, performing the computation, and then converting the result back to 
 PyTorch array. Likewise, in the rotation benchmark, we see that NumPy is very
 competitive for small problem sizes due to the fact it uses a compiled code path while
 other array types use a Python code path.
+
+\subsection{Progress in}
 
 \begin{table}
   \caption{Coverage of modules in SciPy 2.0 supporting alternative array types.
