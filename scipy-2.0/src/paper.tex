@@ -111,13 +111,12 @@ processing units (GPUs) have become an
 important tool for scientific computing. At the same time, advanced compiler and
 program-transformation techniques, such as just-in-time (JIT) compilation
 and automatic differentiation, are becoming increasingly common in computational
-workflows. This posed a
-problem for SciPy because, while NumPy has been the de
+workflows. For SciPy this posed a problem because, while NumPy has been the de
 facto standard for array computing in Python, it does not natively support GPU computing, JIT
 compilation, or automatic differentiation. This has led to the proliferation of other
 array libraries for Python, such as CuPy~\cite{cupy_learningsys2017},
 JAX~\cite{jax2018github}, and PyTorch~\cite{Ansel2024}, which provide support for these
-capabilities (among other features). This has
+capabilities (among other features). Nevertheless, this has
 effectively led to a dichotomy: SciPy cannot utilize the new features offered by these
 libraries, and users of these new array libraries cannot make full use of the large amount of
 functionality SciPy provides. Furthermore, as SciPy provides the foundational methods
