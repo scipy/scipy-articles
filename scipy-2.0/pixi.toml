@@ -69,7 +69,8 @@ numpy = "<2.5" # https://github.com/cupy/cupy/pull/10037
 [feature.run-benchmark]
 platforms = ["osx-arm64",
              "linux-64",
-             "linux-aarch64"]
+             "linux-aarch64",
+             "linux-64-cuda",]
 
 [feature.run-benchmark.dependencies]
 bash = ">=4"
