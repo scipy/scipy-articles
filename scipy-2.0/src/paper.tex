@@ -198,8 +198,8 @@ The simplest approach is to convert arrays stored on the CPU to NumPy arrays usi
 Python buffer protocol, perform the computation, and then convert the result back to the
 original array type. While this provides a straightforward means of achieving
 interoperability, it does not allow for JIT compilation or automatic differentiation.
-Moreover, it is not a viable approach for arrays stored on the GPU because of the
-significant overhead of transferring data between the CPU and GPU.
+Moreover, it is generally not a viable approach for arrays stored on the GPU because of
+the significant overhead of transferring data between the CPU and GPU.
 
 The second approach exploits the fact that array libraries such as JAX and CuPy have
 already reimplemented a subset of SciPy's functionality, allowing us to \emph{delegate}
