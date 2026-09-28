@@ -145,40 +145,45 @@ provides lightweight wrappers that adapt these libraries to the standard. Likewi
 some functionality is not covered by the standard, for a variety of reasons, so the
 array-api-extra\footnote{\url{https://github.com/data-apis/array-api-extra}} package provides generic implementations of these operations.
 These additional packages therefore overcome many of the practical difficulties in
-achieving interoperability. As an example, Listing~\ref{lst:fiedler} shows how a typical
+achieving interoperability. As an example, Listing~\ref{lst:whiten} shows how a typical
 function from SciPy, written in Python, can be adapted to accept arrays conforming to
 the standard.
 
 \begin{lstlisting}[language=diff,caption={Example showing the changes made to
-  \texttt{scipy.linalg.fiedler} in order to support the Python array API standard.
+  \texttt{scipy.cluster.vq.whiten} in order to support the Python array API standard.
   Changes include registering the function with an automated documentation and testing
   system that generates array type compatibility tables and test skips, using
   the namespace of the array type (denoted \texttt{xp}) rather than NumPy, and
-  using array-api-compat and array-api-extra functionality when required.},
-  label={lst:fiedler}]
+  using array-api-compat and array-api-extra functionality when required. In addition,
+  as JIT compilation in JAX does not allow for value dependent control flow, the warning
+  is only issued for eager array types. Finally, as JAX arrays are immutable,
+  \texttt{xpx.at} is used to perform assignments.},
+  label={lst:whiten}]
 
 + @xp_capabilities()  # Register with documentation and testing framework
-  def fiedler(a):
-+     xp = array_namespace(a)  # get the namespace of the input array
--     a = np.atleast_1d(a)
-+     a = xpx.atleast_nd(xp.asarray(a), ndim=1)  # from array-api-extra
+  def whiten(obs, check_finite=None):
++     xp = array_namespace(obs)  # get the namespace of the input array
++     if check_finite is None:
++         check_finite = not is_lazy_array(obs)
+-     obs = _asarray_validated(obs, check_finite=check_finite)
++     obs = _asarray(obs, check_finite=check_finite, xp=xp)
+-     std_dev = obs.std(axis=0)
++     std_dev = xp.std(obs, axis=0)
+      zero_std = std_dev == 0
+-     if zero_std.any():
+-         std_dev[zero_std] = 1.0
++     std_dev = xpx.at(std_dev, zero_std).set(1.0)  # from array-api-extra
++     if check_finite and xp.any(zero_std):
+          warnings.warn("Some columns have standard deviation zero. "
+                        "The values of these columns will not change.",
+                        RuntimeWarning, stacklevel=2)
+      return obs / std_dev
 
--     if a.size == 0:
-+     if xp_size(a) == 0:  # from array-api-compat
--         return np.array([], dtype=float)
-+         return xp.empty((0, 0), dtype=xp.float64)
--     elif a.size == 1:
-+     elif xp_size(a) == 1:
--         return np.array([[0.]])
-+         return xp.asarray([[0.]])
-      else:
--         return np.abs(a[..., :, None] - a[..., None, :])
-+         return xp.abs(a[..., :, xp.newaxis] - a[..., xp.newaxis, :])
 \end{lstlisting}
 
 \subsection{Strategies for Compilied Code and General Design Principles}
 
-While the recipe shown in Listing~\ref{lst:fiedler} can be applied to most of SciPy's
+While the recipe shown in Listing~\ref{lst:whiten} can be applied to most of SciPy's
 Python code, a significant amount of SciPy's functionality is implemented in compiled
 languages, such as Cython and C/C++ --- see Section~\ref{sec:languages} for further
 details. This is typically the case when a Python implementation would not provide
@@ -253,7 +258,7 @@ $\gamma_1 = \mu_3/\mu_2^{3/2}$, where $\mu_i$ is the biased $i$th central sample
 moment, using \texttt{scipy.stats.skew}. This function is implemented entirely
 in Python and therefore was adapted to accept arrays from other array libraries by
 rewriting it in terms of standardised functions in a similar fashion to the example in
-Listing~\ref{lst:fiedler}. Specifically, the benchmark considers computing the
+Listing~\ref{lst:whiten}. Specifically, the benchmark considers computing the
 skewness of three samples of size $n$, drawn from the gamma distribution (with shape
 and scale parameters 5 and 0.5), the standard normal distribution, and the beta
 distribution (with shape parameters 0.5 and 0.5). The computation is performed in
