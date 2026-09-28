@@ -203,10 +203,10 @@ the significant overhead of transferring data between the CPU and GPU.
 
 The second approach exploits the fact that array libraries such as JAX and CuPy have
 already reimplemented a subset of SciPy's functionality, allowing us to \emph{delegate}
-to their implementations. For functionality implemented in Python, we also often
-delegate to the array library's implementation where available, assuming that a
-library-specific implementation will provide better performance than a generic
-implementation.
+to their implementations. For functionality implemented in Python that can be written in
+terms of the standard, we often still delegate to the array library's implementation
+where available, under the assumption that a library-specific implementation will
+provide better performance than a generic implementation.
 
 The final approach is to maintain two code paths: the original compiled code path for
 NumPy arrays and a new Python code path written in terms of standardised operations for
