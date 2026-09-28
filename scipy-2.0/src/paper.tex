@@ -283,7 +283,7 @@ the rotations, and then converting the resulting mean back to Euler angles.
 The result of these benchmarks are shown in Figure~\ref{fig:benchmarks}. In general,
 these results show that for large problem sizes, using alternative array types can
 provide significant performance benefits over NumPy. For small problem sizes, we see
-that, with the exception of JAX-JIT, the NumPy is still typically the fastest option due
+that, with the exception of JAX-JIT, NumPy is still typically the fastest option due
 to the lower overhead of using NumPy arrays. However, for large problem sizes, other
 array types should be favoured. The benchmarks also highlight the different performance
 characteristics of the approaches for handling compiled code discussed above.
