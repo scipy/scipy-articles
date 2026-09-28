@@ -117,11 +117,11 @@ compilation, or automatic differentiation. This has led to the proliferation of 
 array libraries for Python, such as CuPy~\cite{cupy_learningsys2017},
 JAX~\cite{jax2018github}, and PyTorch~\cite{Ansel2024}, which provide support for these
 capabilities (among other features). Nevertheless, this has
-effectively led to a dichotomy: SciPy cannot utilize the new features offered by these
-libraries, and users of these new array libraries cannot make full use of the large amount of
-functionality SciPy provides. Furthermore, as SciPy provides the foundational methods
-for many other scientific Python packages, these packages are also prevented from
-taking advantage of these developments.
+effectively led to a dichotomy: SciPy has been unable to utilize the new features
+offered by these libraries, and users of these new array libraries have been unable
+make full use of the large amount of functionality SciPy provides. Furthermore, as SciPy
+provides the foundational methods for many other scientific Python packages, these
+packages have also prevented from taking advantage of these developments.
 
 Addressing this fragmentation through the Python array API standard~\cite{Meurer2023} has been a
 major focus of SciPy 2.0. This standard defines application
