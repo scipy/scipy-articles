@@ -221,7 +221,7 @@ Across all three approaches, there are a number of design principles that SciPy 
 adopted in order to manage potential complications associated with accepting multiple
 array types. First, the input array type and device on which the array is located is
 preserved. Second, users cannot mix array types or arrays located on different
-devices. Third, SciPy must not silently transfer arrays between devices (e.g.\ between
+devices. Third, SciPy should not silently transfer arrays between devices (e.g.\ between
 the CPU and GPU) because, as discussed above, this can incur a significant performance
 penalty. Instead, any device transfers (e.g.\ to ensure all arrays are on the same
 device) must be explicitly performed by the user. These principles help to avoid
@@ -333,8 +333,10 @@ Overall & 35 \% & 40 \% & 20 \% & 39 \% & 19 \% & 25 \% \\
 \end{table}
 
 Converting SciPy's extensive range of functionality to support alternative array types
-has been a significant undertaking. Table~\ref{tab:coverage} shows the progress towards
-this goal as of SciPy 2.0. \jake{Finish this once SciPy 2.0 is actually released, as it
+has been a significant undertaking. While some functions could easily be rewritten in
+terms of the standard, i.e.\@ Listings~\ref{lst:whiten}, others required substantial
+effort. Table~\ref{tab:coverage} shows the progress, as of
+SciPy 2.0, towards converting the public API to support alternative array types. \jake{Finish this once SciPy 2.0 is actually released, as it
 is difficult to comment on coverage when we do not yet know what it will be.} Note that
 this table omits legacy modules and modules that are not within the scope of the
 conversion. This includes \texttt{scipy.datasets} and \texttt{scipy.io}, both of which
