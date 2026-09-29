@@ -256,7 +256,7 @@ Additional benchmarks are also presented in~\cite{Meurer2023,rotation,rbf_bench}
 The first benchmark considers the computation of the sample skewness,
 $\gamma_1 = \mu_3/\mu_2^{3/2}$, where $\mu_i$ is the biased $i$th central sample
 moment, using \texttt{scipy.stats.skew}. This function is implemented entirely
-in Python and therefore was adapted to accept arrays from other array libraries by
+in Python and therefore has been adapted to accept arrays from other array libraries by
 rewriting it in terms of standardised functions in a similar fashion to the example in
 Listing~\ref{lst:whiten}. Specifically, the benchmark considers computing the
 skewness of three samples of size $n$, drawn from the gamma distribution (with shape
@@ -334,7 +334,7 @@ Overall & 35 \% & 40 \% & 20 \% & 39 \% & 19 \% & 25 \% \\
 
 Converting SciPy's extensive range of functionality to support alternative array types
 has been a significant undertaking. While some functions could easily be rewritten in
-terms of the standard, as illustrated in Listings~\ref{lst:whiten}, others required substantial
+terms of the standard, as illustrated in Listing~\ref{lst:whiten}, others required substantial
 effort. Table~\ref{tab:coverage} shows the progress, as of
 SciPy 2.0, towards converting the public API to support alternative array types. \jake{Finish this once SciPy 2.0 is actually released, as it
 is difficult to comment on coverage when we do not yet know what it will be.} Note that
