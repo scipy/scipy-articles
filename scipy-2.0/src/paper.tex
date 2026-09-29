@@ -285,7 +285,7 @@ types. The benchmark considers converting a series of $n$ random rotations, repr
 as Euler angles, to quaternions, computing the chordal $L_2$ mean~\cite{Hartley2013} of
 the rotations, and then converting the resulting mean back to Euler angles.
 
-The result of these benchmarks are shown in Figure~\ref{fig:benchmarks}. In general,
+The results of these benchmarks are shown in Figure~\ref{fig:benchmarks}. In general,
 these results show that for large problem sizes, using alternative array types can
 provide significant performance benefits over NumPy. For small problem sizes, we see
 that, with the exception of JAX-JIT, NumPy is still typically the fastest option due
