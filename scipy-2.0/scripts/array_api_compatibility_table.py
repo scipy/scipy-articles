@@ -9,7 +9,7 @@ included_modules = [
     module
     for module in PUBLIC_MODULES
     # These are extension modules which should never be included. They are either
-    # or the introspection does not work.
+    # out of scope or the introspection does not work.
     if module
     not in {
         "scipy.linalg.cython_blas",
