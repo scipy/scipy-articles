@@ -106,22 +106,22 @@ Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array libr
 Python (Numeric~\cite{Dubois1996,ascher2000numerical} and
 numarray~\cite{Greenfield2003numarrayA}), SciPy's functionality, for most of its
 existence, has been built on top of NumPy arrays. However, driven in part
-by the boom in machine learning, graphics
-processing units (GPUs) have become an
+by the boom in machine learning, graphics processing units (GPUs) have become an
 important tool for scientific computing. At the same time, advanced compiler and
 program-transformation techniques, such as just-in-time (JIT) compilation
 and automatic differentiation, are becoming increasingly common in computational
-workflows. For SciPy this posed a problem because, while NumPy has been the de
-facto standard for array computing in Python, it does not natively support GPU computing, JIT
-compilation, or automatic differentiation. This has led to the proliferation of other
+workflows. This has led to the proliferation of other
 array libraries for Python, such as CuPy~\cite{cupy_learningsys2017},
 JAX~\cite{jax2018github}, and PyTorch~\cite{Ansel2024}, which provide support for these
-capabilities (among other features). This has
-effectively led to a dichotomy: SciPy has been unable to utilize the new features
-offered by these libraries, and users of these new array libraries have been unable to
-make full use of the large amount of functionality SciPy provides. Furthermore, as SciPy
-provides the foundational methods for many other scientific Python packages, these
-packages have also been prevented from taking advantage of these developments.
+capabilities (among other features). For SciPy this posed a problem because, while NumPy
+has been the de facto standard for array computing in Python, it does not natively
+support GPU computing, JIT compilation, or automatic differentiation.
+This has effectively led to a dichotomy: SciPy has been unable to allow its users to
+utilize the new features offered by these libraries, and users of these new array
+libraries have been unable to make full use of the large amount of functionality SciPy
+provides. Furthermore, as SciPy provides the foundational methods for many other
+scientific Python packages, these packages have also been prevented from taking
+advantage of these developments.
 
 Addressing this fragmentation through the Python array API standard~\cite{Meurer2023} has been a
 major focus of SciPy 2.0. This standard defines application
