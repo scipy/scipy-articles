@@ -5,6 +5,7 @@ import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import LogLocator
 import numpy as np
 import mpl_tectonic
 
@@ -53,6 +54,17 @@ funcs = {
     "Rotation.mean": ["c)", r"\texttt{scipy.spatial.transform.Rotation.mean}"],
 }
 
+
+class LogLocatorWithOne(LogLocator):
+    def tick_values(self, vmin, vmax):
+        ticks = super().tick_values(vmin, vmax)
+
+        if vmin <= 1 <= vmax:
+            ticks = np.unique(np.append(ticks, 1.0))
+
+        return ticks
+
+
 fig = plt.figure(figsize=(5, 6), layout="constrained")
 subfigs = fig.subfigures(3, 1)
 
@@ -90,6 +102,10 @@ for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
             axr.loglog(data["ns"], relative_times, **line_styles[data["backend"]])
     axl.set_ylabel("Time (s)")
     axr.set_ylabel("Speed-up relative\nto NumPy")
+    # we always want to show the 1x tick in the speed-up plot
+    axr.yaxis.set_major_locator(LogLocatorWithOne(base=10))
+    for ax in (axl, axr):
+        ax.minorticks_off()
 axl.set_xlabel("Problem size $n$")
 axr.set_xlabel("Problem size $n$")
 fig.legend(ncols=4, loc="outside lower center")
