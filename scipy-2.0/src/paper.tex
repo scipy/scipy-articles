@@ -116,7 +116,7 @@ facto standard for array computing in Python, it does not natively support GPU c
 compilation, or automatic differentiation. This has led to the proliferation of other
 array libraries for Python, such as CuPy~\cite{cupy_learningsys2017},
 JAX~\cite{jax2018github}, and PyTorch~\cite{Ansel2024}, which provide support for these
-capabilities (among other features). Nevertheless, this has
+capabilities (among other features). This has
 effectively led to a dichotomy: SciPy has been unable to utilize the new features
 offered by these libraries, and users of these new array libraries have been unable to
 make full use of the large amount of functionality SciPy provides. Furthermore, as SciPy
@@ -219,7 +219,7 @@ CPU --- see Figure~\ref{fig:benchmarks}(c).
 
 Across all three approaches, there are a number of design principles that SciPy has
 adopted in order to manage potential complications associated with accepting multiple
-array types. First, the input array type and device on which the array is located is
+array types. First, the input array type and device on which the array is located are
 preserved. Second, users cannot mix array types or arrays located on different
 devices. Third, SciPy should not silently transfer arrays between devices (e.g.\ between
 the CPU and GPU) because, as discussed above, this can incur a significant performance
@@ -348,7 +348,7 @@ type after loading.
 Future versions of SciPy will continue to expand the number of functions supporting
 alternative array types as well as adding support for additional features, such as
 PyTorch's JIT compilation mechanism \texttt{torch.compile}.
-\jake{Possibly also discuss turning turning compilied code into kernels can also be
+\jake{Possibly also discuss turning compilied code into kernels can also be
 executed on the GPU}
 
 \section{A New Look at Language Choices}\label{sec:languages}
