@@ -178,7 +178,6 @@ the standard.
                         "The values of these columns will not change.",
                         RuntimeWarning, stacklevel=2)
       return obs / std_dev
-
 \end{lstlisting}
 
 \subsection{Strategies for Compiled Code and General Design Principles}
@@ -240,11 +239,15 @@ behaviour should be.
     indicating improved performance over NumPy.
     (a) Computing the skewness of a data set.
     (b) Estimating the power spectral density using Welch's method.
-    (c) Computing the mean of multiple rotations.}\label{fig:benchmarks}
+    (c) Computing the mean of multiple rotations.
+    Solid lines indicate CPU execution, while dashed lines indicate GPU execution.
+    For JAX, we report only the results under JIT compilation as this is the typical
+    mode of execution for performance-critical code.
+    }\label{fig:benchmarks}
 \end{figure}
 
 While enabling users to use SciPy with their preferred array types is valuable in its
-own right, it can also provide substantial performance benefits. We quantify these
+own right, it can also provide substantial performance benefits. We aim to quantify these
 benefits through a series of benchmarks covering the different approaches to adopting
 the array API Standard discussed above. All benchmarks
 were executed on an Intel\textsuperscript{\textregistered}
