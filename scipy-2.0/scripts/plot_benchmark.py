@@ -29,21 +29,22 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+# Colour blind friendly palette from https://www.nature.com/articles/nmeth.1618
 line_styles = {
     "NumPy": {"color": "black", "linestyle": "-", "marker": None, "linewidth": 2},
-    "PyTorch-CPU": {"color": "tab:orange", "linestyle": "-", "marker": None},
-    "PyTorch-GPU": {"color": "tab:orange", "linestyle": "--", "marker": None},
-    "JAX-CPU": {"color": "tab:green", "linestyle": "-", "marker": None},
+    "PyTorch-CPU": {"color": "#56B4E9", "linestyle": "-", "marker": None},
+    "PyTorch-GPU": {"color": "#56B4E9", "linestyle": "--", "marker": None},
+    "JAX-CPU": {"color": "#D55E00", "linestyle": "-x", "marker": None},
     "JAX-CPU-JIT": {
-        "color": "tab:green",
+        "color": "#D55E00",
         "linestyle": "-",
     },
-    "JAX-GPU": {"color": "tab:green", "linestyle": "--", "marker": None},
+    "JAX-GPU": {"color": "#D55E00", "linestyle": "--x", "marker": None},
     "JAX-GPU-JIT": {
-        "color": "tab:green",
+        "color": "#D55E00",
         "linestyle": "--",
     },
-    "CuPy": {"color": "tab:red", "linestyle": "--", "marker": None},
+    "CuPy": {"color": "#009E73", "linestyle": "--", "marker": None},
 }
 
 funcs = {
