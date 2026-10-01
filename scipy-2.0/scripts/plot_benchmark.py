@@ -22,6 +22,11 @@ parser.add_argument(
     action="store_true",
     help="Use the data from the paper, rather than the latest benchmark results.",
 )
+parser.add_argument(
+    "--include-eager",
+    action="store_true",
+    help="Include eager JAX results in the plot.",
+)
 args = parser.parse_args()
 
 line_styles = {
@@ -32,13 +37,11 @@ line_styles = {
     "JAX-CPU-JIT": {
         "color": "tab:green",
         "linestyle": "-",
-        "marker": "o",
     },
     "JAX-GPU": {"color": "tab:green", "linestyle": "--", "marker": None},
     "JAX-GPU-JIT": {
         "color": "tab:green",
         "linestyle": "--",
-        "marker": "o",
     },
     "CuPy": {"color": "tab:red", "linestyle": "--", "marker": None},
 }
@@ -71,6 +74,8 @@ for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
     with open(data_dir / f"{func}_benchmark_timings.jsonl", "r") as f:
         for line in f:
             data = json.loads(line)
+            if not args.include_eager and data["backend"] in ["JAX-CPU", "JAX-GPU"]:
+                continue
             axl.loglog(
                 data["ns"],
                 data["times"],
@@ -79,6 +84,7 @@ for (func, title), (i, subfig) in zip(funcs.items(), enumerate(subfigs)):
             )
             if data["backend"] == "NumPy":
                 numpy_times = data["times"]
+                continue
             relative_times = np.array(numpy_times) / np.array(data["times"])
             axr.loglog(data["ns"], relative_times, **line_styles[data["backend"]])
     axl.set_ylabel("Time (s)")
