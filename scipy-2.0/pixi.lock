@@ -1389,7 +1389,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/smmap-5.0.3-pyhcf101f3_1.conda
       - conda: https://prefix.dev/conda-forge/noarch/typing_extensions-4.16.0-pyhcf101f3_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
-      - pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
+      - pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
       - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
       linux-aarch64:
       - conda: https://prefix.dev/conda-forge/linux-aarch64/_openmp_mutex-4.5-20_gnu.conda
@@ -1542,7 +1542,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/smmap-5.0.3-pyhcf101f3_1.conda
       - conda: https://prefix.dev/conda-forge/noarch/typing_extensions-4.16.0-pyhcf101f3_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
-      - pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
+      - pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
       - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
       osx-arm64:
       - conda: https://prefix.dev/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda
@@ -1638,7 +1638,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/osx-arm64/zlib-1.3.2-h8088a28_3.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/zlib-ng-2.3.3-h31dac16_1.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/zstd-1.5.7-hf451053_7.conda
-      - pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
+      - pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
       - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-macosx_12_0_arm64.whl
       p1:
       - conda: https://prefix.dev/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
@@ -1791,7 +1791,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/smmap-5.0.3-pyhcf101f3_1.conda
       - conda: https://prefix.dev/conda-forge/noarch/typing_extensions-4.16.0-pyhcf101f3_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
-      - pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
+      - pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
       - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
       win-64:
       - conda: https://prefix.dev/conda-forge/noarch/ca-certificates-2026.7.22-h4c7d964_0.conda
@@ -1902,7 +1902,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/win-64/zlib-1.3.2-hfd05255_3.conda
       - conda: https://prefix.dev/conda-forge/win-64/zlib-ng-2.3.3-h0261ad2_1.conda
       - conda: https://prefix.dev/conda-forge/win-64/zstd-1.5.7-h534d264_7.conda
-      - pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
+      - pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
       - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-win_amd64.whl
   python:
     channels:
@@ -12816,6 +12816,12 @@ packages:
     - zstd >=1.5.7,<1.6.0a0
   size: 387535
   timestamp: 1786599623274
+- pypi: git+https://github.com/j-bowhay/mpl-tectonic.git?rev=otf#c35922b055dcbc95090efbff07668fc70f9c7daa
+  name: mpl-tectonic
+  version: 0.1.0
+  requires_dist:
+  - matplotlib>=3.11,<3.12
+  requires_python: '>=3.11'
 - pypi: https://files.pythonhosted.org/packages/45/8f/9beacf79ca7c650688ad0baa80931adb988fe6e6e5d5903c23cc3dbd70eb/numpy-2.5.3-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
   name: numpy
   version: 2.5.3
@@ -12841,13 +12847,6 @@ packages:
   version: 2.5.3
   sha256: 2c25dfa72943e4336ddb6b0ee4277b47a0c85bede0807530ec68103bf58e2c10
   requires_python: '>=3.12'
-- pypi: https://files.pythonhosted.org/packages/f6/79/99e9e1106c63ecb107f0bde3b6a441758b3b2411b7cb983bf81a0e375859/mpl_tectonic-0.1.0-py3-none-any.whl
-  name: mpl-tectonic
-  version: 0.1.0
-  sha256: 63123d7991e9ad77f6b2df5fb025270ec5834e258a5e5e0379926238e2c4d910
-  requires_dist:
-  - matplotlib>=3.11,<3.12
-  requires_python: '>=3.11'
 - pypi: https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/scipy/2.0.0.dev0/scipy-2.0.0.dev0-cp314-cp314-macosx_12_0_arm64.whl
   name: scipy
   version: 2.0.0.dev0

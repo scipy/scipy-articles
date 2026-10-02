@@ -99,7 +99,7 @@ plot-sloc = { cmd = "python scripts/sloc_plot.py", description = "Make SLOC figu
 plot-benchmark = { cmd = "python scripts/plot_benchmark.py", description = "Plot the benchmark results" }
 
 [feature.plot.pypi-dependencies]
-mpl-tectonic = ">=0.1.0, <0.2"
+mpl-tectonic = { git = "https://github.com/j-bowhay/mpl-tectonic.git", rev = "otf" }
 
 [environments]
 default = ["python", "latex"]
