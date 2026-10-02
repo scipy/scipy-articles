@@ -162,7 +162,7 @@ the standard.
 
 + @xp_capabilities()  # Register with documentation and testing framework
   def whiten(obs, check_finite=None):
-+     xp = array_namespace(obs)  # get the namespace of the input array
++     xp = array_namespace(obs)  # Get the namespace of the input array
 +     if check_finite is None:
 +         check_finite = not is_lazy_array(obs)
 -     obs = _asarray_validated(obs, check_finite=check_finite)
@@ -172,11 +172,9 @@ the standard.
       zero_std = std_dev == 0
 -     if zero_std.any():
 -         std_dev[zero_std] = 1.0
-+     std_dev = xpx.at(std_dev, zero_std).set(1.0)  # from array-api-extra
++     std_dev = xpx.at(std_dev, zero_std).set(1.0)  # From array-api-extra
 +     if check_finite and xp.any(zero_std):
-          warnings.warn("Some columns have standard deviation zero. "
-                        "The values of these columns will not change.",
-                        RuntimeWarning, stacklevel=2)
+          warnings.warn(...)  # Omitted for brevity
       return obs / std_dev
 \end{lstlisting}
 
