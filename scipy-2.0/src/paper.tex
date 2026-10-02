@@ -177,9 +177,12 @@ since version 1.0.
 The \texttt{stats} module in SciPy supports calculations for a large number of
 probability distributions, including the generation of random variates.
 These sampling algorithms are often specifically designed for a given
-distribution, e.g., by relying on general methods such as inversion of the
-CDF\footnote{Note that accurate and fast CDF inversion is usually non-trivial.}
-or on the rejection principle~\cite{vonneumann1951}. In contrast, there are
+distribution, e.g., the Box–Muller transform~\cite{Box1958} for the normal distribution
+or Knuth's algorithm for the Poisson distribution~\cite{Knuth81}.
+Otherwise, they rely on general methods, such as inversion of the
+cumulative distribution function (CDF). However, computing an accurate and fast inverse
+CDF is often challenging.
+In contrast, there are
 also so-called automatic or black-box methods: the same implementation can be
 used to sample from large classes of distributions, while requiring only basic
 information about the distribution --- such as the density (and optionally
