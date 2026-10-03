@@ -177,13 +177,20 @@ since version 1.0.
 The \texttt{stats} module in SciPy supports calculations for a large number of
 probability distributions, including the generation of random variates.
 These sampling algorithms are often specifically designed for a given
-distribution, e.g., the Box–Muller transform~\cite{Box1958} for the normal distribution
-or Knuth's algorithm for the Poisson distribution~\cite{Knuth81}.
-Otherwise, random variate generation is performed via inverse transform sampling;
-that is, computing the quantile function of uniformly-distributed random variates. 
+distribution, see for example chapters 4--6 of~\cite{Devroye1986} or chapter 5
+of~\cite{gentle2003}.
+Otherwise, random variate generation is performed via inverse transform sampling
+or the rejection principle~\cite{vonneumann1951}. The former computes the quantile
+function of uniformly-distributed random variates while the latter approach draws
+samples from a proposal distribution and accepts or rejects with probability
+proportional the ratio of the target and proposal densities.
 However, the quantile function cannot always be expressed in terms of elementary
 or (readily available) special functions, and even when it can, it may be quite
-costly to evaluate.
+costly to evaluate. Likewise, the rejection principle requires deciding on suitable
+proposal distribution and bound on the ratio of the target and proposal densities.
+Hence, while these methods are generally applicable, they are not necessarily efficient
+or easy to implement for arbitrary distributions.
+
 In contrast, there are so-called automatic or black-box methods that rely on
 more commonly available and efficiently computable
 information about the distribution --- such as the density (and optionally
