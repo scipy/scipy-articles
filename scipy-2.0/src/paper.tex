@@ -246,16 +246,8 @@ of the search space than the IID uniform random sampling. This space-filling pro
 also makes QMC methods useful candidates for generating sample points when
 interpolating high-dimensional functions using methods such as radial basis functions
 and nearest-neighbour interpolation implemented in \texttt{scipy.interpolate}.
-
-QMC methods are also used extensively in SciPy for sampling from distributions.
-Within the \texttt{scipy.stats.qmc} submodule, functionality is provided for generating
-samples from the multinomial and multivariate normal distributions using QMC methods.
-Likewise, QMC methods can be used to generate samples from black box distributions using
-\texttt{scipy.stats.sampling}, as described in Section~\ref{sec:sampling}, and
-from predefined distributions using the new statistical distributions infrastructure
-described in \jake{XREF section when written}.
-\jake{This is the section I am least sure about, is there some theory or literature
-we can point to about why this is desirable.}
+QMC methods are also used for sampling from distributions, as mentioned in
+Section~\ref{sec:sampling}.
 
 Another new feature in SciPy 2.0 that utilizes QMC methods is the new functionality
 \texttt{scipy.stats.sobol\_indices} for global sensitivity analysis (GSA) using Sobol'
