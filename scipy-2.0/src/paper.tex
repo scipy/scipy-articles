@@ -179,12 +179,13 @@ probability distributions, including the generation of random variates.
 These sampling algorithms are often specifically designed for a given
 distribution, e.g., the Box–Muller transform~\cite{Box1958} for the normal distribution
 or Knuth's algorithm for the Poisson distribution~\cite{Knuth81}.
-Otherwise, they rely on general methods, such as inversion of the
-cumulative distribution function (CDF). However, computing an accurate and fast inverse
-CDF is often challenging.
-In contrast, there are
-also so-called automatic or black-box methods: the same implementation can be
-used to sample from large classes of distributions, while requiring only basic
+Otherwise, random variate generation is performed via inverse transform sampling;
+that is, computing the quantile function of uniformly-distributed random variates. 
+However, the quantile function cannot always be expressed in terms of elementary
+or (readily available) special functions, and even when it can, it may be quite
+costly to evaluate.
+In contrast, there are so-called automatic or black-box methods that rely on
+more commonly available and efficiently computable
 information about the distribution --- such as the density (and optionally
 its derivative), the CDF, and/or the mode (see~\cite{hormann2004} for an
 overview). Based on this input, a generator is automatically derived in a
