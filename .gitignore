@@ -13,3 +13,5 @@
 *.cut
 paper.pdf
 /.vscode/*
+*.jsonl
+!/scipy-2.0/scripts/data_paper/*.jsonl
