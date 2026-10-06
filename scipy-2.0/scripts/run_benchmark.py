@@ -66,7 +66,7 @@ elif args.function == "Rotation.mean":
     from scipy.spatial.transform import Rotation
 
     def func(data):
-        return Rotation.from_euler("xyz", data).mean().as_euler("xyz")
+        return Rotation.from_euler("xyz", data, degrees=True).mean().as_euler("xyz")
 
     def data_generator(n):
         rng = np.random.default_rng(738274923759827)
