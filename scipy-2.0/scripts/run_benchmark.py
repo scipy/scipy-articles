@@ -79,6 +79,7 @@ else:
 ns = np.logspace(args.log_n_start, args.log_n_end, args.n_points, dtype=int)
 times = []
 
+numpy_func = func
 if "PyTorch" in backend:
     import torch
 if "JAX" in backend:
@@ -95,7 +96,7 @@ if "CuPy" in backend:
 
 for n in ns:
     data = data_generator(n)
-    numpy_result = func(data)
+    numpy_result = numpy_func(data)
 
     if backend == "NumPy":
         func(data)
