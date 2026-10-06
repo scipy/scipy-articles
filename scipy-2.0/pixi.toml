@@ -96,6 +96,7 @@ pandas = ">=3.0.5,<4"
 
 [feature.plot.tasks]
 plot-sloc = { cmd = "python scripts/sloc_plot.py", description = "Make SLOC figure" }
+plot-qmc = { cmd = "python scripts/plot_qmc.py", description = "Make QMC figure" }
 plot-benchmark = { cmd = "python scripts/plot_benchmark.py", description = "Plot the benchmark results" }
 
 [feature.plot.pypi-dependencies]
