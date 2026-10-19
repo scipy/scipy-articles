@@ -352,6 +352,109 @@ PyTorch's JIT compilation mechanism \texttt{torch.compile}.
 executed on the GPU, comment on the fact that  less expressive / more verbose than
 NumPy. I will return to these once we see how the rest of the paper is shaping up.}
 
+\section{From Sparse Matrices to Sparse Arrays}\label{sec:sparse}
+
+Sparse data refers to datasets where a high percentage of the values are zero or empty.
+This happens when relationships across dimensions (e.g. rows and columns) don't exist
+or are neglected.
+Sparse datasets are ubiquitous in modern scientific computing, including network
+analysis, signal processing, image processing, machine learning, etc.
+There exist many sparse data formats which save memory by storing only non-zero
+values, and their positions, yet still allow efficient computation and manipulation.
+
+From the early beginnings of SciPy, \lstinline|scipy.sparse| provided 7 sparse data formats
+for datasets that are 2D (like a matrix). The interface was bult to mimic
+the \lstinline|numpy.matrix| interface using {\it matrix semantics}, which is fundamentally
+different from the \lstinline|numpy.ndarray| interface which uses {\it array semantics}.
+For example, \lstinline|A*B| in the {\it matrix} interface indicates matrix multiplication,
+but in the {\it ndarray} interface it indicates element-wise multiplication.
+Semantic differences mean that matrix objects and array objects are not interchangeable
+and this can lead to confusion or silent errors when standard array semantics are
+used incorrectly with a \lstinline|matrix| object.
+The NumPy community has a long-standing desire to remove \lstinline|numpy.matrix| and related semantics
+in favor of the \lstinline|ndarray| semantics that have become the de facto standard for data in Python.
+The major blocker to this removal is the use of matrix semantics in \lstinline|scipy.sparse|.
+Constructing array semantics interfaces for sparse data in Python has been discussed for years.
+
+Unlike the universally accepted strided memory model on which \lstinline|ndarray| is built,
+sparse data can be stored in many formats with varied memory usage and
+computational efficiency. Performance scales with amount of data and number of dimensions
+differently across formats.
+Some formats, such as Coordinate (COO), directly generalize to any number of
+dimensions, whereas others do not. Also, some users need flexibility to switch between
+formats while others need strict format control.
+This makes interface design critical, involving communication across developers of
+many libraries throughout the scientific Python ecosystem.
+Interface input and facilitation of acceptance from NumPy, SciPy, and
+other libraries is critical.
+In the ramp up to SciPy 2.0, sparse arrays have been implemented to replace the
+sparse matrix data structures in all 7 formats. In addition, 1D arrays are
+supported by 3 sparse formats (COO, CSR, DOK) and nD arrays (up to $n=64$) are
+supported in COO format.
+
+The sparse array interface provides straightforward interaction with sparse data.
+The sparse semantics match the familiar dense `numpy.ndarray` semantics so that
+replacing a dense array with a sparse array does not require changing arithmetic
+expressions. Reading code that involves both sparse and dense objects is
+dramatically simplified. Users of NumPy ndarrays should be able to use sparse
+arrays without any steep learning curve.
+
+The inherent 2D nature of {\it matrix semantics} means that operations involving
+reduction or slicing/indexing lead to 2D column/row objects, either sparse matrices
+or dense \lstinline|numpy.matrix| objects. The new {\it array semantics} mean those operations
+result in 1D sparse arrays or dense \lstinline|numpy.ndarray| objects.
+One popular trait of {\it array semantics} is that arrays are inherently nested.
+For example, a 2D array is a collection of 1D arrays.
+So, after enacting support for 2D manipulations in the new sparse arrays, we
+further developed 1D sparse array support for the COO, CSR, and DOK formats.
+The other formats are specific to their 2D nature so reduction and slicing
+operations that result in sparse objects result in 1D sparse
+arrays of one of the 3 supported formats. Changing formats is fast and often done
+internally in \lstinline|scipy.sparse| to make use of efficiencies of various formats.
+The new 1D support matches \lstinline|numpy.ndarray| behavior so users can enact array
+manipulations with these 1D structures in the same way they do with {\it array
+semantics} largely iwithout regard to which sparse format is used.
+Higher dimensional data (nD for $n>2$) is currently only supported by the
+COO format. One can think of this as collections of 2D objects indexed by the
+other dimensions. We expect to develop nD support for other formats where that
+makes sense. There may be other formats designed specifically for higher dimensions
+that we implement in the future.
+
+Quite a lot of work has gone into making the transition from sparse matrix to
+sparse arrays smooth and intuitive. We realize that there are potential silent
+errors that could arise and we tried to make those errors noisy or unneeded.
+One helpful feature is Python's introduction of the \lstinline|@| operator for
+matrix multiplication. So while the {\it sparse matrix} interface uses \lstinline|*| or \lstinline|@|
+for matrix multiplication and a method \lstinline|multiply()| for elementwise multiplication,
+the {\it sparse array} interface uses \lstinline|@| for matrix multiplication and \lstinline|*| or the
+method \lstinline|multiply()| for elementwise multiplication. Conversion of code from one
+iterface to the other requires first changing all use of \lstinline|*| to \lstinline|@| in the
+{\it sparse matrix} code. Results should be the same. Then conversion from \lstinline|multiply()|
+to \lstinline|*| can be done as desired, possibly many releases later when sparse matrices
+have been deprecated. Code that can work for both interfaces is designed to work
+by sticking to the \lstinline|@| operator and the \lstinline|multiply()| method.
+
+The new interface requires that we be able to indicate which kind of sparse interface
+to create in functions like \lstinline|hstack| or \lstinline|eye|. After some debate we designed the
+decided that functions which take sparse inputs (like \lstinline|vstack)| will return objects
+with the interface of the input, and select the {\it array} interface if inputs of both
+interfaces are provided. Construction functions which do not take sparse input
+(like \lstinline|eye|) have been given separate functions with the function name indicating
+an array interface, e.g. \lstinline|eye_array()| produces a sparse array while \lstinline|eye()| produces
+a sparse matrix. This reduces suprising results whlie minimizing the complexity of
+changes to switch from one to the other.
+
+We provided a transition guide to users to help them convert to the new interface.
+In addition, we worked with many popular libraries which support \lstinline|scipy.sparse| objects
+to help them with the transition. Most found it fairly straightfoward to switch to code
+that can support either sparse matrix of sparse array objects. The SciPy 2.0, both
+interfaces are supported. But sparse matrices are deprecated and we plan to remove
+support for them in release 2.2.  
+
+Our future efforts will focus on the smooth transition as well as enhancing nD
+features which are not yet implemented. We are also working to improve the performance
+and ease the maintenance burden of our critical C++ code \lstinline|sparsetools|.
+
 \section{A New Look at Language Choices}\label{sec:languages}
 
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
