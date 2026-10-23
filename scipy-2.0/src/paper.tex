@@ -528,28 +528,28 @@ or OpenTURNS~\cite{Baudin2015,Baudin2026}.
 
 The \texttt{stats} module in SciPy supports calculations for a large number of
 probability distributions, including the generation of random variates.
-These sampling algorithms are often specifically designed for a given
-distribution, see for example chapters 4--6 of~\cite{Devroye1986} or chapter 5
-of~\cite{gentle2003}.
-Otherwise, random variate generation is performed via inverse transform sampling
-or the rejection principle~\cite{vonneumann1951}. The former computes the quantile
-function of uniformly-distributed random variates while the latter approach draws
+The sampling algorithms often rely on inverse transform sampling
+or the rejection principle~\cite{vonneumann1951,Forsythe1972}. The former evaluates the quantile
+function on uniformly-distributed random variates\footnote{This is based on the well-known
+property that $F^{-1}(U)$ is distributed according to the CDF $F$ if $U$ is a uniform
+random variable on $[0,1]$}, while the latter approach draws
 samples from a proposal distribution and accepts or rejects with probability
-proportional the ratio of the target and proposal densities.
-However, the quantile function cannot always be expressed in terms of elementary
-or (readily available) special functions, and even when it can, it may be quite
-costly to evaluate. Likewise, the rejection principle requires deciding on suitable
-proposal distribution and bound on the ratio of the target and proposal densities.
-Hence, while these methods are generally applicable, they are not necessarily efficient
-or easy to implement for arbitrary distributions.
+proportional the upper bound on the ratio of the target and proposal densities. However, the quantile
+function can only be expressed in terms of elementary functions in a few special cases.
+Hence, this approach depends on having an accurate and reasonably fast implementation
+available, e.g., in \texttt{scipy.special}, or one needs to compute the inverse numerically
+in a robust and efficient way, which is not trivial. Likewise, the rejection principle
+requires deciding on a suitable proposal distribution
+and bound on the ratio of the target and proposal densities. The reader can refer to
+chapter IX in~\cite{Devroye1986} or chapter 5 of~\cite{gentle2003} for an overview of
+sampling algorithms of various common distributions and the extensive related literature.
 
 In contrast, there are so-called automatic or black-box methods that rely on
-more commonly available and efficiently computable
-information about the distribution --- such as the density (and optionally
-its derivative), the CDF, and/or the mode (see~\cite{hormann2004} for an
-overview). Based on this input, a generator is automatically derived in a
-setup step, which can then be used to draw random variates of the
-distribution.
+commonly available information about the distribution --- such as the density
+(and optionally its derivative), the cumulative distribution function (CDF), and/or the
+mode (see~\cite{hormann2004} for an overview). Based on this input, a generator is
+automatically derived in a setup step, which can then be used to draw random variates
+of the distribution.
 
 Although such universal methods were originally motivated by nonstandard
 distributions~\cite{hormann2004}, they offer advantages that make them attractive
@@ -571,10 +571,7 @@ Hermite-interpolation-based~\cite{hormann2003} CDF inversion, and the simple
 ratio-of-uniforms method~\cite{leydold2001, leydold2003}, as well as for
 discrete distributions, i.e., guide-table~\cite{chen1974} and
 alias-urn~\cite{walker1977} methods, all built on the C library UNU.RAN~\cite{hormann2007}.
-For convenience, \texttt{FastGeneratorInversion}
-can be used to create a generator based on the inversion method from supported continuous
-\texttt{scipy.stats} distributions. For further details and benchmarking,
-please see~\cite{baumgarten2022}.
+For further details and benchmarking, please see~\cite{baumgarten2022}.
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
