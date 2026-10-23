@@ -100,7 +100,7 @@
 \section{Introduction}
 
 \section{Support for Graphics Processing Units (GPUs) and Just-in-Time (JIT) Compilation
-via the Python Array API Standard}
+via the Python Array API Standard}\label{sec:array-api}
 
 Thanks to NumPy's success~\cite{Harris2020} in unifying the two early array libraries for
 Python (Numeric~\cite{Dubois1996,ascher2000numerical} and
@@ -351,6 +351,147 @@ PyTorch's JIT compilation mechanism \texttt{torch.compile}.
 \jake{Possible things to also discuss: turning compilied code into kernels can also be
 executed on the GPU, comment on the fact that  less expressive / more verbose than
 NumPy. I will return to these once we see how the rest of the paper is shaping up.}
+
+\section{From Sparse Matrices to Sparse Arrays}\label{sec:sparse}
+
+Sparse data is a dataset with enough zeros that it pays to take advantage of them.
+The zeros indicate weak or non-existent relationships between dimensions represented
+by that row and column. Typically, though not always, the zeros are stored implicitly,
+using no memory. The non-zeros are stored explicitly along with information to identify
+the position of each value.
+Sparse datasets are ubiquitous in modern scientific computing, including network
+analysis, signal processing, image processing, machine learning, etc.~\cite{Duff1977}.
+There exist many sparse data formats which save memory by storing only non-zero
+values and their positions, yet allow efficient computation and manipulation.
+Alternate sparse packages for Python include scikit-sparse and pydata-sparse.
+
+Notice that ``sparse'' simply means ``not dense''. It does not imply how the data
+values and positions are stored.
+Many different formats have been proposed in the literature.
+Some formats even allow explicit storage of some zero values while others are left implicit.
+From the early beginnings of SciPy, \texttt{scipy.sparse} provided 7 sparse data formats
+for datasets that are 2D (like a matrix). The interface was built to mimic
+the NumPy \texttt{matrix} interface using \emph{matrix semantics}, which is fundamentally
+different from the NumPy \texttt{array} interface and the
+Array API (see~\ref{sec:array-api}) which use \emph{array semantics}.
+For example, \texttt{A*B} in the \emph{matrix} interface
+indicates matrix multiplication,
+but in the \emph{array} interface it indicates element-wise multiplication.
+Semantic differences mean that matrix objects and array objects are not interchangeable
+and this can lead to confusion or silent errors when array semantics are
+used incorrectly with a \texttt{matrix} object.
+The NumPy community has a long-standing desire to remove \texttt{numpy.matrix} and
+related semantics in favor of the \texttt{array} semantics that have become the de facto
+standard for data in Python. The major blocker to this removal was the
+extensive use of \texttt{numpy.matrix} in \texttt{scipy.sparse}.
+Constructing an array interface for sparse data in Python has been discussed for years.
+
+Unlike the commonly used strided memory model on which NumPy is built,
+sparse data can be stored in many formats with varied memory usage and
+computational efficiency. Performance scales differently across formats,
+sparsity patterns, amount of data, and number of dimensions.
+Some formats, such as Coordinate (COO), directly generalize to any number of
+dimensions, whereas others do not. Also, some users need flexibility to
+switch between formats while others need strict format control.
+This makes interface design complicated, involving communication across
+developers of many libraries throughout the scientific Python ecosystem.
+Interface input and facilitation of acceptance from NumPy, SciPy, and
+other libraries is crucial. Packages which already support sparse arrays include
+\texttt{NetworkX}, \texttt{scikit-image}, \texttt{scikit-learn}, \texttt{DiPy},
+\texttt{cvxpy}, \texttt{pyamg}, \texttt{pydata/sparse}, \texttt{scikit-sparse},
+\texttt{PySAL}, and of course the various subpackages of \texttt{SciPy}.
+
+In the ramp up to SciPy 2.0, sparse arrays have been implemented to replace the
+sparse matrix data structures in all 7 formats. In addition, 1D arrays are
+supported by 3 sparse formats (COO, CSR, DOK) and nD arrays (up to $n=64$) are
+supported in COO format. See Table~\ref{tab:sparse}
+
+\begin{table}
+  \caption{Sparse Formats supported by SciPy 2.0}\label{tab:sparse}
+  \begin{tabular}{lccl}
+    \toprule
+    Format & Abbr & ndim & Brief Description \\
+    \midrule
+\texttt{COOrdinate} & \texttt{COO} & 1 -- 64 & Fast format conversion; Flexible manipulation \\
+\texttt{Dict Of Keys} & \texttt{DOK} & 1 -- 2 & Python dict subclass. Flexible construction \\
+\texttt{Compressed Sparse Rows} & \texttt{CSR} & 1 -- 2 & Fast arithmetic and row slicing \\
+\texttt{Compressed Sparse Columns} & \texttt{CSC} & 2 & Fast arithmetic and column slicing \\
+\texttt{Block Sparse Row} & \texttt{BSR} & 2 & Good for uniformly shaped blocks of non-zeros \\
+\texttt{DIAgonal} & \texttt{DIA} & 2 & Good for a few non-zero diagonals \\
+\texttt{LIst of Lists} & \texttt{LIL} & 2 & Good for incremental construction \\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+The sparse array interface provides straightforward interaction with sparse data.
+The sparse semantics mostly match the familiar Array API semantics
+so that replacing a sparse array with a dense array does not require changing arithmetic
+expressions. Care is still needed when replacing a dense array with a sparse array due to
+operations that don't make sense for sparse data like adding 1 to every element.
+In addition to simpler creation of code, reading code that involves both sparse and
+dense objects is dramatically simplified. Users of NumPy arrays and the Array API
+should be able to use sparse arrays without any steep learning curve.
+Uniform semantics also allow more complex features to be developed.
+For example, the recent "batched" processing feature in the
+\texttt{scipy.sparse.linalg} subpackage probably would not have happened
+using the sparse matrix interface.
+
+The inherent 2D nature of \emph{matrix semantics} means that operations involving
+reduction or slicing/indexing lead to 2D column/row objects, either sparse matrices
+or dense \texttt{numpy.matrix} objects. The new \emph{array semantics} mean those operations
+result in 1D sparse arrays or dense \texttt{numpy.ndarray} objects.
+One popular trait of \emph{array semantics} is that arrays are inherently nested.
+For example, a 2D array is a collection of 1D arrays.
+So, after enacting support for 2D manipulations in the new sparse arrays, we
+further developed 1D sparse array support for the COO, CSR, and DOK formats.
+The other formats are specific to their 2D nature so reduction and slicing
+operations that result in sparse objects result in 1D sparse
+arrays of one of the 3 supported formats. Changing formats is fast and often done
+internally in \texttt{scipy.sparse} to make use of efficiencies of various formats.
+The new 1D support matches NumPy array behavior so users can enact array
+manipulations with these 1D structures in the same way they do with \emph{array
+semantics} largely without regard to which sparse format is used.
+Higher dimensional data (nD for $n>2$) is currently only supported by the
+COO format. One can think of this as collections of 2D objects indexed by the
+other dimensions. We expect to develop nD support for other formats where that
+makes sense. There may be other formats designed specifically for higher dimensions
+that we implement in the future.
+
+Significant work has gone into making the transition from sparse matrix to
+sparse arrays smooth and intuitive. We realize that there are potential silent
+errors that could arise and we tried to make those errors noisy or unneeded.
+One helpful feature is Python's introduction of the \texttt{@} operator for
+matrix multiplication. So while the \emph{sparse matrix} interface uses \texttt{*} or \texttt{@}
+for matrix multiplication and a method \texttt{multiply()} for elementwise multiplication,
+the \emph{sparse array} interface uses \texttt{@} for matrix multiplication and \texttt{*} or the
+method \texttt{multiply()} for elementwise multiplication. Conversion of code from one
+interface to the other requires first changing all use of \texttt{*} to \texttt{@} in the
+\emph{sparse matrix} code. Results should be the same. Then conversion from \texttt{multiply()}
+to \texttt{*} can be done as desired, possibly many releases later when sparse matrices
+have been deprecated. Code that can work for both interfaces is designed to work
+by sticking to the \texttt{@} operator and the \texttt{multiply()} method.
+
+%The new interface requires that we be able to indicate which kind of sparse interface
+%to create in functions like \texttt{hstack} or \texttt{eye}. After some debate we designed the
+%decided that functions which take sparse inputs (like \texttt{hstack)} will return objects
+%with the interface of the input, and select the \emph{array} interface if inputs of both
+%interfaces are provided. Construction functions which do not take sparse input
+%(like \texttt{diags}) have been given separate functions with the function name indicating
+%an array interface, e.g. \texttt{diags_array()} produces a sparse array while \texttt{diags()}
+%produces a sparse matrix. This reduces surprising results while minimizing the complexity of
+%changes to switch from one to the other.
+
+We provided a transition guide\footnote{\url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html}}
+to help users convert to the new interface.
+Most users report it is fairly straightforward to switch to code
+that can support either sparse matrix or sparse array objects.
+In SciPy 2.0, both interfaces are supported.
+But sparse matrices are deprecated and we plan to remove
+support for them no sooner than release 2.2.  
+
+Our future efforts will focus on a smooth transition as well as enhancing nD features.
+We are also working to improve the performance
+and ease the maintenance burden of our C++ code.
 
 \section{A New Look at Language Choices}\label{sec:languages}
 
