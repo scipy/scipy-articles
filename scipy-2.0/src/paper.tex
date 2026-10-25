@@ -357,7 +357,7 @@ NumPy. I will return to these once we see how the rest of the paper is shaping u
 As discussed in~\cite{Virtanen2020}, much of SciPy's original success can be attributed
 to the convenient Python interfaces it provided to popular compiled numerical libraries
 that were otherwise distributed primarily as standalone Fortran source
-packages, such as those available through the Netlib repository~\cite{netlib}.
+packages, such as those available through the Netlib repository~\cite{Dongarra2008}.
 These included
 ODEPACK~\cite{Hindmarsh1983ODEPACK},
 VODE/ZVODE~\cite{Brown1989}, and DOPRI5~\cite{Hairer1987} for solving initial value
@@ -423,7 +423,7 @@ original Fortran 77 source code to either pure Python,
 Cython~\cite{Behnel2011}, or C/C++ in order to secure the long-term future of the
 project. Consequently, COBYLA has been replaced with
 a Python implementation from the PRIMA~\cite{Zhang_2023} package, FFTPACK has been replaced with
-ducc.\@fft~\cite{reinecke2019ducc}, and some of the special and statistical functions
+ducc.\@fft\footnote{\url{https://gitlab.mpcdf.mpg.de/mtr/ducc}}, and some of the special and statistical functions
 mentioned have been replaced with counterparts from Boost.\@Math~\cite{boostmath}. Translation of the remaining
 codes posed a significant undertaking, requiring a significant proportion of SciPy's
 $\sim80{,}000$ source lines of Fortran 77 to be translated by hand. The completion of this work has been a major milestone for
