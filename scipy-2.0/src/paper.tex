@@ -375,9 +375,10 @@ indicates matrix multiplication,
 but in the \emph{array} interface it indicates element-wise multiplication.
 These differences mean that matrix objects and array objects are not interchangeable.
 The NumPy community has a long-standing desire to remove the matrix interface
-in favor of the array semantics, which have been standardized by the Python
-array API standard (see Section~\ref{sec:array-api}). A major obstacle to this change
-was the use of matrix semantics throughout \texttt{scipy.sparse}.
+in favor of the array interface, which is the primary NumPy interface and has been
+standardized by the Python array API standard (see Section~\ref{sec:array-api}).
+A major obstacle to the removal of NumPy classes using the matrix interface is
+the use of those classes throughout \texttt{scipy.sparse}.
 Constructing an array interface for sparse data in Python has been discussed for years.
 While this need is partially addressed by the PyData Sparse
 project\footnote{\url{https://github.com/pydata/sparse}}, it does not provide the
@@ -399,11 +400,10 @@ Besides simplifying code development, reading
 code that involves both sparse and dense objects is dramatically simplified.
 The familiar semantics should make it easier for users accustomed to NumPy arrays to
 work with sparse arrays, although some sparse-specific considerations remain.
-% If this is merged, we could then mention this:
-%Uniform semantics also allow more complex features to be developed.
-%For example, the recent ``batched'' processing feature in the
-%\texttt{scipy.sparse.linalg} subpackage probably would not have happened
-%using the sparse matrix interface.
+Uniform semantics also allow more complex features to be developed.
+For example, the recent ``batched'' processing feature in the
+\texttt{scipy.sparse.linalg} subpackage probably would not have happened
+using the sparse matrix interface.
 
 Note that the earlier definition of sparse does not imply how values and their
 positions are stored.
@@ -430,12 +430,12 @@ designed for higher dimensions that SciPy looks to implement.
     \toprule
     Format & ndim & Description \\
     \midrule
-    Cordinate (\texttt{COO}) & 1--64 & Fast format conversion; flexible manipulation \\
-    Dict Of Keys (\texttt{DOK}) & 1--2 & Dictionary-based representation; flexible construction and efficient single-element access \\
+    Coordinate (\texttt{COO}) & 1--64 & Fast format conversion; flexible manipulation \\
+    Dict Of Keys (\texttt{DOK}) & 1--2 & Dictionary-based; flexible construction and efficient single-element access \\
     Compressed Sparse Rows (\texttt{CSR}) & 1--2 & Fast arithmetic and row slicing \\
     Compressed Sparse Columns (\texttt{CSC}) & 2 & Fast arithmetic and column slicing \\
     Block Sparse Row (\texttt{BSR}) & 2 & Efficient storage of uniformly sized blocks \\
-    Diagonal (\texttt{DIA}) & 2 & Efficient storage when nonzero entries lie on a few diagonals \\
+    Diagonal (\texttt{DIA}) & 2 & Efficient storage when many diagonals are all zeros \\
     List of Lists (\texttt{LIL}) & 2 & Flexible incremental construction and modification \\
   \bottomrule
 \end{tabular}
@@ -443,15 +443,15 @@ designed for higher dimensions that SciPy looks to implement.
 
 The inherent 2D nature of \emph{matrix semantics} meant that operations involving
 reduction or slicing/indexing lead to 2D column/row objects, either sparse matrices
-or dense \texttt{numpy.matrix} objects. The new \emph{array semantics} now mean those operations
-produce one-dimensional sparse arrays or dense \texttt{numpy.ndarray} objects.
+or dense \texttt{numpy.matrix} objects. The new \emph{array semantics} mean those operations
+now produce one-dimensional sparse arrays or dense \texttt{numpy.ndarray} objects.
 One characteristic of \emph{array semantics} is that arrays are inherently nested,
 e.g. a 2D array is a collection of 1D arrays.
 So, after implementing support for two-dimensional operations in the new sparse arrays, we
 further developed 1D sparse array support for the COO, CSR, and DOK formats, as mentioned above.
 The other formats are specific to their 2D nature so reduction and slicing
 operations that result in sparse objects result in 1D sparse
-arrays of one of the three supported formats.    and often done
+arrays of one of the three supported formats. Changing formats is fast and often done
 internally in \texttt{scipy.sparse} to make use of efficiencies of various formats.
 The new 1D support matches NumPy array behavior so users can enact array
 manipulations with these 1D structures in the same way they do with \emph{array
