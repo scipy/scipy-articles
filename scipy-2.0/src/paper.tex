@@ -354,143 +354,115 @@ NumPy. I will return to these once we see how the rest of the paper is shaping u
 
 \section{From Sparse Matrices to Sparse Arrays}\label{sec:sparse}
 
-Sparse data is a dataset with enough zeros that it pays to take advantage of them.
-The zeros indicate weak or non-existent relationships between dimensions represented
+A dataset is sparse when enough of its entries are zeros that it pays to take advantage
+of them~\cite{Wilkinson1971,Duff1977,Gilbert1992}.
+Often, the zeros indicate weak or nonexistent relationships between dimensions represented
 by that row and column. Typically, though not always, the zeros are stored implicitly,
-using no memory. The non-zeros are stored explicitly along with information to identify
+using no memory. The nonzeros are stored explicitly along with information to identify
 the position of each value.
-Sparse datasets are ubiquitous in modern scientific computing, including network
-analysis, signal processing, image processing, machine learning, etc.~\cite{Duff1977}.
-There exist many sparse data formats which save memory by storing only non-zero
+Sparse datasets are ubiquitous in modern scientific computing, including numerical
+linear algebra, network analysis, signal processing, image processing, and machine
+learning --- see~\cite{Duff1977,Duff1989,Davis2011}.
+There exist many sparse data formats which save memory by storing only nonzero
 values and their positions, yet allow efficient computation and manipulation.
-Alternate sparse packages for Python include scikit-sparse and pydata-sparse.
 
-Notice that ``sparse'' simply means ``not dense''. It does not imply how the data
-values and positions are stored.
-Many different formats have been proposed in the literature.
-Some formats even allow explicit storage of some zero values while others are left implicit.
-From the early beginnings of SciPy, \texttt{scipy.sparse} provided 7 sparse data formats
-for datasets that are 2D (like a matrix). The interface was built to mimic
-the NumPy \texttt{matrix} interface using \emph{matrix semantics}, which is fundamentally
-different from the NumPy \texttt{array} interface and the
-Array API (see~\ref{sec:array-api}) which use \emph{array semantics}.
+From the early beginnings of SciPy, \texttt{scipy.sparse} provided data formats
+for two-dimensional data, such as matrices. The interface was built to mimic
+the NumPy matrix interface using \emph{matrix semantics}, which is fundamentally
+different from the NumPy array interface, which uses \emph{array semantics}.
 For example, \texttt{A*B} in the \emph{matrix} interface
 indicates matrix multiplication,
 but in the \emph{array} interface it indicates element-wise multiplication.
-Semantic differences mean that matrix objects and array objects are not interchangeable
-and this can lead to confusion or silent errors when array semantics are
-used incorrectly with a \texttt{matrix} object.
-The NumPy community has a long-standing desire to remove \texttt{numpy.matrix} and
-related semantics in favor of the \texttt{array} semantics that have become the de facto
-standard for data in Python. The major blocker to this removal was the
-extensive use of \texttt{numpy.matrix} in \texttt{scipy.sparse}.
+These differences mean that matrix objects and array objects are not interchangeable.
+The NumPy community has a long-standing desire to remove the matrix interface
+in favor of the array interface, which is the primary NumPy interface and has been
+standardized by the Python array API standard (see Section~\ref{sec:array-api}).
+A major obstacle to the removal of NumPy classes using the matrix interface is
+the use of those classes throughout \texttt{scipy.sparse}.
 Constructing an array interface for sparse data in Python has been discussed for years.
+While this need is partially addressed by the PyData Sparse
+project\footnote{\url{https://github.com/pydata/sparse}}, it does not provide the
+same breadth of functionality as \texttt{scipy.sparse}. As a result, SciPy 2.0 has
+implemented a new sparse array interface that uses array semantics. In addition, SciPy
+has worked to ensure that the new interface is supported by other scientific
+Python packages, including NetworkX~\cite{Hagberg2008}, scikit-image~\cite{vanderWalt2014},
+scikit-learn~\cite{scikit-learn,sklearn_api}, DIPY~\cite{Garyfallidis2014},
+cvxpy~\cite{Diamond2016,Agrawal2018}, pyamg~\cite{Bell2023}, PyData Sparse, scikit-sparse,
+PySAL~\cite{Rey2007}, and of course the various subpackages of SciPy.
 
+The new sparse array interface provides straightforward interaction with sparse data,
+with semantics that mostly match the familiar array API standard. This means for many
+supported operations replacing a sparse array with a dense array does not require changing arithmetic
+expressions. However, replacing a dense array with a sparse array requires care because
+some operations can destroy sparsity. For example, adding a nonzero scalar to every
+element generally produces a dense result.
+Besides simplifying code development, reading
+code that involves both sparse and dense objects is dramatically simplified.
+The familiar semantics should make it easier for users accustomed to NumPy arrays to
+work with sparse arrays, although some sparse-specific considerations remain.
+Uniform semantics also allow more complex features to be developed.
+For example, the recent ``batched'' processing feature in the
+\texttt{scipy.sparse.linalg} subpackage probably would not have happened
+using the sparse matrix interface.
+
+Note that the earlier definition of sparse does not imply how values and their
+positions are stored.
 Unlike the commonly used strided memory model on which NumPy is built,
 sparse data can be stored in many formats with varied memory usage and
-computational efficiency. Performance scales differently across formats,
-sparsity patterns, amount of data, and number of dimensions.
+computational efficiency.
+Many different formats have been proposed in the literature.
+Performance depends on the format, sparsity pattern, data size, and number of
+dimensions. SciPy offers seven
+different sparse formats, as summarized in Table~\ref{tab:sparse}.
 Some formats, such as Coordinate (COO), directly generalize to any number of
-dimensions, whereas others do not. Also, some users need flexibility to
-switch between formats while others need strict format control.
-This makes interface design complicated, involving communication across
-developers of many libraries throughout the scientific Python ecosystem.
-Interface input and facilitation of acceptance from NumPy, SciPy, and
-other libraries is crucial. Packages which already support sparse arrays include
-\texttt{NetworkX}, \texttt{scikit-image}, \texttt{scikit-learn}, \texttt{DiPy},
-\texttt{cvxpy}, \texttt{pyamg}, \texttt{pydata/sparse}, \texttt{scikit-sparse},
-\texttt{PySAL}, and of course the various subpackages of \texttt{SciPy}.
-
-In the ramp up to SciPy 2.0, sparse arrays have been implemented to replace the
-sparse matrix data structures in all 7 formats. In addition, 1D arrays are
-supported by 3 sparse formats (COO, CSR, DOK) and nD arrays (up to $n=64$) are
-supported in COO format. See Table~\ref{tab:sparse}
+dimensions, whereas others do not.
+While the old sparse matrix interface supported only 2D data, the new sparse array
+interface supports 1D arrays for three formats (COO, CSR, and DOK) and nD arrays
+(up to 64 dimensions) for the COO format. We expect to develop nD support for other
+formats where that makes sense. Additionally, there may be other formats specifically
+designed for higher dimensions that SciPy looks to implement.
 
 \begin{table}
-  \caption{Sparse Formats supported by SciPy 2.0}\label{tab:sparse}
-  \begin{tabular}{lccl}
+  \centering
+  \caption{Sparse array formats supported by SciPy 2.0.
+  The \texttt{ndim} column indicates how many dimensions each format supports.}\label{tab:sparse}
+  \begin{tabular}{lcp{0.48\linewidth}@{}}
     \toprule
-    Format & Abbr & ndim & Brief Description \\
+    Format & ndim & Description \\
     \midrule
-\texttt{COOrdinate} & \texttt{COO} & 1 -- 64 & Fast format conversion; Flexible manipulation \\
-\texttt{Dict Of Keys} & \texttt{DOK} & 1 -- 2 & Python dict subclass. Flexible construction \\
-\texttt{Compressed Sparse Rows} & \texttt{CSR} & 1 -- 2 & Fast arithmetic and row slicing \\
-\texttt{Compressed Sparse Columns} & \texttt{CSC} & 2 & Fast arithmetic and column slicing \\
-\texttt{Block Sparse Row} & \texttt{BSR} & 2 & Good for uniformly shaped blocks of non-zeros \\
-\texttt{DIAgonal} & \texttt{DIA} & 2 & Good for a few non-zero diagonals \\
-\texttt{LIst of Lists} & \texttt{LIL} & 2 & Good for incremental construction \\
+    Coordinate (\texttt{COO}) & 1--64 & Fast format conversion; flexible manipulation \\
+    Dict Of Keys (\texttt{DOK}) & 1--2 & Dictionary-based; flexible construction and \newline efficient single-element access \\
+    Compressed Sparse Rows (\texttt{CSR}) & 1--2 & Fast arithmetic and row slicing \\
+    Compressed Sparse Columns (\texttt{CSC}) & 2 & Fast arithmetic and column slicing \\
+    Block Sparse Row (\texttt{BSR}) & 2 & Efficient storage of uniformly sized blocks \\
+    Diagonal (\texttt{DIA}) & 2 & Efficient storage when many diagonals are all zeros \\
+    List of Lists (\texttt{LIL}) & 2 & Flexible incremental construction and \newline modification \\
   \bottomrule
 \end{tabular}
 \end{table}
 
-The sparse array interface provides straightforward interaction with sparse data.
-The sparse semantics mostly match the familiar Array API semantics
-so that replacing a sparse array with a dense array does not require changing arithmetic
-expressions. Care is still needed when replacing a dense array with a sparse array due to
-operations that don't make sense for sparse data like adding 1 to every element.
-In addition to simpler creation of code, reading code that involves both sparse and
-dense objects is dramatically simplified. Users of NumPy arrays and the Array API
-should be able to use sparse arrays without any steep learning curve.
-Uniform semantics also allow more complex features to be developed.
-For example, the recent "batched" processing feature in the
-\texttt{scipy.sparse.linalg} subpackage probably would not have happened
-using the sparse matrix interface.
-
-The inherent 2D nature of \emph{matrix semantics} means that operations involving
+The inherent 2D nature of \emph{matrix semantics} meant that operations involving
 reduction or slicing/indexing lead to 2D column/row objects, either sparse matrices
 or dense \texttt{numpy.matrix} objects. The new \emph{array semantics} mean those operations
-result in 1D sparse arrays or dense \texttt{numpy.ndarray} objects.
-One popular trait of \emph{array semantics} is that arrays are inherently nested.
-For example, a 2D array is a collection of 1D arrays.
-So, after enacting support for 2D manipulations in the new sparse arrays, we
-further developed 1D sparse array support for the COO, CSR, and DOK formats.
+now produce one-dimensional sparse arrays or dense \texttt{numpy.ndarray} objects.
+One characteristic of \emph{array semantics} is that arrays are inherently nested,
+e.g. a 2D array is a collection of 1D arrays.
+So, after implementing support for two-dimensional operations in the new sparse arrays, we
+further developed 1D sparse array support for the COO, CSR, and DOK formats, as mentioned above.
 The other formats are specific to their 2D nature so reduction and slicing
 operations that result in sparse objects result in 1D sparse
-arrays of one of the 3 supported formats. Changing formats is fast and often done
+arrays of one of the three supported formats. Changing formats is fast and often done
 internally in \texttt{scipy.sparse} to make use of efficiencies of various formats.
 The new 1D support matches NumPy array behavior so users can enact array
 manipulations with these 1D structures in the same way they do with \emph{array
 semantics} largely without regard to which sparse format is used.
-Higher dimensional data (nD for $n>2$) is currently only supported by the
-COO format. One can think of this as collections of 2D objects indexed by the
-other dimensions. We expect to develop nD support for other formats where that
-makes sense. There may be other formats designed specifically for higher dimensions
-that we implement in the future.
 
 Significant work has gone into making the transition from sparse matrix to
-sparse arrays smooth and intuitive. We realize that there are potential silent
-errors that could arise and we tried to make those errors noisy or unneeded.
-One helpful feature is Python's introduction of the \texttt{@} operator for
-matrix multiplication. So while the \emph{sparse matrix} interface uses \texttt{*} or \texttt{@}
-for matrix multiplication and a method \texttt{multiply()} for elementwise multiplication,
-the \emph{sparse array} interface uses \texttt{@} for matrix multiplication and \texttt{*} or the
-method \texttt{multiply()} for elementwise multiplication. Conversion of code from one
-interface to the other requires first changing all use of \texttt{*} to \texttt{@} in the
-\emph{sparse matrix} code. Results should be the same. Then conversion from \texttt{multiply()}
-to \texttt{*} can be done as desired, possibly many releases later when sparse matrices
-have been deprecated. Code that can work for both interfaces is designed to work
-by sticking to the \texttt{@} operator and the \texttt{multiply()} method.
-
-%The new interface requires that we be able to indicate which kind of sparse interface
-%to create in functions like \texttt{hstack} or \texttt{eye}. After some debate we designed the
-%decided that functions which take sparse inputs (like \texttt{hstack)} will return objects
-%with the interface of the input, and select the \emph{array} interface if inputs of both
-%interfaces are provided. Construction functions which do not take sparse input
-%(like \texttt{diags}) have been given separate functions with the function name indicating
-%an array interface, e.g. \texttt{diags_array()} produces a sparse array while \texttt{diags()}
-%produces a sparse matrix. This reduces surprising results while minimizing the complexity of
-%changes to switch from one to the other.
-
-We provided a transition guide\footnote{\url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html}}
+sparse arrays smooth and intuitive. We provided a transition
+guide\footnote{\url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html}}
 to help users convert to the new interface.
-Most users report it is fairly straightforward to switch to code
-that can support either sparse matrix or sparse array objects.
-In SciPy 2.0, both interfaces are supported.
-But sparse matrices are deprecated and we plan to remove
-support for them no sooner than release 2.2.  
-
-Our future efforts will focus on a smooth transition as well as enhancing nD features.
-We are also working to improve the performance
+Our future efforts will focus on facilitating a smooth transition as well as enhancing
+nD features. We are also working to improve the performance
 and ease the maintenance burden of our C++ code.
 
 \section{A New Look at Language Choices}\label{sec:languages}
@@ -669,17 +641,28 @@ or OpenTURNS~\cite{Baudin2015,Baudin2026}.
 
 The \texttt{stats} module in SciPy supports calculations for a large number of
 probability distributions, including the generation of random variates.
-These sampling algorithms are often specifically designed for a given
-distribution, e.g., by relying on general methods such as inversion of the
-CDF\footnote{Note that accurate and fast CDF inversion is usually non-trivial.}
-or on the rejection principle~\cite{vonneumann1951}. In contrast, there are
-also so-called automatic or black-box methods: the same implementation can be
-used to sample from large classes of distributions, while requiring only basic
-information about the distribution --- such as the density (and optionally
-its derivative), the CDF, and/or the mode (see~\cite{hormann2004} for an
-overview). Based on this input, a generator is automatically derived in a
-setup step, which can then be used to draw random variates of the
-distribution.
+The sampling algorithms often rely on inverse transform sampling
+or the rejection principle~\cite{vonneumann1951,Forsythe1972}. The former evaluates the quantile
+function on uniformly-distributed random variates\footnote{This is based on the well-known
+property that $F^{-1}(U)$ is distributed according to the CDF $F$ if $U$ is a uniform
+random variable on $[0,1]$}, while the latter approach draws
+samples from a proposal distribution and accepts or rejects with probability
+proportional the upper bound on the ratio of the target and proposal densities. However, the quantile
+function can only be expressed in terms of elementary functions in a few special cases.
+Hence, this approach depends on having an accurate and reasonably fast implementation
+available, e.g., in \texttt{scipy.special}, or one needs to compute the inverse numerically
+in a robust and efficient way, which is not trivial. Likewise, the rejection principle
+requires deciding on a suitable proposal distribution
+and bound on the ratio of the target and proposal densities. The reader can refer to
+chapter IX in~\cite{Devroye1986} or chapter 5 of~\cite{gentle2003} for an overview of
+sampling algorithms of various common distributions and the extensive related literature.
+
+In contrast, there are so-called automatic or black-box methods that rely on
+commonly available information about the distribution --- such as the density
+(and optionally its derivative), the cumulative distribution function (CDF), and/or the
+mode (see~\cite{hormann2004} for an overview). Based on this input, a generator is
+automatically derived in a setup step, which can then be used to draw random variates
+of the distribution.
 
 Although such universal methods were originally motivated by nonstandard
 distributions~\cite{hormann2004}, they offer advantages that make them attractive
@@ -701,10 +684,7 @@ Hermite-interpolation-based~\cite{hormann2003} CDF inversion, and the simple
 ratio-of-uniforms method~\cite{leydold2001, leydold2003}, as well as for
 discrete distributions, i.e., guide-table~\cite{chen1974} and
 alias-urn~\cite{walker1977} methods, all built on the C library UNU.RAN~\cite{hormann2007}.
-For convenience, \texttt{FastGeneratorInversion}
-can be used to create a generator based on the inversion method from supported continuous
-\texttt{scipy.stats} distributions. For further details and benchmarking,
-please see~\cite{baumgarten2022}.
+For further details and benchmarking, please see~\cite{baumgarten2022}.
 
 \begin{acks}
 We thank everyone who has contributed to SciPy 2.0, from those who have posted one
