@@ -125,7 +125,7 @@ advantage of these developments.
 
 Addressing this fragmentation through the Python array API standard~\cite{Meurer2023} has been a
 major focus of SciPy 2.0. This standard defines application
-programming interfaces (APIs) and behaviours for arrays and their
+programming interfaces (APIs) and behaviors for arrays and their
 associated operations. Most importantly for SciPy, this enables
 ``array-consuming libraries to accept and operate on arrays from multiple different
 array libraries''~\cite{Meurer2023}. In doing so, this also enables libraries that are
@@ -133,7 +133,7 @@ heavily reliant on SciPy, such as scikit-learn~\cite{scikit-learn,sklearn_api}, 
 begin adopting the Python array API standard themselves.
 
 In principle, by rewriting SciPy's functionality
-in terms of these standardised APIs, SciPy can support any array package that
+in terms of these standardized APIs, SciPy can support any array package that
 implements the standard. However, in practice, there are a number of barriers to this
 interoperable ideal.
 Most significantly, NumPy, CuPy, JAX, and PyTorch all predate
@@ -185,10 +185,10 @@ Python code, a significant amount of SciPy's functionality is implemented in com
 languages, such as Cython and C/C++ --- see Section~\ref{sec:languages} for further
 details. This is typically the case when a Python implementation would not provide
 satisfactory performance, for example, when an algorithm cannot be efficiently expressed
-in terms of vectorised array operations, which would otherwise allow much of the
-computation to be delegated to NumPy's (or an alternative array library's) optimised compiled code. This presents
+in terms of vectorized array operations, which would otherwise allow much of the
+computation to be delegated to NumPy's (or an alternative array library's) optimized compiled code. This presents
 a challenge because these functions cannot be converted to accept other array libraries
-by simply rewriting them in terms of standardised array operations at the Python level.
+by simply rewriting them in terms of standardized array operations at the Python level.
 SciPy has adopted three approaches to address this challenge.
 
 The simplest approach is to convert arrays stored on the CPU to NumPy arrays using the
@@ -206,7 +206,7 @@ where available, under the assumption that a library-specific implementation wil
 provide better performance than a generic implementation.
 
 The final approach is to maintain two code paths: the original compiled code path for
-NumPy arrays and a new Python code path written in terms of standardised operations for
+NumPy arrays and a new Python code path written in terms of standardized operations for
 alternative array types. While this allows SciPy to support alternative array libraries,
 it comes at the cost of code duplication and an increased maintenance burden.
 Consequently, this approach is used sparingly in situations where maintaining two code
@@ -223,7 +223,7 @@ the CPU and GPU) because, as discussed above, this can incur a significant perfo
 penalty. Instead, any device transfers (e.g.\ to ensure all arrays are on the same
 device) must be explicitly performed by the user. These principles help to avoid
 unexpected performance issues and scenarios where it is ambiguous what the correct
-behaviour should be.
+behavior should be.
 
 \subsection{Performance Benchmarks}
 
@@ -257,12 +257,12 @@ The first benchmark considers the computation of the sample skewness,
 $\gamma_1 = \mu_3/\mu_2^{3/2}$, where $\mu_i$ is the biased $i$th central sample
 moment, using \texttt{scipy.stats.skew}. This function is implemented entirely
 in Python and therefore has been adapted to accept arrays from other array libraries by
-rewriting it in terms of standardised functions in a similar fashion to the example in
+rewriting it in terms of standardized functions in a similar fashion to the example in
 Listing~\ref{lst:whiten}. Specifically, the benchmark considers computing the
 skewness of three samples of size $n$, drawn from the gamma distribution (with shape
 and scale parameters 5 and 0.5), the standard normal distribution, and the beta
 distribution (with shape parameters 0.5 and 0.5). The computation is performed in
-a vectorised fashion, meaning all three samples are passed in one call to
+a vectorized fashion, meaning all three samples are passed in one call to
 \texttt{scipy.stats.skew}.
 
 The second benchmark considers estimating the power spectral density of a signal using
@@ -279,7 +279,7 @@ here we present the results in more detail for a range of problem sizes.
 Finally, the third benchmark considers a series of operations involving rotations using
 \path{scipy.spatial.transform.Rotation}. This is an example of functionality for which
 SciPy maintains two code paths: a compiled Cython code path for NumPy arrays and a
-Python code path written in terms of standardised APIs for other array types. The aim is
+Python code path written in terms of standardized APIs for other array types. The aim is
 to maintain satisfactory performance for NumPy arrays while also supporting other array
 types. The benchmark considers converting a series of $n$ random rotations, represented
 as Euler angles, to quaternions, computing the chordal $L_2$ mean~\cite{Hartley2013} of
@@ -290,7 +290,7 @@ these results show that for large problem sizes, using alternative array types c
 provide significant performance benefits over NumPy. For small problem sizes, we see
 that, with the exception of JAX-JIT, NumPy is still typically the fastest option due
 to the lower overhead of using NumPy arrays. However, for large problem sizes, other
-array types should be favoured. The benchmarks also highlight the different performance
+array types should be favored. The benchmarks also highlight the different performance
 characteristics of the approaches for handling compiled code discussed above.
 For example, in the Welch's method benchmark, we see that using PyTorch arrays offers
 no performance benefit as the implementation is based on converting the input array to a
@@ -299,7 +299,7 @@ PyTorch array. Likewise, in the rotation benchmark, we see that NumPy is very
 competitive for small problem sizes due to the fact it uses a compiled code path while
 other array types use a Python code path.
 
-\subsection{Progress Towards Adopting the Python Array API Standard}
+\subsection{Progress Toward Adopting the Python Array API Standard}
 
 \begin{table}
   \caption{Coverage of modules in SciPy 2.0 supporting alternative array types.
@@ -337,7 +337,7 @@ Converting SciPy's extensive range of functionality to support alternative array
 has been a significant undertaking. While some functions could easily be rewritten in
 terms of the standard, as illustrated in Listing~\ref{lst:whiten}, others required substantial
 effort. Table~\ref{tab:coverage} shows the progress, as of
-SciPy 2.0, towards converting the public API to support alternative array types. \jake{Finish this once SciPy 2.0 is actually released, as it
+SciPy 2.0, toward converting the public API to support alternative array types. \jake{Finish this once SciPy 2.0 is actually released, as it
 is difficult to comment on coverage when we do not yet know what it will be.} Note that
 this table omits legacy modules and modules that are not within the scope of the
 conversion. This includes \texttt{scipy.datasets} and \texttt{scipy.io}, both of which
@@ -470,7 +470,7 @@ methods~\cite{Art2020}.
     \centering
     \includegraphics{figures/qmc.pdf}
     \caption{Examples of samples generated from MC and QMC methods and their
-    associated centred discrepancy ($\mathrm{CD}^2$) --- a smaller numerical value is
+    associated centered discrepancy ($\mathrm{CD}^2$) --- a smaller numerical value is
     better. We generate $n=128$ points in
     $[0,1]^2$ using (A) IID uniform random sampling, (B) Sobol'
     sequence, (C) Halton sequence, (D) Latin hypercube sampling (LHS), and (E) Poisson
@@ -497,7 +497,7 @@ error estimation~\cite{Owen1998,Owen2003}, similar to those that are obtained fo
 Carlo methods. Functionality is also provided for measuring the uniformity, known as the
 \emph{discrepancy}, of a set of points, which is used to quantify how well the sample
 points cover the sampling space~\cite{Zhou2013,Warnock1972,Warnock1995,Franco2009}.
-It is possible to reduce the discrepancy of a sequence using one of the inbuilt
+It is possible to reduce the discrepancy of a sequence using one of the built-in
 optimization methods, based on either random permutation or Lloyd
 iteration~\cite{Lloyd1982}.
 
@@ -511,7 +511,7 @@ new QMC functionality to generate their initial populations, as these provide be
 of the search space than the IID uniform random sampling. This space-filling property
 also makes QMC methods useful candidates for generating sample points when
 interpolating high-dimensional functions using methods such as radial basis functions
-and nearest-neighbour interpolation implemented in \texttt{scipy.interpolate}.
+and nearest-neighbor interpolation implemented in \texttt{scipy.interpolate}.
 QMC methods are also used for sampling from distributions, as mentioned in
 Section~\ref{sec:sampling}.
 
