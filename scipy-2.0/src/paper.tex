@@ -230,6 +230,16 @@ behavior should be.
 \begin{figure}
     \centering
     \includegraphics{figures/benchmark.pdf}
+    \Description{Three log-log line plots compare speedups over NumPy for (a) sample
+      skewness, (b) Welch spectral density estimation, and (c) rotation averaging.
+      The horizontal axis is NumPy execution time in seconds, increasing with
+      problem size; the vertical axis is speedup, with a dotted baseline at one.
+      Solid lines show CPU execution and dashed lines show GPU execution.
+      JAX with JIT compilation on the GPU achieves the largest speedups at large
+      sizes: approximately 10,000 for skewness and 1,000 for the two other benchmarks.
+      CuPy and PyTorch GPU speedups also increase with size, while GPU overhead
+      makes small problems slower. PyTorch remains near the NumPy baseline for
+      Welch's method.}
     \caption{Benchmarks comparing the performance of various SciPy functions
     for different array types as the problem size is increased. Reported
     timings are given relative to NumPy, with values greater than one
@@ -522,6 +532,13 @@ indefinitely.
 \begin{figure}
     \centering
     \includegraphics{figures/sloc.pdf}
+    \Description{Stacked area chart of SciPy source lines of code by release, from
+      version 1.0 to 2.0, excluding independently maintained wrapped libraries.
+      Total code grows from roughly 375,000 to 610,000 lines. Python is the largest
+      component throughout, increasing from approximately 200,000 to 400,000 lines.
+      Fortran 77 is initially the second most used language then shrinks
+      sharply and disappears by version 2.0. C and C++ both grow, while Cython remains
+      a relatively small component.}
     \caption{Source lines of code (SLOC) in SciPy by programming language.
     Libraries that are wrapped by SciPy and are actively maintained projects themselves,
     e.g.\ Boost.\@Math~\cite{boostmath} and HiGHS~\cite{Huangfu2017}, are excluded.
@@ -582,6 +599,12 @@ methods~\cite{Art2020}.
 \begin{figure}
     \centering
     \includegraphics{figures/qmc.pdf}
+    \Description{Five scatter plots each show 128 points in the unit square.
+      (A) Independent uniform random samples form clusters and leave large gaps.
+      (B) Scrambled Sobol' and (C) scrambled Halton samples cover the square more
+      evenly. (D) Latin hypercube samples still show some clustering.
+      (E) Poisson disk samples have a minimum separation so give a regular-looking
+      spacing.}
     \caption{Examples of samples generated from MC and QMC methods and their
     associated centered discrepancy ($\mathrm{CD}^2$) --- a smaller numerical value is
     better. We generate $n=128$ points in
@@ -737,6 +760,10 @@ under Contract No.\ \grantnum{NNSA}{89233218CNA000001}.
 \begin{figure}[h]
     \centering
     \includegraphics{figures/sloc_all.pdf}
+    \Description{Stacked area chart of SciPy source lines of code by release, from
+      version 1.0 to 2.0, including all wrapped libraries. Total code grows from
+      approximately 400,000 to 1.5 million lines. C++ expands sharply around versions 1.7,
+      1.11, and 1.15 and becomes the largest component by version 2.0.}
     \caption{Source lines of code (SLOC) in SciPy by programming language, including all
     libraries that are wrapped by SciPy.}\label{fig:sloc_all}
 \end{figure}
