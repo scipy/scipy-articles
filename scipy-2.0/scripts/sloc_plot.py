@@ -61,6 +61,7 @@ versions = [f"1.{i}.x" for i in range(19)] + ["2.0.x"]
 rows = []
 
 with tempfile.TemporaryDirectory() as tmpdirname:
+    tmpdir = Path(tmpdirname)
     print(f"Cloning into temporary directory: {tmpdirname}")
     repo = Repo.clone_from(
         "https://github.com/scipy/scipy",
@@ -77,7 +78,7 @@ with tempfile.TemporaryDirectory() as tmpdirname:
         repo.git.clean("-ffdx")
         if branch == "maintenance/1.17.x":
             shutil.rmtree(
-                Path(tmpdirname) / "scipy/sparse/linalg/_propack/PROPACK",
+                tmpdir / "scipy/sparse/linalg/_propack/PROPACK",
                 ignore_errors=True,
             )
 
@@ -89,7 +90,7 @@ with tempfile.TemporaryDirectory() as tmpdirname:
         if args.all:
             # At one point SciPy wrapped the entire Boost library when we really only used
             # Boost.Math so we don't count the rest of Boost in our SLOC numbers.
-            boost_dir = Path(tmpdirname) / "scipy" / "_lib" / "boost" / "boost"
+            boost_dir = tmpdir / "scipy" / "_lib" / "boost" / "boost"
             if boost_dir.exists():
                 for path in boost_dir.iterdir():
                     if path.name != "math":
@@ -98,20 +99,20 @@ with tempfile.TemporaryDirectory() as tmpdirname:
                         else:
                             path.unlink()
 
-            if (Path(tmpdirname) / "subprojects").exists():
+            if (tmpdir / "subprojects").exists():
                 dirs = ["scipy", "subprojects"]
             else:
                 dirs = ["scipy"]
         else:
             for rel in REMOVED_PATHS:
-                p = Path(tmpdirname) / rel
+                p = tmpdir / rel
                 if p.is_dir():
                     shutil.rmtree(p)
                 elif p.exists():
                     p.unlink()
 
             dirs = ["scipy"]
-            if (Path(tmpdirname) / "subprojects" / "xsf").exists():
+            if (tmpdir / "subprojects" / "xsf").exists():
                 # we want to include xsf since we maintain it
                 dirs.append("subprojects/xsf")
 
