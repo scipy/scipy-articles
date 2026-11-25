@@ -81,6 +81,11 @@ with tempfile.TemporaryDirectory() as tmpdirname:
                 tmpdir / "scipy/sparse/linalg/_propack/PROPACK",
                 ignore_errors=True,
             )
+        if branch == "main":  # XXX: change this to `maintenance/2.0.x` once 2.0.x is released
+            shutil.rmtree(
+                tmpdir / "subprojects/cobyqa",
+                ignore_errors=True
+            )
 
         repo.git.checkout(branch)
         repo.git.clean("-ffdx")
